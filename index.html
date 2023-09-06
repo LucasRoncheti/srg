@@ -1,63 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="css/mainPage/mainPage.css">
     <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/mainPage/mainPage.css">
+    
+    <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <title>Sistema de cadastro Reinholz Ginger</title>
 </head>
 <body>
    <header>
-    <button>
+    <button class="logoutButton">
         <img src="assets/logoutIcon.svg" alt="Icone de fazer logout da página">
     </button>
-    <img src="assets/logoMainPage.svg" alt="Imagem  página inicial sistema de cadastro">
-    <h1>Sistema de cadastros e relatórios</h1>
-    <p>Data e hora aqui </p>
+
+    <img  src="assets/logoMainPage.svg" alt="Imagem  página inicial sistema de cadastro">
+
+    <h1>Sistema de Cadastros e Relatórios</h1>
+    <p id="data-hora"> </p>
    </header>
 
-   <section>
+   <section class="containerMenuButtons">
         <div class="menuButtons">
             <button class="categorieButton">
-                <div class="divImgCategorieButton"><img src="" alt=""></div>
-                <div class="divNameCategorieButton"><h2></h2></div>
+                <div class="divImgCategorieButton"><img src="assets/categories/cadastro.svg" alt="icone Cadastro"></div>
+                <div class="divNameCategorieButton"><h2>CADASTROS</h2></div>
             </button>
         </div>
 
         <div class="menuButtons">
             <button class="categorieButton">
-                <div class="divImgCategorieButton"><img src="" alt=""></div>
-                <div class="divNameCategorieButton"><h2></h2></div>
+                <div class="divImgCategorieButton"><img src="assets/categories/pedidos.svg" alt="icone pedidos"></div>
+                <div class="divNameCategorieButton"><h2>PEDIDOS</h2></div>
             </button>
         </div>
 
         <div class="menuButtons">
             <button class="categorieButton">
-                <div class="divImgCategorieButton"><img src="" alt=""></div>
-                <div class="divNameCategorieButton"><h2></h2></div>
+                <div class="divImgCategorieButton"><img src="assets/categories/relatorios.svg" alt="icone relatorios"></div>
+                <div class="divNameCategorieButton"><h2>RELATÓRIOS</h2></div>
             </button>
         </div>
 
         <div class="menuButtons">
             <button class="categorieButton">
-                <div class="divImgCategorieButton"><img src="" alt=""></div>
-                <div class="divNameCategorieButton"><h2></h2></div>
+                <div class="divImgCategorieButton"><img src="assets/categories/inspessao.svg" alt="icone inspessao"></div>
+                <div class="divNameCategorieButton"><h2>INSPESSÃO</h2></div>
             </button>
         </div>
         
         <div class="menuButtons">
             <button class="categorieButton">
-                <div class="divImgCategorieButton"><img src="" alt=""></div>
-                <div class="divNameCategorieButton"><h2></h2></div>
+                <div class="divImgCategorieButton"><img src="assets/categories/packing_list.svg" alt="icone packing_list"></div>
+                <div class="divNameCategorieButton"><h2>PACKING LIST</h2></div>
             </button>
         </div>
       
    </section>
 
    <footer>
-    <p>Desenvolvido por Lucas Roncheti </p>
+    <p> V 1.0.0 2023 © Lucas Roncheti </p>
    </footer>
 </body>
+
+<script>
+    const elementoDataHora = document.getElementById('data-hora')
+
+    function atualizarDataHora(){
+
+            // cria o objeto data
+            const dataAtual = new Date()
+            //formata a hora e data
+            const dataHoraFormatada = dataAtual.toLocaleString([], { hour: '2-digit', minute: '2-digit' })
+           
+
+            const diasDaSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+            const diaDaSemana = diasDaSemana[dataAtual.getDay()];
+
+             //insere a data  formatada no html
+             elementoDataHora.textContent=`${diaDaSemana} | ${dataHoraFormatada}`
+    }
+
+    atualizarDataHora()
+
+    setInterval(atualizarDataHora,3000)
+</script>
 </html>
