@@ -1,0 +1,125 @@
+a{
+    text-decoration: none;
+}
+/* container principal com todo o conteúdo */
+.mobileMenuContainer{
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor06);
+    position: absolute;
+    display: flex;
+   
+    z-index: 1;
+
+    display: none;
+}
+
+/* container com todos os botões*/
+.mobileMenuButtons{
+    width: 200px;
+    height: 450px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+/* botão que fecha a modal mobile */
+.mobileMenuButtonClose{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+
+/* os botões ficam dentro dessa div*/
+.menuButtonsMobile{
+    width: 100%;
+    height: 47px;
+
+}
+
+
+/* botões aqui */
+.categorieButtonMobile{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    padding: 5px;
+    background-color: var(--branco);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.214);
+}
+
+/*div que contém a imagem da categoria*/
+.divImgCategorieButtonMobile{
+    width: 71px;
+    height: 100%;
+    border-right: 2px solid var(--cor01);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*div que contém o nome da categoria */
+.divNameCategorieButtonMobile{
+    width: 214px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cor03);
+}
+
+/*texto dos botões*/
+.divNameCategorieButtonMobile h2{
+    font-size: 12pt;
+}
+
+
+
+/* ANIMAÇÕES DO MENU AQUI */
+
+.openAnimation{
+    animation-duration: 0.6s;
+    animation-name: open;
+    display: block;
+
+}
+
+.closeAnimation{
+    animation-duration: 0.6s;
+    animation-name:close;
+    
+
+}
+
+
+@keyframes open{
+    from {
+        right: -100%;
+    }
+
+    to{
+        right: 0%;
+    }
+}
+
+@keyframes close{
+    from {
+        right: 0%;
+    }
+
+    to{
+        right: -100%;
+    }
+}

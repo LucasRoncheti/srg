@@ -10,6 +10,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+   
 }
 
 :root{
@@ -18,4 +19,11 @@
     --cor02 : #E55933;
     --cor03 : #438A64;
     --branco : #f4f4f4;
+
+    /* cor verde com transparencia*/
+    --cor06 :#438a64fa;
+}
+
+section a{
+    text-decoration: none;
 }

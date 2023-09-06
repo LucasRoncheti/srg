@@ -9,21 +9,22 @@ body{
 header{
     width: 100%;
     height: 166px;
-    background-color: var(--cor01);
+    background-color: var(--cor03);
 
     text-align: center;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.174);
 }
 
 header h1{
-    font-size: 15pt;
+    font-size: 25pt;
     font-weight: 700;
-    color: var(--cor02);
+    margin-top: 10px;
+    color: var(--cor01);
 }
 
 /* imagem que fica no topo do header  */
-header img{
-    margin-top: 24px;
+.topIconCategorie{
+    margin-top: 40px;
 }
 
 header p{
@@ -36,15 +37,15 @@ header p{
     width: 100%;
 }
 
-
-/* css do botão de lougout */
-.logoutButton{
+/* css do botão de botão mobile */
+.mobileMenuButton{
     width: 30px;
     height: 30px;
     background-color: transparent;
     border: none;
     position: absolute;
     right: 24px;
+    top: 24px;
 }
 
 
@@ -58,7 +59,7 @@ header p{
     align-items: center;
     justify-content: space-around;
 
-    padding: 5%;
+    padding: 10%;
 }
 
 
