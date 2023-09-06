@@ -17,6 +17,6 @@ openMenu = () => {
     condicional=1
     setTimeout(function(){
         menuMobile.style.display='none'
-    },700)
+    },600)
    }
 }

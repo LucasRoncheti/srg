@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="css/root.css">
-    <link rel="stylesheet" href="css/mainPage/mainPage.css">
+    <link rel="stylesheet" href="index/root.css">
+    <link rel="stylesheet" href="index/mainPage.css">
     
     <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <title>Sistema de cadastro Reinholz Ginger</title>
@@ -23,7 +23,8 @@
    </header>
 
    <section class="containerMenuButtons">
-        <a  href="cadastros/cadastros.html"> <div class="menuButtons">
+        <a 
+         href="cadastros/cadastros.html"> <div class="menuButtons">
             <button class="categorieButton">
                 <div class="divImgCategorieButton"><img src="assets/categories/cadastro.svg" alt="icone Cadastro"></div>
                 <div class="divNameCategorieButton"><h2>CADASTROS</h2></div>
@@ -61,30 +62,12 @@
    </section>
 
    <footer>
-    <p> V 1.0.0 2023 © Lucas Roncheti </p>
+    <p  id="data-footer">  </p>
    </footer>
 </body>
 
-<script>
-    const elementoDataHora = document.getElementById('data-hora')
 
-    function atualizarDataHora(){
 
-            // cria o objeto data
-            const dataAtual = new Date()
-            //formata a hora e data
-            const dataHoraFormatada = dataAtual.toLocaleString([], { hour: '2-digit', minute: '2-digit' })
-           
-
-            const diasDaSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-            const diaDaSemana = diasDaSemana[dataAtual.getDay()];
-
-             //insere a data  formatada no html
-             elementoDataHora.textContent=`${diaDaSemana} | ${dataHoraFormatada}`
-    }
-
-    atualizarDataHora()
-
-    setInterval(atualizarDataHora,3000)
-</script>
+<script src="generalScripts/version.js"></script>
+<script src="generalScripts/timeFormat.js"></script>
 </html>
