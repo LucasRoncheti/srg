@@ -1,0 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* background Color */
+
+.dark {
+    background: #222;
+}
+
+.white {
+    background: rgb(243, 243, 243);
+}
+
+/** Background Color **/
+
+.overflow, .circle-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overflow {
+    z-index: 9998;
+    width: 100vw;
+    height: 100vh;
+}
+
+.circle-line {
+    z-index: 9999;
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.circle-red,.circle-green,.circle-yellow,.circle-blue{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    margin: 5px;
+}
+
+.circle-red {
+    background-color: var(--cor02);
+    animation: movingUp 0.5s infinite alternate;
+  
+}
+
+.circle-blue {
+    background-color: #4285f4;
+    animation: movingUp 0.5s 0.2s infinite alternate;
+   
+}
+
+.circle-green {
+    background-color: var(--cor03);
+    animation: movingUp 0.5s .5s infinite alternate;
+    
+  
+}
+
+.circle-yellow {
+    background-color: #FBBC05;
+    animation: movingUp 0.5s .7s infinite alternate;
+    
+}
+
+/* CSS ANIMATION */
+
+@keyframes movingUp {
+    from {
+    
+        width:20px;
+        height: 20px;
+        
+    }
+
+    to {
+        
+        width:40px;
+        height:40px;
+    }
+}
