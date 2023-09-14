@@ -1,6 +1,8 @@
 <?php
 
      include '../../generalPhp/conection.php';
+
+    
      
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $numero = $_POST["numero"];
@@ -11,6 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     if ($conn->query($sql) === TRUE) {
         echo "Fornecedor cadastrado com sucesso!";
+       
+     
     } else {
         echo "Erro no cadastro: " . $conn->error;
     }

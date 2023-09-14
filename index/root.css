@@ -18,9 +18,15 @@
     --cor02 : #E55933;
     --cor03 : #438A64;
     --branco : #f4f4f4;
+    --cor04 : #cbcbcb;
 
     /* cor verde com transparencia*/
     --cor06 :#438a64fa;
+
+
+    /* shadow padrão*/
+
+    --shadow: 3px 3px 7px rgba(0, 0, 0, 0.13);
 }
 
 section a{

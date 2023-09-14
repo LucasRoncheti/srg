@@ -31,7 +31,7 @@
     
 
     <div id="mobileMenu" class="mobileMenuContainer ">
-        <button onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
+        <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
             <div class="mobileMenuButtons">
@@ -44,7 +44,7 @@
                     </div>
                 </a>
 
-                <a href="#">
+                <a href="../cadastros.html">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
@@ -93,9 +93,10 @@
 
    <header>
 
-    <button onclick="backPage()" id="backButton" class="backButton">
+    <a href="../cadastros.html"><button  id="backButton" class="backButton">
         <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
     </button>
+    </a>
 
     <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
         <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
@@ -103,12 +104,12 @@
     
     <form id="cadastroForm">
         <div class="inputBox">
-            <label for="numero">Número:</label>
+            
             <input placeholder="NÚMERO" type="number" id="numero" name="numero" required>
         </div>
 
         <div class="inputBox">
-            <label for="numero">Nome:</label>
+            
             <input placeholder="NOME" type="text" id="nome" name="nome" required>
         </div>
 
@@ -116,15 +117,29 @@
     </form>
    
    </header>
+   
+		<form method="POST" class="inputSearch" id="form-pesquisa" action="">
+			<input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
+			
+		</form>
+	
 
-   <section id="containerList" class="containerList">
-       
       
+
+ 
+  
+   <section id="containerList" class="containerList">
+    
+    
+       
+    
  
 
    
       
-   </section>
+   </section> 
+
+  
 
    <footer>
     <p  id="data-footer">  </p>
@@ -140,5 +155,7 @@
 <script src="cadastroFonecedor.js"></script>
 
 <script src="listarFornecedores.js"></script>
+
+<script src="busca.js"></script>
 
 </html>

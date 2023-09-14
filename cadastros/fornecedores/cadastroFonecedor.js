@@ -16,7 +16,9 @@
         .then(data => {
             alert(data);
             form.reset();
-            carregarFornecedores()
+            carregarFornecedores(1,10)
+          
+            
         });
    
         

@@ -57,7 +57,7 @@
 
 .circle-green {
     background-color: var(--cor03);
-    animation: movingUp 0.5s .5s infinite alternate;
+    animation: 544.432ms ease 500ms infinite alternate none running movingUp;
     
   
 }
