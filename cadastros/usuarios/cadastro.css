@@ -1,0 +1,258 @@
+
+body{
+    height: 100%;
+    width: 100vw;
+    background-color: var(--branco);
+}
+
+
+header{
+    width: 100%;
+    height: 314px;
+    background-color: var(--cor03);
+    position: relative;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.174);
+}
+
+/* formulario de cadastro dos fornecedores*/
+form{
+    width: 100%;
+    height: 220px;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+/* div do input */
+.inputBox{
+    width: 100%;
+    height: 62px;
+    max-width: 320px;
+    position: relative;
+}
+
+
+input{
+    width: 320px;
+    height: 44px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.3em;
+    text-align: center;
+    font-weight: 500;
+    color: var(--cor03);
+}
+input::placeholder{
+    font-size: 1.5em;
+    color: var(--cor01);
+}
+
+label{
+    position: absolute;
+    background-color: var(--cor02);
+    padding: 3px;
+    font-size: 0.7em;
+    border-radius: 5px;
+    color: var(--branco);
+    top: -10px;
+    left: 10px;
+}
+
+/* botão salvar*/
+button{
+    width: 257px;
+    height: 42px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--cor02);
+    color: var(--branco);
+    font-size:1.5em;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+button img{
+    margin-left: 8px;
+}
+
+/*lista do container */
+.containerList{
+    width: 100%;
+    height: calc(100vh - 342px);
+    background-color: var(--branco);
+    overflow: auto;
+}
+
+/* input de busca  */
+.inputSearch{
+    width: 100%;
+    height: 40px;
+    background-color: var(--cor04);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputSearch input{
+    width: 95%;
+    max-width: 380px;
+    height: 30px;
+    font-size: 0.8em;
+    font-size: 1.2em;
+   
+  
+
+}
+
+/* mensagem de erro de busca */
+
+.notFound{
+    width: 100%;
+    height: calc(100vh - 360px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.notFoundImg{
+    max-width: 150px;
+    animation-duration: 0.6s;
+    animation-name: notFound;
+}
+
+.notFound h3,p{
+    font-size: 1em;
+    margin: 5px;
+}
+
+@keyframes notFound{
+    from{
+        width: 0px;
+    }
+
+    to{
+        width: 150px;
+    }
+}
+
+
+
+/* Tabela com os nomes */
+table {
+    width: 100%;
+    max-height: 50px;
+    overflow: auto; 
+    text-align: center;
+}
+
+th {
+    background-color: var(--cor03);
+    color: var(--branco);
+    height: 40px;
+}
+
+.tableRow {
+    height: 40px; 
+}
+
+.tableRow:nth-child(odd) {
+    background-color: var(--cor01);
+}
+
+.tableRow:nth-child(even) {
+    background-color: var(--cor04);
+}
+
+/* Botões de editar e apagar  nomee numero */
+.editTable {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    width: 15vw;
+    padding: 0px  5px 0px 0px;
+    
+}
+
+.nameTable{
+    width: 70vw;
+}
+
+.numTable{
+    width: 15vw;
+}
+
+
+/* div com os botões de paginação */
+.divPagina{
+    width: 100%;
+    height: 30px;
+ 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color:var(--cor02);
+    font-weight: 500;
+    color: var(--branco);
+}
+
+a{
+    text-decoration: none;
+    color: var(--branco);
+   
+}
+
+
+/* css do botão de botão mobile */
+.mobileMenuButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+
+/* css do botão de voltar a página anterior */
+.backButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 24px;
+    top: 24px;
+
+}
+
+
+
+
+footer{
+    width: 100vw;
+    height: 28px;
+    background-color: var(--cor01);
+    color: var(--cor03);
+
+    
+    font-size: 10pt;
+    font-weight: 500;
+    
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
