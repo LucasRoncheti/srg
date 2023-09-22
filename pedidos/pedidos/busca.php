@@ -6,7 +6,7 @@
 	$busca = $_POST['palavra'];
 	
 	//Pesquisar no banco de dados nome do curso referente a palavra digitada pelo usuário
-	$sql = "SELECT * FROM produtos WHERE produto  LIKE '%$busca%'";
+	$sql = "SELECT * FROM clientes WHERE nome  LIKE '%$busca%'";
 	$resultado_sql= mysqli_query($conn, $sql);
 	
 	if(mysqli_num_rows($resultado_sql) <= 0){
@@ -25,8 +25,7 @@
 		// Cabeçalho da tabela
 		echo '<tr>
 					<th>N°</th>
-					<th>NOME PRODUTO</th>
-					<th>VALOR</th>
+					<th>NOME CLIENTE</th>
 					<th >EDIT.</th>
 				</tr>'; 
 	
@@ -34,8 +33,8 @@
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
 			echo '<tr class=" tableRow">';
 			echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
-			echo '<td class = "nameTable">' . $row_sql['produto'] . '</td>';
-			echo '<td class = "numTable">' . number_format($row_sql['valor'] / 100 , 2,",",".") . '</td>';
+			echo '<td class = "nameTable">' . $row_sql['nome'] . '</td>';
+			
 			echo '<td class = "editTable"> <a  href="editarsql.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>  
 											<a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a> 
 					</td>';

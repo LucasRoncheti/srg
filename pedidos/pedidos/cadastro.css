@@ -1,0 +1,389 @@
+
+body{
+    height: 100%;
+    width: 100vw;
+    background-color: var(--branco);
+}
+
+
+header{
+    width: 100%;
+    height: 400px;
+    background-color: var(--cor03);
+    position: relative;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.174);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    justify-content: space-around;
+}
+
+/* input que faz a busca do nome do cliente no banco de dados */
+.searchClient{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cor03);
+    z-index: 3;
+    display: none;
+}
+.searchClient form{
+    max-width: 380px;
+    height: 160px;
+    width: 80%;
+    display: flex;
+    background-color: transparent;
+    justify-content: space-around;
+   
+}
+
+.searchClient form select{
+    width: 100%;
+    height: 60px;
+    max-width: 320px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    color: WHITE;
+    font-weight: 600;
+    appearance: none;
+    border: none;
+    background-color: white;
+    background: url('../../assets/arowDown.svg') no-repeat right center;
+    
+}
+
+/* container  com as divs davalor unit e total */
+
+.quantidadeContainer{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.valoresContainer{
+    width: 49%;
+    display: flex;
+    justify-content: space-between;
+}
+.valores{
+    width: 49%;
+    background-color: var(--cor04);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.valorUnit:nth-child(even) {
+    color: var(--cor05);
+    font-weight: 600;
+    /* border-radius: 0px 20px  20px 0px; */
+}
+.valorTotal:nth-child(even) {
+    color: var(--cor05);
+    font-weight: 600;
+
+}
+
+.botaoQuantidadeMenos{
+    background-color: var(--cor02);
+    width: 30%;
+    height: 100%;
+    border-radius: 20px 0px 0px 20px;
+}
+.botaoQuantidadeMais{
+    background-color: var(--cor02);
+    width: 30%;
+    height: 100%;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.valorUnit ,.valorTotal{
+    width: 100%;
+    height: 50%;
+    font-size: 0.9em;
+    font-weight: 500;
+
+}
+
+.quntidade{
+    width: 50%;
+}
+.aumentaQuantidade{
+    width: 40%;
+    height:40px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--cor04);
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+  
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.aumentaQuantidade input{
+width: 60%;
+background-color: var(--cor04);
+}
+
+/* div do input */
+.inputBox{
+    width: 100%;
+    height: 62px;
+    max-width: 320px;
+    position: relative;
+}
+
+
+input{
+    width: 320px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.0em;
+    text-align: center;
+    font-weight: 500;
+    color: var(--cor03);
+}
+input::placeholder{
+    font-size: 1.5em;
+    color: var(--cor01);
+}
+
+label{
+    position: absolute;
+    background-color: var(--cor02);
+    padding: 3px;
+    font-size: 0.7em;
+    border-radius: 5px;
+    color: var(--branco);
+    top: -10px;
+    left: 10px;
+}
+
+/* botão salvar*/
+button{
+    width: 257px;
+    height: 42px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--cor02);
+    color: var(--branco);
+    font-size:1.5em;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+button img{
+    margin-left: 8px;
+}
+
+/*lista do container */
+.containerList{
+    width: 100%;
+    height: calc(100vh - 342px);
+    background-color: var(--branco);
+    overflow: auto;
+}
+
+/* input quebusca fornecedor e produto*/
+.inputSearch select{
+    width: 90%;
+    height: 40PX   ;
+    
+   
+}
+
+.inputSearchHeader{
+    height: 70px;
+    width: 100%;
+
+    
+}
+.inputSearchHeader select{
+    height: 30px;
+    width: 320px;
+    text-align: center;
+}
+
+/* input de busca  */
+.inputSearch{
+    width: 100%;
+    height: 40px;
+    background-color: var(--cor04);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputSearch input{
+    width: 90%;
+    max-width: 380px;
+    height: 30px;
+    font-size: 0.8em;
+    font-size: 1.2em;
+
+}
+
+.pesquisaFornecedor{
+    border-radius: 0px;
+}
+/* mensagem de erro de busca */
+
+.notFound{
+    width: 100%;
+    height: calc(100vh - 360px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.notFoundImg{
+    max-width: 150px;
+    animation-duration: 0.6s;
+    animation-name: notFound;
+}
+
+.notFound h3,p{
+    font-size: 1em;
+    margin: 5px;
+}
+
+@keyframes notFound{
+    from{
+        width: 0px;
+    }
+
+    to{
+        width: 150px;
+    }
+}
+
+
+
+/* Tabela com os nomes */
+table {
+    width: 100%;
+    max-height: 50px;
+    overflow: auto; 
+    text-align: center;
+}
+
+th {
+    background-color: var(--cor03);
+    color: var(--branco);
+    height: 40px;
+}
+
+.tableRow {
+    height: 40px; 
+}
+
+.tableRow:nth-child(odd) {
+    background-color: var(--cor01);
+}
+
+.tableRow:nth-child(even) {
+    background-color: var(--cor04);
+}
+
+/* Botões de editar e apagar  nomee numero */
+.editTable {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    width: 15vw;
+    padding: 0px  5px 0px 0px;
+    
+}
+
+.nameTable{
+    width: 70vw;
+}
+
+.numTable{
+    width: 15vw;
+}
+
+
+/* div com os botões de paginação */
+.divPagina{
+    width: 100%;
+    height: 30px;
+ 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color:var(--cor02);
+    font-weight: 500;
+    color: var(--branco);
+}
+
+a{
+    text-decoration: none;
+    color: var(--branco);
+   
+}
+
+
+/* css do botão de botão mobile */
+.mobileMenuButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+
+/* css do botão de voltar a página anterior */
+.backButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 24px;
+    top: 24px;
+
+}
+
+
+
+
+footer{
+    width: 100vw;
+    height: 28px;
+    background-color: var(--cor01);
+    color: var(--cor03);
+
+    
+    font-size: 10pt;
+    font-weight: 500;
+    
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
