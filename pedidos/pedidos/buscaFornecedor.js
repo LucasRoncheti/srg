@@ -17,7 +17,7 @@ $(function(){
 			});
 		}else{
 			$("#fornecedor").html('');
-			listar(1,10)
+			
 		}		
 	});
 });

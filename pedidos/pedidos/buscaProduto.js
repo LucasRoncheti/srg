@@ -1,3 +1,6 @@
+
+ 
+ 
  $(function () {
      //Pesquisar os cursos sem refresh na página
      $("#pesquisaProduto").keyup(function () {
@@ -38,7 +41,7 @@
              $("#produto").html('');
              $("#valorUnit").html('R$ 0,00');
              $("#valorTotal").html('R$ 0,00'); // Limpar a outra div se nada for digitado
-             listar(1, 10)
+           
          }
      });
 });
@@ -47,9 +50,10 @@
 function calcularTotal() {
     var selectedValue = parseFloat($("#produto option:selected").val());
     var quantidade = parseFloat($("#quantidade").val());
-
+    
     var total = selectedValue * quantidade;
     var valorString = total.toString()
+   
 
     if(valorString.length == 2){
         $("#valorTotal").html("R$ 0,"+ total)

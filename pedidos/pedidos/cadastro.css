@@ -1,12 +1,11 @@
-
-body{
+body {
     height: 100%;
     width: 100vw;
     background-color: var(--branco);
 }
 
 
-header{
+header {
     width: 100%;
     height: 400px;
     background-color: var(--cor03);
@@ -21,7 +20,7 @@ header{
 }
 
 /* input que faz a busca do nome do cliente no banco de dados */
-.searchClient{
+.searchClient {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -33,17 +32,18 @@ header{
     z-index: 3;
     display: none;
 }
-.searchClient form{
+
+.searchClient form {
     max-width: 380px;
     height: 160px;
     width: 80%;
     display: flex;
     background-color: transparent;
     justify-content: space-around;
-   
+
 }
 
-.searchClient form select{
+.searchClient form select {
     width: 100%;
     height: 60px;
     max-width: 320px;
@@ -56,12 +56,12 @@ header{
     border: none;
     background-color: white;
     background: url('../../assets/arowDown.svg') no-repeat right center;
-    
+
 }
 
 /* container  com as divs davalor unit e total */
 
-.quantidadeContainer{
+.quantidadeContainer {
     width: 100%;
     height: 40px;
     display: flex;
@@ -69,12 +69,13 @@ header{
     justify-content: space-around;
 }
 
-.valoresContainer{
+.valoresContainer {
     width: 49%;
     display: flex;
     justify-content: space-between;
 }
-.valores{
+
+.valores {
     width: 49%;
     background-color: var(--cor04);
     display: flex;
@@ -83,31 +84,35 @@ header{
     align-items: center;
     border-radius: 20px;
 }
+
 .valorUnit:nth-child(even) {
     color: var(--cor05);
     font-weight: 600;
     /* border-radius: 0px 20px  20px 0px; */
 }
+
 .valorTotal:nth-child(even) {
     color: var(--cor05);
     font-weight: 600;
 
 }
 
-.botaoQuantidadeMenos{
+.botaoQuantidadeMenos {
     background-color: var(--cor02);
     width: 30%;
     height: 100%;
     border-radius: 20px 0px 0px 20px;
 }
-.botaoQuantidadeMais{
+
+.botaoQuantidadeMais {
     background-color: var(--cor02);
     width: 30%;
     height: 100%;
     border-radius: 0px 20px 20px 0px;
 }
 
-.valorUnit ,.valorTotal{
+.valorUnit,
+.valorTotal {
     width: 100%;
     height: 50%;
     font-size: 0.9em;
@@ -115,30 +120,31 @@ header{
 
 }
 
-.quntidade{
+.quntidade {
     width: 50%;
 }
-.aumentaQuantidade{
+
+.aumentaQuantidade {
     width: 40%;
-    height:40px;
+    height: 40px;
     display: flex;
     flex-direction: row;
     background-color: var(--cor04);
     justify-content: space-around;
     align-items: center;
     border-radius: 20px;
-  
+
     font-size: 2em;
     font-weight: 500;
 }
 
-.aumentaQuantidade input{
-width: 60%;
-background-color: var(--cor04);
+.aumentaQuantidade input {
+    width: 60%;
+    background-color: var(--cor04);
 }
 
 /* div do input */
-.inputBox{
+.inputBox {
     width: 100%;
     height: 62px;
     max-width: 320px;
@@ -146,7 +152,7 @@ background-color: var(--cor04);
 }
 
 
-input{
+input {
     width: 320px;
     height: 30px;
     border-radius: 5px;
@@ -156,12 +162,13 @@ input{
     font-weight: 500;
     color: var(--cor03);
 }
-input::placeholder{
+
+input::placeholder {
     font-size: 1.5em;
     color: var(--cor01);
 }
 
-label{
+label {
     position: absolute;
     background-color: var(--cor02);
     padding: 3px;
@@ -172,55 +179,211 @@ label{
     left: 10px;
 }
 
-/* botão salvar*/
-button{
-    width: 257px;
+/* botão adicionar e continuar */
+button {
+    width: 95%;
     height: 42px;
     border-radius: 20px;
     border: none;
     background-color: var(--cor02);
     color: var(--branco);
-    font-size:1.5em;
+    font-size: 1.5em;
     font-weight: 600;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
-button img{
-    margin-left: 8px;
+
+button img {
+    width: 40px;
+
+}
+
+/* botão salvar pedido*/
+.salvarPedido {
+
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--cor02);
+    color: var(--branco);
+    font-size: 1.5em;
+    display: flex;
+
+    align-items: center;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    box-shadow: var(--shadow);
+
+
 }
 
 /*lista do container */
-.containerList{
+.containerList {
     width: 100%;
-    height: calc(100vh - 342px);
+    height: calc(100vh - 370px);
     background-color: var(--branco);
     overflow: auto;
+
+
 }
+
+/*cabeçalhodos  produtos na lista */
+.cabeçalhoProdutos {
+
+    height: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--cor03);
+    margin-top: 3px;
+    font-size: 0.8em;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerProdutoPedido {
+    font-weight: 600;
+}
+
+.quantidades {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45%;
+}
+
+.quantidades div {
+
+    display: flex;
+    width: 33%;
+    justify-content: center;
+
+}
+
+/* produtos na lista */
+.dadosPedido {
+
+    height: 30px;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--cor04);
+    margin-top: 3px;
+    font-size: 0.8em;
+    color: var(--cor03);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quantidades2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 45%;
+
+}
+
+.fornecedor {
+    width: 55%;
+
+}
+
+.quantidades2 div {
+
+    display: flex;
+    width: 33%;
+    justify-content: center;
+
+}
+
+.quantidades2 div img {
+
+    width: 25px;
+
+}
+
+
+/* dados secundários na lista de produtos  */
+.dadosPedidoSecundario {
+
+    height: 30px;
+    display: none;
+    width: 100%;
+
+    padding: 10px;
+
+    background-color: var(--cor07);
+
+    font-size: 0.8em;
+
+    color: var(--cor03);
+
+
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.quantidades3 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 45%;
+
+}
+
+.produtosLista {
+    width: 55%;
+
+}
+
+.quantidades3 div {
+
+    display: flex;
+
+    color: var(black);
+
+
+}
+
+.quantidades3 div img {
+
+    width: 17px;
+    margin-right: 5px;
+}
+
 
 /* input quebusca fornecedor e produto*/
-.inputSearch select{
+.inputSearch select {
     width: 90%;
-    height: 40PX   ;
-    
-   
+    height: 40PX;
+
+
 }
 
-.inputSearchHeader{
+.inputSearchHeader {
     height: 70px;
     width: 100%;
 
-    
+
 }
-.inputSearchHeader select{
+
+.inputSearchHeader select {
     height: 30px;
     width: 320px;
     text-align: center;
 }
 
 /* input de busca  */
-.inputSearch{
+.inputSearch {
     width: 100%;
     height: 40px;
     background-color: var(--cor04);
@@ -230,7 +393,7 @@ button img{
     justify-content: center;
 }
 
-.inputSearch input{
+.inputSearch input {
     width: 90%;
     max-width: 380px;
     height: 30px;
@@ -239,12 +402,13 @@ button img{
 
 }
 
-.pesquisaFornecedor{
+.pesquisaFornecedor {
     border-radius: 0px;
 }
+
 /* mensagem de erro de busca */
 
-.notFound{
+.notFound {
     width: 100%;
     height: calc(100vh - 360px);
     display: flex;
@@ -255,23 +419,24 @@ button img{
 
 
 
-.notFoundImg{
+.notFoundImg {
     max-width: 150px;
     animation-duration: 0.6s;
     animation-name: notFound;
 }
 
-.notFound h3,p{
+.notFound h3,
+p {
     font-size: 1em;
     margin: 5px;
 }
 
-@keyframes notFound{
-    from{
+@keyframes notFound {
+    from {
         width: 0px;
     }
 
-    to{
+    to {
         width: 150px;
     }
 }
@@ -282,7 +447,7 @@ button img{
 table {
     width: 100%;
     max-height: 50px;
-    overflow: auto; 
+    overflow: auto;
     text-align: center;
 }
 
@@ -293,7 +458,7 @@ th {
 }
 
 .tableRow {
-    height: 40px; 
+    height: 40px;
 }
 
 .tableRow:nth-child(odd) {
@@ -311,42 +476,42 @@ th {
     align-items: center;
     height: 40px;
     width: 15vw;
-    padding: 0px  5px 0px 0px;
-    
+    padding: 0px 5px 0px 0px;
+
 }
 
-.nameTable{
+.nameTable {
     width: 70vw;
 }
 
-.numTable{
+.numTable {
     width: 15vw;
 }
 
 
 /* div com os botões de paginação */
-.divPagina{
+.divPagina {
     width: 100%;
     height: 30px;
- 
+
     display: flex;
     justify-content: space-around;
     align-items: center;
 
-    background-color:var(--cor02);
+    background-color: var(--cor02);
     font-weight: 500;
     color: var(--branco);
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--branco);
-   
+
 }
 
 
 /* css do botão de botão mobile */
-.mobileMenuButton{
+.mobileMenuButton {
     width: 30px;
     height: 30px;
     background-color: transparent;
@@ -357,7 +522,7 @@ a{
 }
 
 /* css do botão de voltar a página anterior */
-.backButton{
+.backButton {
     width: 30px;
     height: 30px;
     background-color: transparent;
@@ -371,19 +536,18 @@ a{
 
 
 
-footer{
+footer {
     width: 100vw;
     height: 28px;
     background-color: var(--cor01);
     color: var(--cor03);
 
-    
+
     font-size: 10pt;
     font-weight: 500;
-    
+
     bottom: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-

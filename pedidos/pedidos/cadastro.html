@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="../../onLoad/onLoad.css">
     <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="../pedidos/cadastro.css">
-    
+
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Cadastro Pedidos</title>
 
@@ -18,7 +19,7 @@
 <script src="../../onLoad/onLoad.js"></script>
 
 
- <div class="overflow white" id="preload"> 
+<div class="overflow white" id="preload">
     <div class="circle-line">
         <div class="circle-red">&nbsp;</div>
         <div class="circle-blue">&nbsp;</div>
@@ -34,162 +35,201 @@
 
     <form method="POST" class="inputSearch" id="form-pesquisa1" action="">
         <select aria-placeholder="CLIENTE" name="cliente" id="select">
+            <option value="Lucas Roncheti"></option>
         </select>
-        
+
     </form>
 
-    <button onclick="ContinuarParaPedidos()" >CONTINUAR ></button> 
+    <button onclick="ContinuarParaPedidos()">CONTINUAR ></button>
 
 </div>
 
 <body onload="onLoad()">
 
-    <!--Menu mobile   --> 
+    <!--Menu mobile   -->
 
     <div id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
-            <div class="mobileMenuButtons">
-                <a href="../../index.html">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _home_.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
-                        </button>
-                    </div>
-                </a>
+        <div class="mobileMenuButtons">
+            <a href="../../index.html">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _home_.svg"
+                                alt="icone fornecedor"></div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>INÍCIO</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
 
-                <a href="../../cadastros/cadastros.html">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../pedidos/cadastro.html">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>RELATÓRIOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INSPESSÃO</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
-                        </button>
-                    </div>
-                </a>
-             
+            <a href="../../cadastros/cadastros.html">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img
+                                src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>CADASTROS</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
+            <a href="../../pedidos/cadastro.html">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img
+                                src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>PEDIDOS</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
+            <a href="#">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img
+                                src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>RELATÓRIOS</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
+            <a href="#">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img
+                                src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor">
+                        </div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>INSPESSÃO</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
+            <a href="#">
+                <div class="menuButtonsMobile">
+                    <button class="categorieButtonMobile">
+                        <div class="divImgCategorieButtonMobile"><img
+                                src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
+                        <div class="divNameCategorieButtonMobile">
+                            <h2>PACKING LIST</h2>
+                        </div>
+                    </button>
+                </div>
+            </a>
 
-            </div>   
+
+        </div>
 
     </div>
 
-    
-
-   <header>
-
-    <a href="../cadastros.html"><button  id="backButton" class="backButton">
-        <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-    </button>
-    </a>
-
-    <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-        <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
-    </button>
-    
-    <div>
-        <input id="dataAtual"class="dataPedido" type="date">
-    </div>
 
 
+    <header>
 
-    <form method="POST" class="inputSearchHeader" id="form-pesquisa2" action="">
-        <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"  placeholder="FORNECEDOR">
-        <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
-            <option value="Lucas Roncheti"></option>
-        </select>
-    </form>
+        <a href="../cadastros.html"><button id="backButton" class="backButton">
+                <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
+            </button>
+        </a>
 
-    <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
-        <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto" placeholder="PRODUTO">
-        <select onchange="calcularMudançaSelect()" placeholder="PRODUTO" name="produto" id="produto">
-            
-        </select>
-        
-    </form>
+        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
+            <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
+        </button>
 
-    <div class="quantidadeContainer">
-        <div class="valoresContainer"> 
-            <div class="valores">
-                <div class="valorUnit">Unit.</div>
-                <div id="valorUnit" class="valorUnit" >R$ 0,00</div>
+        <div>
+            <input id="dataAtual" class="dataPedido" type="date">
+        </div>
+
+
+
+        <form method="POST" class="inputSearchHeader" id="form-pesquisa2" action="">
+            <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
+                placeholder="FORNECEDOR">
+            <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
+                <option value=""></option>
+            </select>
+        </form>
+
+        <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
+            <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto"
+                placeholder="PRODUTO">
+            <select onchange="calcularMudançaSelect()" placeholder="PRODUTO" name="produto" id="produto">
+                <option value=""></option>
+            </select>
+
+        </form>
+
+        <div class="quantidadeContainer">
+            <div class="valoresContainer">
+                <div class="valores">
+                    <div class="valorUnit">Unit.</div>
+                    <div id="valorUnit" class="valorUnit">R$ 0,00</div>
+                </div>
+                <div class="valores">
+                    <div class="valorTotal"> Total</div>
+                    <div id="valorTotal" class="valorTotal">R$ 0,00</div>
+                </div>
             </div>
-            <div class="valores">
-                <div  class="valorTotal"> Total</div>
-                <div id="valorTotal" class="valorTotal">R$ 0,00</div>
+            <div class="aumentaQuantidade">
+                <div onclick="subtrairValor()" class="botaoQuantidadeMenos">-</div>
+                <input id="quantidade" class="quantidade" value="1" type="number">
+                <div></div>
+                <div onclick="aumentarValor()" class="botaoQuantidadeMais">+</div>
             </div>
         </div>
-        <div  class="aumentaQuantidade">
-            <div onclick="subtrairValor()" class="botaoQuantidadeMenos">-</div>
-            <input  id="quantidade" class="quantidade" value="1" type="number"><div></div>
-            <div onclick="aumentarValor()" class="botaoQuantidadeMais">+</div>
+
+        <button onclick="listar()"><img style="height: 30px;" src="../../assets/arowDown.svg" alt="Arrow Down ">ADIOCIONAR <img style="height: 30px;" src="../../assets/arowDown.svg" alt="Arrow Down "></button>
+
+
+
+        <form id="cadastroForm">
+
+
+
+            <input type="hidden" id="cliente" name="cliente">
+
+
+        </form>
+
+
+
+
+    </header>
+
+    <!-- cabeçalho da lista de produtos -->
+    <div class="cabeçalhoProdutos">
+        <div id="fornecedorCabeçalho" class="fornecedor" >FORNECEDOR</div>
+        <div class="quantidades" >
+            <div  id="qnt" >QNT</div>
+            <div id="vlr">VLR T.</div>
+            <div id="verMais"> MAIS</div>
         </div>
+    
     </div>
 
-    <button>ADIOCIONAR <img style="height: 30px;" src="../../assets/arowDown.svg" alt=""></button>
 
+    <form id="containerList" class="containerList">
+       
 
-    
-    <form id="cadastroForm">
+     
 
-        <button type="submit">SALVAR <img src="../../assets/save.svg" alt=""></button> 
-
-        <input type="hidden" id="cliente" name="cliente" >
-        
-        
-    </form> 
    
 
 
 
-   </header>
-   
-		<form method="POST" class="inputSearch" id="form-pesquisa" action="">
-			<input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">	
-		</form>
+        <button class="salvarPedido" type="submit"> <img src="../../assets/save.svg" alt=""></button>
 
-   <section id="containerList" class="containerList">
-    
+    </form>
 
-   </section> 
 
-  
 
-   <footer>
-    <p  id="data-footer">  </p>
-   </footer>
+    <footer>
+        <p id="data-footer"> </p>
+    </footer>
 </body>
 
 <script src="../../mobileMenu/js/mobileMenu.js"></script>
@@ -200,9 +240,8 @@
 
 <script src="cadastro.js"></script>
 
-<script src="listar.js"></script>
 
-<script src="busca.js"></script>
+
 
 <script src="buscaCliente.js"></script>
 
@@ -215,6 +254,13 @@
 <script src="../../generalScripts/atualDate.js"></script>
 
 <script src="aumentarQuantidade.js"></script>
+
+<script src="mostrarInfo.js"></script>
+
+<!-- 
+lista o produto adicionado na lista do pedido -->
+<script src="listarProdutos.js"></script> 
+
 
 
 

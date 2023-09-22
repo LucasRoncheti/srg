@@ -4,14 +4,21 @@ valorUnit = document.getElementById("valorUnit");
 let quantidadeInicial = 1;
 let quantidadeAtual = quantidadeInicial;
 
-const aumentarValor = () => {
+var aumentarValor = () => {
     quantidade.value = ++quantidadeAtual;
     calcularTotal();
 };
 
-const subtrairValor = () => {
+var subtrairValor = () => {
     if (quantidadeAtual > 1) {
         quantidade.value = --quantidadeAtual;
+    }
+    calcularTotal();
+};
+
+var zerarValor = () => {
+    if (quantidadeAtual > 1) {
+        quantidade.value = 0;
     }
     calcularTotal();
 };
