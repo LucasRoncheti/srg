@@ -6,14 +6,14 @@ let trocarDisplay = (id, img) => {
     let div = document.getElementById(id)
     let imgem = document.getElementById(img)
 
-    var eyeSlashsrc ="../../assets/eyeSlash.svg"
-    var eyesrc ="../../assets/eye.svg"
+    var eyeSlashsrc = "../../assets/eyeSlash.svg"
+    var eyesrc = "../../assets/eye.svg"
 
     if (div.style.display == "none") {
         div.style.display = "flex"
-        imgem.src=eyeSlashsrc
+        imgem.src = eyeSlashsrc
     } else {
         div.style.display = "none"
-        imgem.src=eyesrc
+        imgem.src = eyesrc
     }
 }

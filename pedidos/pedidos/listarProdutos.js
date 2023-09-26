@@ -2,6 +2,11 @@
 
 //quantidade
 valores = [{}]
+//valores que serão usados para fazer a soma total dos valores e quantidade de produtos
+itensParaSoma = []
+
+//variavel que armazena a quantidade de caixas que serão calculadas no pedido
+var  caixasTotais = 1400;
 
 key = 1
 
@@ -16,11 +21,11 @@ let listar = () => {
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
 
     if (fornecedor === "" || produto === "") {
-        alert("Preencha o  campo vazio  ")
+        alert("Preencha o campo vazio ! ")
     } else {
 
 
-        //recuperaos valores 
+        //recuperaos valores a serem mapeados na função adicionarItemPedido()
         valores[0].nome = fornecedor
         valores[0].produto = produto
         valores[0].valorUnit = valorUnitFormatado
@@ -30,6 +35,43 @@ let listar = () => {
         valores[0].quantidade = quantidadeFormatada
         valores[0].id = key++
 
+        //recupera os valores para fazer a soma total de caixas e valor total 
+        novoDicionarioItens = {}
+        novoDicionarioItens['id'] = key 
+        novoDicionarioItens['valorTotal'] = valorTotalFormatado
+        novoDicionarioItens['quantidade'] = quantidadeFormatada
+        itensParaSoma.push(novoDicionarioItens)
+
+        //fazer a soma dos valores e colocar em variáveis 
+
+        var somaQuantidade = 0
+        var somaValortotalPedido = 0
+
+        for (var i = 0; i < itensParaSoma.length; i++) {
+            somaQuantidade = somaQuantidade + itensParaSoma[i].quantidade
+        }
+
+        for (var i = 0; i < itensParaSoma.length; i++) {
+            somaValortotalPedido = somaValortotalPedido + itensParaSoma[i].valorTotal
+        }
+        
+
+        //converte o  valor para string e  formata para real brasileiro
+        somaValortotalPedidoSTRING = somaValortotalPedido.toString()
+        if(somaValortotalPedidoSTRING.length == 2){
+            $("#valorTotalPedido").html("R$ 0," + somaValortotalPedidoSTRING)
+        }
+
+        if(somaValortotalPedidoSTRING.length>=3){
+            valorTotalFormatadoPedido = somaValortotalPedidoSTRING  / 100
+            $("#valorTotalPedido").html("R$ " + valorTotalFormatadoPedido.toFixed(2).replace(".", ","))
+        }
+
+        
+        //calcula o valor das caicas restantes 
+        var quantiadeDeCaixasRestantes = caixasTotais - somaQuantidade
+        document.getElementById("Ncaixas").innerHTML = somaQuantidade
+        document.getElementById("CxRest").innerHTML = quantiadeDeCaixasRestantes
 
         adicionarItemPedido()
         quantidade = document.getElementById("quantidade").value = 1
@@ -37,7 +79,7 @@ let listar = () => {
         document.getElementById("pesquisaFornecedor").value = ""
         document.getElementById("pesquisaProduto").value = ""
         document.getElementById("valorTotal").textContent = valorUnit
-
+       
 
 
     }
@@ -52,9 +94,11 @@ let listar = () => {
 
 }
 
+
+
 let adicionarItemPedido = () => {
     Item = document.getElementById("containerList")
-    return (Item.innerHTML += valores.map((x, index) => {
+    return (Item.innerHTML += valores.map((x) => {
         let { nome, produto, id, valorUnit, valorTotal, valorUnitString, valorTotalString, quantidade } = x
         return `
             

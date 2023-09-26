@@ -1,5 +1,7 @@
 quantidade = document.getElementById("quantidade");
-valorUnit = document.getElementById("valorUnit");
+
+InputAumentarCaixasRestantes = document.getElementById("inputCxRest")
+
 
 let quantidadeInicial = 1;
 let quantidadeAtual = quantidadeInicial;
@@ -22,3 +24,16 @@ var zerarValor = () => {
     }
     calcularTotal();
 };
+
+//atualiza a quantidade digitando o numero 
+quantidade.addEventListener('change',function(){
+    quantidadeAtual = parseFloat(quantidade.value)
+    calcularTotal()
+})
+
+InputAumentarCaixasRestantes.addEventListener('input', function(){
+
+    caixasTotais = parseFloat(InputAumentarCaixasRestantes.value)
+    document.getElementById("CxRest").innerHTML =  caixasTotais
+    calcularTotal()
+})

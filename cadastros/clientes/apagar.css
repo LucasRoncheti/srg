@@ -1,24 +1,24 @@
-html{
+html {
     height: 100%;
     width: 100%;
 }
 
-body{
+body {
 
-width: 100%;
+    width: 100%;
 
-height: 100%;
+    height: 100%;
 
-background-color: var(--cor03);
+    background-color: var(--cor03);
 
-display: flex;
+    display: flex;
 
-justify-content: center;
+    justify-content: center;
 
-align-items: center;
+    align-items: center;
 }
 
-.popUpContainer{
+.popUpContainer {
     width: 80%;
     height: 50%;
     max-width: 380px;
@@ -35,38 +35,40 @@ align-items: center;
     animation: zoomSize 0.6s ease forwards;
 }
 
-h3{
+h3 {
     opacity: 0;
     animation: opacity 0.6s ease 0.3s forwards;
 }
 
 @keyframes zoomSize {
 
-    from{
+    from {
         width: 0%;
         height: 0%;
     }
-    to{
+
+    to {
         width: 80%;
         height: 30%;
     }
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--branco);
     font-size: 1.1em;
-   
+
 }
 
 
-.popUpContainer img{
+.popUpContainer img {
     width: 60px;
     opacity: 0;
     animation: opacity 0.6s ease 0.3s forwards;
-    
+
 }
-.deleteButtons{
+
+.deleteButtons {
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -74,19 +76,19 @@ a{
     animation: opacity 0.6s ease 0.3s forwards;
 }
 
-.yesButton{
+.yesButton {
     width: 90px;
     height: 40px;
     background-color: var(--cor02);
     display: flex;
     justify-content: center;
     align-items: center;
-   border-radius: 10px;
-   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.223);
-  
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.223);
+
 }
 
-.cancelButton{
+.cancelButton {
     width: 90px;
     height: 40px;
     background-color: var(--cor03);
@@ -95,10 +97,10 @@ a{
     align-items: center;
     border-radius: 10px;
     box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.223);
-  
+
 }
 
-.listButton{
+.listButton {
     width: 180px;
     height: 50px;
     background-color: var(--cor03);
@@ -113,14 +115,14 @@ a{
 
 }
 
-@keyframes opacity{
-    0%{
+@keyframes opacity {
+    0% {
         opacity: 0;
     }
 
-   
 
-    100%{
+
+    100% {
         opacity: 1;
     }
 }
