@@ -34,13 +34,13 @@
     <input type="text" name="pesquisaCliente" id="pesquisaCliente" placeholder="BUSCAR CLIENTE">
 
     <form method="POST" class="inputSearch" id="form-pesquisa1" action="">
-        <select aria-placeholder="CLIENTE" name="cliente" id="select">
+        <select placeholder="CLIENTE" name="cliente" id="select">
             <option value="Lucas Roncheti"></option>
         </select>
 
     </form>
 
-    <button onclick="ContinuarParaPedidos()">CONTINUAR ></button>
+    <button id="ContinuarParaPedidos" onclick="ContinuarParaPedidos()">CONTINUAR ></button>
 
 </div>
 
@@ -48,7 +48,7 @@
 
     <!--Menu mobile   -->
 
-    <div id="mobileMenu" class="mobileMenuContainer ">
+    <div "id=""mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
@@ -193,7 +193,7 @@
 
 
 
-            <input type="hidden" id="cliente" name="cliente">
+            <input type="hidden" id="clienteInput" name="cliente" value="">
 
 
         </form>
@@ -216,17 +216,9 @@
 
 
     <form id="containerList" class="containerList">
-
-
-
-
-
-
-
-
-        <button class="salvarPedido" type="submit"> <img src="../../assets/save.svg" alt=""></button>
-
+            <!-- aqui entra a lista dos intens no pedido -->
     </form>
+    <button onclick="enviarDados()" id="salvarPedido" class="salvarPedido" > <img src="../../assets/save.svg" alt=""></button>
 
     <div id="containerValoresFinais"   class="containerValoresFinais">
         <div id="containerInternoValoresFinais"  class="containerInternoValoresFinais">
@@ -260,9 +252,6 @@
 
 <script src="../../generalScripts/backPage.js"></script>
 
-<script src="cadastro.js"></script>
-
-
 
 
 <script src="buscaCliente.js"></script>
@@ -278,10 +267,16 @@
 <script src="aumentarQuantidade.js"></script>
 
 <script src="mostrarInfo.js"></script>
-
 <!-- 
 lista o produto adicionado na lista do pedido -->
 <script src="listarProdutos.js"></script>
+
+
+
+
+<script src="cadastro.js"></script>
+
+
 
 
 

@@ -26,10 +26,19 @@ var zerarValor = () => {
 };
 
 //atualiza a quantidade digitando o numero 
-quantidade.addEventListener('change',function(){
+quantidade.addEventListener('input',function(){
     quantidadeAtual = parseFloat(quantidade.value)
     calcularTotal()
 })
+quantidade.addEventListener('keyup',function(){
+    quantidadeAtual = parseFloat(quantidade.value)
+    calcularTotal()
+})
+
+quantidade.onfocus = function(){
+    quantidadeAtual = parseFloat(quantidade.value)
+    calcularTotal()
+}
 
 InputAumentarCaixasRestantes.addEventListener('input', function(){
 

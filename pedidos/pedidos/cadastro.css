@@ -30,7 +30,7 @@ header {
     justify-content: center;
     background-color: var(--cor03);
     z-index: 3;
-    display: none;
+    display: flex;
 }
 
 .searchClient form {
@@ -214,7 +214,8 @@ button img {
 
     align-items: center;
     position: fixed;
-    right: 30px;
+    right: 50%;
+    transform: translate(50%);
     bottom: 90px;
     box-shadow: var(--shadow);
 
@@ -224,11 +225,9 @@ button img {
 /*lista do container */
 .containerList {
     width: 100%;
-    height: calc(100vh - 370px);
+    height: calc(100vh - 501px);
     background-color: var(--branco);
     overflow: auto;
-
-
 }
 
 /*cabeçalhodos  produtos na lista */

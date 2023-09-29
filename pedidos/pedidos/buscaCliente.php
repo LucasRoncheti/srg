@@ -12,7 +12,7 @@
 	if(mysqli_num_rows($resultado_sql) <= 0){
 		echo '
 
-		 <option value="Cliente não encontrado"> Cliente não encontrado </option>
+		 <option value="Cliente não encontrado">Cliente não encontrado</option>
 		
 		';
 	}else{
@@ -25,7 +25,7 @@
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
 
 
-			echo '<option  value=" '. $row_sql['nome'] . '"> ' . $row_sql['nome'] . '</option>';
+			echo '<option  value="'. $row_sql['nome'] . '"> ' . $row_sql['nome'] . '</option>';
 
 			
 		}

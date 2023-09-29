@@ -3,12 +3,14 @@
 //quantidade
 valores = [{}]
 //valores que serão usados para fazer a soma total dos valores e quantidade de produtos
-itensParaSoma = []
+var itensParaSoma = []
 
 //variavel que armazena a quantidade de caixas que serão calculadas no pedido
 var  caixasTotais = 1400;
 
-key = 1
+var  valorTotalBD;
+
+key =  0
 
 let listar = () => {
     fornecedor = document.getElementById("fornecedor").options[0].value;
@@ -23,7 +25,7 @@ let listar = () => {
     if (fornecedor === "" || produto === "") {
         alert("Preencha o campo vazio ! ")
     } else {
-
+        calcularTotal()
 
         //recuperaos valores a serem mapeados na função adicionarItemPedido()
         valores[0].nome = fornecedor
@@ -38,8 +40,12 @@ let listar = () => {
         //recupera os valores para fazer a soma total de caixas e valor total 
         novoDicionarioItens = {}
         novoDicionarioItens['id'] = key 
+        novoDicionarioItens['fornecedor'] = fornecedor 
+        novoDicionarioItens['produto'] = produto 
+        novoDicionarioItens['valorUnit'] = valorUnitFormatado 
         novoDicionarioItens['valorTotal'] = valorTotalFormatado
         novoDicionarioItens['quantidade'] = quantidadeFormatada
+         novoDicionarioItens['chaveAcesso'] = chaveAcesso
         itensParaSoma.push(novoDicionarioItens)
 
         //fazer a soma dos valores e colocar em variáveis 
@@ -54,7 +60,7 @@ let listar = () => {
         for (var i = 0; i < itensParaSoma.length; i++) {
             somaValortotalPedido = somaValortotalPedido + itensParaSoma[i].valorTotal
         }
-        
+        valorTotalBD = somaValortotalPedido
 
         //converte o  valor para string e  formata para real brasileiro
         somaValortotalPedidoSTRING = somaValortotalPedido.toString()
@@ -73,6 +79,7 @@ let listar = () => {
         document.getElementById("Ncaixas").innerHTML = somaQuantidade
         document.getElementById("CxRest").innerHTML = quantiadeDeCaixasRestantes
 
+      
         adicionarItemPedido()
         quantidade = document.getElementById("quantidade").value = 1
 
@@ -89,8 +96,8 @@ let listar = () => {
 
     quantidadeInicial = 1;
     quantidadeAtual = quantidadeInicial;
-
-
+    console.log(itensParaSoma)
+  
 
 }
 
@@ -129,7 +136,47 @@ let adicionarItemPedido = () => {
 }
 
 
+
 var apagarItem = (id) => {
+    //pega o id da  div 
     let div = document.getElementById(id)
+
+    //seleciona o dicionario do  array a ser apagado usando como parametro o id da div 
+    itensParaSoma.splice(id,1)
+    console.log(itensParaSoma)
+
+    // faz todo o calculo novamente para as quantidades 
+    var somaQuantidade = 0
+    var somaValortotalPedido = 0
+
+    for (var i = 0; i < itensParaSoma.length; i++) {
+        somaQuantidade = somaQuantidade + itensParaSoma[i].quantidade
+    }
+
+    for (var i = 0; i < itensParaSoma.length; i++) {
+        somaValortotalPedido = somaValortotalPedido + itensParaSoma[i].valorTotal
+    }
+    
+    valorTotalBD = somaValortotalPedido
+
+    //converte o  valor para string e  formata para real brasileiro
+    somaValortotalPedidoSTRING = somaValortotalPedido.toString()
+    if(somaValortotalPedidoSTRING.length == 2){
+        $("#valorTotalPedido").html("R$ 0," + somaValortotalPedidoSTRING)
+    }
+
+    if(somaValortotalPedidoSTRING.length>=3){
+        valorTotalFormatadoPedido = somaValortotalPedidoSTRING  / 100
+        $("#valorTotalPedido").html("R$ " + valorTotalFormatadoPedido.toFixed(2).replace(".", ","))
+    }
+
+    
+    //calcula o valor das caicas restantes 
+    var quantiadeDeCaixasRestantes = caixasTotais - somaQuantidade
+    document.getElementById("Ncaixas").innerHTML = somaQuantidade
+    document.getElementById("CxRest").innerHTML = quantiadeDeCaixasRestantes
+    
+    // remove a div do html 
     div.remove()
 }
+
