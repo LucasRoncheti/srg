@@ -1,3 +1,30 @@
+<?php
+include '../../generalPhp/conection.php';
+
+// Check if 'id' parameter is provided in the URL
+if (isset($_GET['id'])) {
+    // Retrieve the 'id' value from the URL
+    $id = $_GET['id'];
+
+    // Create a SQL query to fetch the data for the specified 'id'
+    $sql = "SELECT * FROM pedidos_dados WHERE chaveAcesso = '$id'";
+    $result = mysqli_query($conn, $sql);
+
+    $sql1 = "SELECT * FROM pedidoscadastro WHERE chaveAcesso ='$id'";
+    $resultSql1 = mysqli_query($conn,$sql1);
+
+    if($resultSql1 && $resultSql1->num_rows !=0){
+        while($row = mysqli_fetch_assoc($resultSql1)){
+            $valorTotalSalvoPedido = $row['valor_total'];
+        }
+    }
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,7 +38,7 @@
     <link rel="stylesheet" href="../pedidos/cadastro.css">
 
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <title>Cadastro Pedidos</title>
+    <title>Editar Pedidos</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -30,21 +57,6 @@
     </div>
 </div>
 
-
-
-<div id="searchClient" class="searchClient">
-    <input type="text" name="pesquisaCliente" id="pesquisaCliente" placeholder="BUSCAR CLIENTE">
-
-    <form method="POST" class="inputSearch" id="form-pesquisa1" action="">
-        <select placeholder="CLIENTE" name="cliente" id="select">
-            <option value="Lucas Roncheti"></option>
-        </select>
-
-    </form>
-
-    <button id="ContinuarParaPedidos" onclick="ContinuarParaPedidos()">CONTINUAR ></button>
-
-</div>
 
 
 
@@ -137,7 +149,7 @@
 
     <header>
 
-        <a href="../cadastros.html"><button id="backButton" class="backButton">
+        <a href="../cadastro.html"><button id="backButton" class="backButton">
                 <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
             </button>
         </a>
@@ -146,9 +158,9 @@
             <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
 
-        <div>
-            <input id="dataAtual" class="dataPedido" type="date">
-        </div>
+        <div style="display:none;">
+            <input  id="dataAtual" class="dataPedido" type="date">
+        </div> 
 
 
 
@@ -195,14 +207,7 @@
 
 
 
-        <form id="cadastroForm">
-
-
-
-            <input type="hidden" id="clienteInput" name="cliente" value="">
-
-
-        </form>
+      
 
 
 
@@ -223,36 +228,99 @@
     </div>
 
 
-    <form id="containerList" class="containerList">
+    <form style="height:auto;" id="containerList" class="containerList">
             <!-- aqui entra a lista dos intens no pedido -->
     </form>
-    <button onclick="enviarDados()" id="salvarPedido" class="salvarPedido" > <img src="../../assets/save.svg" alt=""></button>
+   
+    <span style="width:100%;height:5px;background-color: #E55933;display:block;margin-top:3px;"></span>
+    
+    <div class="containerList">
+       
+    
+    <?php
 
-    <div id="containerValoresFinais"   class="containerValoresFinais">
-        <div id="containerInternoValoresFinais"  class="containerInternoValoresFinais">
-            <div id="" class="headValores">
-                <p>N° CAIXAS</p>
-                <p id="Ncaixas">0</p>
-            </div>
-            <div id="" class="headValores">
-                <p>CX. REST.</p>
-                <div class="CxDiv">
-                    <p id="CxRest">0</p> de
-                    <input id="inputCxRest" type="number">
-                </div>
-            </div>
-            <div id="" class="headValores">
-                <p>VALOR TOTAL</p>
-                <p id="valorTotalPedido">R$  00.000,00</p>
-            </div>
-        </div>
+
+
+            // Check if the query was successful and data was found
+            if ($result && $result->num_rows != 0) {
+
+                $somaQuantidadeTotal = 0;
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $fornecedor = $row['fornecedor'];
+                    $quantidade = $row['quantidade'];
+                    $valor_unit = $row['valor_unit'];
+                    $valor_total = $row['valor_total'];
+                    $produto = $row['produto'];
+                    $idItem = $row['id'];
+                    $chaveAcesso = $row['chaveAcesso'];
+
+
+                    $somaQuantidadeTotal += $quantidade;
+                
+
+                    echo '<input id="chaveAcesso" type="hidden" value="'.$chaveAcesso.'">';
+                    echo '<div id="' . $idItem . '" class="containerProdutoPedido">';
+                    echo '    <div class="dadosPedido">';
+                    echo '        <div id="fornecedorNome" class="fornecedor">' . $fornecedor . '</div>';
+                    echo '        <div class="quantidades2">';
+                    echo '            <div id="qnt">' . $quantidade . '</div>';
+                    echo '            <div id="vlr"> R$ ' . number_format($valor_total / 100, 2, ",", ".") . '</div>';
+                    echo '            <div onclick="trocarDisplay(\'info' . $idItem . '\', \'img' . $idItem . '\')" id="verMais">';
+                    echo '                <img id="img' . $idItem . '" src="../../assets/eye.svg" alt="Olho vetor">';
+                    echo '            </div>';
+                    echo '        </div>';
+                    echo '    </div>';
+                    echo '    <div id="info' . $idItem . '" class="dadosPedidoSecundario">';
+                    echo '        <div id="produtoLista" class="produtoLista">' . $produto . '</div>';
+                    echo '        <div class="quantidades3">';
+                    echo '            <div id="vlr">Unit R$ ' . number_format($valor_unit / 100, 2, ",", ".") . '</div>';
+                    echo '           <a href="apagar.php?id='. $idItem .'&valorPedidoSalvo='.$valorTotalSalvoPedido.'&valorTotal='.$valor_total.'&chaveAcesso='.$chaveAcesso.'"> <div  id="verMais' . $idItem . '">';
+                    echo '                <img src="../../assets/erase.svg" alt="Olho vetor">';
+                    echo '            </div></a>';
+                    echo '        </div>';
+                    echo '    </div>';
+                    echo '</div>';
+                }
+            } else {
+                echo 'Registro não encontrado!';
+            }
+            } else {
+            echo 'ID não fornecido na URL!';
+            }
+    ?>
+     
     </div>
 
 
+<button onclick="enviarDados()" id="salvarPedido" class="salvarPedido" > <img src="../../assets/save.svg" alt=""></button>
 
-    <footer>
-        <p id="data-footer"> </p>
-    </footer>
+<div id="containerValoresFinais"   class="containerValoresFinais">
+    <div id="containerInternoValoresFinais"  class="containerInternoValoresFinais">
+        <div id="" class="headValores">
+            <p>N° CAIXAS</p>
+            <p id="Ncaixas"><?php echo $somaQuantidadeTotal?></p>
+        </div>
+        <div id="" class="headValores">
+            <p>CX. REST.</p>
+            <div class="CxDiv">
+                <p id="CxRest">0</p> de
+                <input id="inputCxRest" type="number">
+            </div>
+        </div>
+        <div id="" class="headValores">
+            <p>VALOR TOTAL</p>
+            <p id="valorTotalPedido">R$ <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", "."); ?></p>
+
+        </div>
+    </div>
+</div>
+
+
+
+<footer>
+    <p id="data-footer"> </p>
+</footer>
 </body>
 
 <script src="../../mobileMenu/js/mobileMenu.js"></script>
@@ -263,19 +331,19 @@
 
 
 
-<script src="buscaCliente.js"></script>
+<script src="../pedidos/buscaCliente.js"></script>
 
-<script src="pedidos.js"></script>
+<script src="../pedidos/pedidos.js"></script>
 
-<script src="buscaFornecedor.js"></script>
+<script src="../pedidos/buscaFornecedor.js"></script>
 
-<script src="buscaProduto.js"></script>
+<script src="../pedidos/buscaProduto.js"></script>
 
 <script src="../../generalScripts/atualDate.js"></script>
 
-<script src="aumentarQuantidade.js"></script>
+<script src="../pedidos/aumentarQuantidade.js"></script>
 
-<script src="mostrarInfo.js"></script>
+<script src="../pedidos/mostrarInfo.js"></script>
 <!-- 
 lista o produto adicionado na lista do pedido -->
 <script src="listarProdutos.js"></script>
@@ -294,3 +362,6 @@ lista o produto adicionado na lista do pedido -->
 
 
 </html>
+
+
+

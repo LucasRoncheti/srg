@@ -1,48 +1,51 @@
 <?php
 	//Incluir a conexão com banco de dados
-    include '../../generalPhp/conection.php';
+    include '../generalPhp/conection.php';
 	
 	//Recuperar o valor da palavra
 	$busca = $_POST['palavra'];
 	
 	//Pesquisar no banco de dados nome do curso referente a palavra digitada pelo usuário
-	$sql = "SELECT * FROM clientes WHERE nome  LIKE '%$busca%'";
+	$sql = "SELECT * FROM pedidoscadastro WHERE cliente  LIKE '%$busca%'";
 	$resultado_sql= mysqli_query($conn, $sql);
+
+
+	
 	
 	if(mysqli_num_rows($resultado_sql) <= 0){
 		echo '
 			<div class="notFound">
-				<img  class="notFoundImg" src="../../assets/notFound.svg" alt="">
-				<h3>PRODUTO NÃO ENCONTRADO</h3>
+				<img  class="notFoundImg" src="../assets/notFound.svg" alt="">
+				<h3>PEDIDO NÃO ENCONTRADO</h3>
 			</div>
 		
 		';
 	}else{
 
 		
-		
-		echo '<table>';
-		// Cabeçalho da tabela
-		echo '<tr>
-					<th>N°</th>
-					<th>NOME CLIENTE</th>
-					<th >EDIT.</th>
-				</tr>'; 
-	
 	
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
-			echo '<tr class=" tableRow">';
-			echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
-			echo '<td class = "nameTable">' . $row_sql['nome'] . '</td>';
 			
-			echo '<td class = "editTable"> <a  href="editarsql.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>  
-											<a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a> 
-					</td>';
-			echo '</tr>';
+			
+			$dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
+
+			echo   ' <div class="containerDadosPedidos">';
+			echo   '     <div class="numberDate">';
+			echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
+			echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
+			echo  '      </div>';
+			echo  '      <div class="dadosPedidos">';
+			echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
+			echo   '         <div class="valorTotalPedidoPedido">' . $row_sql['valor_total'] . '</div>';
+			echo  '      </div>';
+			echo   '     <div class="apagarImprimir">';
+			echo   '         <div class="imprimir" ><img src="../assets/print.svg" alt=""></div>';
+			echo    '        <div class="apagar"> <img src="../assets/erase.svg" alt="ìcone lixeira"></div>';
+					
+			echo  '      </div>';
+			echo  '  </div>';
 		}
 	
-		
-		echo '</table>';//tag que fecha  a tabela
 		
 		
 	}

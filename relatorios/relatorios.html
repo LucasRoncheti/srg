@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../index/root.css">
     <link rel="stylesheet" href="../onLoad/onLoad.css">
     <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="../pedidos/cadastro.css">
+    <link rel="stylesheet" href="relatorios.css">
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
 
     
@@ -106,18 +106,25 @@
     </button>
     
     <form id="cadastroForm">
+        <img  src="../assets/categories/relatoriosWhite.svg" alt="">
 
-        <a href="pedidos/cadastro.html"> <div class="buttonAction" >NOVO PEDIDO + <img alt=""></div> </a>
+        <h2>RELATÓRIOS</h2>
+        <div class="inputSearch">
+            <input type="text" name="pesquisa" id="pesquisa" placeholder="FORNECEDOR">
+        </div>
+        <div class="inputSearch">
+            <label for="dataInicial"></label>
+            <input id="dataInicial" class="inputDate"  type="date">
+            <label for="dataFinal"></label>
+            <input id="dataFinal" class="inputDate"  type="date">
+        </div>
+        
+        <a href="pedidos/cadastro.html"> <div class="buttonAction" >FILTRAR  <img src="../assets/filtrar.svg" alt=""></div> </a>
     </form>
    
    </header>
    
 		
-	
-    <!-- campo para busca dos pedidos  -->
-    <form method="POST" class="inputSearch" id="form-pesquisa" action="">
-        <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
-    </form>
 
  
   
@@ -147,7 +154,7 @@
 
 
 
-<script src="listar.js"></script>
+<!-- <script src="listar.js"></script> -->
 
 <script src="../pedidos/busca.js"></script>
 

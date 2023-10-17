@@ -11,38 +11,42 @@ $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBE
 $inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
 
 //consultar no banco de dados
-$result_sql = "SELECT * FROM clientes ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
+$result_sql = "SELECT * FROM pedidoscadastro ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
 $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
 if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
-    echo '<table>';
-    // Cabeçalho da tabela
-    echo '<tr>
-                <th>N°</th>
-                <th>NOME CLIENTE</th>
-                
-                <th >EDIT.</th>
-            </tr>';
+   
 
 
 	while($row_sql = mysqli_fetch_assoc($resultado_sql)){
-		echo '<tr class=" tableRow">';
-        echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
-        echo '<td class = "nameTable">' . $row_sql['nome'] . '</td>';
-        echo '<td class = "editTable"> <a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../assets/erase.svg" > </a>
-                </td>';
-        echo '</tr>';
+        $dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
+        echo   ' <div class="containerDadosPedidos">';
+        echo   '     <div class="numberDate">';
+        echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
+        echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
+        echo  '      </div>';
+        echo  '      <div class="dadosPedidos">';
+        echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
+        echo   '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100 , 2,",",".")  . '</div>';
+        echo  '      </div>';
+        echo   '     <div class="apagarImprimir">';
+        echo   '          <a  href="print.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/print.svg" > </a>';
+        echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/edit.svg" > </a>';
+        echo    '        <a  href="apagar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/erase.svg" > </a>';
+                
+        echo  '      </div>';
+        echo  '  </div>';
 	}
 
     
 
-    echo '</table>';//tag que fecha  a tabela
+   
 
 
 
         //Paginação - Somar a quantidade de usuários
-        $result_pg = "SELECT COUNT(id) AS num_result FROM clientes";
+        $result_pg = "SELECT COUNT(id) AS num_result FROM pedidoscadastro";
         $resultado_pg = mysqli_query($conn, $result_pg);
         $row_pg = mysqli_fetch_assoc($resultado_pg);
 
@@ -71,7 +75,13 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
         echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
         echo '</div>';
         }else{
-            echo "<div class='alert alert-danger' role='alert'>Nenhum registro encontrado!</div>";
+            echo '
+			<div class="notFound">
+				<img  class="notFoundImg" src="../assets/notFound.svg" alt="">
+				<h3>NENHUM PEDIDO SALVO</h3>
+			</div>
+		
+		';
         }
 
 

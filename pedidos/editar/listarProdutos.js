@@ -12,6 +12,16 @@ var  valorTotalBD;
 
 key =  0
 
+
+//pega o valor total para fazer a soma e converte em inteiro 
+valorTotaldoPedido = document.getElementById('valorTotalPedido').textContent
+valorTotaldoPedidoSemSimbolos = valorTotaldoPedido.replace(/[^\d,]/g, '')
+var valorInteiro = parseInt(valorTotaldoPedidoSemSimbolos.replace(',', ''), 10);
+//pega a quantidade de caixas já salva no banco de dados 
+
+quantidadeCaixas = document.getElementById("Ncaixas").textContent
+var quantidadeCaixasInterio = parseInt(quantidadeCaixas.replace(',', ''), 10);
+
 let listar = () => {
     fornecedor = document.getElementById("fornecedor").options[0].value;
     produto = document.getElementById("produto").options[0].text;
@@ -22,9 +32,19 @@ let listar = () => {
     quantidade = document.getElementById("quantidade").value
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
 
+
+    
+
+     
+   
+
+    //chave de acesso gerada na hora de salvar o pedido pela primeira vez 
+    let chaveAcessoCliente = document.getElementById("chaveAcesso").value
+
     if (fornecedor === "" || produto === "") {
         alert("Preencha o campo vazio ! ")
     } else {
+
         calcularTotal()
 
         //recuperaos valores a serem mapeados na função adicionarItemPedido()
@@ -45,12 +65,12 @@ let listar = () => {
         novoDicionarioItens['valorUnit'] = valorUnitFormatado 
         novoDicionarioItens['valorTotal'] = valorTotalFormatado
         novoDicionarioItens['quantidade'] = quantidadeFormatada
-        novoDicionarioItens['chaveAcesso'] = chaveAcesso
+        novoDicionarioItens['chaveAcesso'] = chaveAcessoCliente
         itensParaSoma.push(novoDicionarioItens)
 
         //fazer a soma dos valores e colocar em variáveis 
 
-        var somaQuantidade = 0
+        var somaQuantidade = quantidadeCaixasInterio
         var somaValortotalPedido = 0
 
         for (var i = 0; i < itensParaSoma.length; i++) {
@@ -60,6 +80,8 @@ let listar = () => {
         for (var i = 0; i < itensParaSoma.length; i++) {
             somaValortotalPedido = somaValortotalPedido + itensParaSoma[i].valorTotal
         }
+
+        somaValortotalPedido = somaValortotalPedido + valorInteiro
         valorTotalBD = somaValortotalPedido
 
         //converte o  valor para string e  formata para real brasileiro
@@ -97,6 +119,7 @@ let listar = () => {
     quantidadeInicial = 1;
     quantidadeAtual = quantidadeInicial;
     console.log(itensParaSoma)
+
   
 
 }
@@ -157,6 +180,7 @@ var apagarItem = (id) => {
         somaValortotalPedido = somaValortotalPedido + itensParaSoma[i].valorTotal
     }
     
+    somaValortotalPedido = somaValortotalPedido + valorInteiro
     valorTotalBD = somaValortotalPedido
 
     //converte o  valor para string e  formata para real brasileiro

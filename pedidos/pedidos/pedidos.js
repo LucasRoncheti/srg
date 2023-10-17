@@ -42,15 +42,15 @@ function gerarChaveUnica() {
     const dataHoraAtual = new Date();
     const segundos = dataHoraAtual
     
-    chave += dataHoraAtual.toISOString().replace(/[^0-9]/g, '') + segundos;
+    chave += dataHoraAtual.toISOString().replace(/ /g, "-") + segundos;
 
     // Gere os caracteres restantes da chave como antes
     for (let i = 0; i < comprimentoChave - chave.length; i++) {
         const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
         chave += caracteres.charAt(indiceAleatorio);
     }
-
-    return chave;
+    chaveFormatada = chave.toString().replace(/ /g, "-")
+    return chaveFormatada;
 }
 
 
