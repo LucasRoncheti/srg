@@ -1,12 +1,11 @@
-
-body{
+body {
     height: 100%;
     width: 100vw;
     background-color: var(--branco);
 }
 
 
-header{
+header {
     width: 100%;
     height: 300px;
     background-color: var(--cor03);
@@ -16,13 +15,13 @@ header{
 }
 
 
-h2{
+h2 {
     color: var(--branco);
     font-size: 2em;
 }
 
-/* formulario de cadastro dos fornecedores*/
-form{
+/* formulario de relatorios */
+form {
     width: 100%;
     height: 90%;
     position: absolute;
@@ -31,16 +30,17 @@ form{
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-   
+
 }
-.inputDate{
+
+.inputDate {
     margin: 10px;
     width: 100%;
 }
 
 
 
-input{
+input {
     width: 320px;
     height: 62px;
     border-radius: 5px;
@@ -49,32 +49,24 @@ input{
     text-align: center;
     font-weight: 500;
     color: var(--cor03);
+    position: relative;
 }
-input::placeholder{
+
+input::placeholder {
     font-size: 1.5em;
     color: var(--cor01);
 }
 
-label{
-    position: absolute;
-    background-color: var(--cor02);
-    padding: 3px;
-    font-size: 0.7em;
-    border-radius: 5px;
-    color: var(--branco);
-    top: -10px;
-    left: 10px;
-}
 
 /* botão filtrar*/
-.buttonAction{
+.buttonAction {
     width: 257px;
     height: 42px;
     border-radius: 20px;
     border: none;
     background-color: var(--cor02);
     color: var(--branco);
-    font-size:1.5em;
+    font-size: 1.5em;
     font-weight: 600;
     display: flex;
     flex-direction: row;
@@ -82,44 +74,197 @@ label{
     align-items: center;
 }
 
-button img{
+button img {
     margin-left: 8px;
 }
 
 /*lista do container */
-.containerList{
+.containerList {
     width: 100%;
-    height: calc(100vh - 265px);
+    height: calc(100vh - 463px);
     background-color: var(--branco);
     overflow: auto;
 }
 
 /* input de busca  */
-.inputSearch{
+.inputSearch {
+    width: 100%;
+    height: 80px;
+    background-color: var(--cor04);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 2%;
+}
+
+
+.inputSearch input {
+    width: 95%;
+    max-width: 380px;
+    height: 30px;
+    font-size: 0.8em;
+    font-size: 1.2em;
+
+}
+
+select{
+margin-top: 5px;
+width: 95%;
+height: 30px;
+text-align: center;
+}
+
+/* quntidade de pedidos / total caixas/ valor unirf */
+.cabeçalhoFiltro {
+    width: 100%;
+    height: 70px;
+    background-color: var(--cor03);
+    display: flex;
+    justify-content: center;
+}
+
+.cabeçalhoFiltro div {
+    width: 32%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: white;
+
+}
+
+
+/* Valores totais somados*/
+.cabeçalhoValores {
+    width: 100%;
+    height: 30px;
+    background-color: var(--cor02);
+    display: flex;
+    justify-content: center;
+}
+
+.cabeçalhoValores div {
+    width: 32%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: white;
+
+}
+
+
+/* cabeçalho n°P data cliente quantidade */
+
+.cabeçalhoItens {
+    width: 100%;
+    height: 30px;
+    background-color: var(--cor03);
+    display: flex;
+    justify-content: center;
+}
+
+.cabeçalhoItens div {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: white;
+
+}
+
+/* itens carregados na lista de busca */
+
+.containerItensFiltro {
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+}
+
+.cabeçalhoListaFiltro {
     width: 100%;
     height: 40px;
+    background-color: var(--cor04);
+    display: flex;
+    justify-content: center;
+}
+
+.cabeçalhoListaFiltro div {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: var(--cor03);
+}
+
+.discItens{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    background-color: var(--cor05);
+    font-size: 0.7em;
+    justify-content: center;
+    align-items:center;
+    font-weight: 500;
+}
+
+.discItens:nth-child(odd){
+   
+    background-color: var(--cor01);
+   
+}
+
+.divDiscItens{
+    width: 25%;
+    text-align:left;
+}
+.divDiscItensValor{
+    width: 40%;
+    text-align:left;
+}
+.containerDiscItens{
+    width: 100%;
+    height: auto;
+}
+
+/* input que contem os valores das datas de buscas */
+
+.inputSearchData {
+    width: 100%;
+    height: 70px;
     background-color: var(--cor04);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0px 2%;
+
 }
 
-.inputSearch input{
+.inputSearchData input {
     width: 95%;
     max-width: 380px;
     height: 30px;
     font-size: 0.8em;
     font-size: 1.2em;
-   
-  
 
 }
 
 /* mensagem de erro de busca */
 
-.notFound{
+.notFound {
     width: 100%;
     height: calc(100vh - 360px);
     display: flex;
@@ -128,108 +273,35 @@ button img{
     align-items: center;
 }
 
-
-
-.notFoundImg{
+.notFoundImg {
     max-width: 150px;
     animation-duration: 0.6s;
     animation-name: notFound;
 }
 
-.notFound h3,p{
+.notFound h3,
+p {
     font-size: 1em;
     margin: 5px;
 }
 
-@keyframes notFound{
-    from{
+@keyframes notFound {
+    from {
         width: 0px;
     }
 
-    to{
+    to {
         width: 150px;
     }
 }
 
 
-/* lista de pediso no filtro*/
-
-.containerDadosPedidos{
-    width: 100%;
-    height: 60px;
-    background-color: var(--cor04);
-    display: flex;
-    color: var(--cor03);
-    font-weight: 500;
-    padding: 0px 5% 0px 5% ;
-}
-
-.containerDadosPedidos:nth-child(even){
-    background-color: var(--cor05);
-}
-
-.numberDate{
-    width: 15%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.dataPedido{
-    font-size: 0.7em;
-}
-
-.dadosPedidos{
-    width: 75%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    
-    
-}
 
 
-.apagarImprimir{
-    width: 28%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.apagarImprimir img{
-    max-width: 20px;
-}
-
-
-
-/* div com os botões de paginação */
-.divPagina{
-    width: 100%;
-    height: 30px;
- 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    background-color:var(--cor02);
-    font-weight: 500;
-    color: var(--branco);
-}
-
-a{
-    text-decoration: none;
-    color: var(--branco);
-   
-}
 
 
 /* css do botão de botão mobile */
-.mobileMenuButton{
+.mobileMenuButton {
     width: 30px;
     height: 30px;
     background-color: transparent;
@@ -240,7 +312,7 @@ a{
 }
 
 /* css do botão de voltar a página anterior */
-.backButton{
+.backButton {
     width: 30px;
     height: 30px;
     background-color: transparent;
@@ -254,7 +326,7 @@ a{
 
 
 
-footer{
+footer {
     width: 100vw;
     height: 28px;
     background-color: var(--cor01);
@@ -263,10 +335,9 @@ footer{
     position: absolute;
     font-size: 10pt;
     font-weight: 500;
-    
+
     bottom: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-

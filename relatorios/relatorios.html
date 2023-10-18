@@ -110,27 +110,68 @@
 
         <h2>RELATÓRIOS</h2>
         <div class="inputSearch">
-            <input type="text" name="pesquisa" id="pesquisa" placeholder="FORNECEDOR">
-        </div>
-        <div class="inputSearch">
-            <label for="dataInicial"></label>
-            <input id="dataInicial" class="inputDate"  type="date">
-            <label for="dataFinal"></label>
-            <input id="dataFinal" class="inputDate"  type="date">
+            <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor" 
+            placeholder="FORNECEDOR">
+
+            <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
+                <option value="Jailson Vaz"></option>
+            </select>
         </div>
         
-        <a href="pedidos/cadastro.html"> <div class="buttonAction" >FILTRAR  <img src="../assets/filtrar.svg" alt=""></div> </a>
+
+        <div class="inputSearchData">
+            <div class="inputDate">
+                <p>Data Incial</p>
+                <input id="dataInicial" type="date" >
+            </div>
+
+            <div class="inputDate">
+                <p>Data Final</p>
+                <input id="dataFinal"  type="date">
+            </div>
+        </div>
+        
+        <a href="#"> <div id="filtrarButton" class="buttonAction" > FILTRAR  <img src="../assets/filtrar.svg" alt=""></div> </a>
     </form>
    
    </header>
-   
-		
+   <div class="cabeçalhoFiltro">
+       <div>Quantidade <br> de pedidos</div>
+       <div>Total Caixas</div>
+       <div> Valor total <br> unificado</div>
+   </div>
+
+
+   <div class="cabeçalhoValores">
+       <div>03</div>
+       <div>210</div>
+       <div> R$ 450,00</div>
+   </div>
+
+   <div class="cabeçalhoItens">
+       <div> N° P</div>
+       <div>DATA</div>
+       <div> CLIENTE</div>
+       <div>QNT</div>
+       <div> </div>
+   </div>
+
+  
 
  
   
    <section id="containerList" class="containerList">
     
-    
+
+
+
+       
+        
+
+        
+   
+
+ 
        
   
 
@@ -152,11 +193,40 @@
 
 <script src="../generalScripts/backPage.js"></script>
 
+<script src="buscaFornecedor.js"></script>
+
+<script src="filtrarPedidos.js"></script>
+
+
+<!-- script para definir as datas iniciais nos campos de input da busca -->
+<script>
+
+   
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1; // Os meses começam em 0 (janeiro), então somamos 1.
+    var year = today.getFullYear();
+
+    if (day < 10) {
+        day = "0" + day;
+    }
+
+    if (month < 10) {
+        month = "0" + month;
+    }
+
+    var formattedDate = year + "-" + month + "-" + day;
+
+
+    document.getElementById("dataInicial").value = formattedDate
+    document.getElementById("dataFinal").value = formattedDate
+</script>
+
 
 
 <!-- <script src="listar.js"></script> -->
-
-<script src="../pedidos/busca.js"></script>
+<!-- 
+<script src="../pedidos/busca.js"></script> -->
 
 
 

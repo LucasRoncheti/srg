@@ -15,5 +15,8 @@
 
     var formattedDate = year + "-" + month + "-" + day;
 
+
     document.getElementById("dataAtual").value = formattedDate;
+
+   
 
