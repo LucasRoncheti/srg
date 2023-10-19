@@ -7,7 +7,7 @@ body {
 
 header {
     width: 100%;
-    height: 300px;
+    height: 348px;
     background-color: var(--cor03);
     position: relative;
     text-align: center;
@@ -16,21 +16,20 @@ header {
 
 
 h2 {
-    color: var(--branco);
+    
     font-size: 2em;
 }
 
 /* formulario de relatorios */
 form {
     width: 100%;
-    height: 90%;
+    height: 78%;
     position: absolute;
     bottom: 0px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-
 }
 
 .inputDate {
@@ -53,13 +52,14 @@ input {
 }
 
 input::placeholder {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: var(--cor01);
 }
 
 
 /* botão filtrar*/
 .buttonAction {
+    margin: 5px;
     width: 257px;
     height: 42px;
     border-radius: 20px;
@@ -104,9 +104,9 @@ button img {
     width: 95%;
     max-width: 380px;
     height: 30px;
+    margin-top: 5px;
     font-size: 0.8em;
     font-size: 1.2em;
-
 }
 
 select{
@@ -237,6 +237,7 @@ text-align: center;
 .containerDiscItens{
     width: 100%;
     height: auto;
+    display: none;
 }
 
 /* input que contem os valores das datas de buscas */
@@ -332,11 +333,11 @@ footer {
     background-color: var(--cor01);
     color: var(--cor03);
 
-    position: absolute;
+
     font-size: 10pt;
     font-weight: 500;
 
-    bottom: 0px;
+
     display: flex;
     justify-content: center;
     align-items: center;

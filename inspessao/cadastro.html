@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../index/root.css">
     <link rel="stylesheet" href="../onLoad/onLoad.css">
     <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="relatorios.css">
+    <link rel="stylesheet" href="../inspessao/cadastro.css">
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
 
     
@@ -46,7 +46,7 @@
                     </div>
                 </a>
 
-                <a href="../cadastros.html">
+                <a href="../cadastros/cadastros.html">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
@@ -106,85 +106,39 @@
     </button>
     
     <form id="cadastroForm">
-        <img  src="../assets/categories/relatoriosWhite.svg" alt="">
 
-        <h2 style="color:white">RELATÓRIOS</h2>
-        <div class="inputSearch">
-            <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor" 
-            placeholder="FORNECEDOR">
+        <img style="width: 40px;"  src="../assets/categories/inspessao.svg" alt="">
 
-            <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
-                <option value=""></option>
-            </select>
-        </div>
-        
-
-        <div class="inputSearchData">
-            <div class="inputDate">
-                <p>Data Incial</p>
-                <input id="dataInicial" type="date" >
-            </div>
-
-            <div class="inputDate">
-                <p>Data Final</p>
-                <input id="dataFinal"  type="date">
-            </div>
-        </div>
-        
-        <a href="#"> <div id="filtrarButton" class="buttonAction" > FILTRAR  <img src="../assets/filtrar.svg" alt=""></div> </a>
+        <h2  style="color:white;font-size: 2em;margin-bottom: 10px;">INSPEÇÃO</h2>
     </form>
    
    </header>
-   <div class="cabeçalhoFiltro">
-       <div>Quantidade <br> de pedidos</div>
-       <div>Total Caixas</div>
-       <div> Valor total <br> unificado</div>
-   </div>
-
-
-   <div class="cabeçalhoValores">
-       <div id="quantidadePedidos">0</div>
-       <div id="totalCaixas">0</div>
-       <div id="ValorUnificado"> R$ 0,00</div>
-   </div>
-
-   <div class="cabeçalhoItens">
-       <div> N° P</div>
-       <div>DATA</div>
-       <div> CLIENTE</div>
-       <div>QNT</div>
-       <div onclick="imprimirPagina()" > <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
-   </div>
-
-  
+   
+		
+	
+    <!-- campo para busca dos pedidos  -->
+    <form method="POST" class="inputSearch" id="form-pesquisa" action="">
+        <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
+    </form>
 
  
   
    <section id="containerList" class="containerList">
     
-
-
-
+    
        
-        
-
-        
-   
-
- 
-       
-
+  
 
 
    
       
    </section> 
 
-
-
    <footer>
     <p  id="data-footer">  </p>
    </footer>
+
+ 
 </body>
 
 <script src="../mobileMenu/js/mobileMenu.js"></script>
@@ -193,42 +147,11 @@
 
 <script src="../generalScripts/backPage.js"></script>
 
-<script src="buscaFornecedor.js"></script>
-
-<script src="filtrarPedidos.js"></script>
-
-<script src="mostrarInfo.js"></script>
 
 
-<!-- script para definir as datas iniciais nos campos de input da busca -->
-<script>
+<script src="listar.js"></script>
 
-   
-    var today = new Date();
-    var day = today.getDate();
-    var month = today.getMonth() + 1; // Os meses começam em 0 (janeiro), então somamos 1.
-    var year = today.getFullYear();
-
-    if (day < 10) {
-        day = "0" + day;
-    }
-
-    if (month < 10) {
-        month = "0" + month;
-    }
-
-    var formattedDate = year + "-" + month + "-" + day;
-
-
-    document.getElementById("dataInicial").value = formattedDate
-    document.getElementById("dataFinal").value = formattedDate
-</script>
-
-<script src="../generalScripts/print.js"></script>
-
-<!-- <script src="listar.js"></script> -->
-<!-- 
-<script src="../pedidos/busca.js"></script> -->
+<script src="../pedidos/busca.js"></script>
 
 
 
