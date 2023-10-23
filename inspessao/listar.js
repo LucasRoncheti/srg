@@ -15,7 +15,7 @@ function listar(pagina, qnt_result_pg) {
         pagina: pagina,
         qnt_result_pg: qnt_result_pg
     }
-    $.post('../listar.php', dados , function(retorna){
+    $.post('listar.php', dados , function(retorna){
         //seletor id no html
         $("#containerList").html(retorna);
     });

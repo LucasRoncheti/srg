@@ -4,12 +4,17 @@ include '../../generalPhp/conection.php';
 // Check if 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+    $numero = $_GET['numero'];
+    $cliente = $_GET['cliente'];
+    
     // Use uma consulta preparada para evitar injeção de SQL
     $stmt = $conn->prepare("SELECT * FROM pedidos_dados WHERE chaveAcesso = ?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    
+}
 ?>
 
 
@@ -143,32 +148,51 @@ if (isset($_GET['id'])) {
                 <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
             </button>
 
-            <div style="display:none;">
-                <input  id="dataAtual" class="dataPedido" type="date">
-            </div> 
+           <div class="cabecalhoNome">
+           <img src="../../assets/categories/inspessao.svg" alt=""> <H3>N° <?php echo $numero;?> <?php echo $cliente;?></H3>
+           </div>
 
         </header>
 
        
         <div class="containerList">
-                       
-                <?php
-                        // Check if the query was successful and data was found
-                        if ($result && $result->num_rows != 0) {
+            <?php 
+                if($result&&$result->num_rows != 0){
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $fornecedor = $row['fornecedor'];
-                                
+                    while($row = mysqli_fetch_assoc($result)){
+                        $fornecedor = $row['fornecedor'];
+                        $id_item = $row['id'];
 
-                            }
-                        } else {
-                            echo 'Registro não encontrado!';
+                        $stmt1 = $conn->prepare ("SELECT numero FROM fornecedores WHERE nome = ?");
+                        $stmt1->bind_param("s", $fornecedor);
+                        $stmt1->execute();
+                        $resultado = $stmt1->get_result();
+
+                        //recupera o resultado e atribui a uma vasriável 
+                        if ($resultado->num_rows > 0) {
+                            $row = $resultado->fetch_assoc();
+                            $numero = $row['numero'];
+                            
+                        
                         }
-                        } else {
-                        echo 'ID não fornecido na URL!';
-                        }
-                ?>
-                
+                        echo ' 
+                        <form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
+                            <div class="dadosFornecedor">
+                                <div class="forncedorNum">N° ' . $numero . '</div>
+                                <div class="nomeFornecedor"> ' . $fornecedor . '</div>
+                            </div>
+                            <div class="inputContainer">
+                                <div class="inputThumbnail">
+                                    <input type="file" accept="image/*" capture="environment" id="'.$id_item.'" style="display: none;" onchange="enviarImagem(this)">
+                                    <div class="buttonUploadImg" onclick="teste(\''.$id_item.'\')"> <img src="../../assets/photo.svg"> </div>
+                                </div>
+                            </div>
+                        </form>';
+            
+                    }
+                }
+            ?>
+
         </div>
 
         <footer>
@@ -184,7 +208,12 @@ if (isset($_GET['id'])) {
 <script src="../../generalScripts/version.js"></script>
 
 <script src="../../generalScripts/backPage.js"></script>
-
-<script src="../../generalScripts/atualDate.js"></script>
+<script src="upload.js"></script>
+<script>
+    function teste(id){
+        document.getElementById(id).click()
+        console.log(id)
+    }
+</script>
 
 
