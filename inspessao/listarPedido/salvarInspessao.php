@@ -150,47 +150,87 @@ if (isset($_GET['id'])) {
 
            <div class="cabecalhoNome">
            <img src="../../assets/categories/inspessao.svg" alt=""> <H3>N° <?php echo $numero;?> <?php echo $cliente;?></H3>
+           <img onclick="teste(window.print())" style = "width:25px;margin-left:15px" src="../../assets/print.svg" alt="">
            </div>
 
         </header>
 
        
         <div class="containerList">
+          
             <?php 
-                if($result&&$result->num_rows != 0){
-
-                    while($row = mysqli_fetch_assoc($result)){
-                        $fornecedor = $row['fornecedor'];
-                        $id_item = $row['id'];
-
-                        $stmt1 = $conn->prepare ("SELECT numero FROM fornecedores WHERE nome = ?");
-                        $stmt1->bind_param("s", $fornecedor);
-                        $stmt1->execute();
-                        $resultado = $stmt1->get_result();
-
-                        //recupera o resultado e atribui a uma vasriável 
-                        if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $numero = $row['numero'];
-                            
-                        
-                        }
-                        echo ' 
-                        <form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
-                            <div class="dadosFornecedor">
-                                <div class="forncedorNum">N° ' . $numero . '</div>
-                                <div class="nomeFornecedor"> ' . $fornecedor . '</div>
-                            </div>
-                            <div class="inputContainer">
-                                <div class="inputThumbnail">
-                                    <input type="file" accept="image/*" capture="environment" id="'.$id_item.'" style="display: none;" onchange="enviarImagem(this)">
-                                    <div class="buttonUploadImg" onclick="teste(\''.$id_item.'\')"> <img src="../../assets/photo.svg"> </div>
-                                </div>
-                            </div>
-                        </form>';
+               if ($result && $result->num_rows != 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $fornecedor = $row['fornecedor'];
+                    $id_item = $row['id'];
             
+                    $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
+                    $stmt1->bind_param("s", $fornecedor);
+                    $stmt1->execute();
+                    $resultado = $stmt1->get_result();
+            
+                    if ($resultado->num_rows > 0) {
+                        $row = $resultado->fetch_assoc();
+                        $numero = $row['numero'];
                     }
+            
+                    echo ' 
+                    <form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
+                        <div class="dadosFornecedor">
+                            <div class="forncedorNum">N° ' . $numero . '</div>
+                            <div class="nomeFornecedor"> ' . $fornecedor . '</div>
+                        </div>
+                        <div class="inputContainer">';
+                        
+                        // Agora, dentro do loop do fornecedor, você pode listar registros de imagens associados a esse fornecedor
+                        $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
+                        $stmt0->bind_param("i", $id_item);
+                        $stmt0->execute();
+                        $resultado0 = $stmt0->get_result();
+                
+                        if ($resultado0 && $resultado0->num_rows != 0) {
+                            while ($rows0 = mysqli_fetch_assoc($resultado0)) {
+                                $path = $rows0['pathImagem'];
+                                $id_image = $rows0['id'];
+
+                                $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image' ";
+                                $resultadoSql2 = mysqli_query($conn,$slq2);
+
+                                if($resultadoSql2&&$resultadoSql2->num_rows != 0){
+                                    $rows1 = mysqli_fetch_assoc($resultadoSql2);
+                                        $pathHD = $rows1['pathimagem'];
+                                    
+                                echo '
+                                <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
+                                    <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img   src="../../assets/erase1.svg"></div>
+                                    <div class="buttonUploadImg"  > <img src="'.$path.'"> </div>
+                                    <input id="'.$id_image.'inputThumb"  type="hidden" value="'. $path.'">
+                                    <input id="'.$id_image.'input"  type="hidden" value="'. $pathHD.'">
+
+                                       
+                                </div>
+
+                                
+                                ';
+                            }
+                            }
+                        } else {
+                            echo "";
+                        }
+
+                        echo '
+                        
+                            <div class="inputThumbnail">
+                                <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
+                                <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
+                            </div>
+                        </div>
+                    </form>';
+            
+                   
                 }
+            }
+
             ?>
 
         </div>
@@ -209,6 +249,13 @@ if (isset($_GET['id'])) {
 
 <script src="../../generalScripts/backPage.js"></script>
 <script src="upload.js"></script>
+<script src="apagarImg.js"></script>
+<script src="abrirImgHD.js"></script>
+<script>
+    function reload(){
+        window.location.reload()
+    }
+</script>
 <script>
     function teste(id){
         document.getElementById(id).click()
