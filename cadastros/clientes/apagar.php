@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="apagar.css">
     <link rel="stylesheet" href="../../index/root.css">
+    
+    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Apagar Registro</title>
 </head>
 <body>
@@ -14,6 +16,15 @@
         <?php
         include '../../generalPhp/conection.php';
 
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        
+        if(!isset($_SESSION['id'])) {
+           die( header("Location: ../../index.php"));
+           
+        }
+
         // Check if 'id' parameter is provided in the URL
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -22,12 +33,12 @@
             if (isset($_GET['confirm'])) {
                 if ($_GET['confirm'] === 'yes') {
                     // The user confirmed to delete, proceed with the deletion
-                    $sql = "DELETE FROM produtos WHERE id='$id'";
+                    $sql = "DELETE FROM clientes WHERE id='$id'";
                     if (mysqli_query($conn, $sql)) {
                         echo"  <img src='../../assets/fileDeleted.svg' alt='delete  image'> ";
                         echo "<h3>Registro deletado com sucesso</h3>";
                         echo "<div class='listButton'>";
-                        echo "<a href='cadastro.html'>Lista de Fornecedores</a>";
+                        echo "<a href='cadastrodecliente.php'>Lista de Fornecedores</a>";
                         echo "</div>";
                     } else {
                         echo "Erro ao atualizar registro: " . mysqli_error($conn);
@@ -45,7 +56,7 @@
             echo "<a href='apagar.php?id=$id&confirm=yes'>Sim</a>  ";
             echo "</div>";
             echo "<div class='cancelButton'>";
-            echo "<a href='cadastro.html'>Cancelar</a>";
+            echo "<a href='cadastrodecliente.php'>Cancelar</a>";
             echo "</div>";
             echo"</div>";
         } else {

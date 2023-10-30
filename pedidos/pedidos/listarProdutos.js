@@ -24,6 +24,7 @@ let listar = () => {
 
     if (fornecedor === "" || produto === "") {
         alert("Preencha o campo vazio ! ")
+        
     } else {
         calcularTotal()
 
@@ -98,7 +99,7 @@ let listar = () => {
     quantidadeAtual = quantidadeInicial;
     console.log(itensParaSoma)
   
-
+    
 }
 
 
@@ -133,6 +134,7 @@ let adicionarItemPedido = () => {
             
             `
     }))
+    
 }
 
 

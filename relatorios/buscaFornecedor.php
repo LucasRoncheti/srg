@@ -2,6 +2,15 @@
 	//Incluir a conexão com banco de dados
     include '../generalPhp/conection.php';
 	
+	if(!isset($_SESSION)) {
+        session_start();
+    }
+    
+    if(!isset($_SESSION['id'])) {
+        die( header("Location: ../index.php"));
+       
+    }
+	
 	//Recuperar o valor da palavra
 	$busca = $_POST['palavra'];
 	

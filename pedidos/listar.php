@@ -4,6 +4,16 @@ include '../generalPhp/conection.php';
 
 
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+    die( header("Location: ../index.php"));
+   
+}
+
+
 //paginação
 $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT);
 $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT);

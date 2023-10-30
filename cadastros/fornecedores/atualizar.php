@@ -17,6 +17,15 @@
             <?php
                include '../../generalPhp/conection.php';
 
+               if(!isset($_SESSION)) {
+                  session_start();
+              }
+              
+              if(!isset($_SESSION['id'])) {
+                 die( header("Location: ../../index.php"));
+                 
+              }
+
 
                //recebe os dados pelo metodo post
 
@@ -32,7 +41,7 @@
                   echo"  <img src='../../assets/refresh.svg' alt='delete  image'> ";
                   echo "<h3>Registro atualizado  com sucesso </h3>";
                   echo "<div class='listButton'>";
-                  echo "<a href='cadastroFornecedor.html'>Lista de Fornecedores</a>";
+                  echo "<a href='cadastrodeFornecedor.php'>Lista de Fornecedores</a>";
                   echo "</div>";
                }else{
                echo" Erro ao atualizar fornecedor" . msqli_error($conn);

@@ -9,7 +9,7 @@ document.getElementById('filtrarButton').addEventListener('click', function (e) 
 
    
     
-    console.log(dataFinal,dataInicial,fornecedor)
+    // console.log(dataFinal,dataInicial,fornecedor)
     
     // Enviar uma solicitação Fetch para o servidor
 fetch('filtrarPedidos.php', {

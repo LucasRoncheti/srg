@@ -2,6 +2,14 @@
 
 include '../../generalPhp/conection.php';
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+   die( header("Location: ../../index.php"));
+   
+}
 
 
 //paginação
@@ -73,7 +81,10 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
         echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
         echo '</div>';
         }else{
-            echo "<div class='alert alert-danger' role='alert'>Nenhum registro encontrado!</div>";
+            echo' <div class="notFound">
+            <img  class="notFoundImg" src="../../assets/notFound.svg" alt="">
+            <h3>NÃO HÁ REGISTROS </h3>
+        </div>';
         }
 
 

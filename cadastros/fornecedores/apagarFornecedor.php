@@ -14,6 +14,15 @@
         <?php
         include '../../generalPhp/conection.php';
 
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        
+        if(!isset($_SESSION['id'])) {
+           die( header("Location: ../../index.php"));
+           
+        }
+
         // Check if 'id' parameter is provided in the URL
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -27,7 +36,7 @@
                         echo"  <img src='../../assets/fileDeleted.svg' alt='delete  image'> ";
                         echo "<h3>Registro deletado com sucesso</h3>";
                         echo "<div class='listButton'>";
-                        echo "<a href='cadastroFornecedor.html'>Lista de Fornecedores</a>";
+                        echo "<a href='cadastrodeFornecedor.php'>Lista de Fornecedores</a>";
                         echo "</div>";
                     } else {
                         echo "Erro ao atualizar fornecedor: " . mysqli_error($conn);
@@ -45,7 +54,7 @@
             echo "<a href='apagarFornecedor.php?id=$id&confirm=yes'>Sim</a>  ";
             echo "</div>";
             echo "<div class='cancelButton'>";
-            echo "<a href='cadastroFornecedor.html'>Cancelar</a>";
+            echo "<a href='cadastrodeFornecedor.php'>Cancelar</a>";
             echo "</div>";
             echo"</div>";
         } else {

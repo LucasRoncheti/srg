@@ -1,6 +1,15 @@
 <?php
 include '../../generalPhp/conection.php';
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+    die( header("Location: ../../index.php"));
+   
+}
+
 //variáveis que serão alocadas em outra tabela 
 $cliente = "";
 $valortotalPedido = 0;
@@ -21,6 +30,7 @@ foreach ($itensEnviados as $key => $item) {
 }
 
 // Primeiro loop para inserir os itens principais na tabela pedidos_dados
+
 foreach ($itensEnviados as $item) {
     $chaveAcesso = $item['chaveAcesso'];
     $fornecedor = $item['fornecedor'];
@@ -30,6 +40,7 @@ foreach ($itensEnviados as $item) {
     $valorUnit = $item['valorUnit'];
     $dataAtual = $dadosEspecificos['dataAtual'];
 
+  
     $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, dataAtual, produto, valor_unit, valor_total, quantidade) VALUES ('$chaveAcesso', '$fornecedor', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade') ";
 
     if ($conn->query($sql1) !== TRUE) {
@@ -56,12 +67,12 @@ if ($dadosEspecificos) {
 
 
     if($conn->query($sql2)=== TRUE){
-        echo '<div style="padding: 50% 10% 50% 10%; text-align: center; z-index: 999; position: absolute; top: 0; width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; height: 100%; background-color: white;" class="pedidoCadastrado">';
+        echo '<div style="padding: 50% 10% 50% 10%; text-align: center; z-index: 999; position: fixed; top: 0; width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; height: 100%; background-color: white;" class="pedidoCadastrado">';
         echo '<div class="teste">';
         echo '<h2> Pedido cadastrado com sucesso! </h2>';
         echo '</div>';
         echo '<img style="max-width:200px" src="../../assets/check.svg" alt="">';
-        echo '<a href="../cadastro.html"><button style="min-width: 300px;">PEDIDOS</button></a>';
+        echo '<a href="../cadastrodepedidos.php"><button style="min-width: 300px;">PEDIDOS</button></a>';
         echo '</div>';
         echo ' </div>';
         

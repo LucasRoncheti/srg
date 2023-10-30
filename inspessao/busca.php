@@ -1,6 +1,15 @@
 <?php
 	//Incluir a conexão com banco de dados
     include '../generalPhp/conection.php';
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	
+	if(!isset($_SESSION['id'])) {
+		die( header("Location: ../index.php"));
+	   
+	}
+	
 	
 	//Recuperar o valor da palavra
 	$busca = $_POST['palavra'];
@@ -29,21 +38,24 @@
 			
 			$dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
 
-			echo   ' <div class="containerDadosPedidos">';
-			echo   '     <div class="numberDate">';
-			echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
-			echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
-			echo  '      </div>';
-			echo  '      <div class="dadosPedidos">';
-			echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
-			echo   '         <div class="valorTotalPedidoPedido">' . $row_sql['valor_total'] . '</div>';
-			echo  '      </div>';
-			echo   '     <div class="apagarImprimir">';
-			echo   '         <div class="imprimir" ><img src="../assets/print.svg" alt=""></div>';
-			echo    '        <div class="apagar"> <img src="../assets/erase.svg" alt="ìcone lixeira"></div>';
-					
-			echo  '      </div>';
-			echo  '  </div>';
+			echo ' <div class="containerDadosPedidos">';
+			echo '     <div class="numberDate">';
+			echo '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
+			echo '        <div class="dataPedido">' . $dataFormatada . '</div>';
+			echo '      </div>';
+			echo '      <div class="dadosPedidos">';
+			echo '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
+			echo '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100, 2, ",", ".") . '</div>';
+			echo '      </div>';
+			echo '     <div class="apagarImprimir">';
+			echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file.png"></a>';
+
+
+			// echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/edit.svg" > </a>';
+
+
+			echo '      </div>';
+			echo '  </div>';
 		}
 	
 		

@@ -17,7 +17,14 @@
             <?php
                include '../../generalPhp/conection.php';
 
-
+               if(!isset($_SESSION)) {
+                  session_start();
+              }
+              
+              if(!isset($_SESSION['id'])) {
+                 die( header("Location: ../../index.php"));
+                 
+              }
                //recebe os dados pelo metodo post
 
                $id=$_POST['id'];
@@ -34,7 +41,7 @@
                   echo"  <img src='../../assets/refresh.svg' alt='delete  image'> ";
                   echo "<h3>Registro atualizado  com sucesso </h3>";
                   echo "<div class='listButton'>";
-                  echo "<a href='cadastro.html'>Lista de Produtos</a>";
+                  echo "<a href='cadastrodeproduto.php'>Lista de Produtos</a>";
                   echo "</div>";
                }else{
                echo" Erro ao atualizar produto" . msqli_error($conn);

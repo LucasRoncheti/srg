@@ -84,7 +84,7 @@ button img{
 /*lista do container */
 .containerList{
     width: 100%;
-    height: calc(100vh - 342px);
+    height: calc(100vh - 381px);
     background-color: var(--branco);
     overflow: auto;
 }

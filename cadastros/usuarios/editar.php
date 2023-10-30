@@ -1,6 +1,15 @@
 <?php
 include '../../generalPhp/conection.php';
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+   die( header("Location: ../../index.php"));
+   
+}
+
 // Check if 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
     // Retrieve the 'id' value from the URL
@@ -49,7 +58,7 @@ if (isset($_GET['id'])) {
 
         <div class="inputBox">
             <label for="valor">NOVA SENHA</label>
-            <input placeholder="NOVA SENHA" type="text" id="senha" name="senha" value="<?php echo $senha; ?>"  required>
+            <input placeholder="NOVA SENHA" type="password" id="senha" name="senha" value="<?php echo $senha; ?>"  required>
         </div>
        
         

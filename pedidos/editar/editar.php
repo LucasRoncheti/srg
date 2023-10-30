@@ -1,5 +1,13 @@
 <?php
 include '../../generalPhp/conection.php';
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+    die( header("Location: ../../index.php"));
+   
+}
 
 // Check if 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
@@ -149,7 +157,7 @@ if (isset($_GET['id'])) {
 
     <header>
 
-        <a href="../cadastro.html"><button id="backButton" class="backButton">
+        <a href="../cadastrodepedidos.php"><button id="backButton" class="backButton">
                 <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
             </button>
         </a>
@@ -228,7 +236,7 @@ if (isset($_GET['id'])) {
     </div>
 
 
-    <form style="height:auto;" id="containerList" class="containerList">
+    <form  style="height:auto;" id="containerList" class="containerList">
             <!-- aqui entra a lista dos intens no pedido -->
     </form>
    
@@ -347,15 +355,10 @@ if (isset($_GET['id'])) {
 <!-- 
 lista o produto adicionado na lista do pedido -->
 <script src="listarProdutos.js"></script>
-
-
-
-
 <script src="cadastro.js"></script>
-
 <script src="../../generalScripts/deleteDiv.js"></script>
 
-
+<script src="validarBotaoSalvar.js"></script>
 
 
 

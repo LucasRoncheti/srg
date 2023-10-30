@@ -2,6 +2,15 @@
 
 include '../../generalPhp/conection.php';
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+   die( header("Location: ../../index.php"));
+   
+}
+
 
 
 //paginação
@@ -70,7 +79,10 @@ if(($resultado_fornecedor) AND ($resultado_fornecedor->num_rows != 0)){
         echo " <a href='#' onclick='carregarFornecedores($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
         echo '</div>';
         }else{
-            echo "<div class='alert alert-danger' role='alert'>Nenhum usuário encontrado!</div>";
+            echo' <div class="notFound">
+                        <img  class="notFoundImg" src="../../assets/notFound.svg" alt="">
+                        <h3>NÃO HÁ REGISTROS </h3>
+                    </div>';
         }
 
 

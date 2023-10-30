@@ -24,6 +24,17 @@
         <!-- The confirmation messages will be displayed here -->
         <?php
         include '../generalPhp/conection.php';
+        
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        
+        if(!isset($_SESSION['id'])) {
+            die( header("Location: ../index.php"));
+        
+        }
+    
+    
 
         // Check if 'id' parameter is provided in the URL
         if (isset($_GET['id'])) {
@@ -43,7 +54,7 @@
                         echo "<img src='../assets/fileDeleted.svg' alt='delete image'>";
                         echo "<h3>Registro deletado com sucesso</h3>";
                         echo "<div class='listButton'>";
-                        echo "<a href='cadastro.html'>Lista de Fornecedores</a>";
+                        echo "<a href='cadastrodepedidos.php'>Lista de Pedidos</a>";
                         echo "</div>";
                     } else {
                         echo "Erro ao excluir registro de pedidoscadastro: " . mysqli_error($conn);
@@ -65,7 +76,7 @@
             echo "<a href='apagar.php?id=$id&confirm=yes'>Sim</a>  ";
             echo "</div>";
             echo "<div class='cancelButton'>";
-            echo "<a href='cadastro.html'>Cancelar</a>";
+            echo "<a href='cadastrodepedidos.php'>Cancelar</a>";
             echo "</div>";
             echo"</div>";
         } else {

@@ -1,5 +1,13 @@
 <?php
 include '../../generalPhp/conection.php';
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+if(!isset($_SESSION['id'])) {
+    die( header("Location: ../../index.php"));
+   
+}
 
 //variáveis que serão alocadas em outra tabela 
 $cliente = "";
@@ -59,7 +67,7 @@ if ($dadosEspecificos) {
         echo '<h2> Pedido cadastrado com sucesso! </h2>';
         echo '</div>';
         echo '<img style="max-width:200px" src="../../assets/check.svg" alt="">';
-        echo '<a href="../cadastro.html"><button style="min-width: 300px;">PEDIDOS</button></a>';
+        echo '<a href="../cadastrodepedidos.php"><button style="min-width: 300px;">PEDIDOS</button></a>';
         echo '</div>';
         echo ' </div>';
         
