@@ -6,6 +6,8 @@ body{
 }
 
 
+
+
 header{
     width: 100%;
     height: 166px;
@@ -23,6 +25,7 @@ header h1{
 /* imagem que fica no topo do header  */
 header img{
     margin-top: 24px;
+    margin-right: 10px;
 }
 
 header p{

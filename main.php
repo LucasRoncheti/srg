@@ -30,7 +30,9 @@
     </div>
 </div>
 
+
 <body onload="onLoad()">
+    
     <header>
 
         <a href="logout.php" class="logoutButton">
@@ -106,7 +108,7 @@
         </a>
 
     </section>
-
+    <div class="mensagem"><div><p>tested</p></div></div>
     <footer>
         <p id="data-footer"> </p>
     </footer>

@@ -19,8 +19,9 @@
 [x] menu mobile primeira camada
 [x] conferir favicon de todas as páginas 
 [x] conferir botão apagar e editar nas buscas 
+[x]BOTÃO SALVAR NA HORA DE EDITAR OS PEDIDOS 
+[] todas as palavras em uppercase 
 
-[]BOTÃO SALVAR NA HORA DE EDITAR OS PEDIDOS 
 
 
 
