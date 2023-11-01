@@ -20,7 +20,7 @@ $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBE
 $inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
 
 //consultar no banco de dados
-$result_sql = "SELECT * FROM usuarios ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
+$result_sql = "SELECT * FROM usuarios ORDER BY id  DESC LIMIT $inicio, $qnt_result_pg ";
 $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
@@ -39,8 +39,8 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
         echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
         echo '<td class = "nameTable">' . $row_sql['usuario'] . '</td>';
         
-        echo '<td class = "editTable"> <a  href="editar.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>
-                                        <a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a>
+        echo '<td class = "editTable"> <a  href="editarSenha.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>
+                                        <a  href="apagarUsuario.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a>
                 </td>';
         echo '</tr>';
 	}

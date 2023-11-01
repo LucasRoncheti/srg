@@ -1,8 +1,6 @@
 <?php
 include '../../generalPhp/conection.php';
 
-
-
 if(!isset($_SESSION)) {
     session_start();
 }
@@ -12,24 +10,20 @@ if(!isset($_SESSION['id'])) {
    
 }
 
-
-
-
-
 // Check if 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
     // Retrieve the 'id' value from the URL
     $id = $_GET['id'];
 
     // Create a SQL query to fetch the data for the specified 'id'
-    $sql = "SELECT produto,valor FROM produtos WHERE id = '$id'";
+    $sql = "SELECT usuario,senha FROM usuarios WHERE id = '$id'";
     $result = mysqli_query($conn, $sql);
 
     // Check if the query was successful and data was found
     if ($row = mysqli_fetch_assoc($result)) {
-        $produto = $row['produto'];
-        $valor = $row['valor'];
-        $valorFormatado= number_format($valor /100,2 ,'.','.');
+        $usuario = $row['usuario'];
+        $senha = $row['senha'];
+        
         
     } else {
         echo 'Registro não encontrado!';
@@ -47,28 +41,29 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../index/root.css">
     <link rel="stylesheet" href="editar.css">
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <title>Editar Produto</title>
+    <title>Apagar Usuários</title>
 </head>
 <body>
-    <form action="atualizar.php" method="POST">
+    <form action="apagar.php" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
 
         <div class="inputBox">
-            <label for="produto">PRODUTO</label>
-            <input placeholder="PRODUTO" type="text" id="produto" name="produto" value="<?php echo $produto; ?>" required>
-        </div>
 
-        <div class="inputBox">
-            <label for="valor">VALOR</label>
-            <input placeholder="VALOR" type="text" id="valor" name="valor" onkeypress="$(this).mask('R$ ###.###.##',{ reverse: true })"  value="<?php echo $valorFormatado; ?> "  required>
-        </div>
+            
+            <label for="valor">SENHA</label>
+            <input placeholder="INSIRA A SENHA" type="text" id="senha" name="senha" value=""  required>
+            </div>
        
         
 
-        <button type="submit" value="Atualizar">SALVAR <img src="../../assets/save.svg" alt=""></button>
+        <a href="apagar.php?id=<?php echo $id; ?>&senha=<?php echo $senha; ?>">Excluir</a>
+
+        <a  href="cadastrodeusuarios.php">CANCELAR<img style="width:30px;" src="../../assets/delete.svg" alt=""></a>
+      
+
     </form>
 </body>
 </html>

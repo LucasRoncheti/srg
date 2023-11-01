@@ -40,11 +40,8 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
         echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
         echo   '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100 , 2,",",".")  . '</div>';
         echo  '      </div>';
-        echo   '     <div class="apagarImprimir">';
-        
+        echo   '     <div class="apagarImprimir">';    
         echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/greenFile.svg" > </a>';
-       
-                
         echo  '      </div>';
         echo  '  </div>';
 	}

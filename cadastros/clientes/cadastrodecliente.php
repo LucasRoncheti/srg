@@ -27,7 +27,7 @@ if(!isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../produtos/cadastro.css">
     
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <title>Cadastro produtos</title>
+    <title>Cadastro Clientes</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -48,12 +48,12 @@ if(!isset($_SESSION['id'])) {
 
     
 
-    <div id="mobileMenu" class="mobileMenuContainer ">
+<div id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
             <div class="mobileMenuButtons">
-                <a href="../../index.html">
+                <a href="../../main.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _home_.svg" alt="icone fornecedor"></div>
@@ -62,7 +62,7 @@ if(!isset($_SESSION['id'])) {
                     </div>
                 </a>
 
-                <a href="../cadastros.html">
+                <a href="../cadastros.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
@@ -70,7 +70,7 @@ if(!isset($_SESSION['id'])) {
                         </button>
                     </div>
                 </a>
-                <a href="#">
+                <a href="../../pedidos/cadastrodepedidos.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
@@ -78,7 +78,7 @@ if(!isset($_SESSION['id'])) {
                         </button>
                     </div>
                 </a>
-                <a href="#">
+                <a href="../../relatorios/relatorios.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
@@ -86,15 +86,15 @@ if(!isset($_SESSION['id'])) {
                         </button>
                     </div>
                 </a>
-                <a href="#">
+                <a href="../../inspessao/cadastro.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INSPESSÃO</h2></div>
+                            <div class="divNameCategorieButtonMobile"><h2>INSPEÇÃO</h2></div>
                         </button>
                     </div>
                 </a>
-                <a href="#">
+                <a href="../../packingList/cadastropackinglist.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
@@ -107,6 +107,7 @@ if(!isset($_SESSION['id'])) {
             </div>   
 
     </div>
+
 
 
    <header>

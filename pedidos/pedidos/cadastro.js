@@ -20,7 +20,7 @@ const enviarDados = () => {
    itensParaSoma.push(dicionarioCliente);
   itensEnviados = itensParaSoma
 
-  console.log(itensEnviados)
+console.log(itensEnviados)
 
 
 
@@ -33,12 +33,18 @@ fetch('cadastroPedido.php', {
 })
   .then(response => response.text())
   .then(data => {
+    document.getElementById("respostaPHP").style.display = "block";
     document.getElementById("respostaPHP").innerHTML = data; // Resposta do PHP
     document.getElementById('preload').style.display='none'
+    setTimeout(()=>{
+      document.getElementById("respostaPHP").innerHTML = "";
+      document.getElementById("respostaPHP").style.display = "none";
+    },10000)
   })
   .catch(error => {
-    document.getElementById("respostaPHP").innerHTML = "Erro: " + error; // Exibir mensagem de erro
+    document.getElementById("respostaPHP").innerHTML = "Erro: " + erro; // Exibir mensagem de erro
     document.getElementById('preload').style.display='none'
+
   });
 
 }

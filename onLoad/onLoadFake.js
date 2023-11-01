@@ -7,7 +7,7 @@ onLoad = () => {
     
     setTimeout(() => {
         preloadElement.style.display = 'none'; // Oculta o elemento após 1500 milissegundos (1,5 segundos)
-        console.log('Pré-carregamento carregado');
+        
         window.location.href='../pedidos/pedidos.php'
     }, 1500);
 }

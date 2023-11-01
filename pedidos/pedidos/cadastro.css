@@ -196,10 +196,28 @@ button {
 }
 
 button img {
-    width: 40px;
-
+    width: 30px;
 }
 
+
+
+@keyframes opacidade{
+    0%{
+        opacity: 0%;
+    }
+    25%{
+        opacity: 100%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    75%{
+        opacity: 60%;
+    }
+    100%{
+        opacity: 0%;
+    }
+}
 /* botão salvar pedido*/
 .salvarPedido {
 

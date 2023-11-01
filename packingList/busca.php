@@ -18,17 +18,12 @@
 				<img  class="notFoundImg" src="../assets/notFound.svg" alt="">
 				<h3>PEDIDO NÃO ENCONTRADO</h3>
 			</div>
-		
 		';
 	}else{
 
-		
-	
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
 			
-			
 			$dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
-
 			echo   ' <div class="containerDadosPedidos">';
 			echo   '     <div class="numberDate">';
 			echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
@@ -38,16 +33,12 @@
 			echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
 			echo   '         <div class="valorTotalPedidoPedido">' . $row_sql['valor_total'] . '</div>';
 			echo  '      </div>';
-			echo   '     <div class="apagarImprimir">';
-			echo   '         <div class="imprimir" ><img src="../assets/print.svg" alt=""></div>';
-			echo    '        <div class="apagar"> <img src="../assets/erase.svg" alt="ìcone lixeira"></div>';
-					
+			echo   '     <div class="apagarImprimir">';    
+			echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/greenFile.svg" > </a>';
 			echo  '      </div>';
 			echo  '  </div>';
 		}
 	
-		
-		
 	}
 ?>
 

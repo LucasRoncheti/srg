@@ -37,7 +37,9 @@ form{
     position: relative;
     box-shadow:3px 3px 7px rgba(0, 0, 0, 0.124);
 }
-
+.menuButtonsMobile{
+    width: 20px;
+}
 
 input{
     width: 320px;

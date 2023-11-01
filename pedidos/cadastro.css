@@ -78,8 +78,11 @@ label{
     align-items: center;
 }
 button img{
-    margin-left: 8px;
+   
+    width: 20px;
 }
+
+
 
 /*lista do container */
 .containerList{

@@ -50,8 +50,9 @@
 			echo   '         <div class="valorTotalPedidoPedido">' . $row_sql['valor_total'] . '</div>';
 			echo  '      </div>';
 			echo   '     <div class="apagarImprimir">';
-			echo   '         <div class="imprimir" ><img src="../assets/print.svg" alt=""></div>';
-			echo    '        <div class="apagar"> <img src="../assets/erase.svg" alt="ìcone lixeira"></div>';
+			echo   '          <a  href="print.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/print.svg" > </a>';
+			echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/edit.svg" > </a>';
+			echo    '        <a  href="apagar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/erase.svg" > </a>';
 					
 			echo  '      </div>';
 			echo  '  </div>';

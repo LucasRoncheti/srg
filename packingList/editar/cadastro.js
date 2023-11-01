@@ -6,7 +6,7 @@ const enviarDados = () => {
   var quantidade = document.getElementById('quantidade').value;
   var chaveAcesso = document.getElementById("chaveAcesso").value;
 
-  console.log(fornecedor, palet, quantidade);
+
 
   if (!fornecedor || !palet || !quantidade) {
     alert("Preencha todos os campos antes de enviar os dados.");
@@ -23,6 +23,8 @@ const enviarDados = () => {
       Listar(); // Chame a função listar após o cadastro ser bem-sucedido
       document.getElementById("respostaPHP").innerHTML = data;
       document.getElementById('preload').style.display = 'none';
+      document.getElementById('palet').value = ""
+      document.getElementById('quantidade').value = ""
     })
     .catch(error => {
       document.getElementById("respostaPHP").innerHTML = "Erro: " + error;

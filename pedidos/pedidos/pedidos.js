@@ -8,27 +8,32 @@ const input = document.getElementById('clienteInput')
 
 const data = document.getElementById("dataAtual")
 
-var chaveAcesso=""
-var clienteBD=""
+var chaveAcesso = ""
+var clienteBD = ""
 var dataBD = ""
+
+
 
 
 let ContinuarParaPedidos = () => {
 
-    div.style.display = 'none'
-
     const primeiroOption = select.options[0]
     const clientePedido = primeiroOption.value
 
-    input.value = clientePedido
-    dataAtual = data.value
-    // Exemplo de uso:
-    const chaveGerada = gerarChaveUnica();
-    chaveAcesso = chaveGerada
+    if (!clientePedido || clientePedido == "Cliente não encontrado") {
+        alert("selecione um cliente")
+    } else {
+        div.style.display = 'none'
+        input.value = clientePedido
+        dataAtual = data.value
+        // Exemplo de uso:
+        const chaveGerada = gerarChaveUnica();
+        chaveAcesso = chaveGerada
 
-    clienteBD = clientePedido
-    dataBD = dataAtual
-   
+        clienteBD = clientePedido
+        dataBD = dataAtual
+    }
+
 
 }
 
@@ -41,7 +46,7 @@ function gerarChaveUnica() {
     // Adicione a data e hora com segundos atuais ao início da chave
     const dataHoraAtual = new Date();
     const segundos = dataHoraAtual
-    
+
     chave += dataHoraAtual.toISOString().replace(/ /g, "-") + segundos;
 
     // Gere os caracteres restantes da chave como antes

@@ -13,6 +13,7 @@ var  valorTotalBD;
 key =  0
 
 let listar = () => {
+    
     fornecedor = document.getElementById("fornecedor").options[0].value;
     produto = document.getElementById("produto").options[0].text;
     valorUnit = document.getElementById("valorUnit").textContent
@@ -22,7 +23,9 @@ let listar = () => {
     quantidade = document.getElementById("quantidade").value
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
 
-    if (fornecedor === "" || produto === "") {
+
+
+    if (!fornecedor || produto === "" || fornecedor === " Fornecedor não encontrado " || produto === "Produto não encontrado" ) {
         alert("Preencha o campo vazio ! ")
         
     } else {
@@ -122,7 +125,7 @@ let adicionarItemPedido = () => {
                 </div>
 
 
-                <div id="info${id}" class="dadosPedidoSecundario">
+                <div style="display: none;" id="info${id}" class="dadosPedidoSecundario">
                     <div id="produtoLista" class="produtoLista" >${produto}</div>
                     <div class="quantidades3" >
 

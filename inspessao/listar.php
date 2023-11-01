@@ -23,38 +23,33 @@ $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
 if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
-   
 
 
-	while($row_sql = mysqli_fetch_assoc($resultado_sql)){
+
+    while ($row_sql = mysqli_fetch_assoc($resultado_sql)) {
         $dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
-        echo   ' <div class="containerDadosPedidos">';
-        echo   '     <div class="numberDate">';
-        echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
-        echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
-        echo  '      </div>';
-        echo  '      <div class="dadosPedidos">';
-        echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
-        echo   '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100 , 2,",",".")  . '</div>';
-        echo  '      </div>';
-        echo   '     <div class="apagarImprimir">';
-        echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file.png"></a>';
-
-
-        // echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/edit.svg" > </a>';
-       
-                
-        echo  '      </div>';
-        echo  '  </div>';
-	}
-
-    
-
-   
+        echo ' <div class="containerDadosPedidos">';
+        echo '     <div class="numberDate">';
+        echo '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
+        echo '        <div class="dataPedido">' . $dataFormatada . '</div>';
+        echo '      </div>';
+        echo '      <div class="dadosPedidos">';
+        echo '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
+        echo '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100, 2, ",", ".") . '</div>';
+        echo '      </div>';
+        echo '     <div class="apagarImprimir">';
+        echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file_green.svg"></a>';
+        echo '      </div>';
+        echo '  </div>';
+    }
 
 
 
-        //Paginação - Somar a quantidade de usuários
+
+
+
+
+    //Paginação - Somar a quantidade de usuários
         $result_pg = "SELECT COUNT(id) AS num_result FROM pedidoscadastro";
         $resultado_pg = mysqli_query($conn, $result_pg);
         $row_pg = mysqli_fetch_assoc($resultado_pg);

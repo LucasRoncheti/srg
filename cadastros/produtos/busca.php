@@ -45,8 +45,8 @@
 			echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
 			echo '<td class = "nameTable">' . $row_sql['produto'] . '</td>';
 			echo '<td class = "numTable">' . number_format($row_sql['valor'] / 100 , 2,",",".") . '</td>';
-			echo '<td class = "editTable"> <a  href="editarsql.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>  
-											<a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a> 
+			echo '<td class = "editTable"> <a  href="editar.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>
+			<a  href="apagar.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a>
 					</td>';
 			echo '</tr>';
 		}

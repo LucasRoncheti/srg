@@ -41,10 +41,10 @@
 		
 			while($row_fornecedor = mysqli_fetch_assoc($resultado_fornecedores)){
 				echo '<tr class=" tableRow">';
-				echo '<td>' . $row_fornecedor['numero'] . '</td>';
-				echo '<td>' . $row_fornecedor['nome'] . '</td>';
-				echo '<td class = "editTable"> <a  href="" id="'.$row_fornecedor['id'].'">  <img src="../../assets/edit.svg" > </a>  
-							<a href="" id="'.$row_fornecedor['id'].'">  <img src="../../assets/erase.svg" ></a>  
+				echo '<td class = "numTable">' . $row_fornecedor['numero'] . '</td>';
+				echo '<td class = "nameTable">' . $row_fornecedor['nome'] . '</td>';
+				echo '<td class = "editTable"> <a  href="editarFornecedor.php?id='. $row_fornecedor['id'] .'">  <img src="../../assets/edit.svg" > </a>  
+												<a  href="apagarFornecedor.php?id='. $row_fornecedor['id'] .'">  <img src="../../assets/erase.svg" > </a> 
 						</td>';
 				echo '</tr>';
 			}

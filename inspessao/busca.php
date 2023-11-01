@@ -48,12 +48,7 @@
 			echo '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100, 2, ",", ".") . '</div>';
 			echo '      </div>';
 			echo '     <div class="apagarImprimir">';
-			echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file.png"></a>';
-
-
-			// echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/edit.svg" > </a>';
-
-
+			echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file_green.svg"></a>';
 			echo '      </div>';
 			echo '  </div>';
 		}

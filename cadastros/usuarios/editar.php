@@ -40,10 +40,10 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../index/root.css">
     <link rel="stylesheet" href="editar.css">
-
+    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <title>Editar Produto</title>
+    <title>Editar Usuários</title>
 </head>
 <body>
     <form action="atualizar.php" method="POST">
@@ -53,17 +53,17 @@ if (isset($_GET['id'])) {
             <label for="usuario">USUÁRIO</label>
             <input placeholder="USUÁRIO" type="text" id="usuario " name="usuario" value="<?php echo $usuario; ?>" required>
         </div>
-
+    
        
 
         <div class="inputBox">
             <label for="valor">NOVA SENHA</label>
-            <input placeholder="NOVA SENHA" type="password" id="senha" name="senha" value="<?php echo $senha; ?>"  required>
+            <input placeholder="NOVA SENHA" type="text" id="senha" name="senha" value="<?php echo $senha; ?>"  required>
         </div>
        
         
 
-        <button type="submit" value="Atualizar">SALVAR <img src="../../assets/save.svg" alt=""></button>
+        <button type="submit" value="Atualizar">SALVAR <img  src="../../assets/save.svg" alt=""></button>
     </form>
 </body>
 </html>

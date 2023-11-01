@@ -61,7 +61,7 @@ a{
 
 
 .popUpContainer img{
-    width: 60px;
+    width: 100px;
     opacity: 0;
     animation: opacity 0.6s ease 0.3s forwards;
     

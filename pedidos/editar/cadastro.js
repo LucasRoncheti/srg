@@ -18,7 +18,7 @@ const enviarDados = () => {
      itensParaSoma.push(dicionarioCliente);
     itensEnviados = itensParaSoma
   
-    console.log(itensEnviados)
+
   
   
   
@@ -31,8 +31,14 @@ const enviarDados = () => {
    })
      .then(response => response.text())
      .then(data => {
-       document.getElementById("respostaPHP").innerHTML = data; // Resposta do PHP
-       document.getElementById('preload').style.display='none'
+      document.getElementById("respostaPHP").style.display = "flex";
+      document.getElementById("respostaPHP").innerHTML = data; // Resposta do PHP
+      document.getElementById('preload').style.display='none'
+      document.getElementById('preload').textContent=''
+      setTimeout(()=>{
+        document.getElementById("respostaPHP").innerHTML = "";
+        document.getElementById("respostaPHP").style.display = "none";
+      },2500)
      })
      .catch(error => {
        document.getElementById("respostaPHP").innerHTML = "Erro: " + error; // Exibir mensagem de erro

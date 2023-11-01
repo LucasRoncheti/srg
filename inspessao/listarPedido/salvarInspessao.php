@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="salvarInspessao.css">
 
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <title>Editar Pedidos</title>
+    <title>Inspeção</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -68,87 +68,68 @@ if (isset($_GET['id'])) {
 
     <div id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img src="../../assets/x.svg" alt="Menu mobile da página">
+            <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
-        <div class="mobileMenuButtons">
-            <a href="../../index.html">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _home_.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INÍCIO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
+            <div class="mobileMenuButtons">
+                <a href="../../main.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img style="width:20px" src="../../assets/mobileIcons/🦆 icon _home_.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
+                        </button>
+                    </div>
+                </a>
 
-            <a href="../../cadastros/cadastros.html">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>CADASTROS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../../pedidos/cadastro.html">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PEDIDOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="#">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>RELATÓRIOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="#">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor">
-                        </div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INSPESSÃO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="#">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PACKING LIST</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
+                <a href="../../cadastros/cadastros.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
+                        </button>
+                    </div>
+                </a>
+                <a href="../../pedidos/cadastrodepedidos.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
+                        </button>
+                    </div>
+                </a>
+                <a href="../../relatorios/relatorios.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>RELATÓRIOS</h2></div>
+                        </button>
+                    </div>
+                </a>
+                <a href="../../inspessao/cadastro.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>INSPEÇÃO</h2></div>
+                        </button>
+                    </div>
+                </a>
+                <a href="../../packingList/cadastropackinglist.php">
+                    <div class="menuButtonsMobile">
+                        <button class="categorieButtonMobile">
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
+                        </button>
+                    </div>
+                </a>
+             
 
-
-        </div>
+            </div>   
 
     </div>
 
 
         <header>
 
-            <a href="../cadastro.html"><button id="backButton" class="backButton">
+            <a href="../cadastro.php"><button id="backButton" class="backButton">
                     <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
                 </button>
             </a>

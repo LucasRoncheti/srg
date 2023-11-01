@@ -28,18 +28,18 @@ function apagarImagem(id) {
     .then(data => {
         if (data.success) {
             if (data.message) {
-                console.log("Imagens apagadas");
+               
                 
                  element.parentNode.removeChild(element); 
                  document.getElementById('preload').style.display='none'
                 
             } else {
-                console.log("Não foi possível apagar a imagem");
+             
             }
         }
     })
     .catch(error => {
-        console.error("Error:", error);
+        // console.error("Error:", error);
     });
 }
 

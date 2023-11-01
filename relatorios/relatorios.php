@@ -29,7 +29,7 @@ if (!isset($_SESSION['id'])) {
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
 
 
-    <title>Cadastro Pedidos</title>
+    <title>Relatórios</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -143,9 +143,10 @@ if (!isset($_SESSION['id'])) {
         </button>
 
         <form id="cadastroForm">
-            <img src="../assets/categories/relatoriosWhite.svg" alt="">
-
+            <img style="width:40px" src="../assets/categories/relatorios.svg" alt="">
+    
             <h2 style="color:white">RELATÓRIOS</h2>
+            
             <div class="inputSearch">
                 <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
                     placeholder="FORNECEDOR">

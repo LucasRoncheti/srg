@@ -41,8 +41,10 @@ let listar = () => {
     //chave de acesso gerada na hora de salvar o pedido pela primeira vez 
     let chaveAcessoCliente = document.getElementById("chaveAcesso").value
 
-    if (fornecedor === "" || produto === "") {
+   
+    if (!fornecedor || produto === "" || fornecedor === " Fornecedor não encontrado " || produto === "Produto não encontrado" ) {
         alert("Preencha o campo vazio ! ")
+        
     } else {
 
         calcularTotal()
@@ -118,7 +120,7 @@ let listar = () => {
 
     quantidadeInicial = 1;
     quantidadeAtual = quantidadeInicial;
-    console.log(itensParaSoma)
+    
 
   
 
@@ -144,7 +146,7 @@ let adicionarItemPedido = () => {
                 </div>
 
 
-                <div id="info${id}" class="dadosPedidoSecundario">
+                <div style="display: none;" id="info${id}" class="dadosPedidoSecundario">
                     <div id="produtoLista" class="produtoLista" >${produto}</div>
                     <div class="quantidades3" >
 
@@ -166,7 +168,7 @@ var apagarItem = (id) => {
 
     //seleciona o dicionario do  array a ser apagado usando como parametro o id da div 
     itensParaSoma.splice(id,1)
-    console.log(itensParaSoma)
+   
 
     // faz todo o calculo novamente para as quantidades 
     var somaQuantidade = 0

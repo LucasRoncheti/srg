@@ -33,11 +33,11 @@
 
 
 <div id="searchClient" class="searchClient">
-    <input type="text" name="pesquisaCliente" id="pesquisaCliente" placeholder="BUSCAR CLIENTE">
+    <input type="text" name="pesquisaCliente" id="pesquisaCliente" placeholder="BUSCAR CLIENTE" required>
 
     <form method="POST" class="inputSearch" id="form-pesquisa1" action="">
-        <select placeholder="CLIENTE" name="cliente" id="select">
-            <option value="Lucas Roncheti"></option>
+        <select  name="cliente" id="select" value="" >
+        <option value=""></option>
         </select>
 
     </form>
@@ -131,18 +131,18 @@
 
     </div>
 
-    <div id="respostaPHP">
+    <div  id="respostaPHP">
         
     </div>
 
     <header>
 
-        <a href="../cadastrodepedidos.php"><button id="backButton" class="backButton">
+       <button onclick="avisoSalvar()" id="backButton" class="backButton">
                 <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
             </button>
-        </a>
+      
 
-        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
+        <button onclick="openMenu(),avisoSalvar2()" id="mobileMenuButton" class="mobileMenuButton">
             <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
 
@@ -286,7 +286,7 @@ lista o produto adicionado na lista do pedido -->
 <script src="cadastro.js"></script>
 
 <script src="../../generalScripts/deleteDiv.js"></script>
-
+<script src="avisoSalvar.js"></script>
 
 
 

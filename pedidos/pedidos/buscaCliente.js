@@ -10,7 +10,7 @@ $(function(){
 				palavra : pesquisa
 			}		
 			$.post('buscaCliente.php', dados, function(retorna){
-				//Mostra dentro da ul os resultado obtidos 
+				
 				$("#select").html(retorna);
 			});
 		}else{

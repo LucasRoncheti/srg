@@ -101,17 +101,26 @@ p{
     background-color: red;
     bottom: 60px;
     border-radius: 10px;
-    animation: opacidade 1s forwards;
+    animation: opacidade 3s forwards;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 @keyframes opacidade{
-    from{
+    0%{
         opacity: 0%;
     }
-    to{
+    25%{
         opacity: 100%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    75%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
     }
 }
