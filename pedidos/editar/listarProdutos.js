@@ -32,7 +32,9 @@ let listar = () => {
     quantidade = document.getElementById("quantidade").value
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
 
-
+    //recupera a data a ser salvo no banco de dados para conseguir ser achada nos relatórios
+    dataAtual = document.getElementById("DataAtual").value
+    
     
 
      
@@ -68,6 +70,7 @@ let listar = () => {
         novoDicionarioItens['valorTotal'] = valorTotalFormatado
         novoDicionarioItens['quantidade'] = quantidadeFormatada
         novoDicionarioItens['chaveAcesso'] = chaveAcessoCliente
+        novoDicionarioItens['dataAtual'] = dataAtual
         itensParaSoma.push(novoDicionarioItens)
 
         //fazer a soma dos valores e colocar em variáveis 

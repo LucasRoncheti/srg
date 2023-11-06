@@ -38,7 +38,7 @@ foreach ($itensEnviados as $item) {
         $quantidade = $item['quantidade'];
         $valorTotal = $item['valorTotal'];
         $valorUnit = $item['valorUnit'];
-        $dataAtual = $dadosEspecificos['dataAtual'];
+        $dataAtual = $item['dataAtual'];
 
         
 

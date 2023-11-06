@@ -24,11 +24,9 @@ if (isset($_GET['id'])) {
     if($resultSql1 && $resultSql1->num_rows !=0){
         while($row = mysqli_fetch_assoc($resultSql1)){
             $valorTotalSalvoPedido = $row['valor_total'];
+            $dataAtual = $row['dataAtual'];
         }
     }
-
-
-
 
 ?>
 
@@ -80,7 +78,7 @@ if (isset($_GET['id'])) {
                 <a href="../../main.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img style="width:20px" src="../../assets/mobileIcons/🦆 icon _home_.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img style="width:20px" src="../../assets/mobileIcons/icon _home_.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
                         </button>
                     </div>
@@ -89,7 +87,7 @@ if (isset($_GET['id'])) {
                 <a href="../../cadastros/cadastros.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _book_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
                         </button>
                     </div>
@@ -97,7 +95,7 @@ if (isset($_GET['id'])) {
                 <a href="../../pedidos/cadastrodepedidos.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _list_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
                         </button>
                     </div>
@@ -105,7 +103,7 @@ if (isset($_GET['id'])) {
                 <a href="../../relatorios/relatorios.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>RELATÓRIOS</h2></div>
                         </button>
                     </div>
@@ -113,7 +111,7 @@ if (isset($_GET['id'])) {
                 <a href="../../inspessao/cadastro.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>INSPEÇÃO</h2></div>
                         </button>
                     </div>
@@ -121,7 +119,7 @@ if (isset($_GET['id'])) {
                 <a href="../../packingList/cadastropackinglist.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _check_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
                         </button>
                     </div>
@@ -160,6 +158,8 @@ if (isset($_GET['id'])) {
                 <option value=""></option>
             </select>
         </form>
+
+        <input id="DataAtual" type="hidden" value=" <?php echo $dataAtual ?> ">
 
         <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
             <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto"
@@ -206,7 +206,7 @@ if (isset($_GET['id'])) {
     
     
     <!-- cabeçalho da lista de produtos -->
-    <div class="cabeçalhoProdutos">
+    <div class="cabecalhoProdutos">
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
         <div class="quantidades">
             <div id="qnt">QNT</div>
@@ -287,7 +287,7 @@ if (isset($_GET['id'])) {
 <div id="containerValoresFinais"   class="containerValoresFinais">
     <div id="containerInternoValoresFinais"  class="containerInternoValoresFinais">
         <div id="" class="headValores">
-            <p>N° CAIXAS</p>
+            <p>N&deg; CAIXAS</p>
             <p id="Ncaixas"><?php echo $somaQuantidadeTotal?></p>
         </div>
         <div id="" class="headValores">
