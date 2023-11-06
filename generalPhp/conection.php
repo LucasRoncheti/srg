@@ -4,9 +4,14 @@
 
 
 $serverName = "localhost";
-$username = "root";
-$password ="";
-$dbname = "sistemacadastro";
+$username = "lucasroncheti27";
+$password ="skinzerferida";
+$dbname = "srgapp32_sistemacadastro";
+
+// $serverName = "localhost";
+// $username = "root";
+// $password ="";
+// $dbname = "sistemacadastro";
 
 $conn = new mysqli($serverName, $username ,$password, $dbname);
 
