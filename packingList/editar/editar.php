@@ -149,7 +149,7 @@ if (isset($_GET['id'])) {
 
     <header>
 
-        <a href="../cadastroPackingList.php"><button id="backButton" class="backButton">
+        <a href="../cadastropackinglist.php"><button id="backButton" class="backButton">
                 <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
             </button>
         </a>
