@@ -1,6 +1,5 @@
 <?php
 include '../../generalPhp/conection.php';
-
 if(!isset($_SESSION)) {
     session_start();
 }

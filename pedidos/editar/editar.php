@@ -72,14 +72,14 @@ if (isset($_GET['id'])) {
 
     <div id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da p√°gina">
+            <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da p·gina">
         </button>
             <div class="mobileMenuButtons">
                 <a href="../../main.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img style="width:20px" src="../../assets/mobileIcons/icon _home_.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>IN√çCIO</h2></div>
+                            <div class="divNameCategorieButtonMobile"><h2>INÕCIO</h2></div>
                         </button>
                     </div>
                 </a>
@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>RELAT√ìRIOS</h2></div>
+                            <div class="divNameCategorieButtonMobile"><h2>RELAT”RIOS</h2></div>
                         </button>
                     </div>
                 </a>
@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
                             <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INSPE√á√ÉO</h2></div>
+                            <div class="divNameCategorieButtonMobile"><h2>INSPE«√O</h2></div>
                         </button>
                     </div>
                 </a>
@@ -137,12 +137,12 @@ if (isset($_GET['id'])) {
     <header>
 
        <button onclick="avisoSalvar()" id="backButton" class="backButton">
-                <img style='width:25px' src="../../assets/backArrow.svg" alt="Bot√£o para voltar a p√°gina anterior">
+                <img style='width:25px' src="../../assets/backArrow.svg" alt="Bot„o para voltar a p·gina anterior">
             </button>
     
 
         <button onclick="openMenu(),avisoSalvar2()" id="mobileMenuButton" class="mobileMenuButton">
-            <img src="../../assets/menu_mobile.svg" alt="Menu mobile da p√°gina">
+            <img src="../../assets/menu_mobile.svg" alt="Menu mobile da p·gina">
         </button>
 
         <div style="display:none;">
@@ -164,7 +164,7 @@ if (isset($_GET['id'])) {
         <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
             <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto"
                 placeholder="PRODUTO">
-            <select onchange="calcularMudan√ßaSelect()" placeholder="PRODUTO" name="produto" id="produto">
+            <select onchange="calcularMudanÁaSelect()" placeholder="PRODUTO" name="produto" id="produto">
                 <option value=""></option>
             </select>
 
@@ -205,9 +205,9 @@ if (isset($_GET['id'])) {
 
     
     
-    <!-- cabe√ßalho da lista de produtos -->
+    <!-- cabecalho da lista de produtos -->
     <div class="cabecalhoProdutos">
-        <div id="fornecedorCabe√ßalho" class="fornecedor">FORNECEDOR</div>
+        <div id="fornecedorCabeÁalho" class="fornecedor">FORNECEDOR</div>
         <div class="quantidades">
             <div id="qnt">QNT</div>
             <div id="vlr">VLR T.</div>
@@ -272,10 +272,10 @@ if (isset($_GET['id'])) {
                     echo '</div>';
                 }
             } else {
-                echo 'Registro n√£o encontrado!';
+                echo 'Registro n„o encontrado!';
             }
             } else {
-            echo 'ID n√£o fornecido na URL!';
+            echo 'ID n„o fornecido na URL!';
             }
     ?>
      

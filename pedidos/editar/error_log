@@ -1,0 +1,5 @@
+[06-Nov-2023 17:17:30 America/Fortaleza] PHP Warning:  Undefined array key "dataAtual" in /home3/srgapp32/public_html/pedidos/editar/cadastroPedido.php on line 41
+[06-Nov-2023 17:28:47 America/Fortaleza] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home3/srgapp32/public_html/pedidos/editar/apagar.php on line 28
+[06-Nov-2023 17:28:47 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/srgapp32/public_html/pedidos/editar/apagar.php:1) in /home3/srgapp32/public_html/pedidos/editar/apagar.php on line 32
+[06-Nov-2023 17:29:02 America/Fortaleza] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home3/srgapp32/public_html/pedidos/editar/apagar.php on line 28
+[06-Nov-2023 17:29:02 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/srgapp32/public_html/pedidos/editar/apagar.php:1) in /home3/srgapp32/public_html/pedidos/editar/apagar.php on line 32

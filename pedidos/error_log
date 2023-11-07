@@ -1,0 +1,2 @@
+[06-Nov-2023 17:33:49 America/Fortaleza] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home3/srgapp32/public_html/pedidos/apagar.php on line 29
+[06-Nov-2023 17:33:49 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/srgapp32/public_html/pedidos/apagar.php:1) in /home3/srgapp32/public_html/pedidos/apagar.php on line 33
