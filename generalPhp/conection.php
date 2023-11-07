@@ -12,6 +12,7 @@
  $username = "root";
 $password ="";  
  $dbname = "sistemacadastro";
+ 
 
 $conn = new mysqli($serverName, $username ,$password, $dbname);
 
