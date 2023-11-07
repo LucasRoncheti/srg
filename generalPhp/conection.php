@@ -13,6 +13,7 @@
 $password ="";  
  $dbname = "sistemacadastro";
 
+
 $conn = new mysqli($serverName, $username ,$password, $dbname);
 
 if ($conn->connect_error) {
