@@ -54,7 +54,7 @@
             <a href="../main.php">
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/🦆 icon _home_.svg"
+                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _home_.svg"
                                 alt="icone fornecedor"></div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>INÍCIO</h2>
@@ -66,7 +66,7 @@
             <a href="../cadastros/cadastros.php">
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/🦆 icon _book_-1.svg"
+                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _book_-1.svg"
                                 alt="icone fornecedor"></div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>CADASTROS</h2>
@@ -77,7 +77,7 @@
             <a href="../pedidos/cadastrodepedidos.php">
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/🦆 icon _list_-1.svg"
+                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _list_-1.svg"
                                 alt="icone fornecedor"></div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>PEDIDOS</h2>
@@ -89,7 +89,7 @@
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
                         <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
+                                src="../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>RELATÓRIOS</h2>
                         </div>
@@ -100,7 +100,7 @@
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
                         <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor">
+                                src="../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor">
                         </div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>INSPEÇÃO</h2>
@@ -111,7 +111,7 @@
             <a href="cadastropackinglist.php">
                 <div class="menuButtonsMobile">
                     <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/🦆 icon _check_-1.svg"
+                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _check_-1.svg"
                                 alt="icone fornecedor"></div>
                         <div class="divNameCategorieButtonMobile">
                             <h2>PACKING LIST</h2>
@@ -129,12 +129,12 @@
     <header>
 
         <a href="../main.php"><button  id="backButton" class="backButton">
-            <img src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
+            <img  style="width: 30px;" src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
         </button>
         </a>
     
         <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-            <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
+            <img  style="width: 34px;" src="../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
         
         <form id="cadastroForm">

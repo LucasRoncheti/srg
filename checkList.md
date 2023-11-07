@@ -22,12 +22,11 @@
 [x]BOTÃO SALVAR NA HORA DE EDITAR OS PEDIDOS 
 [] todas as palavras em uppercase 
 [] session problema na hora de logar - [ERRO-GRAVÍSSIMO], cadastro fornecedor não funciona, mas clilente funciona .
-[] impressões páginas 
-[] relatórios problemas na hora de filtrar não mostra todos os intens até mesmo se for editado um pedido 
-[] página não encontrada na hora de voltar no packing list 
-[] icones não do menu não aparecendo - modificar o nome e caminho dos icones 
-[] erro ao salvar a imgaem  - provavelmente erro no caminho do salvamento da pasta 
-[] fazer menus emusando map do js para não precisar ficar mudando sempre em todos os menus 
+[x] relatórios problemas na hora de filtrar não mostra todos os intens até mesmo se for editado um pedido 
+[x] página não encontrada na hora de voltar no packing list 
+[x] icones não do menu não aparecendo - modificar o nome e caminho dos icones 
+[x] erro ao salvar a imgaem  - provavelmente erro no caminho do salvamento da pasta 
+[] fazer menus usando map do js para não precisar ficar mudando sempre em todos os menus 
 
 
 
@@ -37,7 +36,7 @@
 [x]estilizar "NÃO É POSSÍVEL LOGAR "
 [x]session 
 [x] erro log
-[]área de report  erro
+[x]área de report  erro
 []animação de loading em todas as requisições com o servidor
 []impressão de páginas
 []converter strings de nomes em maiúsculas 

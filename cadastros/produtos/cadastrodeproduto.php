@@ -56,7 +56,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../../main.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _home_.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _home_.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
                         </button>
                     </div>
@@ -65,7 +65,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../cadastros.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _book_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _book_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
                         </button>
                     </div>
@@ -73,7 +73,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../../pedidos/cadastrodepedidos.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _list_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _list_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
                         </button>
                     </div>
@@ -81,7 +81,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../../relatorios/relatorios.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _pie chart_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>RELATÓRIOS</h2></div>
                         </button>
                     </div>
@@ -89,7 +89,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../../inspessao/cadastro.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>INSPEÇÃO</h2></div>
                         </button>
                     </div>
@@ -97,7 +97,7 @@ if(!isset($_SESSION['id'])) {
                 <a href="../../packingList/cadastropackinglist.php">
                     <div class="menuButtonsMobile">
                         <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/🦆 icon _check_-1.svg" alt="icone fornecedor"></div>
+                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _check_-1.svg" alt="icone fornecedor"></div>
                             <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
                         </button>
                     </div>
