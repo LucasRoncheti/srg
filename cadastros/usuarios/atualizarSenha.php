@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="apagar.css">
     <link rel="stylesheet" href="../../index/root.css">
+    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
    <title>Registro atualizado</title>
 </head>
 <body>
@@ -16,14 +17,14 @@
 
             <?php
                include '../../generalPhp/conection.php';
-               if(!isset($_SESSION)) {
-                  session_start();
-              }
+            //    if(!isset($_SESSION)) {
+            //       session_start();
+            //   }
               
-              if(!isset($_SESSION['id'])) {
-                 die( header("Location: ../../index.php"));
+            //   if(!isset($_SESSION['id'])) {
+            //      die( header("Location: ../../index.php"));
                  
-              }
+            //   }
 
 
                //recebe os dados pelo metodo post

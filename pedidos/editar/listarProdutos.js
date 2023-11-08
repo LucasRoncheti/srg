@@ -24,6 +24,7 @@ var quantidadeCaixasInterio = parseInt(quantidadeCaixas.replace(',', ''), 10);
 
 let listar = () => {
     fornecedor = document.getElementById("fornecedor").options[0].value;
+    fornecedorNumero = document.getElementById("fornecedor").options[0].textContent;
     produto = document.getElementById("produto").options[0].text;
     valorUnit = document.getElementById("valorUnit").textContent
     valorUnitFormatado = parseFloat(valorUnit.replace("R$", "").replace(",", ""))
@@ -53,6 +54,7 @@ let listar = () => {
 
         //recuperaos valores a serem mapeados na função adicionarItemPedido()
         valores[0].nome = fornecedor
+        valores[0].fornecedorNumero = fornecedorNumero
         valores[0].produto = produto
         valores[0].valorUnit = valorUnitFormatado
         valores[0].valorUnitString = valorUnit
@@ -70,6 +72,7 @@ let listar = () => {
         novoDicionarioItens['valorTotal'] = valorTotalFormatado
         novoDicionarioItens['quantidade'] = quantidadeFormatada
         novoDicionarioItens['chaveAcesso'] = chaveAcessoCliente
+        novoDicionarioItens['fornecedorNumero'] = fornecedorNumero
         novoDicionarioItens['dataAtual'] = dataAtual
         itensParaSoma.push(novoDicionarioItens)
 

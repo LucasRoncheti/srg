@@ -218,6 +218,7 @@ if (isset($_GET['id'])) {
     <!-- cabeçalho da lista de produtos -->
     <div class="cabeçalhoProdutos">
         <div id="plt">PLT</div>
+        <div id="numeroFornecedor">N&deg;</div>
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
         <div id="quantidadeC"> QNT</div>
         <div id="vazioDiv"></div>

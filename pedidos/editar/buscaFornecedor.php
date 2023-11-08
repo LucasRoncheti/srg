@@ -33,7 +33,7 @@
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
 
 
-			echo '<option  value="'. $row_sql['nome'] . '"> ' . $row_sql['nome'] . '</option>';
+			echo '<option  value="'. $row_sql['nome'] . '"> '.$row_sql['numero'].'  ' . $row_sql['nome'] .'</option>';
 
 			
 		}

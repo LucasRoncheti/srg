@@ -34,6 +34,7 @@ foreach ($itensEnviados as $key => $item) {
 foreach ($itensEnviados as $item) {
     if (isset($item['chaveAcesso']) || isset($item['produto'])|| isset($item['fornecedor'])) {
         $chaveAcesso = $item['chaveAcesso'];
+        $fornecedorNumero = $item['fornecedorNumero'];
         $fornecedor = $item['fornecedor'];
         $produto = $item['produto'];
         $quantidade = $item['quantidade'];
@@ -44,7 +45,7 @@ foreach ($itensEnviados as $item) {
      
 
 
-            $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, dataAtual, produto, valor_unit, valor_total, quantidade) VALUES ('$chaveAcesso', '$fornecedor', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade') ";
+            $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, fornecedorNumero, dataAtual, produto, valor_unit, valor_total, quantidade) VALUES ('$chaveAcesso', '$fornecedor', '$fornecedorNumero', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade') ";
 
             if ($conn->query($sql1) !== TRUE) {
                 echo '<div style="padding: 50% 10% 50% 10%; text-align: center; z-index: 999; position: absolute; top: 0; width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; height: 100%; background-color: white;" id="pedidoCadastrado">';
