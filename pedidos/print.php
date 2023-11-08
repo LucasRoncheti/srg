@@ -26,6 +26,7 @@ if (isset($_GET['id'])) {
             $valorTotalSalvoPedido = $row['valor_total'];
             $dataAtual = $row['dataAtual'];
             $idPedido = $row['id'];
+            $nomeCliente = $row['cliente'];
         
 
         }
@@ -70,91 +71,98 @@ if (isset($_GET['id'])) {
         <header>
 
             <div class="logoGinger">
-                <img src="../assets/logoLogin.png" alt="">
+                <img src="../assets/logoLogin.png" alt="Logo Reinholz Ginger">
             </div>
 
             <div class="dadosEmpresa">
-                <p>REINHOLZ GINGER </p>
-                <p></p>
+                <p id="nomeEmpresa">REINHOLZ GINGER COMERCIO DE RAIZES LTDA</p>
+                <p> <img src="../assets/cnpj.svg"> 50.688.819/0001-61</p>
+                <p> <img src="../assets/local.svg"> AE ZONA RURAL, S/N GALO-DOMINGOS MARTINS ES- CEP:29260-000</p>
+                <p><img src="../assets/email.svg"> reinholzginger0@outlook.com</p>
             </div>
             
             <div class="dadosPedidos">
-            <div><?php echo $idPedido ?></div>
-            <div><?php echo $dataAtual ?></div>
+            <div> N&deg; PEDIDO <STRONg> <?php echo $idPedido ?></STRONg></div>
+            <div> EMISSÃO: <strong><?php echo date('d/m/y',strtotime($dataAtual)) ?></strong></div>
             </div>
       
-
-            
 
         </header>
 
 
-
-        <!-- cabecalho da lista de produtos -->
-        <div class="cabecalhoProdutos">
-            <div id="fornecedorCabe�alho" class="fornecedor">FORNECEDOR</div>
-            <div class="quantidades">
-                <div id="qnt">QNT</div>
-                <div id="vlr">VLR T.</div>
-                <div id="verMais"> MAIS</div>
-            </div>
-
-        </div>
-
+        <section class="cliente">
+            <p> <strong> CLIENTE: </strong> <?php echo $nomeCliente ?> </p>
+    
+        </section>
 
         <div class="containerList">
 
-            <?php
+        <table>
 
-            // Check if the query was successful and data was found
-            if ($result && $result->num_rows != 0) {
+            <tr>
+                <th class="tableFornecedor" >Fornecedor</th>
+                <th class="tableProduto">Produto</th>
+                <th class="tableQuantidade">Quant</th>
+                <th class="tableValorUnit">Unidade</th>
+                <th class="tableValorTotal">Total</th>
+            </tr>
 
-                $somaQuantidadeTotal = 0;
+                <?php
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $fornecedor = $row['fornecedor'];
-                    $quantidade = $row['quantidade'];
-                    $valor_unit = $row['valor_unit'];
-                    $valor_total = $row['valor_total'];
-                    $produto = $row['produto'];
-                    $idItem = $row['id'];
-                    $chaveAcesso = $row['chaveAcesso'];
+                    // Check if the query was successful and data was found
+                    if ($result && $result->num_rows != 0) {
+
+                        $somaQuantidadeTotal = 0;
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $fornecedor = $row['fornecedor'];
+                            $quantidade = $row['quantidade'];
+                            $valor_unit = $row['valor_unit'];
+                            $valor_total = $row['valor_total'];
+                            $produto = $row['produto'];
+                            $idItem = $row['id'];
+                            $chaveAcesso = $row['chaveAcesso'];
 
 
-                    $somaQuantidadeTotal += $quantidade;
+                            $somaQuantidadeTotal += $quantidade;
 
 
-
+                        echo '<tr class="itensPedido">
+                            <td class="tableFornecedor">'.strtolower($fornecedor).'</th>
+                            <td class="tableProduto">'.strtolower($produto).'</td>
+                            <td class="tableQuantidade">'.$quantidade.'</td>
+                            <td class="tableValorUnit">'.number_format($valor_unit/100,2,",",".").'</td>
+                            <td class="tableValorTotal">'.number_format($valor_total/100,2,",",".").'</td>
+                            </tr>';
+                        }
+                            } else {
+                                echo 'Registro n�o encontrado!';
+                            }
+                } else {
+                    echo 'ID n�o fornecido na URL!';
                 }
-            } else {
-                echo 'Registro n�o encontrado!';
-            }
-} else {
-    echo 'ID n�o fornecido na URL!';
-}
-?>
+                ?>
+
+        </table>
+
 
     </div>
     <div id="containerValoresFinais" class="containerValoresFinais">
         <div id="containerInternoValoresFinais" class="containerInternoValoresFinais">
             <div id="" class="headValores">
-                <p>N&deg; CAIXAS</p>
-                <p id="Ncaixas">
-                    <?php echo $somaQuantidadeTotal ?>
-                </p>
-            </div>
-
+                <p>Quantidade de caixas:  <strong><?php echo $somaQuantidadeTotal ?></strong></p> 
+            </div>  
             <div id="" class="headValores">
-                <p>VALOR TOTAL</p>
-                <p id="valorTotalPedido">R$
-                    <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", "."); ?>
-                </p>
-
+                <p>Valor Total :<strong> R$ <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", "."); ?></strong></p>
             </div>
         </div>
     </div>
 
-
+    <div class="assinaturas">
+        <div class="data"><p>Data</p></div>
+        <div class="assCliente"><p>Assinatura Cliente</p></div>
+        <div class="assTecnico"><p>Assinatura do Técnico Responsável</p></div>
+    </div>
 
     <footer>
         <p id="data-footer"> </p>
@@ -168,7 +176,7 @@ if (isset($_GET['id'])) {
 <script src="../generalScripts/backPage.js"></script>
 
 
-
+<!-- 
 <script src="../pedidos/buscaCliente.js"></script>
 
 <script src="../pedidos/pedidos.js"></script>
@@ -182,15 +190,15 @@ if (isset($_GET['id'])) {
 <script src="../pedidos/aumentarQuantidade.js"></script>
 
 <script src="../pedidos/mostrarInfo.js"></script>
-<!-- 
-lista o produto adicionado na lista do pedido -->
+
+
 <script src="listarProdutos.js"></script>
 <script src="cadastro.js"></script>
 <script src="../../generalScripts/deleteDiv.js"></script>
 
 <script src="validarBotaoSalvar.js"></script>
 
-<script src="avisoSalvar.js"></script>
+<script src="avisoSalvar.js"></script> -->
 
 
 

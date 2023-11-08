@@ -1,0 +1,162 @@
+body{
+   background-color: white;
+   height: auto;
+   width: 750px;
+}
+
+
+/* DADOS DA EMPRESA */
+header{
+    margin-top: 3%;
+    width: 100%;
+    height: 130px;
+
+    background-color: var(--branco);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+}
+
+#nomeEmpresa{
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.dadosEmpresa p {
+    font-weight: 500;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  margin-left: 1%;
+}
+
+.dadosEmpresa p img {
+    width: 2.4%;
+}
+
+
+.dadosPedidos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    align-items: center;
+    text-align: center;
+    font-size: 0.7em;
+
+}
+
+/* CLIENTE*/
+
+.cliente{
+    width: 100%;
+    height: 60px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Lista do pedido*/
+table {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+tr{
+    text-align: left;
+    border: none;
+    padding: 0px 10px;
+    font-size: 0.8em;
+    
+  
+}
+th{
+    background-color: var(--cor04);
+    border: none;
+    padding: 4px 10px;
+}
+td{
+    line-height: 1.9em;
+    border: none;
+    padding: 0px 10px;
+    text-transform: capitalize;
+}
+
+tr:nth-child(odd){
+    background-color: var(--cor07);
+}
+
+
+.tableFornecedor{
+    width: 30%;
+}
+.tableProduto{
+ width: 30%;
+}
+.tableQuantidade{
+    width: 13%;
+    text-align: center;
+}
+.tableValorUnit{
+    width: 13%;
+    text-align: center;
+}
+.tableValorTotal{
+    width: 13%;
+    text-align: center;
+}
+.containerValoresFinais{
+    width: 100%;
+    height: 80px;
+    text-align: right;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+.headValores{
+    margin-top:10px;
+}
+.assinaturas{
+    margin-top: 30px;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: space-around;
+    padding: 0px 10px;
+}
+
+.assinaturas div{
+    border: solid 1px black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    text-align: left;
+    margin: 5px;
+    font-size: 0.7em;
+}
+.data{
+    width: 20%;
+}
+
+.assCliente{
+    width: 40%;
+}
+
+.assTecnico{
+    width: 40%;
+}
+
+
+footer{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.6em;
+}
