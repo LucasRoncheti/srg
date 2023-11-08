@@ -3,6 +3,7 @@
 //dados do servidor para conexão
 
 
+
    $serverName = "localhost";
     $username = "srgapp32_lucasroncheti27";
    $password ="skinzerferida";
@@ -12,6 +13,7 @@
 // $username = "root";
 // $password = "";
 // $dbname = "sistemacadastro";
+
 
 
 $conn = new mysqli($serverName, $username ,$password, $dbname);
