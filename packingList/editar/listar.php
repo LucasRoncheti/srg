@@ -24,8 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $quantidadeTotal = 0;
 
         while ($row = mysqli_fetch_assoc($resultado_sql)) {
-
+           
             $fornecedor = $row['fornecedor'];
+            $sql3 = "SELECT numero FROM fornecedores WHERE nome = '$fornecedor'";
+            $resultado_sql3 = mysqli_query($conn, $sql3);
+            if (($resultado_sql3) and ($resultado_sql3->num_rows != 0)) {
+                while ($row3 = mysqli_fetch_assoc($resultado_sql3)) {
+                    $numeroFornecedor = $row3["numero"];
+                  
+            }
+            }
             $quantidade = $row['quantidade'];
             $palet = $row['palet'];
             $id = $row['id'];
@@ -33,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             echo '<div id="' . $id . '" class="listaPackingList">';
             echo '<div id="plt">' . $palet . '</div>';
+            echo '<div id="numeroFornecedor">' . $numeroFornecedor . '</div>';
             echo '<div id="fornecedorCabeçalho" class="fornecedor">' . $fornecedor . '</div>';
             echo '<div id="quantidadeC"> ' . $quantidade . '</div>';
             echo '<div onclick="apagar(\'' . $id . '\')" id="vazioDiv"> <img src="../../assets/erase.svg" alt=""></div>';
@@ -41,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         }
         echo '<input type="hidden" id="quantidadeTotal" value="' . $quantidadeTotal . '">';
     }
+
 
 
 
