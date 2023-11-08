@@ -1,0 +1,124 @@
+.headerPrint{
+    display: none;
+}
+h2{
+    color: white;
+}
+
+@media print{
+
+    body{
+        background-color: var(--branco);
+        height: auto;
+    }
+
+    .backButton, .buttonAction, .mobileMenuButton, .imgCategoria, .inputSearchHeader-input{
+        display: none;
+    }
+    header{
+        background-color: var(--branco);
+        height: 100px;
+        margin-top: 20px;
+    }
+    h2{
+        color: black;
+        font-size: 1.5em;
+    }
+    #cadastroForm{
+    margin-top: 20px;
+        background-color: var(--branco);
+       
+    }
+    .inputSearch{
+        margin-top: 10px;
+        background-color: var(--branco);
+    }
+    .inputSearchData{
+        margin-bottom: 20px;
+        background-color: var(--branco);
+    }
+    .cabecalhoFiltro{
+        margin-top: 40px;
+    }
+    input{
+        width: 50px;
+        background-color: transparent;
+
+    }
+   
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    select{
+        background-color: transparent;
+        border: none;
+        font-size: 1.5em;
+        font-weight: 500;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: transparent;
+        padding-right: 20px; /* Adicione algum espaço para o ícone, se desejar */
+        background-image: url('seu-icon.png'); /* Opcional: Adicione um ícone personalizado, se desejar */
+        background-position: right center;
+        background-repeat: no-repeat;
+    }
+    #printT{
+        display: none;
+    }
+.headerPrint{
+    margin-top: 3%;
+    width: 100%;
+    height: 130px;
+
+    background-color: var(--branco);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 50px;
+    
+}
+#nomeEmpresa{
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.dadosEmpresa p {
+    font-weight: 500;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  margin-left: 1%;
+}
+
+.dadosEmpresa p img {
+    width: 2.4%;
+}
+
+
+.dadosPedidos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    align-items: center;
+    text-align: center;
+    font-size: 0.7em;
+
+}
+    
+
+footer{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.6em;
+}
+
+}
