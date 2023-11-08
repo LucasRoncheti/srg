@@ -5,6 +5,7 @@ const enviarDados = () => {
   var palet = document.getElementById('palet').value;
   var quantidade = document.getElementById('quantidade').value;
   var chaveAcesso = document.getElementById("chaveAcesso").value;
+  
 
 
 

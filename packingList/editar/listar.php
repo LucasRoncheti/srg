@@ -26,11 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         while ($row = mysqli_fetch_assoc($resultado_sql)) {
            
             $fornecedor = $row['fornecedor'];
-            $sql3 = "SELECT numero FROM fornecedores WHERE nome = '$fornecedor'";
+            $sql3 = "SELECT fornecedorNumero FROM pedidos_dados WHERE fornecedor = '$fornecedor'";
             $resultado_sql3 = mysqli_query($conn, $sql3);
             if (($resultado_sql3) and ($resultado_sql3->num_rows != 0)) {
                 while ($row3 = mysqli_fetch_assoc($resultado_sql3)) {
-                    $numeroFornecedor = $row3["numero"];
+                    $numeroFornecedor = $row3["fornecedorNumero"];
+                
+                   // Use regex para encontrar o número na string
+                        if (preg_match('/\d+/', $numeroFornecedor, $matches)) {
+                            $numero = $matches[0];
+                           
+                        } else{
+                            $numero = '-';
+                        }
+
                   
             }
             }
@@ -41,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             echo '<div id="' . $id . '" class="listaPackingList">';
             echo '<div id="plt">' . $palet . '</div>';
-            echo '<div id="numeroFornecedor">' . $numeroFornecedor . '</div>';
+            echo '<div id="numeroFornecedor">' . $numero . '</div>';
             echo '<div id="fornecedorCabeçalho" class="fornecedor">' . $fornecedor . '</div>';
             echo '<div id="quantidadeC"> ' . $quantidade . '</div>';
             echo '<div onclick="apagar(\'' . $id . '\')" id="vazioDiv"> <img src="../../assets/erase.svg" alt=""></div>';

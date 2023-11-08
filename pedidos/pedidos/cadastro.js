@@ -20,7 +20,7 @@ const enviarDados = () => {
    itensParaSoma.push(dicionarioCliente);
   itensEnviados = itensParaSoma
 
-console.log(itensEnviados)
+
 
 
 
