@@ -1,13 +1,6 @@
 <?php
 include '../generalPhp/conection.php';
-if (!isset($_SESSION)) {
-    session_start();
-}
 
-if (!isset($_SESSION['id'])) {
-    die(header("Location: ../../index.php"));
-
-}
 
 // Check if 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
@@ -49,6 +42,7 @@ if (isset($_GET['id'])) {
         <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
         <title><?php echo $nomeCliente ?> N&deg; <?php echo $idPedido?></title>
 
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     </head>
@@ -66,11 +60,13 @@ if (isset($_GET['id'])) {
 
 
     <body id="body" onload="onLoad()">
+    
+
 
      <div class="botoes">
-        <button><img src="" alt=""></button>imprimir
-        <button><img src="" alt=""></button>baixar
-        <button><img src="" alt=""></button>voltar
+        <button onclick="imprimirPagina()"><img style="width:30px;" src="../assets/printwhite.svg" alt=""></button><br>
+        <button onclick="backPage()"><img src="../assets/backArrow.svg" alt=""></button><br>
+
      </div>
 
         <header>
@@ -172,6 +168,9 @@ if (isset($_GET['id'])) {
     <footer>
         <p id="data-footer"> </p>
     </footer>
+
+
+</script>
 </body>
 
 <script src="../mobileMenu/js/mobileMenu.js"></script>
@@ -181,29 +180,9 @@ if (isset($_GET['id'])) {
 <script src="../generalScripts/backPage.js"></script>
 
 
-<!-- 
-<script src="../pedidos/buscaCliente.js"></script>
+<script src="../generalScripts/print.js"></script>
+<script src="../generalScripts/backPage.js"></script>
 
-<script src="../pedidos/pedidos.js"></script>
-
-<script src="../pedidos/buscaFornecedor.js"></script>
-
-<script src="../pedidos/buscaProduto.js"></script>
-
-<script src="../../generalScripts/atualDate.js"></script>
-
-<script src="../pedidos/aumentarQuantidade.js"></script>
-
-<script src="../pedidos/mostrarInfo.js"></script>
-
-
-<script src="listarProdutos.js"></script>
-<script src="cadastro.js"></script>
-<script src="../../generalScripts/deleteDiv.js"></script>
-
-<script src="validarBotaoSalvar.js"></script>
-
-<script src="avisoSalvar.js"></script> -->
 
 
 
