@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
         <link rel="stylesheet" href="../pedidos/print.css">
 
         <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
-        <title>Imprimir pedido</title>
+        <title><?php echo $nomeCliente ?> N&deg; <?php echo $idPedido?></title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -67,6 +67,11 @@ if (isset($_GET['id'])) {
 
     <body id="body" onload="onLoad()">
 
+     <div class="botoes">
+        <button><img src="" alt=""></button>imprimir
+        <button><img src="" alt=""></button>baixar
+        <button><img src="" alt=""></button>voltar
+     </div>
 
         <header>
 
