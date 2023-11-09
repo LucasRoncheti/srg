@@ -27,6 +27,7 @@ foreach ($itensEnviados as $key => $item) {
         unset($itensEnviados[$key]); // Remover os dados do dicionário específico do array principal
         break;
     }
+    
 }
 
 // Primeiro loop para inserir os itens principais na tabela pedidos_dados
