@@ -79,7 +79,6 @@ if ($dadosEspecificos) {
         echo '<h2> Pedido cadastrado com sucesso! </h2>';
         echo '</div>';
         echo '<img style="max-width:200px" src="../../assets/check.svg" alt="">';
-        echo '<a href="../cadastrodepedidos.php"><button style="min-width: 300px;">PEDIDOS</button></a>';
         echo '</div>';
         echo ' </div>';
         
@@ -92,7 +91,7 @@ if ($dadosEspecificos) {
         echo '<h2> Erro no cadastro : pedidos_cadastro"' . $conn->error . '" ! </h2>';
         echo '</div>';
         echo '<img style="max-width:200px" src="../../assets/delete.svg" alt="">';
-        echo '<button style="min-width: 300px;">VOLTAR</button>';
+        echo '<button onclick="(window.location.reload())" style="min-width: 300px;">VOLTAR</button>';
         echo '</div>';
         echo ' </div>'; 
     }

@@ -82,7 +82,6 @@ if ($dadosEspecificos) {
         echo '<h2> Pedido cadastrado com sucesso! </h2>';
         echo '</div>';
         echo '<img style="max-width:200px" src="../../assets/check.svg" alt="">';
-        echo '<a href="../cadastrodepedidos.php"><button style="min-width: 300px;">PEDIDOS</button></a>';
         echo '</div>';
         echo ' </div>';
 

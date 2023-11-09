@@ -3,12 +3,22 @@
 
 
 
+// evita de enviar dois pedidos 
+let envioEmAndamento = false;
 // arraya ser enviado para o banco de dados com
 
 const enviarDados = () => {
+
+  if (envioEmAndamento) {
+    alert("Tentativa de salvamento duplicado ");
+    window.location.href="../cadastrodepedidos.php"
+    return;
+}
+envioEmAndamento = true;
+
   // animação quando os dadso estão sendo enviados para o servidor 
   document.getElementById('preload').style.display='block'
-
+  document.getElementById('salvarPedido').style.display = 'none'
 
   // Criar um dicionário de cliente
   const dicionarioCliente = {};
@@ -37,13 +47,14 @@ fetch('cadastroPedido.php', {
     document.getElementById("respostaPHP").innerHTML = data; // Resposta do PHP
     document.getElementById('preload').style.display='none'
     setTimeout(()=>{
-      document.getElementById("respostaPHP").innerHTML = "";
-      document.getElementById("respostaPHP").style.display = "none";
-    },10000)
+      let envioEmAndamento = false;
+      window.location.href="../cadastrodepedidos.php"
+    },1000)
   })
   .catch(error => {
     document.getElementById("respostaPHP").innerHTML = "Erro: " + erro; // Exibir mensagem de erro
     document.getElementById('preload').style.display='none'
+    let envioEmAndamento = false;
 
   });
 

@@ -116,6 +116,17 @@ let listar = () => {
         document.getElementById("pesquisaFornecedor").value = ""
         document.getElementById("pesquisaProduto").value = ""
         document.getElementById("valorTotal").textContent = valorUnit
+
+        document.getElementById("fornecedor").innerHTML = `
+        
+        <option value=""></option>
+        `
+
+        document.getElementById("produto").innerHTML = `
+        
+        <option value=""></option>
+        `
+        
        
 
 

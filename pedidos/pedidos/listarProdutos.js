@@ -13,7 +13,7 @@ var  valorTotalBD;
 key =  0
 
 let listar = () => {
-    
+   
     fornecedor = document.getElementById("fornecedor").options[0].value;
     fornecedorNumero = document.getElementById("fornecedor").options[0].textContent;
     produto = document.getElementById("produto").options[0].text;
@@ -54,7 +54,7 @@ let listar = () => {
         novoDicionarioItens['chaveAcesso'] = chaveAcesso
         novoDicionarioItens['fornecedorNumero'] = fornecedorNumero
         itensParaSoma.push(novoDicionarioItens)
-        console.log(itensParaSoma)
+       
 
         //fazer a soma dos valores e colocar em variáveis 
 
@@ -94,9 +94,19 @@ let listar = () => {
         document.getElementById("pesquisaFornecedor").value = ""
         document.getElementById("pesquisaProduto").value = ""
         document.getElementById("valorTotal").textContent = valorUnit
-       
+        
 
+        document.getElementById("fornecedor").innerHTML = `
+        
+        <option value=""></option>
+        `
 
+        document.getElementById("produto").innerHTML = `
+        
+        <option value=""></option>
+        `
+        
+        
     }
     // Reatribuir eventos dos botões de aumentar e diminuir quantidade
     quantidade = document.getElementById("quantidade");
@@ -104,7 +114,9 @@ let listar = () => {
 
     quantidadeInicial = 1;
     quantidadeAtual = quantidadeInicial;
-    console.log(itensParaSoma)
+
+ 
+
   
     
 }
@@ -152,7 +164,7 @@ var apagarItem = (id) => {
 
     //seleciona o dicionario do  array a ser apagado usando como parametro o id da div 
     itensParaSoma.splice(id,1)
-    console.log(itensParaSoma)
+   
 
     // faz todo o calculo novamente para as quantidades 
     var somaQuantidade = 0
