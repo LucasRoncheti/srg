@@ -149,7 +149,7 @@ if (!isset($_SESSION['id'])) {
 
 
     </section>
-
+    <div id="relatoriosH3">RELATÓRIOS</div>
     <header>
 
         <a href="../main.php"><button id="backButton" class="backButton">
@@ -160,11 +160,12 @@ if (!isset($_SESSION['id'])) {
         <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
             <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
-
+       
         <form id="cadastroForm">
             <img class="imgCategoria" style="width:40px" src="../assets/categories/relatorios.svg" alt="">
     
-            <h2 class="" >RELATÓRIOS</h2>
+            <h2  class="relatoriosH2" >RELATÓRIOS</h2>
+            
             
             <div class="inputSearch">
                 <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
@@ -214,7 +215,7 @@ if (!isset($_SESSION['id'])) {
         <div>DATA</div>
         <div> CLIENTE</div>
         <div>QNT</div>
-        <div id="printT" onclick="imprimirPagina()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
+        <div id="printT" onclick="imprimirRelatorios()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
     </div>
 
 
@@ -287,7 +288,7 @@ if (!isset($_SESSION['id'])) {
 
 <script src="../generalScripts/print.js"></script>
 
-<script src="../generalScripts/print.js"></script>
+
 
 <script>
 //   imprimirPagina()
