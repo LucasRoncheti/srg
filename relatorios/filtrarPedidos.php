@@ -113,7 +113,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
             foreach ($clienteData['itens'] as $item) {
                 echo    '<div id="' . $chaveAcesso . '" class="discItens">';
                 echo     '  <div class="divDiscItens">' . $item['produto'] . '</div>';
-                echo       ' <div class="divDiscItens"> ' . $item['quantidade'] . '</div>';
+                echo       ' <div class="divDiscItens">Qnt. ' . $item['quantidade'] . '</div>';
                 echo        '<div class="divDiscItensValor">';
                 echo            '<div>Valor Unit: R$ ' . number_format($item['valorUnit'] / 100, 2, ',', ',')  . '</div>';
                 echo           ' <div>Valor Total: R$ ' . number_format($item['valorTotal'] / 100, 2, ',', ',')  . '</div>';
