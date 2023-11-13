@@ -45,7 +45,6 @@ foreach ($itensEnviados as $item) {
 
      
 
-
             $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, fornecedorNumero, dataAtual, produto, valor_unit, valor_total, quantidade) VALUES ('$chaveAcesso', '$fornecedor', '$fornecedorNumero', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade') ";
 
             if ($conn->query($sql1) !== TRUE) {

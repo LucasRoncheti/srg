@@ -26,6 +26,7 @@ if (!isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../onLoad/onLoad.css">
     <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="relatorios.css">
+    <link rel="stylesheet" href="stylePrint.css">
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
 
 
@@ -47,8 +48,6 @@ if (!isset($_SESSION['id'])) {
 </div>
 
 <body onload="onLoad()">
-
-
 
 
     <div id="mobileMenu" class="mobileMenuContainer ">
@@ -130,7 +129,27 @@ if (!isset($_SESSION['id'])) {
 
     </div>
 
+    <section class="headerPrint" >
 
+        <div class="logoGinger">
+            <img src="../assets/logoLogin.png" alt="Logo Reinholz Ginger">
+        </div>
+
+        <div class="dadosEmpresa">
+            <p id="nomeEmpresa">REINHOLZ GINGER COMERCIO DE RAIZES LTDA</p>
+            <p> <img src="../assets/cnpj.svg"> 50.688.819/0001-61</p>
+            <p> <img src="../assets/local.svg"> AE ZONA RURAL, S/N GALO-DOMINGOS MARTINS ES- CEP:29260-000</p>
+            <p><img src="../assets/email.svg"> reinholzginger0@outlook.com</p>
+        </div>
+
+        <!-- <div class="dadosPedidos">
+        <div> N&deg; PEDIDO <STRONg> <?php echo $idPedido ?></STRONg></div>
+        <div> EMISSÃO: <strong><?php echo date('d/m/y',strtotime($dataAtual)) ?></strong></div>
+        </div> -->
+
+
+    </section>
+    <div id="relatoriosH3">RELATÓRIOS</div>
     <header>
 
         <a href="../main.php"><button id="backButton" class="backButton">
@@ -141,11 +160,12 @@ if (!isset($_SESSION['id'])) {
         <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
             <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
-
+       
         <form id="cadastroForm">
-            <img style="width:40px" src="../assets/categories/relatorios.svg" alt="">
+            <img class="imgCategoria" style="width:40px" src="../assets/categories/relatorios.svg" alt="">
     
-            <h2 style="color:white">RELATÓRIOS</h2>
+            <h2  class="relatoriosH2" >RELATÓRIOS</h2>
+            
             
             <div class="inputSearch">
                 <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
@@ -175,7 +195,9 @@ if (!isset($_SESSION['id'])) {
         </form>
 
     </header>
-    <div class="cabeçalhoFiltro">
+
+
+    <div class="cabecalhoFiltro">
         <div>Quantidade <br> de pedidos</div>
         <div>Total Caixas</div>
         <div> Valor total <br> unificado</div>
@@ -193,7 +215,7 @@ if (!isset($_SESSION['id'])) {
         <div>DATA</div>
         <div> CLIENTE</div>
         <div>QNT</div>
-        <div onclick="imprimirPagina()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
+        <div id="printT" onclick="imprimirRelatorios()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
     </div>
 
 
@@ -266,11 +288,11 @@ if (!isset($_SESSION['id'])) {
 
 <script src="../generalScripts/print.js"></script>
 
-<!-- <script src="listar.js"></script> -->
-<!-- 
-<script src="../pedidos/busca.js"></script> -->
 
 
+<script>
+//   imprimirPagina()
+</script>
 
 
 </html>

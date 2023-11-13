@@ -1,0 +1,212 @@
+.headerPrint {
+    display: none;
+    background-color: white;
+    margin: 0px;
+}
+
+h2 {
+    color: white;
+}
+
+#relatoriosH3{
+    display: none;
+}
+
+    @media print {
+
+        body {
+            background-color:white;
+            height: auto;
+            padding: 0px;
+        }
+
+        form {
+            flex-direction: row;
+            height: 100px;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+      
+        }
+
+        .backButton,
+        .buttonAction,
+        .mobileMenuButton,
+        .imgCategoria,
+        .inputSearchHeader-input,
+        .relatoriosH2 {
+            display: none;
+        }
+
+        header {
+          
+            height: 50px;
+    
+            background-color: transparent;
+        }
+
+        select{
+            width: 100%;
+           
+        }
+
+        h2 {
+            color: black;
+            font-size: 1.5em;
+        }
+
+        #relatoriosH3{
+            display: block;
+            color: black;
+      
+            font-size: 1.6em;
+            font-weight: 600;
+            text-align: center;
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        #cadastroForm {
+            margin-top: 20px;
+            background-color: transparent;
+            height: 50px;
+            margin: 0px;
+          
+
+        }
+     
+
+        .inputSearch {
+            margin-top: 10px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           margin: 0px;
+        }
+
+        .inputSearchData {
+            margin-bottom: 20px;
+            background-color:white;
+            margin: 0px;
+        }
+
+        .cabecalhoFiltro {
+            margin-top: 15px;
+        }
+
+        input {
+            width: 50px;
+            background-color: transparent;
+
+        }
+
+        input[type="date"]::-webkit-inner-spin-button,
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+
+        #mostrarInfos{
+            display: none;
+        }
+
+        .discItens div{
+          text-align: center;
+        }
+        .divDiscItensValor{
+            width: 25%;
+        }
+        select {
+            background-color: transparent;
+            border: none;
+            font-size: 1.5em;
+            font-weight: 500;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent;
+            padding-right: 20px;
+            /* Adicione algum espaço para o ícone, se desejar */
+            background-image: url('seu-icon.png');
+            /* Opcional: Adicione um ícone personalizado, se desejar */
+            background-position: right center;
+            background-repeat: no-repeat;
+            
+        }
+
+          .headerPrint{
+            background-color: transparent;
+            
+        }
+
+        .containerList{
+            background-color: white;
+            height: auto;
+
+        }
+
+
+    
+        #printT {
+            display: none;
+        }
+
+        .headerPrint {
+            margin-top: 3%;
+            width: 100%;
+            height: 130px;
+
+            background-color:transparent;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            border: dashed 1px black;
+            border-left: none;
+            border-right: none;
+            margin-bottom: 50px;
+
+        }
+
+        #nomeEmpresa {
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .dadosEmpresa p {
+            font-weight: 500;
+            font-size: 0.8em;
+            line-height: 1.8em;
+            margin-left: 1%;
+        }
+
+        .dadosEmpresa p img {
+            width: 2.4%;
+        }
+
+
+        .dadosPedidos {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            align-items: center;
+            text-align: center;
+            font-size: 0.7em;
+
+        }
+
+
+        footer {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.6em;
+            background-color: white;
+        }
+
+    }
