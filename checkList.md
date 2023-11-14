@@ -27,6 +27,7 @@
 [x] icones não do menu não aparecendo - modificar o nome e caminho dos icones 
 [x] erro ao salvar a imgaem  - provavelmente erro no caminho do salvamento da pasta 
 [] fazer menus usando map do js para não precisar ficar mudando sempre em todos os menus 
+[] bug na hora de selecionar fornecedor no pedido 14/11/23 
 
 
 
@@ -37,6 +38,7 @@
 [x]session 
 [x] erro log
 [x]área de report  erro
-[]animação de loading em todas as requisições com o servidor
 [x]impressão de páginas
+[] download de imagens 
+[]animação de loading em todas as requisições com o servidor
 []converter strings de nomes em maiúsculas 

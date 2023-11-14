@@ -1,5 +1,7 @@
-
-
+#vazioDiv{
+    display: block;
+    z-index: 10000;
+}
 .headerPrint{
     display: none;
 }
