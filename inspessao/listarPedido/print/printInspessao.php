@@ -209,7 +209,7 @@ if (isset($_GET['id'])) {
 </script>
 
 
-<script>
+<!-- <script>
  // Função para converter a imagem para um formato de dados adequado para download
  function convertImageToDataUrl(img) {
     return new Promise(function(resolve) {
@@ -262,4 +262,4 @@ function downloadAllImages() {
 
 
 
-</script>
+</script> -->
