@@ -248,7 +248,7 @@ if (isset($_GET['id'])) {
         <div id="numeroFornecedor">N&deg;</div>
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
         <div id="quantidadeC">QNT </div>
-        <div onclick="imprimirPagina()"  id="vazioDiv"> <img style="width:15px;" src="../../assets/printWhite.svg" alt=""></div>
+        <div onclick="imprimirPagina()"  id="vazioDiv"> <img style="width:15px;" src="../../assets/printwhite.svg" alt=""></div>
     </div>
 
 
