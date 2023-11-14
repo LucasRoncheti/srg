@@ -1,7 +1,5 @@
-.headerPrint {
-    display: block;
-    background-color: white;
-    margin: 0px;
+.headerPrint{
+    display: none;
 }
 
 #relatoriosH2 {
@@ -13,6 +11,11 @@
 }
 
     @media print {
+        .headerPrint {
+            display: block;
+            background-color: white;
+            margin: 0px;
+        }
 
         body {
             background-color:white;

@@ -109,7 +109,7 @@ if (isset($_GET['id'])) {
 
     <!--Menu mobile   -->
 
-    <div id="mobileMenu" class="mobileMenuContainer ">
+    <div style="z-index:99999999;" id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da página">
         </button>
