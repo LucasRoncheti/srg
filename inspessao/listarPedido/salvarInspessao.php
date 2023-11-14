@@ -140,7 +140,11 @@ if (isset($_GET['id'])) {
 
            <div class="cabecalhoNome">
            <img src="../../assets/categories/inspessao.svg" alt=""> <H3>N° <?php echo $numero;?> <?php echo $cliente;?></H3>
-           <img onclick="teste(window.print())" style = "width:25px;margin-left:15px" src="../../assets/print.svg" alt="">
+           <?php
+                echo   '     <div class="apagarImprimir">';
+                echo '<a href="../listarPedido/print/printInspessao.php?id=' . $id . '&numero=' . $numero . '&cliente=' . $cliente . '"><img style = "width:25px;margin-left:15px" src="../../assets/print.svg"></a>';
+                echo '      </div>';
+            ?>
            </div>
 
         </header>

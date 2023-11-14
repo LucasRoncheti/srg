@@ -1,10 +1,10 @@
 .headerPrint {
-    display: none;
+    display: block;
     background-color: white;
     margin: 0px;
 }
 
-h2 {
+#relatoriosH2 {
     color: white;
 }
 
@@ -34,7 +34,7 @@ h2 {
         .mobileMenuButton,
         .imgCategoria,
         .inputSearchHeader-input,
-        .relatoriosH2 {
+        #relatoriosH2 {
             display: none;
         }
 
