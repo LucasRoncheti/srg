@@ -164,7 +164,7 @@ if (!isset($_SESSION['id'])) {
         <form id="cadastroForm">
             <img class="imgCategoria" style="width:40px" src="../assets/categories/relatorios.svg" alt="">
     
-            <h2  class="relatoriosH2" >RELATÓRIOS</h2>
+            <h2  id="relatoriosH2" >RELATÓRIOS</h2>
             
             
             <div class="inputSearch">

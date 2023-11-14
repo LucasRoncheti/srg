@@ -151,6 +151,9 @@ button img {
     text-align: center;
     justify-content: space-between;
 }
+.listaPackingList:nth-child(even){
+    background-color: var(--cor07);
+    }
 
 .containerProdutoPedido {
     font-weight: 600;

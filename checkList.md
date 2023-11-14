@@ -38,5 +38,5 @@
 [x] erro log
 [x]área de report  erro
 []animação de loading em todas as requisições com o servidor
-[]impressão de páginas
+[x]impressão de páginas
 []converter strings de nomes em maiúsculas 

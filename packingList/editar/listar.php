@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             echo '<div id="numeroFornecedor">' . $numero . '</div>';
             echo '<div id="fornecedorCabeçalho" class="fornecedor">' . $fornecedor . '</div>';
             echo '<div id="quantidadeC"> ' . $quantidade . '</div>';
-            echo '<div onclick="apagar(\'' . $id . '\')" id="vazioDiv"> <img src="../../assets/erase.svg" alt=""></div>';
+            echo '<div class="apagar" onclick="apagar(\'' . $id . '\')" id="vazioDiv"> <img src="../../assets/erase.svg" alt=""></div>';
             echo '</div>';
             $quantidadeTotal += $quantidade;
         }

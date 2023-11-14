@@ -58,6 +58,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../onLoad/onLoad.css">
     <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="cadastro.css">
+    <link rel="stylesheet" href="print.css">
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Packing List</title>
 
@@ -82,6 +83,29 @@ if (isset($_GET['id'])) {
 
 
 <body id="body" onload="onLoad()">
+
+    <section class="headerPrint" >
+
+    <div class="logoGinger">
+        <img src="../../assets/logoLogin.png" alt="Logo Reinholz Ginger">
+    </div>
+
+    <div class="dadosEmpresa">
+        <p id="nomeEmpresa">REINHOLZ GINGER COMERCIO DE RAIZES LTDA</p>
+        <p> <img src="../../assets/cnpj.svg"> 50.688.819/0001-61</p>
+        <p> <img src="../../assets/local.svg"> AE ZONA RURAL, S/N GALO-DOMINGOS MARTINS ES- CEP:29260-000</p>
+        <p><img src="../../assets/email.svg"> reinholzginger0@outlook.com</p>
+    </div>
+
+    <!-- <div class="dadosPedidos">
+    <div> N&deg; PEDIDO <STRONg> <?php echo $idPedido ?></STRONg></div>
+    <div> EMISSÃO: <strong><?php echo date('d/m/y',strtotime($dataAtual)) ?></strong></div>
+    </div> -->
+
+
+    </section>
+
+    <h3 class="packingListH3">PACKING LIST</h3>
 
     <!--Menu mobile   -->
 
@@ -160,7 +184,10 @@ if (isset($_GET['id'])) {
         </button>
 
         <div class="cabeçalhoNome" >
-                <img src="../../assets/categories/packing_list.svg" alt=""> <p> Nº <?php echo $idPedido ?></p> <p class="nomeCliente"><?php echo strtoupper($cliente);?> </p> <p><?php echo $dataFormatada ;?></p>
+                <img src="../../assets/categories/packing_list.svg" alt=""> 
+                <p> Nº <?php echo $idPedido ?></p> 
+                <p class="nomeCliente"><?php echo strtoupper($cliente);?> </p> 
+                <p>  <?php echo $dataFormatada ;?></p>
         </div> 
 
 
@@ -220,8 +247,8 @@ if (isset($_GET['id'])) {
         <div id="plt">PLT</div>
         <div id="numeroFornecedor">N&deg;</div>
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
-        <div id="quantidadeC"> QNT</div>
-        <div id="vazioDiv"></div>
+        <div id="quantidadeC">QNT </div>
+        <div onclick="imprimirPagina()"  id="vazioDiv"> <img style="width:15px;" src="../../assets/printWhite.svg" alt=""></div>
     </div>
 
 
@@ -264,6 +291,7 @@ if (isset($_GET['id'])) {
 <script src="../../generalScripts/version.js"></script>
 
 <script src="../../generalScripts/backPage.js"></script>
+<script src="../../generalScripts/print.js"></script>
 
 
 

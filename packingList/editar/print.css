@@ -1,0 +1,122 @@
+
+
+.headerPrint{
+    display: none;
+}
+.packingListH3{
+    display: none;
+}
+
+@media print {
+    body {
+        background-color: white;
+
+    }
+    .packingListH3{
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+    }
+    header,
+    .containerList {
+        background-color: transparent;
+        height: auto;
+    }
+
+    .paletContainer,
+    .mobileMenuButton,
+    .backButton,
+    .inputSearchHeader,
+    .apagar,
+    #vazioDiv,
+    button {
+        display: none;
+    }
+.cabeçalhoNome{
+    width: 100%;
+}
+
+/*dados emresa*/
+.headerPrint {
+    display: block;
+    background-color: white;
+    margin: 0px;
+    margin-top: 3%;
+    width: 100%;
+    height: 130px;
+ 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+}
+header{
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+
+    
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+}
+
+#nomeEmpresa{
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.dadosEmpresa p {
+    font-weight: 500;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  margin-left: 1%;
+}
+
+.dadosEmpresa p img {
+    width: 2.4%;
+}
+
+
+.dadosPedidos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    align-items: center;
+    text-align: center;
+    font-size: 0.7em;
+
+}
+
+
+
+.containerValoresFinais{
+    position: relative;
+    background-color: transparent;
+    margin-top: 30px;
+    padding: none;
+    
+}
+
+.containerInternoValoresFinais{
+    border: dashed 1px black;
+    background-color: transparent;
+}
+footer{
+    position: relative;
+    background-color: transparent;
+    margin-top: -30px;
+    padding: none;
+}
+
+}
