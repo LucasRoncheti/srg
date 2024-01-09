@@ -39,6 +39,6 @@
 [x] erro log
 [x]área de report  erro
 [x]impressão de páginas
-[] download de imagens 
+[x] download de imagens 
 []animação de loading em todas as requisições com o servidor
 []converter strings de nomes em maiúsculas 

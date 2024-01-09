@@ -1,0 +1,7 @@
+#iginorar as imagens  e thumbnails 
+
+inspesao/listarPedido/imgHigh
+inspesao/listarPedido/thumbnails
+
+
+generalPhp/conection.php

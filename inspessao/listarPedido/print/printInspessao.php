@@ -102,7 +102,7 @@ if (isset($_GET['id'])) {
                 <?php echo $cliente; ?> | DATA
                 <?php echo date("d/m/y") ?>
             </H3>
-
+         <input id="numeroPedidoParadownload" type="hidden"  value="<?php echo $numero.'-'.$cliente; ?>">
         </div>
 
     </header>
@@ -209,57 +209,50 @@ if (isset($_GET['id'])) {
 </script>
 
 
-<!-- <script>
- // Função para converter a imagem para um formato de dados adequado para download
- function convertImageToDataUrl(img) {
+<!-- Biblioteca que gera o zip  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+
+<script>
+
+let numeroPedidoParadownload = document.getElementById('numeroPedidoParadownload').value
+
+function convertImageToDataUrl(img) {
     return new Promise(function(resolve) {
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
-        canvas.width = img.naturalWidth; // Use naturalWidth para obter a largura original
-        canvas.height = img.naturalHeight; // Use naturalHeight para obter a altura original
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
         ctx.drawImage(img, 0, 0);
-
-        // Converte o conteúdo do canvas para uma URL de dados
         resolve(canvas.toDataURL('image/png'));
     });
 }
 
-// Função para iniciar o download da imagem
-function downloadImage(img, filename) {
-    return convertImageToDataUrl(img)
-        .then(function(dataUrl) {
-            // Cria um link de download temporário
-            var link = document.createElement('a');
-            link.href = dataUrl;
-            link.download = filename;
-
-            // Adiciona o link ao corpo do documento e simula o clique
-            document.body.appendChild(link);
-            link.click();
-
-            // Remove o link do corpo do documento
-            document.body.removeChild(link);
-        });
-}
-
-// Função para baixar todas as imagens nas divs com a classe 'buttonUploadImg'
 function downloadAllImages() {
     var divs = document.querySelectorAll('.buttonUploadImg');
+    var zip = new JSZip();
 
-    // Itera sobre as divs e inicia os downloads com um atraso
     divs.forEach(function(div, index) {
         var imagem = div.querySelector('img');
         var nomeFornecedor = div.closest('.formImgens').querySelector('.nomeFornecedor').innerText.trim();
-        var filename = nomeFornecedor + '_imagem_' + index + '.png'; // Nome do fornecedor + índice + extensão
-        
+        var filename = nomeFornecedor + '_imagem_' + index + '.png';
 
-        // Aguarda 500 milissegundos (ajuste conforme necessário)
-        setTimeout(function() {
-            downloadImage(imagem, filename);
-        }, index * 500); // Multiplica o índice pelo atraso desejado
+        convertImageToDataUrl(imagem)
+            .then(function(dataUrl) {
+                // Adiciona a imagem ao zip com o nome do arquivo
+                zip.file(filename, dataUrl.split(',')[1], { base64: true });
+                
+                // Se for a última imagem, cria e faz o download do arquivo zip
+                if (index === divs.length - 1) {
+                    zip.generateAsync({ type: 'blob' }).then(function(content) {
+                        var link = document.createElement('a');
+                        link.href = URL.createObjectURL(content);
+                        link.download ='Pedido'+numeroPedidoParadownload+'.zip';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    });
+                }
+            });
     });
 }
-
-
-
-</script> -->
+</script>
