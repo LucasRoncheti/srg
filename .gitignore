@@ -1,7 +1,6 @@
-#iginorar as imagens  e thumbnails 
+# Ignorar imagens e thumbnails
+./inspessao/listarPedido/imgHigh/
+./inspessao/listarPedido/thumbnails/
 
- ./inspessao/listarPedido/imgHigh/
- ./inspessao/listarPedido/thumbnails/
-
-
-./generalScripts/conection.php
+# Ignorar arquivo de conexão PHP
+./generalPhp/conection.php
