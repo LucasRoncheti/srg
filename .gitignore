@@ -1,6 +1,7 @@
 #iginorar as imagens  e thumbnails 
 
-# inspessao/listarPedido/imgHigh
-# inspessao/listarPedido/thumbnails
+ inspessao/listarPedido/imgHigh/
+ inspessao/listarPedido/thumbnails/
 
 
+generalScripts/
