@@ -20,16 +20,19 @@ envioEmAndamento = true;
   document.getElementById('preload').style.display='block'
   document.getElementById('salvarPedido').style.display = 'none'
 
+  let dataAtualizada = document.getElementById('dataAtual').value
+
   // Criar um dicionário de cliente
   const dicionarioCliente = {};
   dicionarioCliente['cliente'] = clienteBD;
-  dicionarioCliente['dataAtual'] = dataBD;
+  dicionarioCliente['dataAtual'] = dataAtualizada //dataBD;
   dicionarioCliente['valortotalPedido'] = valorTotalBD;
 
   // Adicionar o dicionário do cliente à lista itensParaSoma
    itensParaSoma.push(dicionarioCliente);
   itensEnviados = itensParaSoma
 
+  console.log(itensEnviados)
 
 
 

@@ -37,6 +37,11 @@ let ContinuarParaPedidos = () => {
 
 }
 
+
+let alterarValorDataAtual =  () =>{
+    dataBD =   document.getElementById('dataAtual').value
+}
+
 //gera  uma chave unica para ser a chave que irá identificar o pedido ao cliente na hora de  mostrar no banco de dados 
 function gerarChaveUnica() {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
