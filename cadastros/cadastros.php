@@ -16,7 +16,8 @@ include '../generalPhp/conection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="nofollow,noindex">
     <link rel="stylesheet" href="../index/root.css">
-    <link rel="stylesheet" href="../onLoad/onLoad.css">
+    <link rel="stylesheet" href="../index/pcversion.css">
+
     <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="css/cadastrosMainPage.css">
     
@@ -101,6 +102,11 @@ include '../generalPhp/conection.php';
 
 
    <header>
+
+   <a href="../main.php"><button  id="backButton" class="backButton">
+        <img src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
+    </button>
+    </a>
     <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
         <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
     </button>

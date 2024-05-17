@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="onLoad/onLoad.css">
     <link rel="stylesheet" href="index/root.css">
     <link rel="stylesheet" href="index/mainPage.css">
+    <link rel="stylesheet" href="index/pcversion.css">
 
     <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <title>Sistema de cadastro Reinholz Ginger</title>
@@ -108,7 +109,7 @@
         </a>
 
     </section>
-    <div class="mensagem"><div><p>tested</p></div></div>
+  
     <footer>
         <p id="data-footer"> </p>
     </footer>

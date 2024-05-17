@@ -256,3 +256,18 @@ footer{
     align-items: center;
 }
 
+
+@media screen and (min-width: 768px){
+   
+
+    .containerList{
+        width: 50%;
+        margin: auto;
+    }
+
+    .editTable{
+        justify-content: space-evenly;
+    }
+
+    
+}

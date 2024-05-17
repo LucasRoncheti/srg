@@ -16,7 +16,8 @@ header {
 
 
 h2 {
-    font-size: 2em;
+    
+font-size: 2em;
 }
 
 /* formulario de relatorios */
@@ -345,3 +346,38 @@ footer {
 }
 
 
+
+
+@media screen and (min-width: 768px){
+   
+    button {
+       width: 300px;
+    }
+   
+   .quantidadeContainer, .containerInternoValoresFinais{
+       width: 50%;
+   }
+       
+   .containerList{
+       width: 50%;
+       margin: auto;
+   }
+   
+   .editTable{
+       justify-content: space-evenly;
+   }
+
+   form{
+    width: 60%;
+  
+   }
+   select{
+    width: 60%;
+   }
+   header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+ 
+   }

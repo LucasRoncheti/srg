@@ -331,3 +331,40 @@ footer {
     align-items: center;
     
 }
+
+@media screen and (min-width: 768px){
+   
+    button {
+       width: 300px;
+    }
+   
+   .quantidadeContainer, .containerInternoValoresFinais{
+       width: 50%;
+   }
+       
+   .containerList{
+       width: 50%;
+       margin: auto;
+   }
+   
+   .editTable{
+       justify-content: space-evenly;
+   }
+
+   form{
+    width: 60%;
+  
+   }
+   select{
+    width: 60%;
+   }
+   header{
+ padding: 2% 25% 0 25%;
+   }
+
+   .cabeçalhoProdutos{
+    width: 50%;
+    margin: auto;
+   }
+ 
+   }

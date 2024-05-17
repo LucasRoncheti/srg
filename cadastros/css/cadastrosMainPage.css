@@ -123,4 +123,40 @@ footer{
     justify-content: center;
     align-items: center;
 }
+.backButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 24px;
+    top: 24px;
 
+}
+
+@media screen and (min-width: 768px){
+        .containerMenuButtons{
+         padding: 2%;
+         flex-direction: row;
+         width: 700px;
+         flex-wrap: wrap;
+         margin: auto;
+        }
+
+        .categorieButton{
+           cursor: pointer; 
+           flex-direction: column;
+           height: 150px;
+           width: 180px;
+        }
+
+        .divImgCategorieButton{
+            border: none;
+        }
+
+        .menuButtons{
+            width: auto;
+        }
+
+     
+}

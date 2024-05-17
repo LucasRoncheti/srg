@@ -1,0 +1,30 @@
+
+@media screen and (min-width: 768px){
+    .containerMenuButtons{
+     padding: 2%;
+     flex-direction: row;
+     width: 700px;
+     flex-wrap: wrap;
+     margin: auto;
+    }
+
+    .categorieButton{
+       cursor: pointer; 
+       flex-direction: column;
+       height: 150px;
+       width: 180px;
+    }
+
+    .divImgCategorieButton{
+        border: none;
+    }
+
+    .menuButtons{
+        width: auto;
+    }
+
+    .containerList{
+        width: 60%;
+    }
+    
+}
