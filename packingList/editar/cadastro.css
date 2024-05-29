@@ -106,7 +106,7 @@ button img {
 /*lista do container */
 .containerList {
     width: 100%;
-    height: calc(100vh - 432px);
+    height: auto;
     background-color: var(--branco);
     overflow: auto;
 }
@@ -231,7 +231,7 @@ button img {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    /* position: absolute; */
     bottom: 28px;
 }
 
@@ -325,11 +325,10 @@ footer {
     font-size: 10pt;
     font-weight: 500;
     bottom: 0px;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 @media screen and (min-width: 768px){
