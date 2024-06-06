@@ -266,6 +266,9 @@ button img {
 .containerProdutoPedido {
     font-weight: 600;
 }
+.quantidadeEditar{
+    cursor: pointer;
+}
 
 .quantidades {
     display: flex;
@@ -536,8 +539,15 @@ footer {
     width: 50%;
     margin: auto;
 }
+.cabecalhoProdutos{
+    width: 50%;
+    margin: auto;
+}
 
 .editTable{
     justify-content: space-evenly;
+}
+body span {
+    display: none;
 }
 }

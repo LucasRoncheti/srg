@@ -221,7 +221,7 @@ if (isset($_GET['id'])) {
             <!-- aqui entra a lista dos intens no pedido -->
     </form>
    
-    <span style="width:100%;height:5px;background-color: #E55933;display:block;margin-top:3px;"></span>
+
     
     <div class="containerList">
        
@@ -230,7 +230,7 @@ if (isset($_GET['id'])) {
 
 
 
-            // Check if the query was successful and data was found
+
             if ($result && $result->num_rows != 0) {
 
                 $somaQuantidadeTotal = 0;
@@ -246,30 +246,33 @@ if (isset($_GET['id'])) {
 
 
                     $somaQuantidadeTotal += $quantidade;
-                
+                    ?>
 
-                    echo '<input id="chaveAcesso" type="hidden" value="'.$chaveAcesso.'">';
-                    echo '<div id="' . $idItem . '" class="containerProdutoPedido">';
-                    echo '    <div class="dadosPedido">';
-                    echo '        <div id="fornecedorNome" class="fornecedor">' . $fornecedor . '</div>';
-                    echo '        <div class="quantidades2">';
-                    echo '            <div id="qnt">' . $quantidade . '</div>';
-                    echo '            <div id="vlr"> R$ ' . number_format($valor_total / 100, 2, ",", ".") . '</div>';
-                    echo '            <div onclick="trocarDisplay(\'info' . $idItem . '\', \'img' . $idItem . '\')" id="verMais">';
-                    echo '                <img id="img' . $idItem . '" src="../../assets/eye.svg" alt="Olho vetor">';
-                    echo '            </div>';
-                    echo '        </div>';
-                    echo '    </div>';
-                    echo '    <div style="display: none;" id="info' . $idItem . '" class="dadosPedidoSecundario">';
-                    echo '        <div id="produtoLista" class="produtoLista">' . $produto . '</div>';
-                    echo '        <div class="quantidades3">';
-                    echo '            <div id="vlr">Unit R$ ' . number_format($valor_unit / 100, 2, ",", ".") . '</div>';
-                    echo '           <a href="apagar.php?id='. $idItem .'&valorPedidoSalvo='.$valorTotalSalvoPedido.'&valorTotal='.$valor_total.'&chaveAcesso='.$chaveAcesso.'"> <div  id="verMais' . $idItem . '">';
-                    echo '                <img src="../../assets/erase.svg" alt="Olho vetor">';
-                    echo '            </div></a>';
-                    echo '        </div>';
-                    echo '    </div>';
-                    echo '</div>';
+                    <input id="chaveAcesso" type="hidden" value="'.$chaveAcesso.'">
+                    <div id="<?=$idItem?>" class="containerProdutoPedido">
+                    <div class="dadosPedido">
+                        <div id="fornecedorNome" class="fornecedor"><?=$fornecedor?></div>
+                        <div class="quantidades2">
+                            <input style="width:50px;height:20px;background-color:transparent;" type="number" onchange="editarQuantidade('<?=$idItem?>',this)" value="<?=$quantidade?>" class="quantidadeEditar" id="qnt">
+                            <div id="vlr"> R$ <?=number_format($valor_total / 100, 2, ",", ".")?></div>
+                            <div onclick="trocarDisplay('info<?=$idItem?>', 'img<?=$idItem?>')" id="verMais">
+                                <img id="img<?=$idItem?>" src="../../assets/eye.svg" alt="Olho vetor">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: none;" id="info<?=$idItem?>" class="dadosPedidoSecundario">
+                        <div id="produtoLista" class="produtoLista"><?=$produto?></div>
+                        <div class="quantidades3">
+                            <div id="vlr">Unit R$ <?=number_format($valor_unit / 100, 2, ",", ".")?></div>
+                            <a href="apagar.php?id=<?=$idItem?>&valorPedidoSalvo=<?=$valorTotalSalvoPedido?>&valorTotal=<?=$valor_total?>&chaveAcesso=<?=$chaveAcesso?>">
+                                <div id="verMais<?=$idItem?>">
+                                    <img src="../../assets/erase.svg" alt="Olho vetor">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <?php
                 }
             } else {
                 echo 'Registro n�o encontrado!';

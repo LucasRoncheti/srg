@@ -60,6 +60,33 @@ const enviarDados = () => {
      });
   
   }
+
+
+  let editarQuantidade=(id,elemento) =>{
+
+    let valorInput = elemento.value
+    const formData = new FormData();
+    formData.append('idItem',id)
+    formData.append('novaQuantidade',valorInput)
+
+
+    
+    fetch('editarQuantidade.php', {
+      method: 'POST',
+     body:formData
+    })
+      .then(response => {
+        if(response.ok){
+          response.text()
+        }else{  
+          alert('Não  foi possível alterar  a quantidade.')
+        }
+      })
+      .catch(error => {
+        document.getElementById("respostaPHP").innerHTML = "Erro: " + error; // Exibir mensagem de erro
+      });
+
+  }
   
   
   
