@@ -74,7 +74,7 @@ if ($dadosEspecificos) {
 
 
     if($conn->query($sql2)=== TRUE){
-        echo '<div style="padding: 50% 10% 50% 10%; text-align: center; z-index: 999; position: absolute; top: 0; width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; height: 100%; background-color: white;" class="pedidoCadastrado">';
+        echo '<div  class="pedidoCadastrado">';
         echo '<div class="teste">';
         echo '<h2> Pedido cadastrado com sucesso! </h2>';
         echo '</div>';

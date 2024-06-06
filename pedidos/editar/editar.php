@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
     // Retrieve the 'id' value from the URL
     $id = $_GET['id'];
 
+
     // Create a SQL query to fetch the data for the specified 'id'
     $sql = "SELECT * FROM pedidos_dados WHERE chaveAcesso = '$id'";
     $result = mysqli_query($conn, $sql);
@@ -248,12 +249,12 @@ if (isset($_GET['id'])) {
                     $somaQuantidadeTotal += $quantidade;
                     ?>
 
-                    <input id="chaveAcesso" type="hidden" value="'.$chaveAcesso.'">
+                    <input id="chaveAcesso" type="hidden" value="<?=$chaveAcesso?>">
                     <div id="<?=$idItem?>" class="containerProdutoPedido">
                     <div class="dadosPedido">
                         <div id="fornecedorNome" class="fornecedor"><?=$fornecedor?></div>
                         <div class="quantidades2">
-                            <input style="width:50px;height:20px;background-color:transparent;" type="number" onchange="editarQuantidade('<?=$idItem?>',this)" value="<?=$quantidade?>" class="quantidadeEditar" id="qnt">
+                            <input style="width:50px;height:20px;background-color:transparent;" type="number" onchange="editarQuantidade('<?=$chaveAcesso?>','<?=$idItem?>',this,'<?=$valor_unit?>','<?=$valor_total?>','<?=$valorTotalSalvoPedido?>')" value="<?=$quantidade?>" class="quantidadeEditar" id="qnt">
                             <div id="vlr"> R$ <?=number_format($valor_total / 100, 2, ",", ".")?></div>
                             <div onclick="trocarDisplay('info<?=$idItem?>', 'img<?=$idItem?>')" id="verMais">
                                 <img id="img<?=$idItem?>" src="../../assets/eye.svg" alt="Olho vetor">

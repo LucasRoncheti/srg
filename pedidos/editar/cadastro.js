@@ -47,9 +47,9 @@ const enviarDados = () => {
       document.getElementById('preload').style.display='none'
       document.getElementById('preload').textContent=''
       let envioEmAndamento = false; 
-      setTimeout(()=>{
-        window.location.href="../cadastrodepedidos.php"
-      },1000)
+        setTimeout(()=>{
+          window.location.href="../cadastrodepedidos.php"
+        },1000)
       
      
      })
@@ -62,15 +62,17 @@ const enviarDados = () => {
   }
 
 
-  let editarQuantidade=(id,elemento) =>{
+  let editarQuantidade=(chaveAcesso,id,elemento,valorUnit,valorTotalItem,valorTotalPedido) =>{
 
     let valorInput = elemento.value
     const formData = new FormData();
     formData.append('idItem',id)
+    formData.append('chaveAcesso',chaveAcesso)
     formData.append('novaQuantidade',valorInput)
+    formData.append('valorUnit',valorUnit)
+    formData.append('valorTotalItem',valorTotalItem)
+    formData.append('valorTotal',valorTotalPedido)
 
-
-    
     fetch('editarQuantidade.php', {
       method: 'POST',
      body:formData
@@ -81,6 +83,9 @@ const enviarDados = () => {
         }else{  
           alert('Não  foi possível alterar  a quantidade.')
         }
+      }).then(data => {
+        console.log(data)
+         window.location.reload()
       })
       .catch(error => {
         document.getElementById("respostaPHP").innerHTML = "Erro: " + error; // Exibir mensagem de erro
