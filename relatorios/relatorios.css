@@ -167,6 +167,7 @@ text-align: center;
     background-color: var(--cor03);
     display: flex;
     justify-content: center;
+    margin: auto;
 }
 
 .cabeçalhoItens div {
@@ -361,6 +362,11 @@ footer {
    .containerList{
        width: 50%;
        margin: auto;
+   }
+
+   .cabeçalhoItens{
+    width: 50%;
+
    }
    
    .editTable{

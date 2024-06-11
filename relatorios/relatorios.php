@@ -213,7 +213,7 @@ if (!isset($_SESSION['id'])) {
     <div class="cabeçalhoItens">
         <div> N° P</div>
         <div>DATA</div>
-        <div> CLIENTE</div>
+
         <div>QNT</div>
         <div id="printT" onclick="imprimirRelatorios()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
     </div>

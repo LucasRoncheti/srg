@@ -100,7 +100,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
             echo '<div class="cabeçalhoListaFiltro">';
             echo '<div>' . $clienteData['id'] . '</div>';
             echo '<div style="font-size: 0.8em;"> ' . date('d/m/Y', strtotime($clienteData['dataAtual'])) . '</div>';
-            echo '<div >' . $clienteData['cliente'] . '</div>';
+
             echo '<div>' . $quantidadeTotal . '</div>'; // Exibir a quantidade total
             echo '<div id="mostrarInfos" onclick="trocarDisplay('.$clienteData['id'].')"> <img src="../assets/fullscreen.svg" alt=""></div>';
             echo '</div>';
