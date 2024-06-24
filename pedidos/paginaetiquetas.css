@@ -1,0 +1,36 @@
+.paginaEtiquetas{
+    width: 210mm;
+    height: 290mm;
+    background-color: white;
+    padding: 12mm 7mm 12mm 6mm;
+    display: flex;
+
+    justify-content: space-between; /* Alinhamento inicial para permitir quebra de linha */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    align-items: start;
+    gap:0 2mm;
+}
+
+.cardNumber {
+    width: 31mm;
+    height:17mm;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 2em;
+    font-weight: 500;
+
+}
+
+.containerEtiquetas{
+    visibility: hidden;
+    width: 100%;
+    height: auto;
+}
+.containerBody{
+    width: 100%;
+    height: auto;
+}

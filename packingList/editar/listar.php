@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $chaveAcesso = $_POST['chaveAcesso'];
 
 
-    $result_sql = "SELECT * FROM packing_list WHERE chaveAcesso = '$chaveAcesso' ";
+    $result_sql = "SELECT * FROM packing_list WHERE chaveAcesso = '$chaveAcesso' ORDER BY palet ASC";
     $resultado_sql = mysqli_query($conn, $result_sql);
 
     //Verificar se encontrou resultado na tabela "sqls"
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         while ($row = mysqli_fetch_assoc($resultado_sql)) {
            
             $fornecedor = $row['fornecedor'];
-            $sql3 = "SELECT fornecedorNumero FROM pedidos_dados WHERE fornecedor = '$fornecedor'";
+            $sql3 = "SELECT fornecedorNumero FROM pedidos_dados WHERE fornecedor = '$fornecedor' ";
             $resultado_sql3 = mysqli_query($conn, $sql3);
             if (($resultado_sql3) and ($resultado_sql3->num_rows != 0)) {
                 while ($row3 = mysqli_fetch_assoc($resultado_sql3)) {

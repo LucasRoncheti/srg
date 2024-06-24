@@ -1,5 +1,11 @@
 function imprimirPagina(){
+    const containerEtiquetas = document.getElementById('containerEtiquetas')
+    containerEtiquetas.style.display= 'none' 
     window.print()
+    containerEtiquetas.style.display= 'block' 
+
+   
+
 }
 
 
@@ -13,4 +19,23 @@ function imprimirRelatorios(){
     }) 
     
     window.print()
+}
+
+
+let imprimirEtiquetas = () => {
+    const bodyelement = document.getElementById('containerBody')
+    const containerEtiquetas = document.getElementById('containerEtiquetas')
+    containerEtiquetas.style.visibility= 'visible' 
+    bodyelement.style.display= 'none'
+    
+    print()
+  
+    containerEtiquetas.style.visibility= 'hidden' 
+    bodyelement.style.display= 'block'
+    window.location.reload()
+    
+    
+
+
+
 }

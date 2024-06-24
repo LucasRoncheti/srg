@@ -157,7 +157,7 @@ tr:nth-child(odd){
 
 .botoes{
     width:80px;
-    height:150px;
+    height:250px;
     background-color: var(--cor02);
     opacity: 0.7;
     position: fixed;
