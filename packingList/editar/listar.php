@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         while ($row = mysqli_fetch_assoc($resultado_sql)) {
            
             $fornecedor = $row['fornecedor'];
-            $sql3 = "SELECT fornecedorNumero FROM pedidos_dados WHERE fornecedor = '$fornecedor' ";
+            $sql3 = "SELECT numero FROM fornecedores WHERE nome = '$fornecedor' ";
             $resultado_sql3 = mysqli_query($conn, $sql3);
             if (($resultado_sql3) and ($resultado_sql3->num_rows != 0)) {
                 while ($row3 = mysqli_fetch_assoc($resultado_sql3)) {
-                    $numeroFornecedor = $row3["fornecedorNumero"];
+                    $numeroFornecedor = $row3["numero"];
                 
                    // Use regex para encontrar o número na string
                         if (preg_match('/\d+/', $numeroFornecedor, $matches)) {

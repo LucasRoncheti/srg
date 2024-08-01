@@ -1,6 +1,6 @@
 //alterar a versão do sistema 
 
-    versao = '1.0.6'
+    versao = '1.1.0'
     element = document.getElementById('data-footer')
     data = () =>  {
 

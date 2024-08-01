@@ -198,14 +198,13 @@ if (isset($_GET['id'])) {
             <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
 
                 <?php
-                $stmt = $conn->prepare("SELECT fornecedor FROM pedidos_dados WHERE chaveAcesso = ?");
-                $stmt->bind_param("s",$id);
+                $stmt = $conn->prepare("SELECT * FROM fornecedores ORDER BY nome ASC");
                 $stmt->execute();
                 $result = $stmt->get_result();
 
                 if(($result) AND ($result->num_rows!=0)){
                     while($row = mysqli_fetch_assoc($result)){
-                        $fornecedor = $row['fornecedor'];
+                        $fornecedor = $row['nome'];
                        echo' <option value="'.$fornecedor.'">'.strtoupper($fornecedor).'</option>';
                     }
                 }
