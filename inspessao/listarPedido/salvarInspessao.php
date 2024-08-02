@@ -348,28 +348,28 @@ if (isset($_GET['id'])) {
 </script>
 
 <script>
-   let adicionarProdutor = () => {
-    let chaveAcesso = document.getElementById('chaveAcesso').value; 
-    let fornecedor = document.getElementById('fornecedor').value; 
+//    let adicionarProdutor = () => {
+//     let chaveAcesso = document.getElementById('chaveAcesso').value; 
+//     let fornecedor = document.getElementById('fornecedor').value; 
 
-    let formData = new FormData();
+//     let formData = new FormData();
 
-    formData.append('chaveAcesso', chaveAcesso);
-    formData.append('fornecedor', fornecedor);
+//     formData.append('chaveAcesso', chaveAcesso);
+//     formData.append('fornecedor', fornecedor);
 
-    fetch('adicionarProdutor.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
+//     fetch('adicionarProdutor.php', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response => response.text())
+//     .then(data => {
+//         console.log(data);
        
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
-}
+//     })
+//     .catch(error => {
+//         console.error('Erro:', error);
+//     });
+// }
 //    let deleteProdutorInspecao = (id) => {
    
 //     let formData = new FormData();
