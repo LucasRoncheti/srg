@@ -6,12 +6,11 @@ if(!isset($_SESSION)) {
 }
 
 if(!isset($_SESSION['id'])) {
-    die( header("Location: ../../index.php"));
-   
+    die(header("Location: ../../index.php"));
 }
 
 // Check if 'id' parameter is provided in the URL
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $id = $_GET['id'];
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
@@ -19,19 +18,24 @@ if (isset($_GET['id'])) {
     // Use uma consulta preparada para evitar injeção de SQL
     $stmt = $conn->prepare("SELECT * FROM inspecao WHERE chaveAcesso = ?");
     $stmt->bind_param("s", $id);
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        die("Erro ao executar consulta: " . $stmt->error);
+    }
     $result = $stmt->get_result();
-
 
     // Use uma consulta preparada para evitar injeção de SQL
     $stmtx = $conn->prepare("SELECT * FROM pedidos_dados WHERE chaveAcesso = ?");
     $stmtx->bind_param("s", $id);
-    $stmtx->execute();
+    if (!$stmtx->execute()) {
+        die("Erro ao executar consulta: " . $stmtx->error);
+    }
     $resultx = $stmtx->get_result();
-
     
+} else {
+    die("Parâmetros necessários não fornecidos.");
 }
 ?>
+
 
 
 <!DOCTYPE html>
