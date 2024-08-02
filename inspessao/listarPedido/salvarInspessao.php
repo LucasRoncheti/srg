@@ -370,26 +370,26 @@ if (isset($_GET['id'])) {
         console.error('Erro:', error);
     });
 }
-   let deleteProdutorInspecao = (id) => {
+//    let deleteProdutorInspecao = (id) => {
    
-    let formData = new FormData();
+//     let formData = new FormData();
 
-    formData.append('idItem', id);
+//     formData.append('idItem', id);
 
-    fetch('deletarProdutorInspecao.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-        window.location.reload()
+//     fetch('deletarProdutorInspecao.php', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response => response.text())
+//     .then(data => {
+//         console.log(data);
+//         window.location.reload()
        
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
-}
+//     })
+//     .catch(error => {
+//         console.error('Erro:', error);
+//     });
+// }
 
 </script>
 
