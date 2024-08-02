@@ -1,29 +1,34 @@
 <?php
 include '../../generalPhp/conection.php';
 
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
 
-if(!isset($_SESSION['id'])) {
+if (!isset($_SESSION['id'])) {
     die(header("Location: ../../index.php"));
 }
 
-// Check if 'id' parameter is provided in the URL
+// Check if 'id', 'numero', and 'cliente' parameters are provided in the URL
 if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $id = $_GET['id'];
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
     
-    // Use uma consulta preparada para evitar injeção de SQL
-    $stmt = $conn->prepare("SELECT * FROM inspecao WHERE chaveAcesso = ?");
+    // Consulta com JOIN para obter dados de inspeção e fornecedor em uma única chamada
+    $stmt = $conn->prepare("
+        SELECT i.*, f.numero AS fornecedor_numero
+        FROM inspecao i
+        LEFT JOIN fornecedores f ON i.fornecedor = f.nome
+        WHERE i.chaveAcesso = ?
+    ");
     $stmt->bind_param("s", $id);
     if (!$stmt->execute()) {
         die("Erro ao executar consulta: " . $stmt->error);
     }
     $result = $stmt->get_result();
 
-    // Use uma consulta preparada para evitar injeção de SQL
+    // Consulta para obter dados do pedido
     $stmtx = $conn->prepare("SELECT * FROM pedidos_dados WHERE chaveAcesso = ?");
     $stmtx->bind_param("s", $id);
     if (!$stmtx->execute()) {
@@ -35,8 +40,6 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     die("Parâmetros necessários não fornecidos.");
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -58,9 +61,6 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 </head>
 <script src="../../onLoad/onLoad.js"></script>
 
-
-
-
 <div class="overflow white" id="preload">
     <div class="circle-line">
         <div class="circle-red">&nbsp;</div>
@@ -70,13 +70,9 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     </div>
 </div>
 
-
-
-
 <body id="body" onload="onLoad()">
 
     <!--Menu mobile   -->
-
     <div style="z-index:9999999999;" id="mobileMenu" class="mobileMenuContainer ">
         <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
             <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da página">
@@ -131,156 +127,69 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
                         </button>
                     </div>
                 </a>
-             
-
             </div>   
-
     </div>
 
-
-        <header>
-
-            <a href="../cadastro.php"><button id="backButton" class="backButton">
-                    <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-                </button>
-            </a>
-
-            <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-                <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
+    <header>
+        <a href="../cadastro.php"><button id="backButton" class="backButton">
+                <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
             </button>
+        </a>
 
-           <div class="cabecalhoNome">
+        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
+            <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
+        </button>
+
+        <div class="cabecalhoNome">
            <img src="../../assets/categories/inspessao.svg" alt=""> <H3>N° <?php echo $numero;?> <?php echo $cliente;?></H3>
-           <?php
-                echo   '     <div class="apagarImprimir">';
-                echo '<a href="../listarPedido/print/printInspessao.php?id=' . $id . '&numero=' . $numero . '&cliente=' . $cliente . '"><img style = "width:25px;margin-left:15px" src="../../assets/print.svg"></a>';
-                echo '      </div>';
-            ?>
+           <div class="apagarImprimir">
+                <a href="../listarPedido/print/printInspessao.php?id=<?php echo $id; ?>&numero=<?php echo $numero; ?>&cliente=<?php echo $cliente; ?>">
+                    <img style="width:25px;margin-left:15px" src="../../assets/print.svg">
+                </a>
            </div>
-           
+        </div>
+    </header>
 
-        </header>
-        
-   
-   
+    <div class="containerList">
+        <?php 
+        if ($result && $result->num_rows != 0) {
+            while ($row = $result->fetch_assoc()) {
+                $fornecedor = $row['fornecedor'];
+                $id_item = $row['id'];
+                $numero = $row['fornecedor_numero'];
 
-       
-        <div class="containerList">
-    <?php 
-    // Processa os resultados do primeiro conjunto ($result)
-    if ($result && $result->num_rows != 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $fornecedor = $row['fornecedor'];
-            $id_item = $row['id'];
-
-            $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
-            $stmt1->bind_param("s", $fornecedor);
-            $stmt1->execute();
-            $resultado = $stmt1->get_result();
-
-            if ($resultado->num_rows > 0) {
-                $row = $resultado->fetch_assoc();
-                $numero = $row['numero'];
-            }
-
-            // Exibe o formulário independentemente de haver imagens
-            echo ' 
-            <form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
-                <div class="dadosFornecedor">
-                    <div class="forncedorNum">N° ' . $numero . '</div>
-                    <div class="nomeFornecedor"> ' . $fornecedor . '</div>
-                    <img onclick="deleteProdutorInspecao('.$id_item.')" style="width:20px;"  src="../../assets/delete.svg">
-
-                </div>
-                <div class="inputContainer">';
-
-            // Aqui você pode exibir as imagens se existirem, mas o formulário será exibido de qualquer forma
-            $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
-            $stmt0->bind_param("i", $id_item);
-            $stmt0->execute();
-            $resultado0 = $stmt0->get_result();
-        
-            if ($resultado0 && $resultado0->num_rows != 0) {
-                while ($rows0 = mysqli_fetch_assoc($resultado0)) {
-                    $path = $rows0['pathImagem'];
-                    $id_image = $rows0['id'];
-
-                    $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image' ";
-                    $resultadoSql2 = mysqli_query($conn,$slq2);
-
-                    if($resultadoSql2 && $resultadoSql2->num_rows != 0){
-                        $rows1 = mysqli_fetch_assoc($resultadoSql2);
-                        $pathHD = $rows1['pathimagem'];
-                        
-                        echo '
-                        <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
-                            <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img   src="../../assets/erase1.svg"></div>
-                            <div class="buttonUploadImg"> <img src="'.$path.'"> </div>
-                            <input id="'.$id_image.'inputThumb"  type="hidden" value="'. $path.'">
-                            <input id="'.$id_image.'input"  type="hidden" value="'. $pathHD.'">
-                        </div>';
-                    }
-                }
-            }
-
-            echo '
-                <div class="inputThumbnail">
-                    <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
-                    <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
-                </div>
-                </div>
-            </form>';
-        }
-    }
-
-    // Processa os resultados do segundo conjunto ($resultx)
-    if ($resultx && $resultx->num_rows != 0) {
-        while ($row = mysqli_fetch_assoc($resultx)) {
-            $fornecedor = $row['fornecedor'];
-            $id_item = $row['id'];
-
-            $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
-            $stmt1->bind_param("s", $fornecedor);
-            $stmt1->execute();
-            $resultado = $stmt1->get_result();
-
-            if ($resultado->num_rows > 0) {
-                $row = $resultado->fetch_assoc();
-                $numero = $row['numero'];
-            }
-
-            // Verifica se existem imagens associadas ao id_item
-            $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
-            $stmt0->bind_param("i", $id_item);
-            $stmt0->execute();
-            $resultado0 = $stmt0->get_result();
-
-            if ($resultado0 && $resultado0->num_rows != 0) {
-                // Se houver imagens, exibe o formulário
-                echo '<form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
+                echo ' 
+                <form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
                     <div class="dadosFornecedor">
                         <div class="forncedorNum">N° ' . $numero . '</div>
                         <div class="nomeFornecedor"> ' . $fornecedor . '</div>
+                        <img onclick="deleteProdutorInspecao(' . $id_item . ')" style="width:20px;"  src="../../assets/delete.svg">
                     </div>
                     <div class="inputContainer">';
-                
-                while ($rows0 = mysqli_fetch_assoc($resultado0)) {
-                    $path = $rows0['pathImagem'];
-                    $id_image = $rows0['id'];
 
-                    $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image'";
-                    $resultadoSql2 = mysqli_query($conn, $slq2);
-
-                    if ($resultadoSql2 && $resultadoSql2->num_rows != 0) {
-                        $rows1 = mysqli_fetch_assoc($resultadoSql2);
-                        $pathHD = $rows1['pathimagem'];
+                // Processa as imagens associadas ao id_item
+                $stmt0 = $conn->prepare("
+                    SELECT i.*, ia.pathimagem AS pathHD 
+                    FROM imagens i
+                    LEFT JOIN imagensalta ia ON i.id = ia.id
+                    WHERE i.id_item = ?
+                ");
+                $stmt0->bind_param("i", $id_item);
+                $stmt0->execute();
+                $resultado0 = $stmt0->get_result();
+            
+                if ($resultado0 && $resultado0->num_rows != 0) {
+                    while ($rows0 = $resultado0->fetch_assoc()) {
+                        $path = $rows0['pathImagem'];
+                        $id_image = $rows0['id'];
+                        $pathHD = $rows0['pathHD'];
 
                         echo '
-                        <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
-                            <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img src="../../assets/erase1.svg"></div>
-                            <div class="buttonUploadImg"> <img src="'.$path.'"> </div>
-                            <input id="'.$id_image.'inputThumb" type="hidden" value="'.$path.'">
-                            <input id="'.$id_image.'input" type="hidden" value="'.$pathHD.'">
+                        <div id="' . $id_image . 'thumb" class="thumbnailImageLoaded">
+                            <div class="apagarImagem" onclick="apagarImagem(\'' . $id_image . '\')"><img src="../../assets/erase1.svg"></div>
+                            <div class="buttonUploadImg"> <img src="' . $path . '"> </div>
+                            <input id="' . $id_image . 'inputThumb" type="hidden" value="' . $path . '">
+                            <input id="' . $id_image . 'input" type="hidden" value="' . $pathHD . '">
                         </div>';
                     }
                 }
@@ -294,47 +203,95 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
                 </form>';
             }
         }
-    }
-    ?>
-</div>
 
+        // Processamento do segundo conjunto de resultados ($resultx)
+        if ($resultx && $resultx->num_rows != 0) {
+            while ($row = $resultx->fetch_assoc()) {
+                $fornecedor = $row['fornecedor'];
+                $id_item = $row['id'];
 
+                $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
+                $stmt1->bind_param("s", $fornecedor);
+                $stmt1->execute();
+                $resultado = $stmt1->get_result();
 
-        <form method="POST" class="inputSearchHeaderInspecao" id="form-pesquisa2" action="">
-            <input id="chaveAcesso" type="hidden" value= "<?php echo $id;?>">
-            <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
+                if ($resultado->num_rows > 0) {
+                    $row = $resultado->fetch_assoc();
+                    $numero = $row['numero'];
+                }
 
-                <?php
-                $stmt = $conn->prepare("SELECT * FROM fornecedores ORDER BY nome ASC");
-                $stmt->execute();
-                $result = $stmt->get_result();
+                echo '<form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
+                    <div class="dadosFornecedor">
+                        <div class="forncedorNum">N° ' . $numero . '</div>
+                        <div class="nomeFornecedor"> ' . $fornecedor . '</div>
+                    </div>
+                    <div class="inputContainer">';
+                
+                $stmt0 = $conn->prepare("SELECT i.*, ia.pathimagem AS pathHD 
+                                         FROM imagens i
+                                         LEFT JOIN imagensalta ia ON i.id = ia.id
+                                         WHERE i.id_item = ?");
+                $stmt0->bind_param("i", $id_item);
+                $stmt0->execute();
+                $resultado0 = $stmt0->get_result();
 
-                if(($result) AND ($result->num_rows!=0)){
-                    while($row5 = mysqli_fetch_assoc($result)){
-                        $fornecedor = $row5['nome'];
-                       echo' <option value="'.$fornecedor.'">'.strtoupper($fornecedor).'</option>';
+                if ($resultado0 && $resultado0->num_rows != 0) {
+                    while ($rows0 = $resultado0->fetch_assoc()) {
+                        $path = $rows0['pathImagem'];
+                        $id_image = $rows0['id'];
+                        $pathHD = $rows0['pathHD'];
+
+                        echo '
+                        <div id="' . $id_image . 'thumb" class="thumbnailImageLoaded">
+                            <div class="apagarImagem" onclick="apagarImagem(\'' . $id_image . '\')"><img src="../../assets/erase1.svg"></div>
+                            <div class="buttonUploadImg"> <img src="' . $path . '"> </div>
+                            <input id="' . $id_image . 'inputThumb" type="hidden" value="' . $path . '">
+                            <input id="' . $id_image . 'input" type="hidden" value="' . $pathHD . '">
+                        </div>';
                     }
                 }
-               
-            
+
+                echo '
+                    <div class="inputThumbnail">
+                        <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
+                        <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
+                    </div>
+                    </div>
+                </form>';
+            }
+        }
+        ?>
+    </div>
+
+    <form method="POST" class="inputSearchHeaderInspecao" id="form-pesquisa2" action="">
+        <input id="chaveAcesso" type="hidden" value= "<?php echo $id;?>">
+        <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
+            <?php
+            $stmt = $conn->prepare("SELECT * FROM fornecedores ORDER BY nome ASC");
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result && $result->num_rows != 0) {
+                while ($row5 = $result->fetch_assoc()) {
+                    $fornecedor = $row5['nome'];
+                    echo' <option value="'.$fornecedor.'">'.strtoupper($fornecedor).'</option>';
+                }
+            }
             ?>
+        </select>
+        <button class="buttonAdicionarProdutor" onclick="adicionarProdutor()">Adicionar Produtor</button>
+    </form>
 
-            </select>
-            <button  class="buttonAdicionarProdutor" onclick="adicionarProdutor()">Adicionar Produtor</button>
-        </form>
-
-        <footer>
-            <p id="data-footer"> </p>
-        </footer>
+    <footer>
+        <p id="data-footer"> </p>
+    </footer>
 
 </body>
 
 </html>
 
 <script src="../../mobileMenu/js/mobileMenu.js"></script>
-
 <script src="../../generalScripts/version.js"></script>
-
 <script src="../../generalScripts/backPage.js"></script>
 <script src="upload.js"></script>
 <script src="apagarImg.js"></script>
@@ -350,51 +307,3 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
         console.log(id)
     }
 </script>
-
-<script>
-//    let adicionarProdutor = () => {
-//     let chaveAcesso = document.getElementById('chaveAcesso').value; 
-//     let fornecedor = document.getElementById('fornecedor').value; 
-
-//     let formData = new FormData();
-
-//     formData.append('chaveAcesso', chaveAcesso);
-//     formData.append('fornecedor', fornecedor);
-
-//     fetch('adicionarProdutor.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.text())
-//     .then(data => {
-//         console.log(data);
-       
-//     })
-//     .catch(error => {
-//         console.error('Erro:', error);
-//     });
-// }
-//    let deleteProdutorInspecao = (id) => {
-   
-//     let formData = new FormData();
-
-//     formData.append('idItem', id);
-
-//     fetch('deletarProdutorInspecao.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.text())
-//     .then(data => {
-//         console.log(data);
-//         window.location.reload()
-       
-//     })
-//     .catch(error => {
-//         console.error('Erro:', error);
-//     });
-// }
-
-</script>
-
-
