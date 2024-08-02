@@ -233,68 +233,68 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
         }
     }
 
-    // // Processa os resultados do segundo conjunto ($resultx)
-    // if ($resultx && $resultx->num_rows != 0) {
-    //     while ($row = mysqli_fetch_assoc($resultx)) {
-    //         $fornecedor = $row['fornecedor'];
-    //         $id_item = $row['id'];
+    // Processa os resultados do segundo conjunto ($resultx)
+    if ($resultx && $resultx->num_rows != 0) {
+        while ($row = mysqli_fetch_assoc($resultx)) {
+            $fornecedor = $row['fornecedor'];
+            $id_item = $row['id'];
 
-    //         $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
-    //         $stmt1->bind_param("s", $fornecedor);
-    //         $stmt1->execute();
-    //         $resultado = $stmt1->get_result();
+            $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
+            $stmt1->bind_param("s", $fornecedor);
+            $stmt1->execute();
+            $resultado = $stmt1->get_result();
 
-    //         if ($resultado->num_rows > 0) {
-    //             $row = $resultado->fetch_assoc();
-    //             $numero = $row['numero'];
-    //         }
+            if ($resultado->num_rows > 0) {
+                $row = $resultado->fetch_assoc();
+                $numero = $row['numero'];
+            }
 
-    //         // Verifica se existem imagens associadas ao id_item
-    //         $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
-    //         $stmt0->bind_param("i", $id_item);
-    //         $stmt0->execute();
-    //         $resultado0 = $stmt0->get_result();
+            // Verifica se existem imagens associadas ao id_item
+            $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
+            $stmt0->bind_param("i", $id_item);
+            $stmt0->execute();
+            $resultado0 = $stmt0->get_result();
 
-    //         if ($resultado0 && $resultado0->num_rows != 0) {
-    //             // Se houver imagens, exibe o formulário
-    //             echo '<form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
-    //                 <div class="dadosFornecedor">
-    //                     <div class="forncedorNum">N° ' . $numero . '</div>
-    //                     <div class="nomeFornecedor"> ' . $fornecedor . '</div>
-    //                 </div>
-    //                 <div class="inputContainer">';
+            if ($resultado0 && $resultado0->num_rows != 0) {
+                // Se houver imagens, exibe o formulário
+                echo '<form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
+                    <div class="dadosFornecedor">
+                        <div class="forncedorNum">N° ' . $numero . '</div>
+                        <div class="nomeFornecedor"> ' . $fornecedor . '</div>
+                    </div>
+                    <div class="inputContainer">';
                 
-    //             while ($rows0 = mysqli_fetch_assoc($resultado0)) {
-    //                 $path = $rows0['pathImagem'];
-    //                 $id_image = $rows0['id'];
+                while ($rows0 = mysqli_fetch_assoc($resultado0)) {
+                    $path = $rows0['pathImagem'];
+                    $id_image = $rows0['id'];
 
-    //                 $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image'";
-    //                 $resultadoSql2 = mysqli_query($conn, $slq2);
+                    $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image'";
+                    $resultadoSql2 = mysqli_query($conn, $slq2);
 
-    //                 if ($resultadoSql2 && $resultadoSql2->num_rows != 0) {
-    //                     $rows1 = mysqli_fetch_assoc($resultadoSql2);
-    //                     $pathHD = $rows1['pathimagem'];
+                    if ($resultadoSql2 && $resultadoSql2->num_rows != 0) {
+                        $rows1 = mysqli_fetch_assoc($resultadoSql2);
+                        $pathHD = $rows1['pathimagem'];
 
-    //                     echo '
-    //                     <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
-    //                         <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img src="../../assets/erase1.svg"></div>
-    //                         <div class="buttonUploadImg"> <img src="'.$path.'"> </div>
-    //                         <input id="'.$id_image.'inputThumb" type="hidden" value="'.$path.'">
-    //                         <input id="'.$id_image.'input" type="hidden" value="'.$pathHD.'">
-    //                     </div>';
-    //                 }
-    //             }
+                        echo '
+                        <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
+                            <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img src="../../assets/erase1.svg"></div>
+                            <div class="buttonUploadImg"> <img src="'.$path.'"> </div>
+                            <input id="'.$id_image.'inputThumb" type="hidden" value="'.$path.'">
+                            <input id="'.$id_image.'input" type="hidden" value="'.$pathHD.'">
+                        </div>';
+                    }
+                }
 
-    //             echo '
-    //                 <div class="inputThumbnail">
-    //                     <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
-    //                     <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
-    //                 </div>
-    //                 </div>
-    //             </form>';
-    //         }
-    //     }
-    // }
+                echo '
+                    <div class="inputThumbnail">
+                        <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
+                        <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
+                    </div>
+                    </div>
+                </form>';
+            }
+        }
+    }
     ?>
 </div>
 
@@ -352,48 +352,48 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 </script>
 
 <script>
-//    let adicionarProdutor = () => {
-//     let chaveAcesso = document.getElementById('chaveAcesso').value; 
-//     let fornecedor = document.getElementById('fornecedor').value; 
+   let adicionarProdutor = () => {
+    let chaveAcesso = document.getElementById('chaveAcesso').value; 
+    let fornecedor = document.getElementById('fornecedor').value; 
 
-//     let formData = new FormData();
+    let formData = new FormData();
 
-//     formData.append('chaveAcesso', chaveAcesso);
-//     formData.append('fornecedor', fornecedor);
+    formData.append('chaveAcesso', chaveAcesso);
+    formData.append('fornecedor', fornecedor);
 
-//     fetch('adicionarProdutor.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.text())
-//     .then(data => {
-//         console.log(data);
+    fetch('adicionarProdutor.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
        
-//     })
-//     .catch(error => {
-//         console.error('Erro:', error);
-//     });
-// }
-//    let deleteProdutorInspecao = (id) => {
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+}
+   let deleteProdutorInspecao = (id) => {
    
-//     let formData = new FormData();
+    let formData = new FormData();
 
-//     formData.append('idItem', id);
+    formData.append('idItem', id);
 
-//     fetch('deletarProdutorInspecao.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.text())
-//     .then(data => {
-//         console.log(data);
-//         window.location.reload()
+    fetch('deletarProdutorInspecao.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        window.location.reload()
        
-//     })
-//     .catch(error => {
-//         console.error('Erro:', error);
-//     });
-// }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+}
 
 </script>
 
