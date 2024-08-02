@@ -52,12 +52,13 @@ header{
     display: flex;
     color: var(--cor03);
     font-weight: 700;
-    justify-content: center;
+    justify-content: space-around;
+    /* margin: 0px 30px 0px 30px; */
     align-items: center;
     position: relative;
 }
 .forncedorNum{
-    position: absolute;
+    /* position: absolute; */
     left: 8px;
 }
 /*container com os thumbnails das imagens*/
@@ -81,6 +82,26 @@ header{
     position: absolute;
     right: 0.5px;
     top: 3px;
+}
+
+.inputSearchHeaderInspecao{
+    width: 60%;
+    position: absolute;
+    top: 40px;
+
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.buttonAdicionarProdutor{
+    width: 94%;
+    margin: 4px 5px 0px 5px;
+    height: 26px;
+    background-color: var(--cor02);
+    color: white;
+    font-size: 1.2em;
 }
 
 .inputThumbnail{
@@ -300,6 +321,22 @@ footer{
        width: 50%;
        margin: auto;
    }
+   .buttonAdicionarProdutor{
+    width: 34%;
+  
+}
+  
+.inputSearchHeaderInspecao{
+    width: 60%;
+    position: absolute;
+    top: 40px;
+
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
    
    .editTable{
        justify-content: space-evenly;
@@ -319,3 +356,4 @@ footer{
    }
  
    }
+
