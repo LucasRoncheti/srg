@@ -300,7 +300,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 
 
 
-        <form method="POST" class="inputSearchHeaderInspecao" id="form-pesquisa2" action="">
+        <form  class="inputSearchHeaderInspecao" id="form-pesquisa2" action="">
             <input id="chaveAcesso" type="hidden" value= "<?php echo $id;?>">
             <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
 
@@ -367,7 +367,8 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
+        alert(data);
+        window.location.reload();
        
     })
     .catch(error => {
