@@ -38,6 +38,8 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
         echo '      </div>';
         echo '     <div class="apagarImprimir">';
         echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>';
+        echo '   <img style="cursor:pointer;" onclick="deletarInspecao('.$row_sql['id'].')" src="../assets/erase.svg">';
+        echo '   <img style="cursor:pointer;" onclick="editarInspecao('.$row_sql['id'].','.$row_sql['nome'].','.$row_sql['numero_container'].','.$row_sql['data_inspecao'].')" src="../assets/edit.svg">';
         echo '      </div>';
         echo '  </div>';
     }

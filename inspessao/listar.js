@@ -39,6 +39,7 @@ function listar(pagina, qnt_result_pg) {
                 // Manipula a resposta do servidor
                 alert('Inspeção salva com sucesso!');
                 console.log(response);
+                window.location.reload();
             },
             error: function(xhr, status, error) {
                 // Manipula erros
@@ -46,6 +47,79 @@ function listar(pagina, qnt_result_pg) {
             }
         });
     }
+
+
+    function deletarInspecao(id) {
+        if (confirm('Tem certeza que deseja deletar esta inspeção?')) {
+            $.ajax({
+                url: 'deletarInspecao.php', // O arquivo PHP que processará a exclusão
+                type: 'POST',
+                data: { id: id },
+                success: function(response) {
+                    alert(response); // Mensagem do servidor (sucesso ou erro)
+                    // Remover a inspeção deletada da interface, se necessário
+                    window.location.reload() // Supondo que cada inspeção tenha um ID HTML correspondente
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao deletar a inspeção:', error);
+                    alert('Houve um erro ao tentar deletar a inspeção.');
+                }
+            });
+        }
+    }
+
+function fecharDivEdicao(){
+    document.getElementById('divEditarInspecao').style.display = 'none';
+}
+    function editarInspecao(id, nome, numeroContainer, data) {
+
+        console.log(id,nome,numeroContainer,data)
+        // Exibir o formulário de edição
+        document.getElementById('divEditarInspecao').style.display = 'block';
+    
+        // Preencher os campos do formulário com os dados da inspeção
+        $('#editarNome').val(nome);
+        $('#editarNumero_container').val(numeroContainer);
+        $('#editarData').val(data);
+    
+        // Adicionar o ID ao formulário de edição
+        $('#divEditarInspecao').data('id', id);
+    }
+
+
+    function salvarEdicaoInspecao() {
+        // Obter o ID da inspeção a partir do div de edição
+        var id = $('#divEditarInspecao').data('id');
+    
+        // Obter os valores dos campos do formulário
+        var nome = $('#editarNome').val();
+        var numeroContainer = $('#editarNumero_container').val();
+        var dataInspecao = $('#editarData').val();
+    
+        // Enviar os dados via AJAX para o servidor
+        $.ajax({
+            url: 'editarInspecao.php', // O arquivo PHP que processará a edição
+            type: 'POST',
+            data: {
+                id: id,
+                nome: nome,
+                numero_container: numeroContainer,
+                data_inspecao: dataInspecao
+            },
+            success: function(response) {
+                alert(response); // Mensagem do servidor (sucesso ou erro)
+              
+                $('#divEditarInspecao').hide(); // Esconder o formulário de edição
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao editar a inspeção:', error);
+                alert('Houve um erro ao tentar editar a inspeção.');
+            }
+        });
+    }
+        
+    
    
 
 

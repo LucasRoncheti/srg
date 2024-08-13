@@ -76,6 +76,9 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 
 <body id="body" onload="onLoad()">
 
+
+
+
     <!--Menu mobile   -->
 
     <div style="z-index:9999999999;" id="mobileMenu" class="mobileMenuContainer ">

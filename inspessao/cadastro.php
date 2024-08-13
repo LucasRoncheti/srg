@@ -154,6 +154,7 @@ if (!isset($_SESSION['id'])) {
             <input name="data_inspecao" type="date">
             <button type="button" onclick="salvarInspecao()">Salvar</button>
         </form>
+       
 
     </header>
 
@@ -164,7 +165,21 @@ if (!isset($_SESSION['id'])) {
         <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
     </form>
 
+    <div  id="divEditarInspecao" style="display:none;" class="divEditarInspecao">
+        <h4>Editar Inspeção</h4>
+        <form class="formEditarInspecao" action="">
+   
+            <p>Nome</p>
+            <input id="editarNome" name="nome" placeholder="Nome" type="text">
+            <p>Numero Container</p>
+            <input id="editarNumero_container" name="numero_container" placeholder="N° Container" type="number">
+            <p>Data</p>
+            <input id="editarData" name="data_inspecao" type="date">
+            <button type="button" onclick="salvarEdicaoInspecao()">Salvar</button>
+            <button style="background-color:red;" type="button" onclick="fecharDivEdicao()">Cancelar</button>
 
+        </form>
+        </div>
 
     <section id="containerList" class="containerList">
 
