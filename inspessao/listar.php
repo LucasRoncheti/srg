@@ -18,7 +18,7 @@ $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBE
 $inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
 
 //consultar no banco de dados
-$result_sql = "SELECT * FROM pedidoscadastro ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
+$result_sql = "SELECT * FROM inspecoes ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
 $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
@@ -27,18 +27,17 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
 
 
     while ($row_sql = mysqli_fetch_assoc($resultado_sql)) {
-        $dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
+        $dataFormatada = date('d/m/y', strtotime($row_sql['data_inspecao']));
         echo ' <div class="containerDadosPedidos">';
         echo '     <div class="numberDate">';
-        echo '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
-        echo '        <div class="dataPedido">' . $dataFormatada . '</div>';
+        echo '         <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . $row_sql['numero_container'] . ' </div>';
+        echo '        <div class="dataPedido">Data ' . $dataFormatada . '</div>';
         echo '      </div>';
         echo '      <div class="dadosPedidos">';
-        echo '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
-        echo '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100, 2, ",", ".") . '</div>';
+        echo '          <div class="nomeClientePedido">' . $row_sql['nome'] . '</div>';
         echo '      </div>';
         echo '     <div class="apagarImprimir">';
-        echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['chaveAcesso']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['cliente']) . '"><img src="../assets/file_green.svg"></a>';
+        echo '<a href="../inspessao/listarPedido/salvarInspessao.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>';
         echo '      </div>';
         echo '  </div>';
     }

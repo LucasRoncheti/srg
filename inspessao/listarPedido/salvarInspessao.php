@@ -14,6 +14,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $id = $_GET['id'];
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
+    $numero_container = $_GET['numero_container'];
     
     // Use uma consulta preparada para evitar injeção de SQL
     $stmt = $conn->prepare("SELECT * FROM inspecao WHERE chaveAcesso = ?");
@@ -153,7 +154,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
            <img src="../../assets/categories/inspessao.svg" alt=""> <H3>N° <?php echo $numero;?> <?php echo $cliente;?></H3>
            <?php
                 echo   '     <div class="apagarImprimir">';
-                echo '<a href="../listarPedido/print/printInspessao.php?id=' . $id . '&numero=' . $numero . '&cliente=' . $cliente . '"><img style = "width:25px;margin-left:15px" src="../../assets/print.svg"></a>';
+                echo '<a href="../listarPedido/print/printInspessao.php?id=' . $id . '&numero=' . $numero . '&cliente=' . $cliente .'&numero_container=' . $numero_container. '"><img style = "width:25px;margin-left:15px" src="../../assets/print.svg"></a>';
                 echo '      </div>';
             ?>
            </div>

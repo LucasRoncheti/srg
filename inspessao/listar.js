@@ -25,6 +25,27 @@ function listar(pagina, qnt_result_pg) {
 
     }
 
+
+    function salvarInspecao() {
+        // Cria um objeto FormData com os dados do formulário
+        var formData = $('.formCadastroInspecao').serialize();
+    
+        // Faz a requisição AJAX para salvar os dados
+        $.ajax({
+            type: 'POST',
+            url: 'salvarInspecao.php',
+            data: formData,
+            success: function(response) {
+                // Manipula a resposta do servidor
+                alert('Inspeção salva com sucesso!');
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Manipula erros
+                console.error('Erro ao salvar inspeção:', error);
+            }
+        });
+    }
    
 
 

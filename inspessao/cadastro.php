@@ -144,6 +144,15 @@ if (!isset($_SESSION['id'])) {
             <img style="width: 40px;" src="../assets/categories/inspessao.svg" alt="">
 
             <h2 style="color:white;font-size: 2em;margin-bottom: 10px;">INSPEÇÃO</h2>
+            <h2> </h2>
+        </form>
+
+        <form class="formCadastroInspecao" action="">
+            <p class="nomeInspecaoMobile">Inspeção</p>
+            <input name="nome" placeholder="Nome" type="text">
+            <input name="numero_container" placeholder="N° Container" type="number">
+            <input name="data_inspecao" type="date">
+            <button type="button" onclick="salvarInspecao()">Salvar</button>
         </form>
 
     </header>

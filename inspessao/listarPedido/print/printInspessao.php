@@ -15,14 +15,18 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
+    $container = $_GET['numero_container'];
 
     // Use uma consulta preparada para evitar injeção de SQL
-    $stmt = $conn->prepare("SELECT * FROM pedidos_dados WHERE chaveAcesso = ?");
+    $stmt = $conn->prepare("SELECT * FROM inspecoes WHERE id = ?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-
+    $stmt2 = $conn->prepare("SELECT * FROM inspecao WHERE id = ?");
+    $stmt2->bind_param("s", $id);
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();
 }
 ?>
 
@@ -63,7 +67,7 @@ if (isset($_GET['id'])) {
 
 
 <div class="botoes">
-    <button onclick="imprimirPagina()"><img style="width:30px;" src="../../../assets/printwhite.svg"
+    <button onclick="imprimirPaginaSimples()"><img style="width:30px;" src="../../../assets/printwhite.svg"
             alt=""></button><br>
     <button id="downLoadButton" onclick="downloadAllImages()"><img src="../../../assets/arowDown.svg" alt=""></button><br>
     <button onclick="backPage()"><img src="../../../assets/backArrow.svg" alt=""></button><br>
@@ -97,8 +101,9 @@ if (isset($_GET['id'])) {
 
     <header>
         <div class="cabecalhoNome">
-            <H3>INSPEÇÃO PEDIDO N°
-                <?php echo $numero; ?>
+            <H3> N°
+                <?php echo $numero.'|'; ?>
+                <?php echo'Container'. $container.'|'; ?>
                 <?php echo $cliente; ?> | DATA
                 <?php echo date("d/m/y") ?>
             </H3>
@@ -111,8 +116,8 @@ if (isset($_GET['id'])) {
     <div class="containerList">
 
         <?php
-        if ($result && $result->num_rows != 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+        if ($result2 && $result2->num_rows != 0) {
+            while ($row = mysqli_fetch_assoc($result2)) {
                 $fornecedor = $row['fornecedor'];
                 $id_item = $row['id'];
 
@@ -206,6 +211,14 @@ if (isset($_GET['id'])) {
     window.onafterprint = function () {
         //  window.history.back()
     };
+
+    
+function imprimirPaginaSimples(){
+
+
+window.print()
+
+}
 </script>
 
 

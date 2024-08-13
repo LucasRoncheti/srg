@@ -9,6 +9,11 @@ function imprimirPagina(){
 }
 
 
+
+
+
+
+
 function imprimirRelatorios(){
    
 
