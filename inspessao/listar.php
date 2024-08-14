@@ -51,7 +51,7 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
 
 
     //Paginação - Somar a quantidade de usuários
-        $result_pg = "SELECT COUNT(id) AS num_result FROM pedidoscadastro";
+        $result_pg = "SELECT COUNT(id) AS num_result FROM inspecoes";
         $resultado_pg = mysqli_query($conn, $result_pg);
         $row_pg = mysqli_fetch_assoc($resultado_pg);
 

@@ -102,6 +102,7 @@ header{
     background-color: var(--cor02);
     color: white;
     font-size: 1.2em;
+    cursor: pointer;
 }
 
 .inputThumbnail{
@@ -326,6 +327,7 @@ footer{
     text-align: center;
     border-radius: 10px;
     border: solid  1px rgba(97, 11, 11, 0.654);
+    cursor: pointer;
   
 }
   

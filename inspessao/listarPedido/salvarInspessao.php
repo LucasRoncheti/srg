@@ -195,7 +195,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
                 <div class="dadosFornecedor">
                     <div class="forncedorNum">N° ' . $numero . '</div>
                     <div class="nomeFornecedor"> ' . $fornecedor . '</div>
-                    <img onclick="deleteProdutorInspecao('.$id_item.')" style="width:20px;"  src="../../assets/delete.svg">
+                    <img onclick="deleteProdutorInspecao('.$id_item.')" style="width:20px;cursor:pointer;"  src="../../assets/delete.svg">
 
                 </div>
                 <div class="inputContainer">';
