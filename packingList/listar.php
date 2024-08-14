@@ -2,92 +2,84 @@
 
 include '../generalPhp/conection.php';
 
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
 
-if(!isset($_SESSION['id'])) {
-    die( header("Location: ../index.php"));
-   
+if (!isset($_SESSION['id'])) {
+    header("Location: ../index.php");
+    exit();
 }
 
+// Paginação
+$pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT) ?: 1;
+$qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT) ?: 10;
+$inicio = ($pagina - 1) * $qnt_result_pg;
 
+// Consultar no banco de dados
+$sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT ?, ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ii", $inicio, $qnt_result_pg);
+$stmt->execute();
+$resultado_sql = $stmt->get_result();
 
+// Verificar se encontrou resultado na tabela "listpack"
+if ($resultado_sql && $resultado_sql->num_rows > 0) {
+    ob_start(); // Inicia o buffer de saída
 
-//paginação
-$pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT);
-$qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT);
-//calcular o inicio visualização
-$inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
+    while ($row_sql = $resultado_sql->fetch_assoc()) {
+        $dataFormatada = date('d/m/Y', strtotime($row_sql['data_packingList']));
+        echo '
+        <div class="containerDadosPedidos">
+            <div class="numberDate">
+                <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . htmlspecialchars($row_sql['numero_container']) . ' </div>
+                <div class="dataPedido">Data ' . htmlspecialchars($dataFormatada) . '</div>
+            </div>
+            <div class="dadosPedidos">
+                <div class="nomeClientePedido">' . htmlspecialchars($row_sql['nome']) . '</div>
+            </div>
+            <div class="apagarImprimir">
+                <a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>
+                <img style="cursor:pointer;" onclick="deletarPackingList(' . (int)$row_sql['id'] . ')" src="../assets/erase.svg">
+                <img style="cursor:pointer;" onclick="editarPackingList(' . (int)$row_sql['id'] . ',\'' . addslashes($row_sql['nome']) . '\',' . (int)$row_sql['numero_container'] . ',\'' . addslashes($row_sql['data_packingList']) . '\')" src="../assets/edit.svg">
+            </div>
+        </div>';
+    }
 
-//consultar no banco de dados
-$result_sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
-$resultado_sql = mysqli_query($conn, $result_sql);
+    // Paginação - Somar a quantidade de registros
+    $sql_pg = "SELECT COUNT(id) AS num_result FROM listpack";
+    $result_pg = $conn->query($sql_pg);
+    $row_pg = $result_pg->fetch_assoc();
+    $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
 
-//Verificar se encontrou resultado na tabela "sqls"
-if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
-   
+    // Limitar os links antes e depois
+    $max_links = 2;
+    echo "<div class='divPagina'>";
+    echo "<a href='#' onclick='listar(1, $qnt_result_pg)'>&lt;PRIMEIRA</a> ";
 
+    for ($pag_ant = max(1, $pagina - $max_links); $pag_ant < $pagina; $pag_ant++) {
+        echo " <a href='#' onclick='listar($pag_ant, $qnt_result_pg)'>$pag_ant </a> ";
+    }
 
-	while($row_sql = mysqli_fetch_assoc($resultado_sql)){
-        $dataFormatada = date('d/m/y', strtotime($row_sql['data_packingList']));
-        echo ' <div class="containerDadosPedidos">';
-        echo '     <div class="numberDate">';
-        echo '         <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . $row_sql['numero_container'] . ' </div>';
-        echo '        <div class="dataPedido">Data ' . $dataFormatada . '</div>';
-        echo '      </div>';
-        echo '      <div class="dadosPedidos">';
-        echo '          <div class="nomeClientePedido">' . $row_sql['nome'] . '</div>';
-        echo '      </div>';
-        echo '     <div class="apagarImprimir">';
-        echo '<a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>';
-        echo '   <img style="cursor:pointer;" onclick="deletarPackingList('.$row_sql['id'].')" src="../assets/erase.svg">';
-        echo '   <img style="cursor:pointer;" onclick="editarPackingList('.$row_sql['id'].',\''.$row_sql['nome'].'\','.$row_sql['numero_container'].','.$row_sql['data_packingList'].')" src="../assets/edit.svg">';
-        echo '      </div>';
-        echo '  </div>';
-	}
+    echo " $pagina ";
 
-    
+    for ($pag_dep = $pagina + 1; $pag_dep <= min($pagina + $max_links, $quantidade_pg); $pag_dep++) {
+        echo " <a href='#' onclick='listar($pag_dep, $qnt_result_pg)'>$pag_dep</a> ";
+    }
 
-        //Paginação - Somar a quantidade de usuários
-        $result_pg = "SELECT COUNT(id) AS num_result FROM listpack";
-        $resultado_pg = mysqli_query($conn, $result_pg);
-        $row_pg = mysqli_fetch_assoc($resultado_pg);
+    echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
+    echo '</div>';
 
-        //Quantidade de pagina
-        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
+    ob_end_flush(); // Libera o conteúdo do buffer de saída
 
-        //Limitar os link antes depois
-        $max_links = 2;
-        echo "<div class ='divPagina'>";
-        echo "<a href='#' onclick='listar(1, $qnt_result_pg)'>&lt;PRIMEIRA</a> ";
+} else {
+    echo '
+    <div class="notFound">
+        <img class="notFoundImg" src="../assets/notFound.svg" alt="">
+        <h3>NENHUM PEDIDO SALVO</h3>
+    </div>';
+}
 
-        for($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++){
-            if($pag_ant >= 1){
-                echo " <a href='#' onclick='listar($pag_ant, $qnt_result_pg)'>$pag_ant </a> ";
-            }
-        }
-
-        echo " $pagina ";
-
-        for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
-            if($pag_dep <= $quantidade_pg){
-                echo " <a href='#' onclick='listar($pag_dep, $qnt_result_pg)'>$pag_dep</a> ";
-            }
-        }
-
-        echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
-        echo '</div>';
-        }else{
-            echo '
-			<div class="notFound">
-				<img  class="notFoundImg" src="../assets/notFound.svg" alt="">
-				<h3>NENHUM PEDIDO SALVO</h3>
-			</div>
-		
-		';
-        }
-
-
-
-
+// Fechar a conexão
+$conn->close();
+?>

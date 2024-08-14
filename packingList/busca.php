@@ -6,7 +6,7 @@
 	$busca = $_POST['palavra'];
 	
 	//Pesquisar no banco de dados nome do curso referente a palavra digitada pelo usuário
-	$sql = "SELECT * FROM pedidoscadastro WHERE cliente  LIKE '%$busca%'";
+	$sql = "SELECT * FROM listpack WHERE nome  LIKE '%$busca%'";
 	$resultado_sql= mysqli_query($conn, $sql);
 
 
@@ -23,20 +23,21 @@
 
 		while($row_sql = mysqli_fetch_assoc($resultado_sql)){
 			
-			$dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
-			echo   ' <div class="containerDadosPedidos">';
-			echo   '     <div class="numberDate">';
-			echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
-			echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
-			echo  '      </div>';
-			echo  '      <div class="dadosPedidos">';
-			echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
-			echo   '         <div class="valorTotalPedidoPedido">' . $row_sql['valor_total'] . '</div>';
-			echo  '      </div>';
-			echo   '     <div class="apagarImprimir">';    
-			echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/greenFile.svg" > </a>';
-			echo  '      </div>';
-			echo  '  </div>';
+			$dataFormatada = date('d/m/y', strtotime($row_sql['data_packingList']));
+			echo ' <div class="containerDadosPedidos">';
+			echo '     <div class="numberDate">';
+			echo '         <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . $row_sql['numero_container'] . ' </div>';
+			echo '        <div class="dataPedido">Data ' . $dataFormatada . '</div>';
+			echo '      </div>';
+			echo '      <div class="dadosPedidos">';
+			echo '          <div class="nomeClientePedido">' . $row_sql['nome'] . '</div>';
+			echo '      </div>';
+			echo '     <div class="apagarImprimir">';
+			echo '<a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>';
+			echo '   <img style="cursor:pointer;" onclick="deletarPackingList('.$row_sql['id'].')" src="../assets/erase.svg">';
+			echo '   <img style="cursor:pointer;" onclick="editarPackingList('.$row_sql['id'].',\''.$row_sql['nome'].'\','.$row_sql['numero_container'].','.$row_sql['data_packingList'].')" src="../assets/edit.svg">';
+			echo '      </div>';
+			echo '  </div>';
 		}
 	
 	}
