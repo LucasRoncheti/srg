@@ -15,7 +15,7 @@ function listar(pagina, qnt_result_pg) {
         pagina: pagina,
         qnt_result_pg: qnt_result_pg
     }
-    $.post('./listar.php', dados , function(retorna){
+    $.post('listar.php', dados , function(retorna){
         //seletor id no html
         $("#containerList").html(retorna);
     });
@@ -59,7 +59,7 @@ function listar(pagina, qnt_result_pg) {
                 success: function(response) {
                     alert(response); // Mensagem do servidor (sucesso ou erro)
                     // Remover a inspeção deletada da interface, se necessário
-                    listar(1,10)// Supondo que cada inspeção tenha um ID HTML correspondente
+                  window.location.reload()// Supondo que cada inspeção tenha um ID HTML correspondente
                 },
                 error: function(xhr, status, error) {
                     console.error('Erro ao deletar a Packing List:', error);
