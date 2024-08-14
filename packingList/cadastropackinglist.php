@@ -191,7 +191,7 @@ if (!isset($_SESSION['id'])) {
         $inicio = ($pagina - 1) * $qnt_result_pg;
 
         // Consultar no banco de dados
-        $sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT ?, ?";
+        $sql = "SELECT * FROM listPack ORDER BY id DESC LIMIT ?, ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $inicio, $qnt_result_pg);
         $stmt->execute();
