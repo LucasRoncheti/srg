@@ -33,7 +33,9 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $resultx = $stmtx->get_result();
     
 } else {
-    die("Parâmetros necessários não fornecidos.");
+    
+   header("Location:../cadastro.php");
+   
 }
 ?>
 
@@ -169,7 +171,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
    
 
        
-        <div class="containerList">
+        <div id="containerList"class="containerList">
     <?php 
     // Processa os resultados do primeiro conjunto ($result)
     if ($result && $result->num_rows != 0) {
@@ -324,7 +326,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
             ?>
 
             </select>
-            <button  class="buttonAdicionarProdutor" onclick="adicionarProdutor()">Adicionar Produtor</button>
+            <div class="buttonAdicionarProdutor" onclick="adicionarProdutor()">Adicionar Produtor</div>
         </form>
 
         <footer>
@@ -340,6 +342,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 <script src="../../generalScripts/version.js"></script>
 
 <script src="../../generalScripts/backPage.js"></script>
+
 <script src="upload.js"></script>
 <script src="apagarImg.js"></script>
 <script src="abrirImgHD.js"></script>
@@ -356,6 +359,10 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 </script>
 
 <script>
+
+
+
+
    let adicionarProdutor = () => {
     let chaveAcesso = document.getElementById('chaveAcesso').value; 
     let fornecedor = document.getElementById('fornecedor').value; 
@@ -379,6 +386,8 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
         console.error('Erro:', error);
     });
 }
+
+
    let deleteProdutorInspecao = (id) => {
    
     let formData = new FormData();
@@ -392,7 +401,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        window.location.reload()
+      window.location.reload();
        
     })
     .catch(error => {

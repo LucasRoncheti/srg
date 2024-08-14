@@ -323,6 +323,9 @@ footer{
    }
    .buttonAdicionarProdutor{
     width: 34%;
+    text-align: center;
+    border-radius: 10px;
+    border: solid  1px rgba(97, 11, 11, 0.654);
   
 }
   

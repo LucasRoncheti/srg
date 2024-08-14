@@ -58,7 +58,7 @@ function listar(pagina, qnt_result_pg) {
                 success: function(response) {
                     alert(response); // Mensagem do servidor (sucesso ou erro)
                     // Remover a inspeção deletada da interface, se necessário
-                    window.location.reload() // Supondo que cada inspeção tenha um ID HTML correspondente
+                    listar(1,10)// Supondo que cada inspeção tenha um ID HTML correspondente
                 },
                 error: function(xhr, status, error) {
                     console.error('Erro ao deletar a inspeção:', error);
