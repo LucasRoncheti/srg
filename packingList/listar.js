@@ -22,6 +22,106 @@ function listar(pagina, qnt_result_pg) {
 
     }
 
+
+
+
+
+
+    function salvarPackingList() {
+        // Cria um objeto FormData com os dados do formulário
+        var formData = $('.formCadastroPackingList').serialize();
+    
+        // Faz a requisição AJAX para salvar os dados
+        $.ajax({
+            type: 'POST',
+            url: 'salvarPackingList.php',
+            data: formData,
+            success: function(response) {
+                // Manipula a resposta do servidor
+                alert('Packing List salvo com sucesso!');
+                console.log(response);
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                // Manipula erros
+                console.error('Erro ao salvar inspeção:', error);
+            }
+        });
+    }
+
+
+    function deletarPackingList(id) {
+        if (confirm('Tem certeza que deseja deletar este Packing  List?')) {
+            $.ajax({
+                url: 'deletarPackingList.php', // O arquivo PHP que processará a exclusão
+                type: 'POST',
+                data: { id: id },
+                success: function(response) {
+                    alert(response); // Mensagem do servidor (sucesso ou erro)
+                    // Remover a inspeção deletada da interface, se necessário
+                    listar(1,10)// Supondo que cada inspeção tenha um ID HTML correspondente
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao deletar a Packing List:', error);
+                    alert('Houve um erro ao tentar deletar a Packing List.');
+                }
+            });
+        }
+    }
+
+function fecharDivEdicao(){
+    document.getElementById('divEditarPackingList').style.display = 'none';
+}
+
+ function editarPackingList(id, nome, numeroContainer, data) {
+
+        console.log(id,nome,numeroContainer,data)
+        // Exibir o formulário de edição
+        document.getElementById('divEditarPackingList').style.display = 'block';
+    
+        // Preencher os campos do formulário com os dados da inspeção
+        $('#editarNome').val(nome);
+        $('#editarNumero_container').val(numeroContainer);
+        $('#editarData').val(data);
+    
+        // Adicionar o ID ao formulário de edição
+        $('#divEditarPackingList').data('id', id);
+    }
+
+
+function salvarEdicaoPackingList() {
+        // Obter o ID da inspeção a partir do div de edição
+        var id = $('#divEditarPackingList').data('id');
+    
+        // Obter os valores dos campos do formulário
+        var nome = $('#editarNome').val();
+        var numeroContainer = $('#editarNumero_container').val();
+        var dataPackingList = $('#editarData').val();
+    
+        // Enviar os dados via AJAX para o servidor
+        $.ajax({
+            url: 'editarPackingList.php', // O arquivo PHP que processará a edição
+            type: 'POST',
+            data: {
+                id: id,
+                nome: nome,
+                numero_container: numeroContainer,
+                data_PackingList: dataPackingList
+            },
+            success: function(response) {
+                alert(response); // Mensagem do servidor (sucesso ou erro)
+              
+                $('#divEditarPackingList').hide(); // Esconder o formulário de edição
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao editar a Packing  List:', error);
+                alert('Houve um erro ao tentar editar a PackingList.');
+            }
+        });
+    }
+        
+    
    
 
 

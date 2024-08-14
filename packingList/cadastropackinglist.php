@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../onLoad/onLoad.css">
     <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="../pedidos/cadastro.css">
+   <link rel="stylesheet" href="packingListCabecalho.css">
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
 
     
@@ -139,10 +140,19 @@
         
         <form id="cadastroForm">
     
-            <img style="width: 40px;"  src="../assets/categories/packing_list.svg" alt="">
+
     
-            <h2  style="color:white;font-size: 2em;margin-bottom: 10px;">PACKING LIST</h2>
+            <h2  style="color:white;font-size: 1.6em;margin-bottom: 10px;">PACKING LIST</h2>
         </form>
+
+        <form class="formCadastroPackingList" action="">
+            <p class="nomePackingListMobile">Packing List</p>
+            <input name="nome" placeholder="Nome" type="text">
+            <input name="numero_container" placeholder="N° Container" type="number">
+            <input name="data_PackingList" type="date">
+            <button type="button" onclick="salvarPackingList()">Salvar</button>
+        </form>
+       
        
        </header>
    
@@ -153,7 +163,21 @@
         <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
     </form>
 
- 
+    <div  id="divEditarPackingList" style="display:none;" class="divEditarPackingList">
+        <h4>Editar Packing  List</h4>
+        <form class="formEditarPackingList" action="">
+   
+            <p>Nome</p>
+            <input id="editarNome" name="nome" placeholder="Nome" type="text">
+            <p>Numero Container</p>
+            <input id="editarNumero_container" name="numero_container" placeholder="N° Container" type="number">
+            <p>Data</p>
+            <input id="editarData" name="data_PackingList" type="date">
+            <button type="button" onclick="salvarEdicaoPackingList()">Salvar</button>
+            <button style="background-color:red;" type="button" onclick="fecharDivEdicao()">Cancelar</button>
+
+        </form>
+        </div>
   
    <section id="containerList" class="containerList">
     

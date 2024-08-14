@@ -71,7 +71,8 @@ function listar(pagina, qnt_result_pg) {
 function fecharDivEdicao(){
     document.getElementById('divEditarInspecao').style.display = 'none';
 }
-    function editarInspecao(id, nome, numeroContainer, data) {
+
+ function editarInspecao(id, nome, numeroContainer, data) {
 
         console.log(id,nome,numeroContainer,data)
         // Exibir o formulário de edição
@@ -87,7 +88,7 @@ function fecharDivEdicao(){
     }
 
 
-    function salvarEdicaoInspecao() {
+function salvarEdicaoInspecao() {
         // Obter o ID da inspeção a partir do div de edição
         var id = $('#divEditarInspecao').data('id');
     

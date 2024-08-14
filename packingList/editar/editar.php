@@ -13,19 +13,22 @@ if(!isset($_SESSION['id'])) {
 if (isset($_GET['id'])) {
     // Retrieve the 'id' value from the URL
     $id = $_GET['id'];
+    $numeroContainer = $_GET['numero_container'];
+    $nome = $_GET['cliente'];
+    $numero = $_GET['numero'];
 
     // Create a SQL query to fetch the data for the specified 'id'
     $sql = "SELECT * FROM pedidos_dados WHERE chaveAcesso = '$id'";
     $result = mysqli_query($conn, $sql);
 
-    $sql1 = "SELECT * FROM pedidoscadastro WHERE chaveAcesso ='$id'";
+    $sql1 = "SELECT * FROM listpack WHERE id ='$id'";
     $resultSql1 = mysqli_query($conn,$sql1);
 
     if($resultSql1 && $resultSql1->num_rows !=0){
         while($row = mysqli_fetch_assoc($resultSql1)){
-            $valorTotalSalvoPedido = $row['valor_total'];
-            $cliente = $row['cliente'];
-            $dataDoPedido = $row['dataAtual'];
+            // $valorTotalSalvoPedido = $row['valor_total'];
+            $cliente = $row['nome'];
+            $dataDoPedido = $row['data_packingList'];
             $idPedido = $row['id'];
         }
     }
@@ -98,7 +101,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <!-- <div class="dadosPedidos">
-    <div> N&deg; PEDIDO <STRONg> <?php echo $idPedido ?></STRONg></div>
+    <div> N&deg; PEDIDO <STRONg> <?php echo $id ?></STRONg></div>
     <div> EMISSÃO: <strong><?php echo date('d/m/y',strtotime($dataAtual)) ?></strong></div>
     </div> -->
 
@@ -185,7 +188,8 @@ if (isset($_GET['id'])) {
 
         <div class="cabeçalhoNome" >
                 <img src="../../assets/categories/packing_list.svg" alt=""> 
-                <p> Nº <?php echo $idPedido ?></p> 
+                <p> Nº ID <?php echo $idPedido ?></p> 
+                <p> Nº  Cont. <?php echo $numeroContainer ?></p> 
                 <p class="nomeCliente"><?php echo strtoupper($cliente);?> </p> 
                 <p>  <?php echo $dataFormatada ;?></p>
         </div> 
@@ -244,10 +248,10 @@ if (isset($_GET['id'])) {
     <!-- cabeçalho da lista de produtos -->
     <div class="cabeçalhoProdutos">
         <div id="plt">PLT</div>
-        <div id="numeroFornecedor">N&deg;</div>
+        <div  style="width:8%" id="numeroFornecedor">N&deg; For.</div>
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
         <div id="quantidadeC">QNT </div>
-        <div onclick="imprimirPagina()"  id="vazioDiv"> <img style="width:15px;" src="../../assets/printwhite.svg" alt=""></div>
+        <div onclick="imprimir()"  id="vazioDiv"> <img style="width:15px;" src="../../assets/printwhite.svg" alt=""></div>
     </div>
 
 
@@ -296,7 +300,11 @@ if (isset($_GET['id'])) {
 
 
 
-
+<script>
+    let imprimir= () =>{
+window.print();
+    }
+</script>
 
 
 

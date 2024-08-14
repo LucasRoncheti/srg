@@ -21,7 +21,7 @@ $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBE
 $inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
 
 //consultar no banco de dados
-$result_sql = "SELECT * FROM pedidoscadastro ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
+$result_sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
 $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
@@ -30,30 +30,27 @@ if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
 
 
 	while($row_sql = mysqli_fetch_assoc($resultado_sql)){
-        $dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
-        echo   ' <div class="containerDadosPedidos">';
-        echo   '     <div class="numberDate">';
-        echo   '         <div class="numeroPedido">N° ' . $row_sql['id'] . ' </div>';
-        echo    '        <div class="dataPedido">' . $dataFormatada . '</div>';
-        echo  '      </div>';
-        echo  '      <div class="dadosPedidos">';
-        echo  '          <div class="nomeClientePedido">' . $row_sql['cliente'] . '</div>';
-        echo   '         <div class="valorTotalPedidoPedido"> R$ ' . number_format($row_sql['valor_total'] / 100 , 2,",",".")  . '</div>';
-        echo  '      </div>';
-        echo   '     <div class="apagarImprimir">';    
-        echo   '          <a  href="editar/editar.php?id='. $row_sql['chaveAcesso'] .'">  <img src="../assets/greenFile.svg" > </a>';
-        echo  '      </div>';
-        echo  '  </div>';
+        $dataFormatada = date('d/m/y', strtotime($row_sql['data_packingList']));
+        echo ' <div class="containerDadosPedidos">';
+        echo '     <div class="numberDate">';
+        echo '         <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . $row_sql['numero_container'] . ' </div>';
+        echo '        <div class="dataPedido">Data ' . $dataFormatada . '</div>';
+        echo '      </div>';
+        echo '      <div class="dadosPedidos">';
+        echo '          <div class="nomeClientePedido">' . $row_sql['nome'] . '</div>';
+        echo '      </div>';
+        echo '     <div class="apagarImprimir">';
+        echo '<a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>';
+        echo '   <img style="cursor:pointer;" onclick="deletarPackingList('.$row_sql['id'].')" src="../assets/erase.svg">';
+        echo '   <img style="cursor:pointer;" onclick="editarPackingList('.$row_sql['id'].',\''.$row_sql['nome'].'\','.$row_sql['numero_container'].','.$row_sql['data_packingList'].')" src="../assets/edit.svg">';
+        echo '      </div>';
+        echo '  </div>';
 	}
 
     
 
-   
-
-
-
         //Paginação - Somar a quantidade de usuários
-        $result_pg = "SELECT COUNT(id) AS num_result FROM pedidoscadastro";
+        $result_pg = "SELECT COUNT(id) AS num_result FROM listpack";
         $resultado_pg = mysqli_query($conn, $result_pg);
         $row_pg = mysqli_fetch_assoc($resultado_pg);
 
