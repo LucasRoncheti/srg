@@ -17,13 +17,13 @@ if (isset($_GET['id'])) {
     $cliente = $_GET['cliente'];
     $container = $_GET['numero_container'];
 
-    // Use uma consulta preparada para evitar injeção de SQL
+ 
     $stmt = $conn->prepare("SELECT * FROM inspecoes WHERE id = ?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $stmt2 = $conn->prepare("SELECT * FROM inspecao WHERE id = ?");
+    $stmt2 = $conn->prepare("SELECT * FROM inspecao WHERE chaveAcesso = ?");
     $stmt2->bind_param("s", $id);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
