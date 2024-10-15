@@ -10,8 +10,11 @@ if(!isset($_SESSION['id'])) {
 }
 
 // Check if 'id' parameter is provided in the URL
+
+// id é o id da inspeção 
 if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $id = $_GET['id'];
+    var_dump($id);
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
     $numero_container = $_GET['numero_container'];
@@ -24,13 +27,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     }
     $result = $stmt->get_result();
 
-    // Use uma consulta preparada para evitar injeção de SQL
-    $stmtx = $conn->prepare("SELECT * FROM pedidos_dados WHERE chaveAcesso = ?");
-    $stmtx->bind_param("s", $id);
-    if (!$stmtx->execute()) {
-        die("Erro ao executar consulta: " . $stmtx->error);
-    }
-    $resultx = $stmtx->get_result();
+ 
     
 } else {
     
@@ -179,6 +176,8 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
             $fornecedor = $row['fornecedor'];
             $id_item = $row['id'];
 
+            var_dump($row['id']);
+
             $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
             $stmt1->bind_param("s", $fornecedor);
             $stmt1->execute();
@@ -210,6 +209,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
                 while ($rows0 = mysqli_fetch_assoc($resultado0)) {
                     $path = $rows0['pathImagem'];
                     $id_image = $rows0['id'];
+                    
 
                     $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image' ";
                     $resultadoSql2 = mysqli_query($conn,$slq2);
@@ -239,68 +239,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
         }
     }
 
-    // Processa os resultados do segundo conjunto ($resultx)
-    if ($resultx && $resultx->num_rows != 0) {
-        while ($row = mysqli_fetch_assoc($resultx)) {
-            $fornecedor = $row['fornecedor'];
-            $id_item = $row['id'];
 
-            $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
-            $stmt1->bind_param("s", $fornecedor);
-            $stmt1->execute();
-            $resultado = $stmt1->get_result();
-
-            if ($resultado->num_rows > 0) {
-                $row = $resultado->fetch_assoc();
-                $numero = $row['numero'];
-            }
-
-            // Verifica se existem imagens associadas ao id_item
-            $stmt0 = $conn->prepare("SELECT * FROM imagens WHERE id_item = ?");
-            $stmt0->bind_param("i", $id_item);
-            $stmt0->execute();
-            $resultado0 = $stmt0->get_result();
-
-            if ($resultado0 && $resultado0->num_rows != 0) {
-                // Se houver imagens, exibe o formulário
-                echo '<form class="formImgens" action="upload.php" method="post" enctype="multipart/form-data">
-                    <div class="dadosFornecedor">
-                        <div class="forncedorNum">N° ' . $numero . '</div>
-                        <div class="nomeFornecedor"> ' . $fornecedor . '</div>
-                    </div>
-                    <div class="inputContainer">';
-                
-                while ($rows0 = mysqli_fetch_assoc($resultado0)) {
-                    $path = $rows0['pathImagem'];
-                    $id_image = $rows0['id'];
-
-                    $slq2 = "SELECT pathimagem FROM imagensalta WHERE id = '$id_image'";
-                    $resultadoSql2 = mysqli_query($conn, $slq2);
-
-                    if ($resultadoSql2 && $resultadoSql2->num_rows != 0) {
-                        $rows1 = mysqli_fetch_assoc($resultadoSql2);
-                        $pathHD = $rows1['pathimagem'];
-
-                        echo '
-                        <div id="'.$id_image.'thumb" class="thumbnailImageLoaded">
-                            <div class="apagarImagem" onclick="apagarImagem(\''.$id_image.'\')"><img src="../../assets/erase1.svg"></div>
-                            <div class="buttonUploadImg"> <img src="'.$path.'"> </div>
-                            <input id="'.$id_image.'inputThumb" type="hidden" value="'.$path.'">
-                            <input id="'.$id_image.'input" type="hidden" value="'.$pathHD.'">
-                        </div>';
-                    }
-                }
-
-                echo '
-                    <div class="inputThumbnail">
-                        <input type="file" accept="image/*" capture="environment" id="' . $id_item . '" style="display: none;" onchange="enviarImagem(this)">
-                        <div class="buttonUploadImg" onclick="teste(\'' . $id_item . '\')"> <img src="../../assets/photo.svg"> </div>
-                    </div>
-                    </div>
-                </form>';
-            }
-        }
-    }
     ?>
 </div>
 

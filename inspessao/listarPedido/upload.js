@@ -48,16 +48,13 @@ function enviarImagem(inputElement) {
                         method: 'POST',
                         body: formData
                     })
-                    .then(response => response.json())
+                    .then(response => response.text())
                     .then(data => {
-                        if (data.success) {
-                            if (data.message) {
-                                
-                                reload();
-                            }
-                        } else {
-                            alert('Erro ao enviar imagem: ' + (data.message || 'Mensagem não especificada'));
-                        }
+                    
+                        console.log(data);
+                        reload();
+                    
+                       
                     })
                     .catch(error => {
                         alert('Erro de rede: ' + error);

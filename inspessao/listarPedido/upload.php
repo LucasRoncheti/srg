@@ -27,21 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nome_do_arquivo = $uploadPath;
 
             if ($stmt->execute()) {
-                echo json_encode(array(
-                    'success' => true,
-                    'message' => 'Imagem  enviada e salva com sucesso.'
-                ));
+                echo 'Imagem Thumb salva com sucesso.';
+                
             } else {
-                echo json_encode(array(
-                    'success' => false,
-                    'message' => 'Erro ao inserir informações no banco de dados.'
-                ));
+                echo 'Erro ao inserir imagem Thumb no banco de dados.';
+               
             }
         } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Erro ao salvar a imagem.'
-            ));
+            echo 'Erro ao salvar a  imagem Thumb no banco de dados.';
+           
         }
 
         // Verifica se o arquivo em alta foi enviado 
@@ -56,11 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nome_do_arquivo1 = $uploadPath1;
 
                 if ($stmt->execute()) {
+                    echo 'Imagem HD salva com sucesso.';
                     
                 } else {
+                    echo 'Erro ao inserir imagem HD no banco de dados.';
                    
                 }
             } else {
+                echo 'Erro ao salvar a  imagem HD no banco de dados.';
                
             }
         }
