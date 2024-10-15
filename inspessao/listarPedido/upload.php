@@ -19,15 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filename = uniqid() . '_' . $_FILES['imagem1']['name'];
         $uploadPath = $uploadDir . $filename;
 
+        $Idimagem =  uniqid();
+        
+
         if (move_uploaded_file($_FILES['imagem1']['tmp_name'], $uploadPath)) {
-            $sql = "INSERT INTO imagens (id_item, pathImagem) VALUES (?, ?)";
+            $sql = "INSERT INTO imagens (id,id_item, pathImagem) VALUES (?, ?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ss", $id_item, $nome_do_arquivo);
+            $stmt->bind_param("sss", $Idimagem ,$id_item, $nome_do_arquivo);
             $id_item = $_POST['id_item'];
             $nome_do_arquivo = $uploadPath;
 
             if ($stmt->execute()) {
-                echo 'Imagem Thumb salva com sucesso.';
+                echo 'Imagem Thumb salva com sucesso.'.$Idimagem;
                 
             } else {
                 echo 'Erro ao inserir imagem Thumb no banco de dados.';
@@ -44,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $uploadPath1 = $uploadDir1 . $filename; // Usando o mesmo nome de arquivo
 
             if (move_uploaded_file($_FILES['imagem2']['tmp_name'], $uploadPath1)) {
-                $sql = "INSERT INTO imagensalta (id_item, pathImagem) VALUES (?, ?)";
+                $sql = "INSERT INTO imagensalta (id,id_item, pathImagem) VALUES (?, ?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ss", $id_item, $nome_do_arquivo1);
+                $stmt->bind_param("sss", $Idimagem,$id_item, $nome_do_arquivo1);
                 $nome_do_arquivo1 = $uploadPath1;
 
                 if ($stmt->execute()) {
-                    echo 'Imagem HD salva com sucesso.';
+                    echo 'Imagem HD salva com sucesso.'.$Idimagem;
                     
                 } else {
                     echo 'Erro ao inserir imagem HD no banco de dados.';
