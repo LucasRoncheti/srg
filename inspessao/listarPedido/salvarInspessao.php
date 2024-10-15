@@ -14,7 +14,7 @@ if(!isset($_SESSION['id'])) {
 // id é o id da inspeção 
 if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     $id = $_GET['id'];
-    var_dump($id);
+
     $numero = $_GET['numero'];
     $cliente = $_GET['cliente'];
     $numero_container = $_GET['numero_container'];
@@ -176,7 +176,7 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
             $fornecedor = $row['fornecedor'];
             $id_item = $row['id'];
 
-            var_dump($row['id']);
+     
 
             $stmt1 = $conn->prepare("SELECT numero FROM fornecedores WHERE nome = ?");
             $stmt1->bind_param("s", $fornecedor);
