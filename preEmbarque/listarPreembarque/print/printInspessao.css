@@ -1,0 +1,394 @@
+
+body{
+    height: auto;
+    width: 750px;
+  
+}
+
+
+header{
+    width: 100%;
+    height: 80px;
+    background-color: var(--cor03);
+    position: relative;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.174);
+}
+
+
+.headerPrint {
+    display: block;
+    background-color: white;
+    margin: 0px;
+    margin-top: 3%;
+    width: 100%;
+    height: 130px;
+ 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+}
+header{
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+
+    
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: dashed 1px black;
+    border-left: none;
+    border-right: none;
+}
+
+#nomeEmpresa{
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.dadosEmpresa p {
+    font-weight: 500;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  margin-left: 1%;
+}
+
+.dadosEmpresa p img {
+    width: 2.4%;
+}
+
+
+.dadosPedidos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    align-items: center;
+    text-align: center;
+    font-size: 0.7em;
+
+}
+
+/*cabeçalho nome do cliente*/
+.cabecalhoNome{
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cabecalhoNome h3{
+    margin-left: 10px;
+}
+
+
+
+/* form com as imagens dos clientes*/
+.formImgens{
+    width: 100%;
+    height: 210px;
+    /* background-color: var(--cor03); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2px;
+}
+/* contem os dados do fornecedor numero e nome */
+.dadosFornecedor{
+    width: 95%;
+    height: 30px;
+    background-color: var(--cor04);
+    display: flex;
+    color: var(--cor03);
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+}
+.forncedorNum{
+    position: absolute;
+    left: 8px;
+}
+/*container com os thumbnails das imagens*/
+.inputContainer{
+ width: 95%;
+ height: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ overflow: hidden;
+
+
+
+}
+
+.apagarImagem{
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+    background-color: var(--cor02);
+    border-radius: 50%;
+    padding: 5px;
+    position: absolute;
+    right: 0.5px;
+    top: 3px;
+}
+
+.inputThumbnail{
+    width: 24%;
+    height: 100%;
+    display: none;
+    position: relative;
+    border-radius: 5px;
+    display: none;
+    justify-content: center;
+}
+
+.inputThumbnail input{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+   
+}
+
+.buttonUploadImg{
+    width: 132px;
+    height: 132px;
+    background-color: var(--cor04);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: solid 1px;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.buttonUploadImg img{
+    width: 50%;
+ 
+}
+
+.thumbnailImageLoaded {
+
+width: 24%;
+
+height: 113%;
+
+position: relative;
+
+border-radius: 5px;
+
+display: flex;
+
+justify-content: center;
+}
+
+.thumbnailImageLoaded img{
+    width: 100%;
+    object-fit: contain;
+}
+/*imagem em hd */
+.imagemHD{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor04);
+}
+
+.imagemHD img{
+    width:80%
+}
+
+.closeButton{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--cor02);
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    color: white;
+    font-size: 2em;
+    
+}
+/* botão novo pedido*/
+.buttonAction{
+    width: 257px;
+    height: 42px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--cor02);
+    color: var(--branco);
+    font-size:1.5em;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+button img{
+    margin-left: 8px;
+}
+
+/*lista do container */
+.containerList{
+    width: 100%;
+    height: auto;
+    background-color:transparent;
+    overflow: auto;
+
+}
+
+.carregandoImagens{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,80%);
+
+}
+
+
+/* mensagem de erro de busca */
+
+.notFound{
+    width: 100%;
+    height: calc(100vh - 360px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.notFoundImg{
+    max-width: 150px;
+    animation-duration: 0.6s;
+    animation-name: notFound;
+}
+
+.notFound h3,p{
+    font-size: 1em;
+    margin: 5px;
+}
+
+@keyframes notFound{
+    from{
+        width: 0px;
+    }
+
+    to{
+        width: 150px;
+    }
+}
+
+
+a{
+    text-decoration: none;
+    color: var(--branco);
+   
+}
+
+
+/* css do botão de botão mobile */
+.mobileMenuButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+.botoes{
+    width:80px;
+    height:190px;
+    background-color: var(--cor02);
+    opacity: 0.7;
+    position: fixed;
+    bottom: 50%;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 10px 7px 7px rgba(0, 0, 0, 0.32);
+    padding-top: 25px;
+    z-index: 1000;
+}
+
+.botoes button{
+    background-color: transparent;
+    border: none;
+}
+/* css do botão de voltar a página anterior */
+.backButton{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 24px;
+    top: 24px;
+
+}
+
+@media print{
+    .inputThumbnail{
+        display: none;
+    }
+
+    .botoes{
+        display: none;
+    }
+}
+
+
+
+footer{
+    width: 100vw;
+    height: 28px;
+    
+    color: var(--cor03);
+
+    text-align: center;
+    font-size: 10pt;
+    font-weight: 500;
+    
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

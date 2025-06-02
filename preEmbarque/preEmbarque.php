@@ -1,0 +1,146 @@
+<?php
+//Incluir a conexão com banco de dados
+include '../generalPhp/conection.php';
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!isset($_SESSION['id'])) {
+    die(header("Location: ../index.php"));
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br" class="">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="nofollow,noindex" />
+         <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+    <title>Pré Embarque</title>
+
+    <!-- Tailwind CSS + Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+        <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Estilos e scripts existentes -->
+    <link rel="stylesheet" href="../onLoad/onLoad.css">
+    <link rel="stylesheet" href="../index/root.css">
+    <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
+    <script src="../onLoad/onLoad.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans" onload="onLoad()">
+    <!-- Preloader -->
+    <div class="overflow white" id="preload">
+        <div class="circle-line">
+            <div class="circle-red"></div>
+            <div class="circle-blue"></div>
+            <div class="circle-green"></div>
+            <div class="circle-yellow"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden">
+        <button onclick="openMenu()" class="absolute top-4 right-4">
+            <img src="../assets/x.svg" alt="Fechar Menu" class="w-6 h-6">
+        </button>
+        <div class="mt-16 px-6 space-y-4">
+            <a href="../main.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Início</a>
+            <a href="../cadastros/cadastros.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Cadastros</a>
+            <a href="../pedidos/cadastrodepedidos.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Pedidos</a>
+            <a href="../relatorios/relatorios.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Relatórios</a>
+            <a href="cadastro.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Pré Embarque</a>
+            <a href="../packingList/cadastropackinglist.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Packing List</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-green-700 dark:bg-green-800 text-white p-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <a href="../main.php">
+                <img src="../assets/backArrow.svg" alt="Voltar" class="w-6 h-6">
+            </a>
+            <h1 class="text-2xl font-bold">Pré Embarque</h1>
+        </div>
+             <button onclick="toggleTheme()" title="Alternar tema" class="text-xl text-yellow-500 hover:text-yellow-400 transition">
+          <i class="fas fa-circle-half-stroke"></i>
+        </button>
+        <button onclick="openMenu()">
+            <img src="../assets/menu_mobile.svg" alt="Menu" class="w-6 h-6">
+        </button>
+    </header>
+
+    <!-- Formulário Principal -->
+    <section class="p-6">
+        <form class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white dark:bg-gray-800 p-6 rounded-lg shadow" id="cadastroForm">
+            <input name="nome" placeholder="Nome" type="text" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            <input name="numero_container" placeholder="Nº Container" type="text" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            <input name="data" type="date" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            <button type="button" onclick="salvarPreEmbarque()" class="md:col-span-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Salvar</button>
+        </form>
+    </section>
+
+    <!-- Busca -->
+    <section class="px-6">
+        <form method="POST" id="form-pesquisa" class="mb-4">
+            <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+        </form>
+    </section>
+
+    <!-- Edição -->
+    <section id="divEditarInspecao" style="display:none;" class="px-6">
+        <div class="bg-yellow-100 dark:bg-yellow-200 p-4 rounded shadow">
+            <h4 class="font-semibold text-lg mb-2 text-gray-900">Editar Inspeção</h4>
+            <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-gray-900">Nome</label>
+                    <input id="editarNome" name="nome" type="text" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-gray-900">Nº Container</label>
+                    <input id="editarNumero_container" name="numero_container" type="text" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-gray-900">Data</label>
+                    <input id="editarData" name="data" type="date" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <button type="button" onclick="salvarEdicaoPreEmbarque()" class="md:col-span-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Salvar</button>
+                <button type="button" onclick="fecharDivEdicao()" class="md:col-span-3 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Cancelar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Listagem -->
+    <section id="containerList" class="p-6"></section>
+
+    <!-- Rodapé -->
+    <footer class="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
+        <p id="data-footer"></p>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../generalScripts/toastify.js"></script>
+       <script src="../generalScripts/darkmode.js"></script>
+    <script src="../mobileMenu/js/mobileMenu.js"></script>
+    <script src="../generalScripts/version.js"></script>
+    <script src="../generalScripts/backPage.js"></script>
+    <script src="./js/preEmbarque.js"></script>
+    <script src="../pedidos/busca.js"></script>
+</body>
+
+</html>
