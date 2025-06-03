@@ -13,6 +13,16 @@
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Cadastro Pedidos</title>
 
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
@@ -127,8 +137,14 @@
             <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
         </button>
 
-        <div>
-            <input onchange="alterarValorDataAtual()" id="dataAtual" class="dataPedido" type="date">
+        <div class="flex flex-col">
+            <label style="position: relative; " for="dataAtual">Data Atual</label>
+            <input onchange="alterarValorDataAtual()" name="dataAtual" id="dataAtual" class="dataPedido" type="date">
+        </div>
+
+        <div class="flex flex-col">
+            <label style="position: relative;"  for="dataRetirada">Data de Retirada</label>
+            <input onchange="alterarValorDataRetirada()" id="dataRetirada" class="dataPedido" type="date">
         </div>
 
 
@@ -154,7 +170,7 @@
             <div class="valoresContainer">
                 <div class="valores">
                     <div class="valorUnit">Unit.</div>
-                    <div id="valorUnit" class="valorUnit">R$ 0,00</div>
+                    <input id="valorUnit" class="valorUnit" value="R$ 0,00">
                 </div>
                 <div class="valores">
                     <div class="valorTotal"> Total</div>
@@ -195,10 +211,12 @@
     <!-- cabeçalho da lista de produtos -->
     <div class="cabecalhoProdutos">
         <div id="fornecedorCabeçalho" class="fornecedor">FORNECEDOR</div>
+         <div title="Data Retirada" id="dataRetirada">RET.</div>
         <div class="quantidades">
-            <div id="qnt">QNT</div>
-            <div id="vlr">VLR T.</div>
-            <div id="verMais"> MAIS</div>
+             
+            <div title="Quantidade" id="qnt">QNT</div>
+            <div title="Valor Total" id="vlr">VLR T.</div>
+            <div title="Ver Mais" id="verMais"> MAIS</div>
         </div>
 
     </div>

@@ -42,10 +42,11 @@ foreach ($itensEnviados as $item) {
         $valorTotal = $item['valorTotal'];
         $valorUnit = $item['valorUnit'];
         $dataAtual = $dadosEspecificos['dataAtual'];
+        $dataRetirada = $dadosEspecificos['dataRetirada'];
 
      
 
-            $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, fornecedorNumero, dataAtual, produto, valor_unit, valor_total, quantidade) VALUES ('$chaveAcesso', '$fornecedor', '$fornecedorNumero', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade') ";
+            $sql1 = "INSERT INTO pedidos_dados (chaveAcesso, fornecedor, fornecedorNumero, dataAtual, produto, valor_unit, valor_total, quantidade,data_retirada) VALUES ('$chaveAcesso', '$fornecedor', '$fornecedorNumero', '$dataAtual', '$produto', '$valorUnit', '$valorTotal', '$quantidade','$dataRetirada') ";
 
             if ($conn->query($sql1) !== TRUE) {
                 echo '<div style="padding: 50% 10% 50% 10%; text-align: center; z-index: 999; position: absolute; top: 0; width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; height: 100%; background-color: white;" id="pedidoCadastrado">';

@@ -12,32 +12,64 @@ if (!isset($_SESSION['id'])) {
 if (isset($_GET['id']) && isset($_GET['nome'])) {
     $id = $_GET['id'];
     $nome = $_GET['nome'];
+    $numero_container = $_GET['numero_container'] ?? '';
 
-    $numero_container = $_GET['numero_container'];
-
+    // Verifica se o registro existe em pre_embarque
     $stmt = $conn->prepare("SELECT * FROM pre_embarque WHERE uniqId = ?");
     $stmt->bind_param("s", $id);
+
     if (!$stmt->execute()) {
         die("Erro ao executar consulta: " . $stmt->error);
     }
+
     $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        // Nenhum registro encontrado
+        die("Registro de pré-embarque não encontrado.");
+    }
+
+    // Coleta os dados salvos em pre_embarque_files
+    $dadosCampos = [];
+    $stmtCampos = $conn->prepare("SELECT nomeCampo, caminho, resposta FROM pre_embarque_files WHERE uniqId = ?");
+    $stmtCampos->bind_param("s", $id);
+    $stmtCampos->execute();
+    $resultCampos = $stmtCampos->get_result();
+
+    while ($row = $resultCampos->fetch_assoc()) {
+        $nomeCampo = $row['nomeCampo'] ?? '';
+        if (trim($nomeCampo) !== '') {
+            $dadosCampos[$nomeCampo] = [
+                'caminho' => $row['caminho'] ?? '',
+                'resposta' => $row['resposta'] ?? ''
+            ];
+        }
+    }
 } else {
+    // Redireciona se parâmetros obrigatórios não forem passados
     header("Location:../preEmbarque.php");
+    exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br" class="dark">
+
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <meta name="robots" content="nofollow,noindex">
-
+    <script src="../../generalScripts/darkmode.js"></script>
     <title>Pre Embarque</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <script>
         tailwind.config = {
             darkMode: 'class'
@@ -51,16 +83,16 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-        <script src="../../generalScripts/darkmode.js"></script>
+    <script src="../../generalScripts/darkmode.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen" onload="onLoad()">
 
-<div id="loader" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-</div>
+    <div id="loader" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+    </div>
 
 
     <!-- Preloader -->
@@ -74,13 +106,18 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
     </div>
     <!-- Header -->
     <header class="flex items-center justify-between p-4 bg-green-700 dark:bg-green-800 text-white">
-        <a href="../preEmbarque.php">
+        <button id="btnVoltar" title="Voltar">
             <img src="../../assets/backArrow.svg" alt="Voltar" class="w-6 h-6">
-        </a>
+        </button>
+
         <div class="text-center flex-1">
             <h3 class="text-lg font-semibold"><?= $nome ?> </h3>
         </div>
+        <button onclick="toggleTheme()" title="Alternar tema" class="z-10 text-xl w-10 h-10 text-yellow-500 hover:text-yellow-400 transition">
+            <i class="fas fa-circle-half-stroke"></i>
+        </button>
         <div>
+
             <!-- <a href="../listarPedido/print/printInspessao.php?id=<?= $id ?>&numero=<?= $numero ?>&cliente=<?= $cliente ?>&numero_container=<?= $numero_container ?>">
                 <img src="../../assets/print.svg" alt="Imprimir" class="w-6 ml-4">
             </a> -->
@@ -89,18 +126,18 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
 
     <!-- Adicionar Imagens por Fornecedor -->
     <section class="p-4 flex flex-col items-center justify-center text-center">
-        <form id="formPreEmbarque" action="submit" class=
-        "flex flex-col space-y-4 w-full max-w-xl">
+        <form id="formPreEmbarque" action="submit" class="flex flex-col space-y-4 w-full max-w-xl">
             <!-- Campos gerados dinamicamente -->
 
 
-        <div class="flex justify-center w-full mt-4">
-        <button
-            type="submit"
-            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded">
-            Enviar Dados
-        </button>
-        </div>
+            <div class="flex justify-center w-full mt-4">
+                <button
+                    type="submit"
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 w-full rounded">
+                    Salvar Dados <i class="fas fa-save"></i>
+
+                </button>
+            </div>
 
         </form>
 
@@ -115,72 +152,17 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
     </footer>
 
     <script src="../../onLoad/onLoad.js"></script>
-    <script src="../../mobileMenu/js/mobileMenu.js"></script>
+
+
     <script src="../../generalScripts/version.js"></script>
     <script src="../../generalScripts/backPage.js"></script>
-    <script src="upload.js"></script>
-    <script src="apagarImg.js"></script>
-    <script src="abrirImgHD.js"></script>
 
-    <script>
-        function reload() {
-            window.location.reload();
-        }
 
-        function teste(id) {
-            document.getElementById(id).click();
-        }
 
-        function adicionarProdutor() {
-            const chaveAcesso = document.getElementById('chaveAcesso').value;
-            const fornecedor = document.getElementById('fornecedor').value;
-            const imagem = document.getElementById('imagemFornecedor').files[0];
-
-            if (!imagem) {
-                alert("Você precisa tirar uma foto primeiro.");
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('chaveAcesso', chaveAcesso);
-            formData.append('fornecedor', fornecedor);
-            formData.append('imagem', imagem);
-
-            fetch('adicionarProdutor.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                    reload();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
-
-        function deleteProdutorInspecao(id) {
-            const formData = new FormData();
-            formData.append('idItem', id);
-
-            fetch('deletarProdutorInspecao.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-                    reload();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
-    </script>
 
     <script>
         const uniqId = "<?= $id ?>"; // vindo do PHP via GET
+        const dadosSalvos = <?= json_encode($dadosCampos, JSON_UNESCAPED_UNICODE) ?>;
 
         const camposPreEmbarque = [{
                 nome: "Número do container",
@@ -238,91 +220,124 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
 
         const form = document.getElementById("formPreEmbarque");
 
-        // cria os campos inputs 
         camposPreEmbarque.forEach((campo, index) => {
+            const nomeChave = `campo_${index}`;
+            const campoSalvo = dadosSalvos[nomeChave];
+
             const wrapper = document.createElement("div");
-            wrapper.className = "flex flex-col items-center gap-2 w-full";
+            wrapper.className = "flex flex-col items-center gap-2 w-full p-4 rounded border border-gray-400 transition-colors";
+            wrapper.dataset.card = nomeChave; // usado depois para resetar
 
             const label = document.createElement("label");
             label.textContent = campo.nome;
-            label.className = "text-sm font-semibold text-center";
+            label.className = "text-md font-semibold text-center";
+            wrapper.appendChild(label);
 
             const nomeCampo = document.createElement("input");
             nomeCampo.type = "hidden";
-            nomeCampo.name = `campo_${index}_nome`;
+            nomeCampo.name = `${nomeChave}_nome`;
             nomeCampo.value = campo.nome;
             wrapper.appendChild(nomeCampo);
-
-
-            wrapper.appendChild(label);
 
             const preview = document.createElement("div");
             preview.className = "mt-2 w-full max-w-md";
             wrapper.appendChild(preview);
 
-
-       
-
-
             if (campo.tipo === "escrito") {
                 const input = document.createElement("input");
-                input.name = `campo_${index}`;
+                input.name = nomeChave;
                 input.type = "text";
-                input.className = "w-full max-w-md p-2 border rounded dark:bg-gray-800 dark:border-gray-600";
+                input.className = "w-full max-w-md p-2 border text-center rounded dark:bg-gray-800 dark:border-gray-600";
+                if (campoSalvo?.resposta) {
+                    input.value = campoSalvo.resposta;
+                }
                 wrapper.appendChild(input);
+
+                input.addEventListener("input", () => {
+                    const cardWrapper = input.closest("[data-card]");
+                    if (cardWrapper) {
+                        cardWrapper.classList.remove("border-gray-400");
+                        cardWrapper.classList.add("border-orange-500");
+                    }
+                });
+
             } else {
-                // Input padrão (galeria)
                 const inputGaleria = document.createElement("input");
-                inputGaleria.name = `campo_${index}_galeria`;
+                inputGaleria.name = nomeChave;
                 inputGaleria.type = "file";
                 inputGaleria.accept = campo.tipo === "foto" ? "image/*" : "video/*";
-                inputGaleria.className =
-                    "file:bg-gray-300 file:rounded file:px-4 file:py-2 text-sm text-gray-700 dark:text-gray-300";
+                inputGaleria.className = "file:bg-gray-300 file:rounded file:px-4 file:py-2 text-sm";
                 wrapper.appendChild(inputGaleria);
 
-                // Input escondido (tirar da câmera)
                 const inputCamera = document.createElement("input");
-                inputCamera.name = `campo_${index}_camera`;
+                inputCamera.name = nomeChave;
                 inputCamera.type = "file";
                 inputCamera.accept = campo.tipo === "foto" ? "image/*" : "video/*";
                 inputCamera.capture = "environment";
                 inputCamera.style.display = "none";
                 inputCamera.id = `input_${index}_camera`;
+                wrapper.appendChild(inputCamera);
 
                 const botaoCamera = document.createElement("button");
                 botaoCamera.type = "button";
-                botaoCamera.className =
-                    campo.tipo === "foto" ?
+                botaoCamera.className = campo.tipo === "foto" ?
                     "bg-blue-600 hover:bg-blue-700 w-full max-w-md text-white px-4 py-2 rounded" :
                     "bg-purple-600 hover:bg-purple-700 w-full max-w-md text-white px-4 py-2 rounded";
                 botaoCamera.textContent = campo.tipo === "foto" ? "Tirar Foto" : "Gravar Vídeo";
                 botaoCamera.onclick = () => document.getElementById(`input_${index}_camera`).click();
-
-                wrapper.appendChild(inputCamera);
                 wrapper.appendChild(botaoCamera);
 
-                     [inputGaleria, inputCamera].forEach((inputEl) => {
-                inputEl.addEventListener("change", () => {
-                    const file = inputEl.files?.[0];
-                    if (!file) return;
 
-                    preview.innerHTML = ""; // Limpa preview anterior
+                [inputGaleria, inputCamera].forEach((inputEl) => {
+                    inputEl.addEventListener("change", function() {
+                        const file = inputEl.files?.[0];
+                        if (!file) return;
 
-                    if (file.type.startsWith("image/")) {
+                        const previewElement = inputEl.closest("div.flex-col")?.querySelector("div.mt-2");
+                        const cardWrapper = inputEl.closest("[data-card]");
+
+                        if (!previewElement || !cardWrapper) return;
+
+                        previewElement.innerHTML = "";
+
+                        // Atualiza borda para laranja (não salvo)
+                        cardWrapper.classList.remove("border-gray-400");
+                        cardWrapper.classList.add("border-orange-500");
+
+                        const url = URL.createObjectURL(file);
+
+                        if (file.type.startsWith("image/")) {
+                            const img = document.createElement("img");
+                            img.src = url;
+                            img.className = "w-full rounded border mt-2";
+                            previewElement.appendChild(img);
+                        } else if (file.type.startsWith("video/")) {
+                            const video = document.createElement("video");
+                            video.src = url;
+                            video.controls = true;
+                            video.className = "w-full rounded border mt-2";
+                            previewElement.appendChild(video);
+                        }
+                    });
+                });
+
+                if (campoSalvo?.caminho) {
+                    const ext = campoSalvo.caminho.split('.').pop().toLowerCase();
+                    if (["jpg", "jpeg", "png"].includes(ext)) {
                         const img = document.createElement("img");
-                        img.src = URL.createObjectURL(file);
+                        img.src = campoSalvo.caminho;
                         img.className = "w-full rounded border mt-2";
                         preview.appendChild(img);
-                    } else if (file.type.startsWith("video/")) {
+                    } else if (["mp4", "webm"].includes(ext)) {
                         const video = document.createElement("video");
-                        video.src = URL.createObjectURL(file);
+                        video.src = campoSalvo.caminho;
                         video.controls = true;
                         video.className = "w-full rounded border mt-2";
                         preview.appendChild(video);
                     }
-                });
-            });
+                }
             }
+
 
             form.appendChild(wrapper);
         });
@@ -389,45 +404,66 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
     </script>
 
     <script>
-  async function salvarImagens(formData) {
-    mostrarLoader(); // mostra o loader
+        async function salvarImagens(formData) {
+            mostrarLoader(); // mostra o loader
 
-    try {
-        const response = await fetch("upload.php", {
-            method: "POST",
-            body: formData,
-        });
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
 
-        if (!response.ok) {
-            throw new Error("Erro ao enviar dados.");
+            try {
+                const response = await fetch("upload.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Erro ao enviar dados.");
+                }
+
+                const data = await response.text();
+                console.log(data)
+                toastifyMessage('Pre-embarque salvo com sucesso!');
+                document.querySelectorAll("[data-card]").forEach(card => {
+                    card.classList.remove("border-orange-500");
+                    card.classList.add("border-gray-400");
+                });
+
+
+
+                // Atualize ou recarregue dados conforme necessário
+            } catch (error) {
+                console.error(error);
+                toastifyMessage("Falha ao enviar os dados.", 'error');
+            } finally {
+                esconderLoader(); // esconde o loader
+
+            }
         }
 
-        const data = await response.text();
-        toastifyMessage("Pré-embarque salvo com sucesso!");
-        form.reset();
-        // Atualize ou recarregue dados conforme necessário
-    } catch (error) {
-        console.error(error);
-        toastifyMessage("Falha ao enviar os dados.",'error');
-    } finally {
-        esconderLoader(); // esconde o loader
-    }
-}
 
-
-        function mostrarLoader() {
-    document.getElementById('loader').classList.remove('hidden');
-}
-
-function esconderLoader() {
-    document.getElementById('loader').classList.add('hidden');
-}
-
+     
     </script>
 
-        <script  src="../../generalScripts/toastify.js"></script>
+    <script src="../../generalScripts/loader.js"></script>
 
-        
+    <script>
+        document.getElementById("btnVoltar").addEventListener("click", function(e) {
+            const alterados = document.querySelectorAll("[data-card].border-orange-500");
+
+            if (alterados.length > 0) {
+                const confirmar = confirm("Você tem alterações não salvas. Tem certeza que deseja sair?");
+                if (!confirmar) return;
+            }
+
+            // Redireciona
+            window.location.href = "../preEmbarque.php";
+        });
+    </script>
+
+    <script src="../../generalScripts/toastify.js"></script>
+
+
 </body>
 
 

@@ -44,6 +44,15 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="../pedidos/cadastro.css">
 
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class'
+            }
+            </script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Editar Pedidos</title>
 
@@ -72,62 +81,7 @@ if (isset($_GET['id'])) {
     <!--Menu mobile   -->
 
     <div id="mobileMenu" class="mobileMenuContainer ">
-        <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img style="width:35px" src="../../assets/x.svg" alt="Menu mobile da p�gina">
-        </button>
-            <div class="mobileMenuButtons">
-                <a href="../../main.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img style="width:20px" src="../../assets/mobileIcons/icon _home_.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
-                        </button>
-                    </div>
-                </a>
-
-                <a href="../../cadastros/cadastros.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _book_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../pedidos/cadastrodepedidos.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _list_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../relatorios/relatorios.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>RELAT�RIOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../inspessao/cadastro.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INSPE��O</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../packingList/cadastropackinglist.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img  style="width:20px" src="../../assets/mobileIcons/icon _check_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
-                        </button>
-                    </div>
-                </a>
-             
-
-            </div>   
+ 
 
     </div>
 
@@ -142,7 +96,7 @@ if (isset($_GET['id'])) {
             </button>
     
 
-        <button onclick="openMenu(),avisoSalvar2()" id="mobileMenuButton" class="mobileMenuButton">
+        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
             <img src="../../assets/menu_mobile.svg" alt="Menu mobile da p�gina">
         </button>
 
@@ -165,7 +119,7 @@ if (isset($_GET['id'])) {
         <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
             <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto"
                 placeholder="PRODUTO">
-            <select onchange="calcularMudan�aSelect()" placeholder="PRODUTO" name="produto" id="produto">
+            <select onchange="calcularMudancaSelect()" placeholder="PRODUTO" name="produto" id="produto">
                 <option value=""></option>
             </select>
 
@@ -175,7 +129,7 @@ if (isset($_GET['id'])) {
             <div class="valoresContainer">
                 <div class="valores">
                     <div class="valorUnit">Unit.</div>
-                    <div id="valorUnit" class="valorUnit">R$ 0,00</div>
+                    <input style="background-color: transparent;border:none;" type="text" id="valorUnit" class="valorUnit" value="R$0,00">
                 </div>
                 <div class="valores">
                     <div class="valorTotal"> Total</div>
@@ -316,7 +270,7 @@ if (isset($_GET['id'])) {
 </footer>
 </body>
 
-<script src="../../mobileMenu/js/mobileMenu.js"></script>
+
 
 <script src="../../generalScripts/version.js"></script>
 
@@ -344,6 +298,7 @@ lista o produto adicionado na lista do pedido -->
 <script src="../../generalScripts/deleteDiv.js"></script>
 
 <script src="validarBotaoSalvar.js"></script>
+<script src="../../mobileMenu/js/mobileMenu.js"></script>
 
 <script src="avisoSalvar.js"></script>
 

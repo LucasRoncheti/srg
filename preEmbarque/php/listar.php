@@ -39,10 +39,12 @@ if ($resultado_sql && $resultado_sql->num_rows != 0) :
             </div>
 
             <div class="flex gap-3 items-center">
+                <button onclick="copiarLink(this)" title="Copiar para área de transferência." data-link="https://srg.app.br/srg/preEmbarque/visualizarPreEmbarque.php?id=<?= urlencode($uniqID)?>">
+                <i class="fas fa-share-alt text-green-700"></i>
+                </button>
                 <a title="Abrir" href="../preEmbarque/listarPreembarque/abrirPreEmbarque.php?id=<?= urlencode($uniqID) ?>&nome=<?= urlencode($nome) ?>&numero_container=<?= urlencode($container) ?>">
                     <img src="../assets/file_green.svg" alt="Visualizar">
                 </a>
-
                 <img title="Deletar" src="../assets/erase.svg"
                      alt="Apagar"
                      class="cursor-pointer hover:opacity-75"

@@ -17,33 +17,31 @@ if (!isset($_SESSION['id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="nofollow,noindex" />
-         <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
     <title>Pré Embarque</title>
 
     <!-- Tailwind CSS + Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script>
         tailwind.config = {
             darkMode: 'class'
         }
     </script>
-        <!-- Toastify -->
+    <!-- Toastify -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <!-- Estilos e scripts existentes -->
     <link rel="stylesheet" href="../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../index/root.css">
-    <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
     <script src="../onLoad/onLoad.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans" onload="onLoad()">
+<body class="bg-gray-100 h-[100dvh] dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans" onload="onLoad()">
     <!-- Preloader -->
     <div class="overflow white" id="preload">
         <div class="circle-line">
@@ -55,18 +53,9 @@ if (!isset($_SESSION['id'])) {
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden">
-        <button onclick="openMenu()" class="absolute top-4 right-4">
-            <img src="../assets/x.svg" alt="Fechar Menu" class="w-6 h-6">
-        </button>
-        <div class="mt-16 px-6 space-y-4">
-            <a href="../main.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Início</a>
-            <a href="../cadastros/cadastros.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Cadastros</a>
-            <a href="../pedidos/cadastrodepedidos.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Pedidos</a>
-            <a href="../relatorios/relatorios.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Relatórios</a>
-            <a href="cadastro.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Pré Embarque</a>
-            <a href="../packingList/cadastropackinglist.php" class="block text-lg font-semibold text-gray-800 dark:text-gray-100">Packing List</a>
-        </div>
+    <div id="mobileMenu"
+        class="fixed bottom-0 md:top-0 md:right-0 w-full md:w-[20%] backdrop-blur-[5px] h-[60%] md:h-full dark:bg-gray-800/50  dark:text-white bg-white/50 shadow-lg transform translate-y-full md:translate-x-full opacity-0 hidden z-50 transition duration-500">
+        <!-- conteúdo do menu -->
     </div>
 
     <!-- Header -->
@@ -77,8 +66,8 @@ if (!isset($_SESSION['id'])) {
             </a>
             <h1 class="text-2xl font-bold">Pré Embarque</h1>
         </div>
-             <button onclick="toggleTheme()" title="Alternar tema" class="text-xl text-yellow-500 hover:text-yellow-400 transition">
-          <i class="fas fa-circle-half-stroke"></i>
+        <button onclick="toggleTheme()" title="Alternar tema" class="text-xl text-yellow-500 hover:text-yellow-400 transition">
+            <i class="fas fa-circle-half-stroke"></i>
         </button>
         <button onclick="openMenu()">
             <img src="../assets/menu_mobile.svg" alt="Menu" class="w-6 h-6">
@@ -134,13 +123,29 @@ if (!isset($_SESSION['id'])) {
     </footer>
 
     <!-- Scripts -->
-     <script src="../generalScripts/toastify.js"></script>
-       <script src="../generalScripts/darkmode.js"></script>
+    <script src="../generalScripts/toastify.js"></script>
+    <script src="../generalScripts/darkmode.js"></script>
     <script src="../mobileMenu/js/mobileMenu.js"></script>
     <script src="../generalScripts/version.js"></script>
     <script src="../generalScripts/backPage.js"></script>
     <script src="./js/preEmbarque.js"></script>
     <script src="../pedidos/busca.js"></script>
 </body>
+<script>
+function copiarLink(e) {
+    const link = e.dataset.link;
+    if (link) {
+        navigator.clipboard.writeText(link)
+            .then(() => {
+                console.log("Link copiado: " + link);
+                toastifyMessage('Link copiado para área de transferência.')
+            })
+            .catch(err => {
+                console.error("Erro ao copiar o link: ", err);
+            });
+    }
+}
+
+</script>
 
 </html>

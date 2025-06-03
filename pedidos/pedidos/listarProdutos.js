@@ -1,7 +1,7 @@
 //script responsável por mostrar o produto  na lista de pedidos  abaixo 
 
 //quantidade
-valores = [{}]
+ valores = [{}]
 //valores que serão usados para fazer a soma total dos valores e quantidade de produtos
 var itensParaSoma = []
 
@@ -17,12 +17,14 @@ let listar = () => {
     fornecedor = document.getElementById("fornecedor").options[0].value;
     fornecedorNumero = document.getElementById("fornecedor").options[0].textContent;
     produto = document.getElementById("produto").options[0].text;
-    valorUnit = document.getElementById("valorUnit").textContent
+    valorUnit = document.getElementById("valorUnit").value
     valorUnitFormatado = parseFloat(valorUnit.replace("R$", "").replace(",", ""))
     valorTotal = document.getElementById("valorTotal").textContent
     valorTotalFormatado = parseFloat(valorTotal.replace("R$", "").replace(",", ""))
     quantidade = document.getElementById("quantidade").value
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
+
+    let dataRetirada =  document.getElementById('dataRetirada').value
 
 
 
@@ -42,6 +44,7 @@ let listar = () => {
         valores[0].valorTotalString = valorTotal
         valores[0].quantidade = quantidadeFormatada
         valores[0].id = key++
+        valores[0].dataRetirada = dataRetirada
 
         //recupera os valores para fazer a soma total de caixas e valor total 
         novoDicionarioItens = {}
@@ -53,6 +56,7 @@ let listar = () => {
         novoDicionarioItens['quantidade'] = quantidadeFormatada
         novoDicionarioItens['chaveAcesso'] = chaveAcesso
         novoDicionarioItens['fornecedorNumero'] = fornecedorNumero
+        novoDicionarioItens['dataRetirada'] = dataRetirada
         itensParaSoma.push(novoDicionarioItens)
        
 
@@ -126,20 +130,21 @@ let listar = () => {
 let adicionarItemPedido = () => {
     Item = document.getElementById("containerList")
     return (Item.innerHTML += valores.map((x) => {
-        let { nome, produto, id, valorUnit, valorTotal, valorUnitString, valorTotalString, quantidade } = x
+        let { nome, produto, id, valorUnit, valorTotal, valorUnitString, valorTotalString, quantidade,dataRetirada } = x
         return `
             
             <div id="${id}" class="containerProdutoPedido">
 
                 <div class="dadosPedido">
                     <div id="fornecedorNome" class="fornecedor" >${nome}</div>
+                    <input style="width:30%" type="date" value="${dataRetirada}">
                     <div class="quantidades2" >
                         <div  id="qnt" >${quantidade}</div>
                         <div id="vlr">${valorTotalString}</div>
                         <div onclick="trocarDisplay('info${id}' , 'img${id}'  )"  id="verMais"><img id="img${id}" src="../../assets/eye.svg" alt="Olho vetor"></div>
                     </div>
                 </div>
-
+        
 
                 <div style="display: none;" id="info${id}" class="dadosPedidoSecundario">
                     <div id="produtoLista" class="produtoLista" >${produto}</div>
