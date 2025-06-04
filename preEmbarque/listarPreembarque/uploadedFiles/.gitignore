@@ -1,3 +1,5 @@
 # Ignora todas as imagens na pasta atual
 *.jpg
-*
+*.png
+*.mp4
+*.MOV

@@ -1,85 +1,71 @@
-
-
-
 $(function () {
-    //Pesquisar os cursos sem refresh na página
+    // Pesquisar os cursos sem refresh na página
     $("#pesquisaProduto").keyup(function () {
         var pesquisa = $(this).val();
-        //Verificar se há algo digitado
-        if (pesquisa != '') {
-            var dados = {
-                palavra: pesquisa
-            }
+
+        if (pesquisa !== '') {
+            var dados = { palavra: pesquisa };
 
             $.post('buscaProduto.php', dados, function (retorna) {
-                //Mostra dentro da ul os resultado obtidos 
                 $("#produto").html(retorna);
 
-
-
-
-                // Aqui você pode pegar o valor selecionado e exibi-lo em uma div diferente
+                // Pega o valor do produto selecionado
                 var selectedValue = $("#produto option:selected").val();
-                var valorStringUnit = selectedValue.toString()
 
+                if (selectedValue) {
+                    var valorEmCentavos = parseInt(selectedValue, 10);
 
-                if (valorStringUnit.length == 2) {
-                    $("#valorUnit").html("R$ 0," + valorStringUnit)
+                    // Formata e preenche o input #valorUnit
+                    var valorFormatado = (valorEmCentavos / 100).toFixed(2).replace(".", ",");
+                    $("#valorUnit").val("R$ " + valorFormatado);
+                } else {
+                    $("#valorUnit").val("R$ 0,00");
                 }
 
-                if (valorStringUnit.length >= 3) {
-                    totalFormatadoUnit = valorStringUnit / 100
-                    $("#valorUnit").html("R$" + totalFormatadoUnit.toFixed(2).replace(".", ","))
-                }
-                //  $("#valorUnit").html("R$"+selectedValue);
-
-                calcularTotal()
-
-
+                calcularTotal();
             });
         } else {
             $("#produto").html('');
-            $("#valorUnit").html('R$ 0,00');
-            $("#valorTotal").html('R$ 0,00'); // Limpar a outra div se nada for digitado
-
+            $("#valorUnit").val('R$ 0,00');
+            $("#valorTotal").html('R$ 0,00');
         }
     });
 });
 
 // Função para calcular o valor total
 function calcularTotal() {
-    var selectedValue = parseFloat($("#produto option:selected").val());
-    var quantidade = parseFloat($("#quantidade").val());
+    let valorUnitRaw = $("#valorUnit").val();
 
-    var total = selectedValue * quantidade;
-    var valorString = total.toString()
+    // Remove "R$ ", espaços e converte vírgula para ponto
+    let valorUnitLimpo = valorUnitRaw.replace("R$", "").trim().replace(",", ".");
+    let valorUnit = parseFloat(valorUnitLimpo);
 
+    let quantidade = parseFloat($("#quantidade").val());
 
-    if (valorString.length == 2) {
-        $("#valorTotal").html("R$ 0," + total)
+    if (!isNaN(valorUnit) && !isNaN(quantidade)) {
+        let total = valorUnit * quantidade;
+        let valorFormatado = total.toFixed(2).replace(".", ",");
+
+        $("#valorTotal").html("R$ " + valorFormatado);
+    } else {
+        $("#valorTotal").html("R$ 0,00");
     }
-
-    if (valorString.length >= 3) {
-        totalFormatado = total / 100
-        $("#valorTotal").html("R$" + totalFormatado.toFixed(2).replace(".", ","))
-    }
-
-
 }
 
-function calcularMudançaSelect() {
-    calcularTotal()
+
+// Função caso mude o select manualmente
+function calcularMudancaSelect() {
+    calcularTotal();
 
     var selectedValue = $("#produto option:selected").val();
-    var valorStringUnit = selectedValue.toString()
 
-    if (valorStringUnit.length == 2) {
-        $("#valorUnit").html("R$ 0," + valorStringUnit)
-    }
+    if (selectedValue) {
+        var valorEmCentavos = parseInt(selectedValue, 10);
+        var valorFormatado = (valorEmCentavos / 100).toFixed(2).replace(".", ",");
 
-    if (valorStringUnit.length >= 3) {
-        totalFormatadoUnit = valorStringUnit / 100
-        $("#valorUnit").html("R$" + totalFormatadoUnit.toFixed(2).replace(".", ","))
+        $("#valorUnit").val("R$ " + valorFormatado);
+    } else {
+        $("#valorUnit").val("R$ 0,00");
     }
 }
 

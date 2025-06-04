@@ -2,14 +2,14 @@
 
 //dados do servidor para conexão
 
-$validacao = false;
+$validacao = true;
 
 if ($validacao) {
 
   $serverName = "localhost";
   $username = "root";
   $password = "";
-  $dbname = "sistemacadastro";
+  $dbname = "reinholzGingerSystem";
 
 
 } else {
@@ -19,10 +19,6 @@ if ($validacao) {
   $dbname = "srgapp32_sistemacadastro";
 
 }
-
-
-
-
 
 
 $conn = new mysqli($serverName, $username, $password, $dbname);

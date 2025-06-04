@@ -1,7 +1,7 @@
 //script responsável por mostrar o produto  na lista de pedidos  abaixo 
 
 //quantidade
-valores = [{}]
+ valores = [{}]
 //valores que serão usados para fazer a soma total dos valores e quantidade de produtos
 var itensParaSoma = []
 
@@ -17,21 +17,22 @@ let listar = () => {
     fornecedor = document.getElementById("fornecedor").options[0].value;
     fornecedorNumero = document.getElementById("fornecedor").options[0].textContent;
     produto = document.getElementById("produto").options[0].text;
-    valorUnit = document.getElementById("valorUnit").textContent
+    valorUnit = document.getElementById("valorUnit").value
     valorUnitFormatado = parseFloat(valorUnit.replace("R$", "").replace(",", ""))
     valorTotal = document.getElementById("valorTotal").textContent
     valorTotalFormatado = parseFloat(valorTotal.replace("R$", "").replace(",", ""))
     quantidade = document.getElementById("quantidade").value
     quantidadeFormatada = parseFloat(quantidade.replace("R$", "").replace(",", ""))
 
+    let dataRetirada =  document.getElementById('dataRetirada').value
 
 
-    if (!fornecedor || produto === "" || fornecedor === " Fornecedor não encontrado " || produto === "Produto não encontrado" ) {
+
+    if (!fornecedor || produto === "" || fornecedor === " Fornecedor não encontrado " || produto === "Produto não encontrado" || dataRetirada === ''||dataRetirada === undefined) {
         alert("Preencha o campo vazio ! ")
         
     } else {
         calcularTotal()
-
         //recuperaos valores a serem mapeados na função adicionarItemPedido()
         valores[0].nome = fornecedor
         valores[0].fornecedorNumero = fornecedorNumero
@@ -42,6 +43,7 @@ let listar = () => {
         valores[0].valorTotalString = valorTotal
         valores[0].quantidade = quantidadeFormatada
         valores[0].id = key++
+        valores[0].dataRetirada = dataRetirada
 
         //recupera os valores para fazer a soma total de caixas e valor total 
         novoDicionarioItens = {}
@@ -53,6 +55,7 @@ let listar = () => {
         novoDicionarioItens['quantidade'] = quantidadeFormatada
         novoDicionarioItens['chaveAcesso'] = chaveAcesso
         novoDicionarioItens['fornecedorNumero'] = fornecedorNumero
+        novoDicionarioItens['dataRetirada'] = dataRetirada
         itensParaSoma.push(novoDicionarioItens)
        
 
@@ -126,30 +129,48 @@ let listar = () => {
 let adicionarItemPedido = () => {
     Item = document.getElementById("containerList")
     return (Item.innerHTML += valores.map((x) => {
-        let { nome, produto, id, valorUnit, valorTotal, valorUnitString, valorTotalString, quantidade } = x
-        return `
-            
-            <div id="${id}" class="containerProdutoPedido">
+        let { nome, produto, id, valorUnit, valorTotal, valorUnitString, valorTotalString, quantidade,dataRetirada } = x
+        return`
 
-                <div class="dadosPedido">
-                    <div id="fornecedorNome" class="fornecedor" >${nome}</div>
-                    <div class="quantidades2" >
-                        <div  id="qnt" >${quantidade}</div>
-                        <div id="vlr">${valorTotalString}</div>
-                        <div onclick="trocarDisplay('info${id}' , 'img${id}'  )"  id="verMais"><img id="img${id}" src="../../assets/eye.svg" alt="Olho vetor"></div>
-                    </div>
-                </div>
+<div id="${id}" class="w-full px-4 py-2 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 text-sm flex flex-col gap-2">
+
+  <!-- Linha principal: FORNECEDOR / RET. / QNT / VLR T. / MAIS -->
+  <div class="flex justify-between items-center">
+    <div class="w-1/3 font-medium text-gray-800 dark:text-white">
+      ${nome}
+    </div>
+    <div class="w-1/6 text-center text-gray-600 dark:text-gray-300">
+      ${dataRetirada.split('-').reverse().join('/')}
+    </div>
+    <div class="w-2/5 flex justify-between items-center text-gray-700 dark:text-gray-200">
+      <div class="w-1/3 text-center font-semibold">${quantidade}</div>
+      <div class="w-1/3 text-center font-semibold text-green-600">${valorTotalString}</div>
+      <div class="w-1/3 text-center">
+        <img src="../../assets/eye.svg" alt="Ícone olho" class="w-5 h-5 mx-auto opacity-40 pointer-events-none">
+      </div>
+    </div>
+  </div>
+
+  <!-- Linha secundária: Produto / Unit / Apagar -->
+  <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-800 px-2 py-2 rounded">
+    <div class="w-1/3 text-gray-700 dark:text-gray-300">
+      ${produto}
+    </div>
+    <div class="w-1/6"></div>
+    <div class="w-2/5 flex justify-between items-center">
+      <div class="w-1/3 text-center text-gray-500 dark:text-gray-400">Unit ${valorUnitString}</div>
+      <div class="w-1/3 text-center"></div>
+      <div class="w-1/3 text-center">
+        <button onclick="apagarItem(${id})" id="verMais${id}">
+          <img src="../../assets/erase.svg" alt="Apagar" class="w-5 h-5 mx-auto">
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 
-                <div style="display: none;" id="info${id}" class="dadosPedidoSecundario">
-                    <div id="produtoLista" class="produtoLista" >${produto}</div>
-                    <div class="quantidades3" >
-
-                        <div id="vlr">Unit ${valorUnitString}</div>
-                        <div onclick="apagarItem(${id})" id="verMais${id}"><img src="../../assets/erase.svg" alt="Olho vetor"></div>
-                    </div>
-                </div>
-            </div>
             
             `
     }))

@@ -9,5 +9,5 @@ let avisoSalvar = () => {
   
 
   let avisoSalvar2 = () => {
-   alert("Dados não salvos serão perdidos")
+  //  alert("Dados não salvos serão perdidos")
   }

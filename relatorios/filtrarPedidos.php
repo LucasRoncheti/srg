@@ -74,6 +74,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
                     'quantidade' => $row_sql['quantidade'],
                     'valorUnit' => $row_sql['valor_unit'],
                     'valorTotal' => $row_sql['valor_total'],
+                    'dataRetirada' => $row_sql['data_retirada'],
                 );
             }
         
@@ -100,6 +101,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
             echo '<div class="cabeçalhoListaFiltro">';
             echo '<div>' . $clienteData['id'] . '</div>';
             echo '<div style="font-size: 0.8em;"> ' . date('d/m/Y', strtotime($clienteData['dataAtual'])) . '</div>';
+            echo '<div style="font-size: 0.8em;"> ' . date('d/m/Y', strtotime($clienteData['itens'][0]['dataRetirada'])) . '</div>';
 
             echo '<div>' . $quantidadeTotal . '</div>'; // Exibir a quantidade total
             echo '<div id="mostrarInfos" onclick="trocarDisplay('.$clienteData['id'].')"> <img src="../assets/fullscreen.svg" alt=""></div>';
