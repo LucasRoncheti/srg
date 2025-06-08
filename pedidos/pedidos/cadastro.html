@@ -61,58 +61,70 @@
     </div>
 
 
-<header class="flex flex-col lg:flex-row flex-wrap gap-6 p-4 bg-gray-200 dark:bg-gray-800 shadow-md justify-between items-start lg:items-center">
+<header class="p-4 bg-gray-200 dark:bg-gray-800 shadow-md flex flex-col gap-6">
 
-  <!-- Bloco: Datas -->
-  <div class="flex flex-col sm:flex-row gap-4">
-    <div class="flex flex-col">
+  <!-- Linha 1: Datas, Fornecedor e Produto -->
+  <div class="w-full flex flex-col lg:grid lg:grid-cols-2 gap-4">
+
+    <!-- Datas -->
+    <div class="flex flex-col gap-2 w-full">
       <label for="dataAtual" class="text-sm text-gray-700 dark:text-gray-200">Data Atual</label>
       <input onchange="alterarValorDataAtual()" name="dataAtual" id="dataAtual" type="date"
-        class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
-    </div>
-    <div class="flex flex-col">
-      <label for="dataRetirada" class="text-sm text-gray-700 dark:text-gray-200">Data de Retirada</label>
+        class="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+
+      <label for="dataRetirada" class="text-sm text-gray-700 dark:text-gray-200 mt-2">Data de Retirada</label>
       <input id="dataRetirada" type="date"
-        class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+        class="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
     </div>
-  </div>
 
-  <!-- Bloco: Fornecedor e Produto -->
-  <div class="flex flex-col sm:flex-row gap-4">
-    <form method="POST" class="flex gap-2" id="form-pesquisa2" action="">
-      <input id="pesquisaFornecedor" name="pesquisaFornecedor" placeholder="FORNECEDOR"
-        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
-      <select name="fornecedor" id="fornecedor"
-        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
-        <option value=""></option>
-      </select>
-    </form>
-
-    <form method="POST" class="flex gap-2" id="form-pesquisa3" action="">
-      <input id="pesquisaProduto" name="pesquisaproduto" placeholder="PRODUTO"
-        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
-      <select onchange="calcularMudançaSelect()" name="produto" id="produto"
-        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
-        <option value=""></option>
-      </select>
-    </form>
-  </div>
-
-  <!-- Bloco: Valores e botão -->
-  <div class="flex flex-col sm:flex-row items-center gap-4">
-    <div class="flex flex-col items-center gap-2">
-      <div class="flex gap-4">
-        <div class="flex flex-col items-center">
-          <div class="text-sm text-gray-700 dark:text-gray-200">Unit.</div>
-          <input id="valorUnit" value="R$ 0,00"
-            class="w-24 text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
-        </div>
-        <div class="flex flex-col items-center">
-          <div class="text-sm text-gray-700 dark:text-gray-200">Total</div>
-          <div id="valorTotal" class="text-green-600 font-semibold text-sm">R$ 0,00</div>
+    <div class="flex flex-col justify-between">
+      <!-- Fornecedor -->
+      <div class="flex flex-col gap-2 w-full">
+        <label for="fornecedor" class="text-sm text-gray-700 dark:text-gray-200">Fornecedor</label>
+        <div class="flex gap-2">
+          <input id="pesquisaFornecedor" name="pesquisaFornecedor" placeholder="FORNECEDOR"
+            class="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
+          <select name="fornecedor" id="fornecedor"
+            class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+            <option value=""></option>
+          </select>
         </div>
       </div>
-      <div class="flex gap-2">
+      <!-- Produto -->
+      <div class="flex flex-col gap-2 w-full">
+        <label for="produto" class="text-sm text-gray-700 dark:text-gray-200">Produto</label>
+        <div class="flex gap-2">
+          <input id="pesquisaProduto" name="pesquisaproduto" placeholder="PRODUTO"
+            class="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
+          <select onchange="calcularMudançaSelect()" name="produto" id="produto"
+            class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Linha 2: Quantidade, Unitário, Total e Botão -->
+  <div class="w-full flex flex-col lg:flex-row justify-between items-center gap-4">
+    <!-- Bloco de valores -->
+    <div class="flex flex-col sm:flex-row flex-wrap gap-6 items-center w-full lg:w-auto">
+      <!-- Unitário -->
+      <div class="flex flex-col items-center">
+        <div class="text-sm text-gray-700 dark:text-gray-200">Unit.</div>
+        <input id="valorUnit" value="R$ 0,00"
+          class="w-24 text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+      </div>
+
+      <!-- Total -->
+      <div class="flex flex-col items-center">
+        <div class="text-sm text-gray-700 dark:text-gray-200">Total</div>
+        <div id="valorTotal" class="text-green-600 font-semibold text-sm">R$ 0,00</div>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="flex items-center gap-2">
         <div onclick="subtrairValor()" class="cursor-pointer px-3 py-1 bg-gray-200 dark:bg-gray-600 rounded">-</div>
         <input id="quantidade" type="number" value="1"
           class="w-16 text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded">
@@ -120,19 +132,21 @@
       </div>
     </div>
 
+    <!-- Botão Adicionar -->
     <button onclick="listar()"
-      class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
+      class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow w-full lg:w-auto justify-center">
       <img src="../../assets/arowDown.svg" alt="Arrow Down" class="h-5">
       ADICIONAR
       <img src="../../assets/arowDown.svg" alt="Arrow Down" class="h-5">
     </button>
 
+    <!-- Campo oculto -->
     <form id="cadastroForm">
       <input type="hidden" id="clienteInput" name="cliente" value="">
     </form>
   </div>
-
 </header>
+
 
 
 
