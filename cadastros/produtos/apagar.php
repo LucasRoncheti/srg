@@ -3,55 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="apagar.css">
-    <link rel="stylesheet" href="../../index/root.css">
-    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Apagar Registro</title>
+    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex items-center justify-center p-4">
 
-    <div class="popUpContainer">
-        <!-- The confirmation messages will be displayed here -->
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-xl p-8 max-w-md w-full text-center space-y-6">
         <?php
         include '../../generalPhp/conection.php';
 
-      
-        // Check if 'id' parameter is provided in the URL
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
 
-            // Check if a confirmation action was triggered
-            if (isset($_GET['confirm'])) {
-                if ($_GET['confirm'] === 'yes') {
-                    // The user confirmed to delete, proceed with the deletion
-                    $sql = "DELETE FROM produtos WHERE id='$id'";
-                    if (mysqli_query($conn, $sql)) {
-                        echo"  <img src='../../assets/fileDeleted.svg' alt='delete  image'> ";
-                        echo "<h3>Registro deletado com sucesso</h3>";
-                        echo "<div class='listButton'>";
-                        echo "<a href='cadastrodeproduto.php'>Lista de Produtos</a>";
-                        echo "</div>";
-                    } else {
-                        echo "Erro ao atualizar registro: " . mysqli_error($conn);
-                    }
-                    mysqli_close($conn);
-                    exit; // Stop execution after deletion
+            if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
+                $sql = "DELETE FROM produtos WHERE id='$id'";
+                if (mysqli_query($conn, $sql)) {
+                    echo "<img src='../../assets/fileDeleted.svg' alt='Deletado' class='mx-auto w-16 h-16'>";
+                    echo "<h2 class='text-xl font-semibold'>Registro deletado com sucesso</h2>";
+                    echo "<a href='cadastrodeproduto.php' class='inline-block px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition'>Lista de Produtos</a>";
+                } else {
+                    echo "<h2 class='text-red-500 font-semibold'>Erro ao deletar: " . mysqli_error($conn) . "</h2>";
                 }
+                mysqli_close($conn);
+                exit;
             }
 
-            // If no confirmation action was triggered, show the confirmation dialog
-            echo"  <img src='../../assets/delete.svg' alt='delete  image'> ";
-            echo "<h3>Deseja realmente apagar esse registro?</h3> ";
-            echo"<div class='deleteButtons'>";
-            echo "<div class='yesButton'>";
-            echo "<a href='apagar.php?id=$id&confirm=yes'>Sim</a>  ";
+            // Exibe confirmação
+            echo "<img src='../../assets/delete.svg' alt='Confirmação' class='mx-auto w-16 h-16'>";
+            echo "<h2 class='text-xl font-semibold'>Deseja realmente apagar esse registro?</h2>";
+            echo "<div class='flex justify-center gap-4 mt-4'>";
+            echo "  <a href='apagar.php?id=$id&confirm=yes' class='px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium'>Sim</a>";
+            echo "  <a href='cadastrodeproduto.php' class='px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-900 rounded-lg font-medium'>Cancelar</a>";
             echo "</div>";
-            echo "<div class='cancelButton'>";
-            echo "<a href='cadastrodeproduto.php'>Cancelar</a>";
-            echo "</div>";
-            echo"</div>";
+
         } else {
-            echo '<h3>ID não fornecido na URL!</h3>';
+            echo '<h2 class="text-red-500 font-semibold">ID não fornecido na URL!</h2>';
         }
         ?>
     </div>

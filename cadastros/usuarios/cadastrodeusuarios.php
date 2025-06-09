@@ -1,187 +1,85 @@
-<?php
-
-    
-if(!isset($_SESSION)) {
-    session_start();
-}
-
-if(!isset($_SESSION['id'])) {
-    die( header("Location: ../../index.php"));
-   
-}
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="../../index/root.css">
-    <link rel="stylesheet" href="../../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="../usuarios/cadastro.css">
-    
-    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <title>Cadastro Usuários</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="nofollow,noindex">
+  <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
+  <title>Cadastro Usuários</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <script src="../../onLoad/onLoad.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Scripts e Estilos Gerais -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
-<script src="../../onLoad/onLoad.js"></script>
 
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white" onload="onLoad()">
+  <!-- Preloader -->
+  <div id="preload" class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-green-500"></div>
+  </div>
 
- <div class="overflow white" id="preload"> 
-    <div class="circle-line">
-        <div class="circle-red">&nbsp;</div>
-        <div class="circle-blue">&nbsp;</div>
-        <div class="circle-green">&nbsp;</div>
-        <div class="circle-yellow">&nbsp;</div>
-    </div>
-</div>
-
-<body onload="onLoad()">
-
-    
-
-    <div id="mobileMenu" class="mobileMenuContainer ">
-        <button style="width: 50px;" onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img src="../../assets/x.svg" alt="Menu mobile da página">
-        </button>
-            <div class="mobileMenuButtons">
-                <a href="../../main.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _home_.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INÍCIO</h2></div>
-                        </button>
-                    </div>
-                </a>
-
-                <a href="../cadastros.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _book_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>CADASTROS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../pedidos/cadastrodepedidos.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _list_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PEDIDOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../relatorios/relatorios.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>RELATÓRIOS</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../inspessao/cadastro.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>INSPEÇÃO</h2></div>
-                        </button>
-                    </div>
-                </a>
-                <a href="../../packingList/cadastropackinglist.php">
-                    <div class="menuButtonsMobile">
-                        <button class="categorieButtonMobile">
-                            <div class="divImgCategorieButtonMobile"><img src="../../assets/mobileIcons/icon _check_-1.svg" alt="icone fornecedor"></div>
-                            <div class="divNameCategorieButtonMobile"><h2>PACKING LIST</h2></div>
-                        </button>
-                    </div>
-                </a>
-             
-
-            </div>   
-
+  <!-- Header -->
+  <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center p-4 shadow-md">
+    <div class="flex items-center gap-4 w-full lg:w-auto">
+      <a href="../cadastros.php" class="text-white hover:underline flex items-center gap-2">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </a>
+     
     </div>
 
-   <header>
-
-    <a href="../cadastros.php"><button  id="backButton" class="backButton">
-        <img src="../../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-    </button>
-    </a>
-
-    <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-        <img src="../../assets/menu_mobile.svg" alt="Menu mobile da página">
-    </button>
-    
-    <form id="cadastroForm">
-        <div class="inputBox">
-            <label for="produto">USUÁRIO</label>
-            <input placeholder="USUÁRIO" type="text" id="nome" name="nome" required>
-        </div>
-
-        <div class="inputBox">
-            <label for="senha">SENHA</label>
-            <input placeholder="SENHA" type="password" id="senha"  name="senha" required>
-           
-        </div>
-
-        <div class="inputBox">
-            <label for="senha">SENHA</label>
-            <input placeholder="REPITA A SENHA" type="password" id="senha1"  name="senha" required>
-           
-        </div>
-
-        <button type="submit">SALVAR <img src="../../assets/save.svg" alt=""></button> 
+    <form id="cadastroForm" class="flex flex-col lg:flex-row gap-4 mt-4 lg:mt-0">
+      <div class="flex flex-col">
+        <label for="nome">USUÁRIO</label>
+        <input id="nome" name="nome" placeholder="USUÁRIO" type="text" required class="input" />
+      </div>
+      <div class="flex flex-col">
+        <label for="senha">SENHA</label>
+        <input id="senha" name="senha" placeholder="SENHA" type="password" required class="input" />
+      </div>
+      <div class="flex flex-col">
+        <label for="senha1">REPITA A SENHA</label>
+        <input id="senha1" name="senha_confirmada" placeholder="REPITA A SENHA" type="password" required class="input" />
+      </div>
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">SALVAR <i class="fas fa-save ml-2"></i></button>
     </form>
-   
-   </header>
-   
-		<form method="POST" class="inputSearch" id="form-pesquisa" action="">
-			<input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
-			
-		</form>
-	
+  </header>
 
-      
+  <!-- Busca -->
+  <section class="p-4">
+    <form method="POST" id="form-pesquisa" action="" class="mb-4">
+      <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-800" />
+    </form>
 
- 
-  
-   <section id="containerList" class="containerList">
-    
-    
-       
-    
- 
+    <!-- Listagem -->
+    <section id="containerList" class="grid gap-4"></section>
+  </section>
 
-   
-      
-   </section> 
+  <!-- Footer -->
+  <footer class="p-4 text-center border-t border-gray-300 dark:border-gray-700">
+    <p id="data-footer"></p>
+  </footer>
 
-  
-
-   <footer>
-    <p  id="data-footer">  </p>
-   </footer>
+  <!-- Scripts Gerais -->
+  <script src="../../generalScripts/toastify.js"></script>
+  <script src="../../generalScripts/darkmode.js"></script>
+  <script src="../../mobileMenu/js/mobileMenu.js"></script>
+  <script src="../../generalScripts/version.js"></script>
+  <script src="../../generalScripts/backPage.js"></script>
+  <script src="cadastro.js"></script>
+  <script src="listar.js"></script>
+  <script src="busca.js"></script>
 </body>
-
-<script src="../../mobileMenu/js/mobileMenu.js"></script>
-
-<script src="../../generalScripts/version.js"></script>
-
-<script src="../../generalScripts/backPage.js"></script>
-
-<script src="cadastro.js"></script>
-
-<script src="listar.js"></script>
-
-<script src="busca.js"></script>
-
-
-
 
 </html>

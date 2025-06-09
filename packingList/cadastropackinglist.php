@@ -1,287 +1,137 @@
 <?php
-
 include '../generalPhp/conection.php';
-
 if (!isset($_SESSION)) {
     session_start();
 }
-
 if (!isset($_SESSION['id'])) {
     die(header("Location: ../index.php"));
-
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="../index/root.css">
-    <link rel="stylesheet" href="../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="../pedidos/cadastro.css">
-    <link rel="stylesheet" href="packingListCabecalho.css">
-    <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packing List</title>
+<link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
 
-
-    <title>Packing List</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <script src="../mobileMenu/js/mo"></script>
+    <script src="../generalScripts/toastify.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="../generalScripts/darkmode.js"></script>
+  <script src="../onLoad/onLoad.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
-<script src="../onLoad/onLoad.js"></script>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white" onload="onLoad()">
 
 
-<div class="overflow white" id="preload">
-    <div class="circle-line">
-        <div class="circle-red">&nbsp;</div>
-        <div class="circle-blue">&nbsp;</div>
-        <div class="circle-green">&nbsp;</div>
-        <div class="circle-yellow">&nbsp;</div>
+
+  <!-- Header -->
+  <!-- Header -->
+  <header class="flex justify-between items-center px-4 py-3 bg-green-800 text-white shadow">
+    <a href="../main.php" class="flex items-center gap-2 font-semibold">
+      <i class="fas fa-arrow-left text-lg"></i>
+      <span>Menu Principal</span>
+    </a>
+    <h1 class="text-lg font-semibold">Packing List</h1>
+    <div class="flex items-center gap-4">
+      <button onclick="toggleTheme()" title="Alternar tema" class="text-yellow-400 text-lg">
+        <i class="fas fa-circle-half-stroke"></i>
+      </button>
+ 
     </div>
-</div>
+  </header>
 
-<body onload="onLoad()">
-
-
-
-    <div id="mobileMenu" class="mobileMenuContainer ">
-        <button onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img src="../assets/x.svg" alt="Menu mobile da página">
-        </button>
-        <div class="mobileMenuButtons">
-            <a href="../main.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _home_.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INÍCIO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-            <a href="../cadastros/cadastros.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _book_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>CADASTROS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../pedidos/cadastrodepedidos.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _list_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PEDIDOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../relatorios/relatorios.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _pie chart_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>RELATÓRIOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../inspessao/cadastro.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor">
-                        </div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INSPEÇÃO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="cadastropackinglist.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _check_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PACKING LIST</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-
-        </div>
-
-    </div>
-
-
-    <header>
-
-        <a href="../main.php"><button id="backButton" class="backButton">
-                <img style="width: 30px;" src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-            </button>
-        </a>
-
-        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-            <img style="width: 34px;" src="../assets/menu_mobile.svg" alt="Menu mobile da página">
-        </button>
-
-        <form id="cadastroForm">
-
-
-
-            <h2 style="color:white;font-size: 1.6em;margin-bottom: 10px;">PACKING LIST</h2>
-        </form>
-
-        <form class="formCadastroPackingList" action="">
-            <p class="nomePackingListMobile">Packing List</p>
-            <input name="nome" placeholder="Nome" type="text">
-            <input name="numero_container" placeholder="N° Container" type="number">
-            <input name="data_PackingList" type="date">
-            <button type="button" onclick="salvarPackingList()">Salvar</button>
-        </form>
-
-
-    </header>
-
-
-
-    <!-- campo para busca dos pedidos  -->
-    <form method="POST" class="inputSearch" id="form-pesquisa" action="">
-        <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
+  <!-- Formulário principal -->
+  <div class="max-w-4xl mx-auto px-4 py-6">
+    <form class="formCadastroPackingList flex flex-col md:flex-row gap-4 mb-6 bg-white dark:bg-gray-800 p-4 rounded shadow">
+      <input name="nome" placeholder="Nome" type="text" class="flex-1 p-2 border rounded dark:bg-gray-700">
+      <input name="numero_container" placeholder="N° Container" type="number" class="flex-1 p-2 border rounded dark:bg-gray-700">
+      <input name="data_PackingList" type="date" class="p-2 border rounded dark:bg-gray-700">
+      <button type="button" onclick="salvarPackingList()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+        Salvar
+      </button>
     </form>
 
-    <div id="divEditarPackingList" style="display:none;" class="divEditarPackingList">
-        <h4>Editar Packing List</h4>
-        <form class="formEditarPackingList" action="">
+    <!-- Campo de busca -->
+    <form id="form-pesquisa" class="mb-6">
+      <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar"
+        class="w-full p-2 border rounded shadow dark:bg-gray-700">
+    </form>
 
-            <p>Nome</p>
-            <input id="editarNome" name="nome" placeholder="Nome" type="text">
-            <p>Numero Container</p>
-            <input id="editarNumero_container" name="numero_container" placeholder="N° Container" type="number">
-            <p>Data</p>
-            <input id="editarData" name="data_PackingList" type="date">
-            <button type="button" onclick="salvarEdicaoPackingList()">Salvar</button>
-            <button style="background-color:red;" type="button" onclick="fecharDivEdicao()">Cancelar</button>
+    <!-- Lista de dados -->
+    <section id="containerList" class="space-y-4">
+      <?php
+      $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT) ?: 1;
+      $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT) ?: 10;
+      $inicio = ($pagina - 1) * $qnt_result_pg;
 
-        </form>
-    </div>
+      $sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT ?, ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("ii", $inicio, $qnt_result_pg);
+      $stmt->execute();
+      $resultado_sql = $stmt->get_result();
 
-    <section id="containerList" class="containerList">
-
-        <?php
-
-
-        // Paginação
-        $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT) ?: 1;
-        $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT) ?: 10;
-        $inicio = ($pagina - 1) * $qnt_result_pg;
-
-        // Consultar no banco de dados
-        $sql = "SELECT * FROM listpack ORDER BY id DESC LIMIT ?, ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ii", $inicio, $qnt_result_pg);
-        $stmt->execute();
-        $resultado_sql = $stmt->get_result();
-
-        // Verificar se encontrou resultado na tabela "listpack"
-        if ($resultado_sql && $resultado_sql->num_rows > 0) {
-            ob_start(); // Inicia o buffer de saída
-        
-            while ($row_sql = $resultado_sql->fetch_assoc()) {
-                $dataFormatada = date('d/m/Y', strtotime($row_sql['data_packingList']));
-                echo '
-        <div class="containerDadosPedidos">
-            <div class="numberDate">
-                <div style="font-size:0.7em;" class="numeroPedido">N° Cont. ' . htmlspecialchars($row_sql['numero_container']) . ' </div>
-                <div class="dataPedido">Data ' . htmlspecialchars($dataFormatada) . '</div>
-            </div>
-            <div class="dadosPedidos">
-                <div class="nomeClientePedido">' . htmlspecialchars($row_sql['nome']) . '</div>
-            </div>
-            <div class="apagarImprimir">
-                <a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '&numero=' . urlencode($row_sql['id']) . '&cliente=' . urlencode($row_sql['nome']) . '&numero_container=' . urlencode($row_sql['numero_container']) . '"><img src="../assets/file_green.svg"></a>
-                <img style="cursor:pointer;" onclick="deletarPackingList(' . (int) $row_sql['id'] . ')" src="../assets/erase.svg">
-                <img style="cursor:pointer;" onclick="editarPackingList(' . (int) $row_sql['id'] . ',\'' . addslashes($row_sql['nome']) . '\',' . (int) $row_sql['numero_container'] . ',\'' . addslashes($row_sql['data_packingList']) . '\')" src="../assets/edit.svg">
-            </div>
-        </div>';
-            }
-
-            // Paginação - Somar a quantidade de registros
-            $sql_pg = "SELECT COUNT(id) AS num_result FROM listpack";
-            $result_pg = $conn->query($sql_pg);
-            $row_pg = $result_pg->fetch_assoc();
-            $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
-
-            // Limitar os links antes e depois
-            $max_links = 2;
-            echo "<div class='divPagina'>";
-            echo "<a href='#' onclick='listar(1, $qnt_result_pg)'>&lt;PRIMEIRA</a> ";
-
-            for ($pag_ant = max(1, $pagina - $max_links); $pag_ant < $pagina; $pag_ant++) {
-                echo " <a href='#' onclick='listar($pag_ant, $qnt_result_pg)'>$pag_ant </a> ";
-            }
-
-            echo " $pagina ";
-
-            for ($pag_dep = $pagina + 1; $pag_dep <= min($pagina + $max_links, $quantidade_pg); $pag_dep++) {
-                echo " <a href='#' onclick='listar($pag_dep, $qnt_result_pg)'>$pag_dep</a> ";
-            }
-
-            echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
-            echo '</div>';
-
-            ob_end_flush(); // Libera o conteúdo do buffer de saída
-        
-        } else {
-            echo '
-    <div class="notFound">
-        <img class="notFoundImg" src="../assets/notFound.svg" alt="">
-        <h3>NENHUM PEDIDO SALVO</h3>
-    </div>';
-        }
-        ?>
-
-
-
-
-
-
+      if ($resultado_sql && $resultado_sql->num_rows > 0) {
+          while ($row_sql = $resultado_sql->fetch_assoc()) {
+              $dataFormatada = date('d/m/Y', strtotime($row_sql['data_packingList']));
+              echo '
+              <div class="flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 p-4 rounded shadow">
+                  <div class="flex flex-col text-sm text-gray-600 dark:text-gray-300">
+                      <span class="font-semibold text-sm">N° Cont.: ' . htmlspecialchars($row_sql['numero_container']) . '</span>
+                      <span>Data: ' . htmlspecialchars($dataFormatada) . '</span>
+                      <span class="text-green-700 font-medium dark:text-green-400">' . htmlspecialchars($row_sql['nome']) . '</span>
+                  </div>
+                  <div class="flex space-x-3 mt-3 md:mt-0">
+                      <a href="../packingList/editar/editar.php?id=' . urlencode($row_sql['id']) . '" title="Visualizar">
+                        <img src="../assets/file_green.svg" class="w-6 h-6">
+                      </a>
+                      <button onclick="deletarPackingList(' . (int) $row_sql['id'] . ')" title="Deletar">
+                        <img src="../assets/erase.svg" class="w-6 h-6">
+                      </button>
+                      <button onclick="editarPackingList(' . (int) $row_sql['id'] . ', \'' . addslashes($row_sql['nome']) . '\',' . (int) $row_sql['numero_container'] . ',\'' . addslashes($row_sql['data_packingList']) . '\')" title="Editar">
+                        <img src="../assets/edit.svg" class="w-6 h-6">
+                      </button>
+                  </div>
+              </div>';
+          }
+      } else {
+          echo '
+          <div class="text-center py-12">
+              <img src="../assets/notFound.svg" alt="Nada encontrado" class="mx-auto mb-4 w-32">
+              <h3 class="text-xl font-medium">NENHUM PEDIDO SALVO</h3>
+          </div>';
+      }
+      ?>
     </section>
+  </div>
 
+  <script>
+    function openMenu() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("-translate-x-full");
+    }
 
+    function onLoad() {
+      document.getElementById('preload')?.remove();
+    }
+  </script>
 
-    <footer>
-        <p id="data-footer"> </p>
-    </footer>
 </body>
-
-<script src="../mobileMenu/js/mobileMenu.js"></script>
-
-<script src="../generalScripts/version.js"></script>
-
-<script src="../generalScripts/backPage.js"></script>
-
-
-
-<script src="listar.js"></script>
-
-<script src="../pedidos/busca.js"></script>
-
 
 
 
 </html>
+
+
+  <script src="../generalScripts/backPage.js"></script>
+  <script src="../pedidos/busca.js"></script>
+  <script src="listar.js"></script>

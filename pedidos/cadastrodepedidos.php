@@ -58,22 +58,23 @@
     </div>
 
     <!-- Header -->
-    <header class="bg-green-700 dark:bg-green-800 text-white flex items-center justify-between px-4 py-3 shadow sticky top-0 z-40">
-        <div class="flex items-center gap-4">
-            <a href="../main.php" class="hover:opacity-80 transition">
-                <img src="../assets/backArrow.svg" alt="Voltar" class="w-6 h-6">
-            </a>
-            <h1 class="text-lg font-semibold">Cadastro Pedidos</h1>
-        </div>
-        <div class="flex items-center gap-4">
-            <button onclick="toggleTheme()" title="Alternar tema" class="text-xl text-yellow-500 hover:text-yellow-400 transition">
-                <i class="fas fa-circle-half-stroke"></i>
-            </button>
-            <button onclick="openMenu()" id="mobileMenuButton" class="hover:opacity-80 transition">
-                <img src="../assets/menu_mobile.svg" alt="Menu" class="w-7 h-7">
-            </button>
-        </div>
-    </header>
+ <header class="flex justify-between items-center px-4 py-3 bg-green-800 text-white shadow">
+  <!-- Voltar -->
+  <a href="../main.php" class="flex items-center gap-2 font-semibold">
+    <i class="fas fa-arrow-left text-lg"></i>
+    <span>Menu Principal</span>
+  </a>
+        <h1>Cadastro de Pedidos</h1>
+  <!-- Toggle Tema -->
+  <button onclick="toggleTheme()" title="Alternar tema" class="text-yellow-400 text-lg">
+    <i class="fas fa-circle-half-stroke"></i>
+  </button>
+
+  <!-- Menu -->
+  <button onclick="openMenu()" title="Abrir menu">
+    <i class="fas fa-bars text-white text-lg"></i>
+  </button>
+</header>
 
     <!-- Botão Novo Pedido e Campo de busca -->
     <section class="p-4 bg-white dark:bg-gray-800 rounded-md shadow-md mx-2 mt-4 space-y-4">

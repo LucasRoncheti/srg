@@ -1,61 +1,74 @@
 <?php
 include '../../generalPhp/conection.php';
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 
+if (!isset($_SESSION['id'])) {
+    die(header("Location: ../../index.php"));
+}
 
-// Check if 'id' parameter is provided in the URL
+$usuario = '';
+$senha = '';
+$id = '';
+
 if (isset($_GET['id'])) {
-    // Retrieve the 'id' value from the URL
     $id = $_GET['id'];
 
-    // Create a SQL query to fetch the data for the specified 'id'
-    $sql = "SELECT usuario,senha FROM usuarios WHERE id = '$id'";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT usuario, senha FROM usuarios WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Check if the query was successful and data was found
-    if ($row = mysqli_fetch_assoc($result)) {
+    if ($row = $result->fetch_assoc()) {
         $usuario = $row['usuario'];
         $senha = $row['senha'];
-        
-        
     } else {
         echo 'Registro não encontrado!';
+        exit;
     }
 } else {
-    echo 'ID não fornecido na URL!';
+    echo 'ID não fornecido!';
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../index/root.css">
-    <link rel="stylesheet" href="editar.css">
+    <title>Editar Senha</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <title>Editar Usuários</title>
 </head>
-<body>
-    <form action="atualizarSenha.php" method="POST">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center min-h-screen">
+
+    <form action="atualizarSenha.php" method="POST" class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md space-y-6">
+        <h1 class="text-xl font-bold text-center">Atualizar Senha</h1>
+
         <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+        <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($usuario); ?>">
 
-        <div class="inputBox">
+        <div>
+            <label for="senha" class="block text-sm font-medium mb-1">Senha</label>
+            <input type="text" id="senha" name="senha" placeholder="Insira a nova senha"
+                   class="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+        </div>
 
-            
-            <label for="valor">SENHA</label>
-            <input placeholder="INSIRA A SENHA" type="text" id="senha" name="senha" value=""  required>
-            </div>
-       
-        
-
-        <button type="submit" value="Atualizar">CONTINUAR></button>
-        <a  href="cadastrodeusuarios.php">CANCELAR<img style="width:20px;heigth:20px;" src="../../assets/delete.svg" alt=""></a>
-      
-
+        <div class="flex justify-between items-center gap-4">
+            <button type="submit"
+                class="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded transition">
+                Continuar &gt;
+            </button>
+            <a href="cadastrodeusuarios.php"
+               class="flex items-center gap-2 text-red-500 hover:text-red-600 font-semibold transition">
+                <img src="../../assets/delete.svg" alt="Cancelar" class="w-5 h-5"> Cancelar
+            </a>
+        </div>
     </form>
+
 </body>
 </html>

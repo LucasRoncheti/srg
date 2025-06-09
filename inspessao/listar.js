@@ -37,9 +37,12 @@ function listar(pagina, qnt_result_pg) {
             data: formData,
             success: function(response) {
                 // Manipula a resposta do servidor
-                alert('Inspeção salva com sucesso!');
+                toastifyMessage('Inspeção salva com sucesso!');
                 console.log(response);
-                window.location.reload();
+                setTimeout(()=>{
+
+                    window.location.reload();
+                },1000)
             },
             error: function(xhr, status, error) {
                 // Manipula erros

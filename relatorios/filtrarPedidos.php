@@ -1,21 +1,17 @@
 <?php
 include '../generalPhp/conection.php';
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
-
-if(!isset($_SESSION['id'])) {
-    die( header("Location: ../index.php"));
-   
+if (!isset($_SESSION['id'])) {
+    die(header("Location: ../index.php"));
 }
-// Receba os dados da solicitação AJAX
-$data = json_decode(file_get_contents('php://input'), true);
 
+$data = json_decode(file_get_contents('php://input'), true);
 $dataInicial = $data['dataInicial'];
 $dataFinal = $data['dataFinal'];
 $fornecedor = $data['fornecedor'];
 
-// Consulte o banco de dados para obter resultados entre as datas e com o nome fornecedor
 $query = "SELECT * FROM pedidos_dados WHERE dataAtual BETWEEN ? AND ? AND fornecedor = ?";
 $stmt = mysqli_stmt_init($conn);
 
@@ -25,20 +21,14 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     $resultado_sql = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($resultado_sql) <= 0) {
-        echo '
-			<div class="notFound">
-				<img  class="notFoundImg" src="../assets/notFound.svg" alt="">
-				<h3 style="text-align:center;">NÃO HÁ REGISTROS ENTRE AS DATAS SELECIONADAS</h3>
-			</div>
-		
-		';
+        echo '<div class="text-center mt-10 text-gray-500 dark:text-gray-300">'
+           . '<img class="mx-auto w-24" src="../assets/notFound.svg" alt="Nenhum registro">'
+           . '<h3 class="mt-4 font-semibold">NÃO HÁ REGISTROS ENTRE AS DATAS SELECIONADAS</h3>'
+           . '</div>';
     } else {
-        $clientes = array();
-      
+        $clientes = [];
         while ($row_sql = mysqli_fetch_assoc($resultado_sql)) {
             $chaveAcesso = $row_sql['chaveAcesso'];
-
-            // Consulta para obter o nome do cliente
             $clienteQuery = "SELECT * FROM pedidoscadastro WHERE chaveAcesso = ?";
             $stmtCliente = mysqli_stmt_init($conn);
 
@@ -52,95 +42,71 @@ if (mysqli_stmt_prepare($stmt, $query)) {
                     $id = $rowCliente['id'];
                     $data = $rowCliente['dataAtual'];
                 } else {
-                    $cliente = "Nome do cliente não encontrado"; // mensagem de erro
-                    $id = "ID não encontrado";
-                    $data = "Data não encontrada";
+                    $cliente = "Cliente não encontrado";
+                    $id = "-";
+                    $data = "-";
                 }
 
-                // Verifique se o cliente já foi adicionado ao array de clientes
                 if (!isset($clientes[$chaveAcesso])) {
-                    $clientes[$chaveAcesso] = array(
+                    $clientes[$chaveAcesso] = [
                         'cliente' => $cliente,
                         'id' => $id,
                         'dataAtual' => $data,
-                        'itens' => array()
-                    );
+                        'itens' => []
+                    ];
                 }
 
-                // Adicione os itens ao array de itens
-                $clientes[$chaveAcesso]['itens'][] = array(
+                $clientes[$chaveAcesso]['itens'][] = [
                     'id' => $row_sql['id'],
                     'produto' => $row_sql['produto'],
                     'quantidade' => $row_sql['quantidade'],
                     'valorUnit' => $row_sql['valor_unit'],
                     'valorTotal' => $row_sql['valor_total'],
                     'dataRetirada' => $row_sql['data_retirada'],
-                );
+                ];
             }
-        
         }
-         //variável que contém a quandidade somada de caixas 
-        $somaQuantidadeTotalCaixas = 0;
-          //variável que contém o valor total das caixas 
-        $valorTotalUnificado = 0;
-        // Iterar pelos clientes e exibir os resultados agrupados
-        foreach ($clientes as $chaveAcesso => $clienteData) {
-           
-            $quantidadeTotal=0;
-            $valorTotalSomado = 0;
-            foreach($clienteData['itens'] as $soma) {
-                $quantidadeTotal += $soma['quantidade'];
-                $valorTotalSomado+= $soma['valorTotal'];
 
+        $somaQuantidadeTotalCaixas = 0;
+        $valorTotalUnificado = 0;
+        foreach ($clientes as $chaveAcesso => $clienteData) {
+            $quantidadeTotal = 0;
+            $valorTotalSomado = 0;
+            foreach ($clienteData['itens'] as $soma) {
+                $quantidadeTotal += $soma['quantidade'];
+                $valorTotalSomado += $soma['valorTotal'];
             }
             $somaQuantidadeTotalCaixas += $quantidadeTotal;
-            $valorTotalUnificado+=$valorTotalSomado;
+            $valorTotalUnificado += $valorTotalSomado;
 
-           
-            echo '<div class="containerItensFiltro">';
-            echo '<div class="cabeçalhoListaFiltro">';
+            echo '<div class="bg-white dark:bg-gray-800 rounded shadow p-4 mb-4">';
+            echo '<div class="grid grid-cols-5 gap-2 font-semibold text-sm border-b pb-2">';
             echo '<div>' . $clienteData['id'] . '</div>';
-            echo '<div style="font-size: 0.8em;"> ' . date('d/m/Y', strtotime($clienteData['dataAtual'])) . '</div>';
-            echo '<div style="font-size: 0.8em;"> ' . date('d/m/Y', strtotime($clienteData['itens'][0]['dataRetirada'])) . '</div>';
+            echo '<div>' . date('d/m/Y', strtotime($clienteData['dataAtual'])) . '</div>';
+            echo '<div>' . date('d/m/Y', strtotime($clienteData['itens'][0]['dataRetirada'])) . '</div>';
+            echo '<div>' . $quantidadeTotal . '</div>';
+            echo '<div class="text-center cursor-pointer" onclick="trocarDisplay(' . $clienteData['id'] . ')">';
+            echo '<img src="../assets/fullscreen.svg" class="mx-auto h-5">';
+            echo '</div></div>';
 
-            echo '<div>' . $quantidadeTotal . '</div>'; // Exibir a quantidade total
-            echo '<div id="mostrarInfos" onclick="trocarDisplay('.$clienteData['id'].')"> <img src="../assets/fullscreen.svg" alt=""></div>';
-            echo '</div>';
-
-            echo '<div style="display: none;" id="'.$clienteData['id'].'" class="containerDiscItens">';
-
-          
-            
-            
+            echo '<div id="' . $clienteData['id'] . '" class="hidden mt-2">';
             foreach ($clienteData['itens'] as $item) {
-                echo    '<div id="' . $chaveAcesso . '" class="discItens">';
-                echo     '  <div class="divDiscItens">' . $item['produto'] . '</div>';
-                echo       ' <div class="divDiscItens">Qnt. ' . $item['quantidade'] . '</div>';
-                echo        '<div class="divDiscItensValor">';
-                echo            '<div>Valor Unit: R$ ' . number_format($item['valorUnit'] / 100, 2, ',', ',')  . '</div>';
-                echo           ' <div>Valor Total: R$ ' . number_format($item['valorTotal'] / 100, 2, ',', ',')  . '</div>';
-                echo       ' </div>';
-                echo  '  </div>';
-                
+                echo '<div class="border-t pt-2 mt-2 text-sm">';
+                echo '<div><strong>' . $item['produto'] . '</strong> (Qnt. ' . $item['quantidade'] . ')</div>';
+                echo '<div>Valor Unit: R$ ' . number_format($item['valorUnit'] / 100, 2, ',', '.') . '</div>';
+                echo '<div>Valor Total: R$ ' . number_format($item['valorTotal'] / 100, 2, ',', '.') . '</div>';
+                echo '</div>';
             }
-
-            echo  '</div>';
+            echo '</div>';
             echo '</div>';
         }
-        // soma a quantidade de clientes listados 
-        $numeroClientesListados =  count($clientes);
-        echo'  <input class="inputHidden" id="nPedidos" type="hidden" value="'.$numeroClientesListados.'">';
-        echo'  <input class="inputHidden" id="somaQuantidade" type="hidden" value="'.$somaQuantidadeTotalCaixas.'">';
-        echo'  <input class="inputHidden" id="valorTotalUnif" type="hidden" value="R$ '.number_format($valorTotalUnificado /100,2,',','.').'">';
-        
+
+        echo '<input class="hidden" id="nPedidos" type="hidden" value="' . count($clientes) . '">';
+        echo '<input class="hidden" id="somaQuantidade" type="hidden" value="' . $somaQuantidadeTotalCaixas . '">';
+        echo '<input class="hidden" id="valorTotalUnif" type="hidden" value="R$ ' . number_format($valorTotalUnificado / 100, 2, ',', '.') . '">';
     }
-   
 } else {
     echo "Erro na preparação da consulta.";
 }
-
-// Feche a conexão com o banco de dados
 $conn->close();
 ?>
-
-

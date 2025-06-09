@@ -1,299 +1,156 @@
 <?php
 include '../generalPhp/conection.php';
-
-
 if (!isset($_SESSION)) {
     session_start();
 }
-
 if (!isset($_SESSION['id'])) {
     die(header("Location: ../index.php"));
-
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-br" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="../index/root.css">
-    <link rel="stylesheet" href="../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="relatorios.css">
-    <link rel="stylesheet" href="stylePrint.css">
-    <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
-
-
-    <title>Relatórios</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="nofollow,noindex">
+  <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+  <title>Relatórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="../generalScripts/darkmode.js"></script>
+  <script src="../onLoad/onLoad.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
-<script src="../onLoad/onLoad.js"></script>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans" onload="onLoad()">
 
+  <!-- Preloader -->
+  <div class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50" id="preload">
+    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-green-500"></div>
+  </div>
 
-<div class="overflow white" id="preload">
-    <div class="circle-line">
-        <div class="circle-red">&nbsp;</div>
-        <div class="circle-blue">&nbsp;</div>
-        <div class="circle-green">&nbsp;</div>
-        <div class="circle-yellow">&nbsp;</div>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed inset-0 bg-gray-800 bg-opacity-90 z-40 hidden flex-col p-4 text-white">
+
+  </div>
+
+  <!-- Header -->
+  <header class="flex justify-between items-center px-4 py-3 bg-green-800 text-white shadow print:hidden">
+    <a href="../main.php" class="flex items-center gap-2 font-semibold">
+      <i class="fas fa-arrow-left text-lg"></i>
+      <span>Menu Principal</span>
+    </a>
+    <h1 class="text-lg font-semibold">Relatórios</h1>
+    <div class="flex items-center gap-4">
+      <button onclick="toggleTheme()" title="Alternar tema" class="text-yellow-400 text-lg">
+        <i class="fas fa-circle-half-stroke"></i>
+      </button>
+      <button onclick="openMenu()" title="Abrir menu">
+        <i class="fas fa-bars text-white text-lg"></i>
+      </button>
     </div>
-</div>
+  </header>
 
-<body onload="onLoad()">
+  <!-- Impressão Header -->
+  <section class="hidden print:block p-4 border-b border-gray-300">
+    <div class="flex items-start gap-4">
+      <img src="../assets/logoLogin.png" alt="Logo Reinholz Ginger" class="w-20 h-20">
+      <div class="text-sm">
+        <p class="font-bold">REINHOLZ GINGER COMERCIO DE RAIZES LTDA</p>
+        <p><img src="../assets/cnpj.svg" class="inline w-4"> 50.688.819/0001-61</p>
+        <p><img src="../assets/local.svg" class="inline w-4"> AE ZONA RURAL, S/N GALO - DOMINGOS MARTINS ES - CEP:29260-000</p>
+        <p><img src="../assets/email.svg" class="inline w-4"> reinholzginger0@outlook.com</p>
+      </div>
+    </div>
+  </section>
 
-
-    <div id="mobileMenu" class="mobileMenuContainer ">
-        <button onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img src="../assets/x.svg" alt="Menu mobile da página">
-        </button>
-        <div class="mobileMenuButtons">
-            <a href="../main.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _home_.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INÍCIO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-            <a href="../cadastros/cadastros.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _book_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>CADASTROS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../pedidos/cadastrodepedidos.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _list_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PEDIDOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="relatorios.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>RELATÓRIOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../inspessao/cadastro.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor">
-                        </div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INSPEÇÃO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../packingList/cadastropackinglist.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _check_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PACKING LIST</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-
+  <!-- Formulário de Filtro -->
+  <main class="p-4">
+    <form id="cadastroForm" class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md grid gap-4">
+      <div class="flex items-center gap-2">
+        <img src="../assets/categories/relatorios.svg" class="w-8">
+        <h2 class="text-lg font-semibold text-green-700 dark:text-green-400">RELATÓRIOS</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input id="pesquisaFornecedor" name="pesquisaFornecedor" type="text" placeholder="FORNECEDOR" class="w-full p-2 border rounded dark:bg-gray-900">
+        <select name="fornecedor" id="fornecedor" class="w-full p-2 border rounded dark:bg-gray-900">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label>Data Inicial</label>
+          <input id="dataInicial" type="date" class="w-full p-2 border rounded dark:bg-gray-900">
         </div>
+        <div>
+          <label>Data Final</label>
+          <input id="dataFinal" type="date" class="w-full p-2 border rounded dark:bg-gray-900">
+        </div>
+      </div>
+      <button type="button" id="filtrarButton"  class="self-start px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 flex items-center gap-2">
+        FILTRAR <img src="../assets/filtrar.svg" alt="">
+      </button>
+    </form>
 
+    <!-- Resumo -->
+    <div class="grid grid-cols-3 text-center mt-8 font-semibold">
+      <div>
+        Quantidade<br>de pedidos
+        <div id="quantidadePedidos" class="text-xl mt-2">0</div>
+      </div>
+      <div>
+        Total Caixas
+        <div id="totalCaixas" class="text-xl mt-2">0</div>
+      </div>
+      <div>
+        Valor total<br>unificado
+        <div id="ValorUnificado" class="text-xl mt-2">R$ 0,00</div>
+      </div>
     </div>
 
-    <section class="headerPrint" >
+    <!-- Cabeçalho Itens -->
+    <div class="grid grid-cols-5 gap-2 text-sm mt-8 font-bold border-b pb-2">
+      <div>Nº P</div>
+      <div>DATA</div>
+      <div>DATA RET.</div>
+      <div>QNT</div>
+      <div class="text-center cursor-pointer" onclick="imprimirRelatorios()">
+        <img src="../assets/print.svg" alt="Imprimir" class="mx-auto h-6">
+      </div>
+    </div>
 
-        <div class="logoGinger">
-            <img src="../assets/logoLogin.png" alt="Logo Reinholz Ginger">
-        </div>
-
-        <div class="dadosEmpresa">
-            <p id="nomeEmpresa">REINHOLZ GINGER COMERCIO DE RAIZES LTDA</p>
-            <p> <img src="../assets/cnpj.svg"> 50.688.819/0001-61</p>
-            <p> <img src="../assets/local.svg"> AE ZONA RURAL, S/N GALO-DOMINGOS MARTINS ES- CEP:29260-000</p>
-            <p><img src="../assets/email.svg"> reinholzginger0@outlook.com</p>
-        </div>
-
-        <!-- <div class="dadosPedidos">
-        <div> N&deg; PEDIDO <STRONg> <?php echo $idPedido ?></STRONg></div>
-        <div> EMISSÃO: <strong><?php echo date('d/m/y',strtotime($dataAtual)) ?></strong></div>
-        </div> -->
-
-
+    <!-- Lista -->
+    <section id="containerList" class="mt-4 space-y-2">
+      <!-- Conteúdo gerado por JS -->
     </section>
-    <div id="relatoriosH3">RELATÓRIOS</div>
-    <header>
+  </main>
 
-        <a href="../main.php"><button id="backButton" class="backButton">
-                <img src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-            </button>
-        </a>
+  <footer class="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
+    <p id="data-footer"></p>
+  </footer>
 
-        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-            <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
-        </button>
-       
-        <form id="cadastroForm">
-            <img class="imgCategoria" style="width:40px" src="../assets/categories/relatorios.svg" alt="">
-    
-            <h2  id="relatoriosH2" >RELATÓRIOS</h2>
-            
-            
-            <div class="inputSearch">
-                <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
-                    placeholder="FORNECEDOR">
-
-                <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
-                    <option value=""></option>
-                </select>
-            </div>
-
-
-            <div class="inputSearchData">
-                <div class="inputDate">
-                    <p>Data Incial</p>
-                    <input id="dataInicial" type="date">
-                </div>
-
-                <div class="inputDate">
-                    <p>Data Final</p>
-                    <input id="dataFinal" type="date">
-                </div>
-            </div>
-
-            <a href="#">
-                <div id="filtrarButton" class="buttonAction"> FILTRAR <img src="../assets/filtrar.svg" alt=""></div>
-            </a>
-        </form>
-
-    </header>
-
-
-    <div class="cabecalhoFiltro">
-        <div>Quantidade <br> de pedidos</div>
-        <div>Total Caixas</div>
-        <div> Valor total <br> unificado</div>
-    </div>
-
-
-    <div class="cabeçalhoValores">
-        <div id="quantidadePedidos">0</div>
-        <div id="totalCaixas">0</div>
-        <div id="ValorUnificado"> R$ 0,00</div>
-    </div>
-
-    <div class="cabeçalhoItens">
-        <div> N° P</div>
-        <div>DATA</div>
-        <div>DATA RET.</div>
-
-        <div>QNT</div>
-        <div id="printT" onclick="imprimirRelatorios()"> <img style="height: 70%;" src="../assets/print.svg" alt=""></div>
-    </div>
-
-
-
-
-
-    <section id="containerList" class="containerList">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </section>
-
-
-
-    <footer>
-        <p id="data-footer"> </p>
-    </footer>
-</body>
-
-<script src="../mobileMenu/js/mobileMenu.js"></script>
-
-<script src="../generalScripts/version.js"></script>
-
-<script src="../generalScripts/backPage.js"></script>
-
-<script src="buscaFornecedor.js"></script>
-
-<script src="filtrarPedidos.js"></script>
-
-<script src="mostrarInfo.js"></script>
-
-
-<!-- script para definir as datas iniciais nos campos de input da busca -->
-<script>
-
-
+  <!-- Scripts -->
+  <script src="../mobileMenu/js/mobileMenu.js"></script>
+  <script src="../generalScripts/version.js"></script>
+  <script src="../generalScripts/backPage.js"></script>
+  <script src="buscaFornecedor.js"></script>
+  <script src="filtrarPedidos.js"></script>
+  <script src="mostrarInfo.js"></script>
+  <script src="../generalScripts/print.js"></script>
+  <script>
     var today = new Date();
-    var day = today.getDate();
-    var month = today.getMonth() + 1; // Os meses começam em 0 (janeiro), então somamos 1.
+    var day = (today.getDate()).toString().padStart(2, '0');
+    var month = (today.getMonth() + 1).toString().padStart(2, '0');
     var year = today.getFullYear();
-
-    if (day < 10) {
-        day = "0" + day;
-    }
-
-    if (month < 10) {
-        month = "0" + month;
-    }
-
     var formattedDate = year + "-" + month + "-" + day;
-
-
-    document.getElementById("dataInicial").value = formattedDate
-    document.getElementById("dataFinal").value = formattedDate
-</script>
-
-<script src="../generalScripts/print.js"></script>
-
-
-
-<script>
-//   imprimirPagina()
-</script>
-
-
+    document.getElementById("dataInicial").value = formattedDate;
+    document.getElementById("dataFinal").value = formattedDate;
+  </script>
+</body>
 </html>

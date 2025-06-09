@@ -1,217 +1,117 @@
 <?php
-//Incluir a conexão com banco de dados
 include '../generalPhp/conection.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-
 if (!isset($_SESSION['id'])) {
     die(header("Location: ../index.php"));
-
 }
 ?>
 
-
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-br" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="../index/root.css">
-    <link rel="stylesheet" href="../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="../inspessao/cadastro.css">
-    <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
-
-
-    <title>Inspeção</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="nofollow,noindex">
+  <title>Inspeção</title>
+  <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+    <script src="../generalScripts/toastify.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="../generalScripts/darkmode.js"></script>
+  <script src="../onLoad/onLoad.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
-<script src="../onLoad/onLoad.js"></script>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans" onload="onLoad()">
 
+  <!-- Preloader -->
+  <div class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50" id="preload">
+    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-green-500"></div>
+  </div>
 
-<div class="overflow white" id="preload">
-    <div class="circle-line">
-        <div class="circle-red">&nbsp;</div>
-        <div class="circle-blue">&nbsp;</div>
-        <div class="circle-green">&nbsp;</div>
-        <div class="circle-yellow">&nbsp;</div>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed inset-0  bg-gray-800 bg-opacity-90 z-40 hidden flex-col p-4 text-white">
+
+  </div>
+
+  <!-- Header -->
+  <header class="flex justify-between items-center px-4 py-3 bg-green-800 text-white shadow">
+    <a href="../main.php" class="flex items-center gap-2 font-semibold">
+      <i class="fas fa-arrow-left text-lg"></i>
+      <span>Menu Principal</span>
+    </a>
+    <h1 class="text-lg font-semibold">Inspeção</h1>
+    <div class="flex items-center gap-4">
+      <button onclick="toggleTheme()" title="Alternar tema" class="text-yellow-400 text-lg">
+        <i class="fas fa-circle-half-stroke"></i>
+      </button>
+      <button onclick="openMenu()" title="Abrir menu">
+        <i class="fas fa-bars text-white text-lg"></i>
+      </button>
     </div>
-</div>
+  </header>
 
-<body onload="onLoad()">
-
-
-
-    <div id="mobileMenu" class="mobileMenuContainer ">
-        <button onclick="openMenu()" id="mobileMenuButtonClose" class="mobileMenuButtonClose">
-            <img src="../assets/x.svg" alt="Menu mobile da página">
-        </button>
-        <div class="mobileMenuButtons">
-            <a href="../main.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _home_.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INÍCIO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-            <a href="../cadastros/cadastros.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _book_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>CADASTROS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../pedidos/cadastrodepedidos.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _list_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PEDIDOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../relatorios/relatorios.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/icon _pie chart_-1.svg" alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>RELATÓRIOS</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="cadastro.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img
-                                src="../assets/mobileIcons/icon _magnifying glass_-1.svg" alt="icone fornecedor">
-                        </div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>INSPEÇÃO</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-            <a href="../packingList/cadastropackinglist.php">
-                <div class="menuButtonsMobile">
-                    <button class="categorieButtonMobile">
-                        <div class="divImgCategorieButtonMobile"><img src="../assets/mobileIcons/icon _check_-1.svg"
-                                alt="icone fornecedor"></div>
-                        <div class="divNameCategorieButtonMobile">
-                            <h2>PACKING LIST</h2>
-                        </div>
-                    </button>
-                </div>
-            </a>
-
-
-        </div>
-
-    </div>
-
-
-
-    <header>
-
-        <a href="../main.php"><button id="backButton" class="backButton">
-                <img src="../assets/backArrow.svg" alt="Botão para voltar a página anterior">
-            </button>
-        </a>
-
-        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-            <img src="../assets/menu_mobile.svg" alt="Menu mobile da página">
-        </button>
-
-        <form id="cadastroForm">
-
-            <img style="width: 40px;" src="../assets/categories/inspessao.svg" alt="">
-
-            <h2 style="color:white;font-size: 2em;margin-bottom: 10px;">INSPEÇÃO</h2>
-            <h2> </h2>
-        </form>
-
-        <form class="formCadastroInspecao" action="">
-            <p class="nomeInspecaoMobile">Inspeção</p>
-            <input name="nome" placeholder="Nome" type="text">
-            <input name="numero_container" placeholder="N° Container" type="number">
-            <input name="data_inspecao" type="date">
-            <button type="button" onclick="salvarInspecao()">Salvar</button>
-        </form>
-       
-
-    </header>
-
-
-
-    <!-- campo para busca dos pedidos  -->
-    <form method="POST" class="inputSearch" id="form-pesquisa" action="">
-        <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar">
+  <!-- Formulário de Inspeção -->
+  <main class="p-4 max-w-4xl mx-auto">
+    <form id="" class=" formCadastroInspecao bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md grid gap-4">
+      <h2 class="text-xl font-semibold text-green-700 dark:text-green-400">Nova Inspeção</h2>
+      <input name="nome" placeholder="Nome" type="text" class="p-2 border rounded dark:bg-gray-900">
+      <input name="numero_container" placeholder="Nº Container" type="text" class="p-2 border rounded dark:bg-gray-900">
+      <input name="data_inspecao" type="date" class="p-2 border rounded dark:bg-gray-900">
+      <button type="button" onclick="salvarInspecao()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Salvar</button>
     </form>
 
-    <div  id="divEditarInspecao" style="display:none;" class="divEditarInspecao">
-        <h4>Editar Inspeção</h4>
-        <form class="formEditarInspecao" action="">
-   
-            <p>Nome</p>
-            <input id="editarNome" name="nome" placeholder="Nome" type="text">
-            <p>Numero Container</p>
-            <input id="editarNumero_container" name="numero_container" placeholder="N° Container" type="number">
-            <p>Data</p>
-            <input id="editarData" name="data_inspecao" type="date">
-            <button type="button" onclick="salvarEdicaoInspecao()">Salvar</button>
-            <button style="background-color:red;" type="button" onclick="fecharDivEdicao()">Cancelar</button>
+    <!-- Campo de busca -->
+    <form method="POST" id="form-pesquisa" class="mt-6">
+      <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar" class="w-full p-2 border rounded dark:bg-gray-900">
+    </form>
 
-        </form>
+    <!-- Editar inspeção -->
+    <div id="divEditarInspecao" class="hidden mt-6 bg-yellow-50 dark:bg-yellow-900 p-4 rounded shadow">
+      <h4 class="font-semibold text-lg">Editar Inspeção</h4>
+      <form class="grid gap-4 mt-4">
+        <div>
+          <label>Nome</label>
+          <input id="editarNome" name="nome" placeholder="Nome" type="text" class="p-2 border rounded w-full dark:bg-gray-900">
         </div>
+        <div>
+          <label>Nº Container</label>
+          <input id="editarNumero_container" name="numero_container" type="text" class="p-2 border rounded w-full dark:bg-gray-900">
+        </div>
+        <div>
+          <label>Data</label>
+          <input id="editarData" name="data_inspecao" type="date" class="p-2 border rounded w-full dark:bg-gray-900">
+        </div>
+        <div class="flex gap-4">
+          <button type="button" onclick="salvarEdicaoInspecao()" class="bg-green-600 text-white px-4 py-2 rounded">Salvar</button>
+          <button type="button" onclick="fecharDivEdicao()" class="bg-red-600 text-white px-4 py-2 rounded">Cancelar</button>
+        </div>
+      </form>
+    </div>
 
-    <section id="containerList" class="containerList">
-
-
-
-
-
-
-
-
+    <!-- Lista -->
+    <section id="containerList" class="mt-8 space-y-4">
+      <!-- Conteúdo dinâmico listado aqui -->
     </section>
+  </main>
 
-    <footer>
-        <p id="data-footer"> </p>
-    </footer>
+  <footer class="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
+    <p id="data-footer"></p>
+  </footer>
 
+  <!-- Scripts -->
 
+  <script src="../mobileMenu/js/mobileMenu.js"></script>
+  <script src="../generalScripts/version.js"></script>
+  <script src="../generalScripts/backPage.js"></script>
+  <script src="listar.js"></script>
+  <script src="../pedidos/busca.js"></script>
 </body>
-
-<script src="../mobileMenu/js/mobileMenu.js"></script>
-
-<script src="../generalScripts/version.js"></script>
-
-<script src="../generalScripts/backPage.js"></script>
-
-
-
-<script src="listar.js"></script>
-
-<script src="../pedidos/busca.js"></script>
-
-
-
-
 </html>

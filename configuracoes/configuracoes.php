@@ -18,7 +18,7 @@ if (!isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="nofollow,noindex" />
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
-    <title>Pré Embarque</title>
+    <title>Configurações</title>
 
     <!-- Tailwind CSS + Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['id'])) {
     <i class="fas fa-arrow-left text-lg"></i>
     <span>Menu Principal</span>
   </a>
-        <h1>Pré-Embarque</h1>
+        <h1>Configurações</h1>
   <!-- Toggle Tema -->
   <button onclick="toggleTheme()" title="Alternar tema" class="text-yellow-400 text-lg">
     <i class="fas fa-circle-half-stroke"></i>
@@ -77,48 +77,13 @@ if (!isset($_SESSION['id'])) {
   </button>
 </header>
 
-    <!-- Formulário Principal -->
-    <section class="p-6">
-        <form class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white dark:bg-gray-800 p-6 rounded-lg shadow" id="cadastroForm">
-            <input name="nome" placeholder="Nome" type="text" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-            <input name="numero_container" placeholder="Nº Container" type="text" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-            <input name="data" type="date" class="border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-            <button type="button" onclick="salvarPreEmbarque()" class="md:col-span-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Salvar</button>
-        </form>
-    </section>
+<main>
+    <button id="btnInstalarApp" disabled class="mt-6 mx-auto block px-6 py-2 rounded bg-gray-400 text-white font-semibold cursor-not-allowed transition disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-700">
+  Instalar Aplicação no Dispositivo
+</button>
 
-    <!-- Busca -->
-    <section class="px-6">
-        <form method="POST" id="form-pesquisa" class="mb-4">
-            <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-        </form>
-    </section>
+</main>
 
-    <!-- Edição -->
-    <section id="divEditarInspecao" style="display:none;" class="px-6">
-        <div class="bg-yellow-100 dark:bg-yellow-200 p-4 rounded shadow">
-            <h4 class="font-semibold text-lg mb-2 text-gray-900">Editar Inspeção</h4>
-            <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-gray-900">Nome</label>
-                    <input id="editarNome" name="nome" type="text" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-900">Nº Container</label>
-                    <input id="editarNumero_container" name="numero_container" type="text" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-900">Data</label>
-                    <input id="editarData" name="data" type="date" class="w-full border border-gray-300 dark:border-gray-600 p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                </div>
-                <button type="button" onclick="salvarEdicaoPreEmbarque()" class="md:col-span-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Salvar</button>
-                <button type="button" onclick="fecharDivEdicao()" class="md:col-span-3 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Cancelar</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Listagem -->
-    <section id="containerList" class="p-6"></section>
 
     <!-- Rodapé -->
     <footer class="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
@@ -148,6 +113,57 @@ if (!isset($_SESSION['id'])) {
                 });
         }
     }
+</script>
+<script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Impede o comportamento automático
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Ativa o botão
+    const btn = document.getElementById('btnInstalarApp');
+    btn.disabled = false;
+    btn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+    btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-pointer');
+
+    btn.addEventListener('click', () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+
+        deferredPrompt.userChoice.then(choiceResult => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('Usuário aceitou a instalação');
+            toastifyMessage('Aplicativo instalado com sucesso!');
+          } else {
+            console.log('Usuário recusou a instalação');
+            toastifyMessage('Instalação cancelada.');
+          }
+          deferredPrompt = null;
+        });
+      }
+    });
+  });
+
+  // Se clicar no botão antes do evento, avisar
+  document.getElementById('btnInstalarApp').addEventListener('click', () => {
+    if (!deferredPrompt) {
+      toastifyMessage('Instalação não disponível no momento. Tente mais tarde.');
+    }
+  });
+
+  function toastifyMessage(texto) {
+    Toastify({
+      text: texto,
+      duration: 3000,
+      gravity: "bottom",
+      position: "center",
+      style: {
+        background: "#16a34a",
+      }
+    }).showToast();
+  }
 </script>
 
 </html>

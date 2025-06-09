@@ -2,91 +2,81 @@
 
 include '../../generalPhp/conection.php';
 
-
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
 
-if(!isset($_SESSION['id'])) {
-   die( header("Location: ../../index.php"));
-   
+if (!isset($_SESSION['id'])) {
+    die(header("Location: ../../index.php"));
 }
 
-
-//paginação
+// Paginação
 $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT);
 $qnt_result_pg = filter_input(INPUT_POST, 'qnt_result_pg', FILTER_SANITIZE_NUMBER_INT);
-//calcular o inicio visualização
 $inicio = ($pagina * $qnt_result_pg) - $qnt_result_pg;
 
-//consultar no banco de dados
-$result_sql = "SELECT * FROM usuarios ORDER BY id  DESC LIMIT $inicio, $qnt_result_pg ";
+// Consulta
+$result_sql = "SELECT * FROM usuarios ORDER BY id DESC LIMIT $inicio, $qnt_result_pg";
 $resultado_sql = mysqli_query($conn, $result_sql);
 
-//Verificar se encontrou resultado na tabela "sqls"
-if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
-    echo '<table>';
-    // Cabeçalho da tabela
+if (($resultado_sql) && ($resultado_sql->num_rows != 0)) {
+    echo '<div class="overflow-x-auto">';
+    echo '<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">';
+    echo '<thead class="bg-gray-100 dark:bg-gray-800">';
     echo '<tr>
-                <th>N°</th>
-                <th>USUÁRIO</th>
-                <th >EDIT.</th>
-            </tr>';
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">N°</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Usuário</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Ações</th>
+          </tr>';
+    echo '</thead><tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">';
 
-
-	while($row_sql = mysqli_fetch_assoc($resultado_sql)){
-		echo '<tr class=" tableRow">';
-        echo '<td class = "numTable">' . $row_sql['id'] . '</td>';
-        echo '<td class = "nameTable">' . $row_sql['usuario'] . '</td>';
-        
-        echo '<td class = "editTable"> <a  href="editarSenha.php?id='. $row_sql['id'] .'">  <img src="../../assets/edit.svg" > </a>
-                                        <a  href="apagarUsuario.php?id='. $row_sql['id'] .'">  <img src="../../assets/erase.svg" > </a>
-                </td>';
+    while ($row = mysqli_fetch_assoc($resultado_sql)) {
+        echo '<tr>';
+        echo '<td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">' . $row['id'] . '</td>';
+        echo '<td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">' . $row['usuario'] . '</td>';
+        echo '<td class="px-4 py-2 flex gap-3">
+                <a href="editarSenha.php?id=' . $row['id'] . '" class="text-blue-600 hover:underline">
+                    <img src="../../assets/edit.svg" alt="Editar" class="w-5 h-5 inline">
+                </a>
+                <a href="apagarUsuario.php?id=' . $row['id'] . '" class="text-red-600 hover:underline">
+                    <img src="../../assets/erase.svg" alt="Excluir" class="w-5 h-5 inline">
+                </a>
+              </td>';
         echo '</tr>';
-	}
+    }
 
-    
+    echo '</tbody></table></div>';
 
-    echo '</table>';//tag que fecha  a tabela
+    // Paginação
+    $result_pg = "SELECT COUNT(id) AS num_result FROM usuarios";
+    $resultado_pg = mysqli_query($conn, $result_pg);
+    $row_pg = mysqli_fetch_assoc($resultado_pg);
+    $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
 
+    $max_links = 2;
+    echo "<div class='mt-4 flex flex-wrap gap-2 text-sm text-gray-800 dark:text-gray-200'>";
+    echo "<a href='#' onclick='listar(1, $qnt_result_pg)' class='px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400 dark:hover:bg-gray-600'>&lt; Primeira</a>";
 
-
-        //Paginação - Somar a quantidade de usuários
-        $result_pg = "SELECT COUNT(id) AS num_result FROM usuarios";
-        $resultado_pg = mysqli_query($conn, $result_pg);
-        $row_pg = mysqli_fetch_assoc($resultado_pg);
-
-        //Quantidade de pagina
-        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
-
-        //Limitar os link antes depois
-        $max_links = 2;
-        echo "<div class ='divPagina'>";
-        echo "<a href='#' onclick='listar(1, $qnt_result_pg)'>&lt;PRIMEIRA</a> ";
-
-        for($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++){
-            if($pag_ant >= 1){
-                echo " <a href='#' onclick='listar($pag_ant, $qnt_result_pg)'>$pag_ant </a> ";
-            }
+    for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
+        if ($pag_ant >= 1) {
+            echo "<a href='#' onclick='listar($pag_ant, $qnt_result_pg)' class='px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded hover:bg-gray-300 dark:hover:bg-gray-700'>$pag_ant</a>";
         }
+    }
 
-        echo " $pagina ";
+    echo "<span class='px-3 py-1 font-bold bg-green-200 dark:bg-green-800 rounded'>$pagina</span>";
 
-        for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
-            if($pag_dep <= $quantidade_pg){
-                echo " <a href='#' onclick='listar($pag_dep, $qnt_result_pg)'>$pag_dep</a> ";
-            }
+    for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
+        if ($pag_dep <= $quantidade_pg) {
+            echo "<a href='#' onclick='listar($pag_dep, $qnt_result_pg)' class='px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded hover:bg-gray-300 dark:hover:bg-gray-700'>$pag_dep</a>";
         }
+    }
 
-        echo " <a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)'>ÚLTIMA></a>";
-        echo '</div>';
-        }else{
-            echo' <div class="notFound">
-                        <img  class="notFoundImg" src="../../assets/notFound.svg" alt="">
-                        <h3>NÃO HÁ REGISTROS </h3>
-                    </div>';
-        }
-
-
-
-
+    echo "<a href='#' onclick='listar($quantidade_pg, $qnt_result_pg)' class='px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400 dark:hover:bg-gray-600'>Última ></a>";
+    echo "</div>";
+} else {
+    echo '<div class="flex flex-col items-center justify-center text-center p-6 text-gray-700 dark:text-gray-300">';
+    echo '<img src="../../assets/notFound.svg" alt="Nada encontrado" class="w-32 h-32 mb-4">';
+    echo '<h3 class="text-lg font-semibold">NÃO HÁ REGISTROS</h3>';
+    echo '</div>';
+}
+?>

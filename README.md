@@ -39,6 +39,8 @@ Então abra `http://localhost:8000/main.php` após efetuar o login.
 
 ---
 
-# SRG - Registration and Reports System (English)
+# Alterações 
+
+
 
 
