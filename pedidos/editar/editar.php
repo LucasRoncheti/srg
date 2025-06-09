@@ -27,6 +27,7 @@ if (isset($_GET['id'])) {
             $valorTotalSalvoPedido = $row['valor_total'];
             $dataAtual = $row['dataAtual'];
             $cliente = $row['cliente'];
+            $idItem = $row['id'];
        
         }
     }
@@ -92,7 +93,7 @@ if (isset($_GET['id'])) {
     <div class="flex flex-col gap-2 w-full">
 
       <label for="dataRetirada" class="text-sm text-gray-700 dark:text-gray-200 mt-2">Data de Retirada</label>
-      <input id="dataRetirada" type="date"
+      <input id="dataRetirada" type="date" onchange="salvarLocalStorageDataRetirada()"
         class="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
     </div>
     <!-- Fornecedor -->
@@ -185,6 +186,7 @@ if (isset($_GET['id'])) {
 <?php
 if ($result && $result->num_rows != 0) {
     $somaQuantidadeTotal = 0;
+    $somaValorTotal = 0;
 
     while ($row = mysqli_fetch_assoc($result)) {
         $fornecedor = $row['fornecedor'];
@@ -199,6 +201,7 @@ if ($result && $result->num_rows != 0) {
 
         $valorUnitString = "R$ " . number_format($valor_unit / 100, 2, ",", ".");
         $valorTotalString = "R$ " . number_format($valor_total / 100, 2, ",", ".");
+        $somaValorTotal += $valor_total;
         ?>
 
         <input id="chaveAcesso" type="hidden" value="<?= $chaveAcesso ?>">
@@ -210,12 +213,12 @@ if ($result && $result->num_rows != 0) {
                     <?= $fornecedor ?>
                 </div>
                 <div class="w-1/6 text-center">
-                    <input type="date" value="<?= $dataRetirada ?>" class="w-full text-center bg-transparent border border-gray-300 dark:border-gray-600 rounded px-1 py-1 text-sm">
+                    <input onchange="alterarDataRetirada('<?= $idItem ?>',this)" type="date" value="<?= $dataRetirada ?>" class="w-full text-center bg-transparent border border-gray-300 dark:border-gray-600 rounded px-1 py-1 text-sm">
                 </div>
                 <div class="w-2/5 flex justify-between items-center text-gray-700 dark:text-gray-200">
                     <div class="w-1/3 text-center">
                         <input type="number"
-                            onchange="editarQuantidade('<?= $chaveAcesso ?>','<?= $idItem ?>', this, '<?= $valor_unit ?>'')"
+                            onchange="editarQuantidade('<?= $chaveAcesso ?>','<?= $idItem ?>', this, '<?= $valor_unit ?>')"
                             value="<?= $quantidade ?>"
                             class="w-14 text-center bg-transparent border border-gray-300 dark:border-gray-600 rounded px-1 py-1 text-sm">
                     </div>
@@ -236,7 +239,7 @@ if ($result && $result->num_rows != 0) {
                     <div class="w-1/3 text-center text-gray-500 dark:text-gray-400">Unit <?= $valorUnitString ?></div>
                     <div class="w-1/3 text-center"></div>
                     <div class="w-1/3 text-center">
-                        <a href="apagar.php?id=<?= $idItem ?>&valorPedidoSalvo=<?= $valorTotalSalvoPedido ?>&valorTotal=<?= $valor_total ?>&chaveAcesso=<?= $chaveAcesso ?>">
+                        <a onclick="apagarPedido('<?=$idItem?>')">
                             <img src="../../assets/erase.svg" alt="Apagar" class="w-5 h-5 mx-auto hover:opacity-80">
                         </a>
                     </div>
@@ -264,12 +267,12 @@ if ($result && $result->num_rows != 0) {
   <div id="containerValoresFinais"
     class="w-full mt-6 px-4 py-4 bg-white dark:bg-gray-800 rounded shadow-md text-gray-800 dark:text-white">
     <div id="containerInternoValoresFinais"
-      class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+      class="flex flex-col sm:flex-row  justify-center items-center flex-row gap-6 text-center">
       <div class="space-y-1">
         <p class="font-semibold text-sm">Nº CAIXAS</p>
         <p id="Ncaixas" class="text-lg font-bold"><?php echo $somaQuantidadeTotal ?></p>
       </div>
-      <div class="space-y-1">
+      <!-- <div class="space-y-1">
         <p class="font-semibold text-sm">CX. REST.</p>
         <div class="flex justify-center items-center gap-2">
           <p id="CxRest" class="text-lg font-bold">0</p>
@@ -277,10 +280,10 @@ if ($result && $result->num_rows != 0) {
           <input id="inputCxRest" type="number"
             class="w-20 px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600">
         </div>
-      </div>
+      </div> -->
       <div class="space-y-1">
         <p class="font-semibold text-sm">VALOR TOTAL</p>
-        <p id="valorTotalPedido" class="text-lg font-bold">R$ <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", ".") ?></p>
+        <p id="valorTotalPedido" class="text-lg font-bold">R$ <?php echo number_format($somaValorTotal / 100, 2, ",", ".") ?></p>
       </div>
     </div>
   </div>
@@ -289,7 +292,7 @@ if ($result && $result->num_rows != 0) {
        <script src="../../generalScripts/toastify.js"></script>
 
     <script src="../../generalScripts/darkmode.js"></script>
-  <script src="../../generalScripts/version.js"></script>
+ 
   <script src="../../generalScripts/backPage.js"></script>
 
   <script src="../pedidos/buscaCliente.js"></script>
@@ -298,9 +301,9 @@ if ($result && $result->num_rows != 0) {
   <script src="../pedidos/buscaFornecedor.js"></script>
   <script src="../pedidos/buscaProduto.js"></script>
 
-  <script src="../../generalScripts/atualDate.js"></script>
 
   <script src="../pedidos/aumentarQuantidade.js"></script>
+
   <script src="../pedidos/mostrarInfo.js"></script>
   <script src="listarProdutos.js"></script>
   <script src="salvarEdicao.js"></script>

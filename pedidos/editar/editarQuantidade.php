@@ -1,13 +1,33 @@
 <?php
 include '../../generalPhp/conection.php';
 
-if (isset($_POST['idItem'])) {
-    $idItem = $_POST['idItem'];
-    $chaveAcesso = $_POST['chaveAcesso'];
-    $quantidade = $_POST['novaQuantidade'];
-    $valorUnit = $_POST['valorUnit'];
-    $valorTotalItem = $_POST['valorTotalItem'];
-    $valorTotal = $_POST['valorTotal'];
+$data = json_decode(file_get_contents("php://input"), true);
+$itensEnviados = $data['dados'];
+
+try{
+
+
+if (isset($itensEnviados['idItem'])) {
+    $idItem = $itensEnviados['idItem'];
+    $chaveAcesso = $itensEnviados['chaveAcesso'];
+    $quantidade = $itensEnviados['quantidade'];
+    $valorUnit = $itensEnviados['valorUnit'];
+
+    // Busca o valor total atual do pedido
+    $stmtTotal = $conn->prepare('SELECT valor_total FROM pedidoscadastro WHERE chaveAcesso = ?');
+    $stmtTotal->bind_param('s', $chaveAcesso);
+    $stmtTotal->execute();
+    $resultTotal = $stmtTotal->get_result();
+    $rowTotal = $resultTotal->fetch_assoc();
+    $valorTotal = $rowTotal ? $rowTotal['valor_total'] : 0;
+
+    // Busca o valor total do item antigo
+    $stmtItem = $conn->prepare('SELECT valor_total FROM pedidos_dados WHERE id = ?');
+    $stmtItem->bind_param('i', $idItem);
+    $stmtItem->execute();
+    $resultItem = $stmtItem->get_result();
+    $rowItem = $resultItem->fetch_assoc();
+    $valorTotalItem = $rowItem ? $rowItem['valor_total'] : 0;
 
     // Calcula o valor total resetado e o valor do novo item
     $valorTotalResetado = $valorTotal - $valorTotalItem;
@@ -21,20 +41,24 @@ if (isset($_POST['idItem'])) {
     $sql->bind_param('iii', $quantidade, $valorItemNovo, $idItem);
 
     if ($sql->execute()) {
-        echo 'Quantidade alterada com sucesso.';
-
-        // Atualiza a tabela pedidoscadastro
-        $sql1 = $conn->prepare('UPDATE pedidoscadastro SET valor_total = ? WHERE chaveAcesso = ?');
-        $sql1->bind_param('is', $valorAtualizado, $chaveAcesso);
-
-        if ($sql1->execute()) {
-            echo 'Valor total atualizado com sucesso.';
-        } else {
-            echo 'Não foi possível atualizar o valor total.';
-        }
+        // Atualiza o valor total do pedido
+        atualizarValorTotal($conn, $valorAtualizado, $chaveAcesso);
+        echo json_encode(['message' => 'Quantidade alterada com sucesso.']);
     } else {
-        echo 'Não foi possível alterar a quantidade.';
+        echo json_encode(['message' => 'Falha ao alterar quantidade.']);
     }
+}
+} catch (Exception $e) {
+    echo json_encode('message: ' . $e->getMessage());
+}
+
+
+function atualizarValorTotal($conn, $valorAtualizado, $chaveAcesso)
+{
+    // Atualiza a tabela pedidoscadastro
+    $sql1 = $conn->prepare('UPDATE pedidoscadastro SET valor_total = ? WHERE chaveAcesso = ?');
+    $sql1->bind_param('is', $valorAtualizado, $chaveAcesso);
+
 }
 ?>
 

@@ -53,7 +53,7 @@
                 }
                 mysqli_close($conn);
                 exit;
-            }
+            }   
 
             // Se não confirmou ainda
             echo "<img src='../assets/delete.svg' alt='Confirmar exclusão' class='mx-auto w-24 h-24'>";
