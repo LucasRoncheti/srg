@@ -1,23 +1,28 @@
 <?php
 include '../../generalPhp/conection.php';
 
-// Get POST data
-$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-$data_retirada = isset($_POST['data_retirada']) ? $_POST['data_retirada'] : '';
+$data = json_decode(file_get_contents("php://input"), true);
+$dados = $data['dados'];
+
+$id = isset($dados['idItem']) ? intval($dados['idItem']) : 0;
+$data_retirada = isset($dados['dataRetirada']) ? $dados['dataRetirada'] : '';
 
 if ($id > 0 && !empty($data_retirada)) {
     try {
-        // Prepared statement for update
         $stmt = $conn->prepare("UPDATE pedidos_dados SET data_retirada = ? WHERE id = ?");
-        if ($stmt->execute([$data_retirada, $id])) {
-            echo "Data de retirada atualizada com sucesso.";
+        $stmt->bind_param('si', $data_retirada, $id); // 's' para string, 'i' para inteiro
+
+        if ($stmt->execute()) {
+            echo json_encode(['message' => "Data de retirada atualizada com sucesso."]);
         } else {
-            echo "Erro ao atualizar a data de retirada.";
+            echo json_encode(['message' => "Erro ao atualizar data de retirada."]);
         }
-    } catch (PDOException $e) {
-        echo "Erro de conexão: " . $e->getMessage();
+
+        $stmt->close();
+    } catch (Exception $e) {
+        echo json_encode(['message' => "Erro de conexão: " . $e->getMessage()]);
     }
 } else {
-    echo "Dados inválidos.";
+    echo json_encode(['message' => "Dados inválidos."]);
 }
 ?>

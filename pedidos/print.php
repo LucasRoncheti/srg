@@ -127,6 +127,17 @@ if (isset($_GET['id'])) {
                             $idItem = $row['id'];
                             $numeroProdutor = preg_replace('/[^0-9]/', '', $row['fornecedorNumero']);
                             $chaveAcesso = $row['chaveAcesso'];
+
+                                
+
+                            $stmtSoma = $conn->prepare('SELECT  SUM(valor_total) AS total FROM pedidos_dados WHERE chaveAcesso = ? ');
+                            $stmtSoma->bind_param('s',$chaveAcesso);
+                            if($stmtSoma->execute()){
+                                $resultSoma = $stmtSoma->get_result();
+                                $row1 = $resultSoma->fetch_assoc();
+                                $somaTotalValor = $row1['total'] ?? 0;
+                            }
+
     
     
                             $somaQuantidadeTotal += $quantidade;
@@ -174,7 +185,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div id="" class="headValores">
                     <p>Valor Total :<strong> R$
-                            <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", "."); ?></strong></p>
+                            <?php echo number_format($somaTotalValor / 100, 2, ",", "."); ?></strong></p>
                 </div>
             </div>
         </div>

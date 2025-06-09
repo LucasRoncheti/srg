@@ -26,9 +26,12 @@ if (isset($_GET['id'])) {
         while($row = mysqli_fetch_assoc($resultSql1)){
             $valorTotalSalvoPedido = $row['valor_total'];
             $dataAtual = $row['dataAtual'];
+            $cliente = $row['cliente'];
+            $idItem = $row['id'];
+       
         }
     }
-
+}
 ?>
 
 
@@ -36,140 +39,141 @@ if (isset($_GET['id'])) {
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="nofollow,noindex">
-    <link rel="stylesheet" href="../../index/root.css">
-    <link rel="stylesheet" href="../../onLoad/onLoad.css">
-    <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
-    <link rel="stylesheet" href="../pedidos/cadastro.css">
-
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class'
-            }
-            </script>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="nofollow,noindex">
+  <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
+  <title>Editar Pedidos</title>
 
 
-    <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
-    <title>Editar Pedidos</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <!-- Scripts -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../../onLoad/onLoad.js"></script>  
 </head>
-<script src="../../onLoad/onLoad.js"></script>
 
-
-
-
-<div class="overflow white" id="preload">
-    <div class="circle-line">
-        <div class="circle-red">&nbsp;</div>
-        <div class="circle-blue">&nbsp;</div>
-        <div class="circle-green">&nbsp;</div>
-        <div class="circle-yellow">&nbsp;</div>
+<body id="body" onload="onLoad()" class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+  <!-- Loader -->
+    <div class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50" id="preload">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-green-500"></div>
     </div>
-</div>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobileMenuContainer"></div>
 
+  <!-- Resposta PHP -->
+  <div id="respostaPHP"></div>
 
+  <!-- Header -->
+  <div class="w-full flex justify-between px-3 items-center bg-green-700">
+    <button onclick="avisoSalvar()" id="backButton" class="p-2">
+      <img src="../../assets/backArrow.svg" alt="Voltar" class="w-6 h-6">
+    </button>
+    <h1 class="text-xl text-white font-bold">Editar Pedido  <?php echo $cliente ?></h1>
+    <button onclick="toggleTheme()" title="Alternar tema" class="text-xl text-yellow-500 hover:text-yellow-400 transition">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
+  </div>
+<header class="p-4 bg-gray-200 dark:bg-gray-800 shadow-md flex flex-col gap-6">
 
+  <!-- Linha 1: Fornecedor e Produto -->
+  <div class="w-full flex flex-col lg:flex-row flex-wrap gap-4">
 
-<body id="body" onload="onLoad()">
+   <!-- Datas -->
+    <div class="flex flex-col gap-2 w-full">
 
-    <!--Menu mobile   -->
+      <label for="dataRetirada" class="text-sm text-gray-700 dark:text-gray-200 mt-2">Data de Retirada</label>
+      <input id="dataRetirada" type="date" onchange="salvarLocalStorageDataRetirada()"
+        class="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+    </div>
+    <!-- Fornecedor -->
+    <form method="POST" class="flex gap-2 w-full" id="form-pesquisa2">
+      <input id="pesquisaFornecedor" name="pesquisaFornecedor" placeholder="FORNECEDOR"
+        class="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
+      <select name="fornecedor" id="fornecedor"
+        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+        <option value=""></option>
+      </select>
+    </form>
 
-    <div id="mobileMenu" class="mobileMenuContainer ">
- 
+  
+    <!-- Produto -->
+    <form method="POST" class="flex gap-2 w-full" id="form-pesquisa3">
+      <input id="pesquisaProduto" name="pesquisaproduto" placeholder="PRODUTO"
+        class="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm" />
+      <select onchange="calcularMudancaSelect()" name="produto" id="produto"
+        class="w-40 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+        <option value=""></option>
+      </select>
+    </form>
+  </div>
 
+  <!-- Linha 2: Valores e botão -->
+  <div class="w-full flex flex-col lg:flex-row justify-between items-center gap-4">
+
+    <!-- Bloco: Unitário, Total e Quantidade -->
+    <div class="flex flex-col sm:flex-row flex-wrap gap-6 items-center w-full lg:w-auto">
+      <!-- Unitário -->
+      <div class="flex flex-col items-center">
+        <div class="text-sm text-gray-700 dark:text-gray-200">Unit.</div>
+        <input id="valorUnit" value="R$ 0,00"
+          class="w-24 text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm">
+      </div>
+
+      <!-- Total -->
+      <div class="flex flex-col items-center">
+        <div class="text-sm text-gray-700 dark:text-gray-200">Total</div>
+        <div id="valorTotal" class="text-green-600 font-semibold text-sm">R$ 0,00</div>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="flex items-center gap-2">
+        <div onclick="subtrairValor()" class="cursor-pointer px-3 py-1 bg-gray-200 dark:bg-gray-600 rounded">-</div>
+        <input id="quantidade" type="number" value="1"
+          class="w-16 text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded">
+        <div onclick="aumentarValor()" class="cursor-pointer px-3 py-1 bg-gray-200 dark:bg-gray-600 rounded">+</div>
+      </div>
     </div>
 
-    <div id="respostaPHP">
+    <!-- Botão Adicionar -->
+    <button onclick="salvarEdicao()"
+      class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow w-full lg:w-auto justify-center">
+      <img src="../../assets/arowDown.svg" alt="Arrow Down" class="h-5">
+      ADICIONAR
+      <img src="../../assets/arowDown.svg" alt="Arrow Down" class="h-5">
+    </button>
+  </div>
+
+  <!-- Datas Ocultas -->
+  <input type="hidden" id="chaveAcesso" value="<?php echo $id ?>">
+  <input type="hidden" id="DataAtual" value="<?php echo $dataAtual ?>">
+</header>
+
+
+
+    
+    
         
-    </div>
-
-    <header>
-
-       <button onclick="avisoSalvar()" id="backButton" class="backButton">
-                <img style='width:25px' src="../../assets/backArrow.svg" alt="Bot�o para voltar a p�gina anterior">
-            </button>
-    
-
-        <button onclick="openMenu()" id="mobileMenuButton" class="mobileMenuButton">
-            <img src="../../assets/menu_mobile.svg" alt="Menu mobile da p�gina">
-        </button>
-
-        <div style="display:none;">
-            <input  id="dataAtual" class="dataPedido" type="date">
-        </div> 
-
-
-
-        <form method="POST" class="inputSearchHeader" id="form-pesquisa2" action="">
-            <input id="pesquisaFornecedor" class="inputSearchHeader-input" type="text" name="pesquisaFornecedor"
-                placeholder="FORNECEDOR">
-            <select placeholder="FORNECEDOR" name="fornecedor" id="fornecedor">
-                <option value=""></option>
-            </select>
-        </form>
-
-        <input id="DataAtual" type="hidden" value=" <?php echo $dataAtual ?> ">
-
-        <form method="POST" class="inputSearchHeader" id="form-pesquisa3" action="">
-            <input id="pesquisaProduto" class="inputSearchHeader-input" type="text" name="pesquisaproduto"
-                placeholder="PRODUTO">
-            <select onchange="calcularMudancaSelect()" placeholder="PRODUTO" name="produto" id="produto">
-                <option value=""></option>
-            </select>
-
-        </form>
-
-        <div class="quantidadeContainer">
-            <div class="valoresContainer">
-                <div class="valores">
-                    <div class="valorUnit">Unit.</div>
-                    <input style="background-color: transparent;border:none;" type="text" id="valorUnit" class="valorUnit" value="R$0,00">
-                </div>
-                <div class="valores">
-                    <div class="valorTotal"> Total</div>
-                    <div id="valorTotal" class="valorTotal">R$ 0,00</div>
-                </div>
-            </div>
-
-            <div class="aumentaQuantidade">
-                <div onclick="subtrairValor()" class="botaoQuantidadeMenos">-</div>
-                <input id="quantidade" class="quantidade" value="1" type="number">
-                <div></div>
-                <div onclick="aumentarValor()" class="botaoQuantidadeMais">+</div>
-            </div>
-        </div>
-
-        <button onclick="listar()"><img style="height: 30px;" src="../../assets/arowDown.svg"
-                alt="Arrow Down ">ADIOCIONAR <img style="height: 30px;" src="../../assets/arowDown.svg"
-                alt="Arrow Down "></button>
-
-
-
-      
-
-
-
-
-    </header>
-
-    
-    
-    <!-- cabecalho da lista de produtos -->
-    <div class="cabecalhoProdutos">
-        <div id="fornecedorCabe�alho" class="fornecedor">FORNECEDOR</div>
-        <div class="quantidades">
-            <div id="qnt">QNT</div>
-            <div id="vlr">VLR T.</div>
-            <div id="verMais"> MAIS</div>
-        </div>
-
-    </div>
+     <!-- Cabeçalho da lista de produtos -->
+      <div class="w-full px-4 py-2 bg-gray-800 text-white dark:bg-gray-800 border-t border-b border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-200 flex justify-between">
+          <div class="w-1/3">FORNECEDOR</div>
+          <div class="w-1/6 text-center">RET.</div>
+          <div class="w-2/5 flex justify-between">
+              <div class="text-center w-1/3">QNT</div>
+              <div class="text-center w-1/3">VLR T.</div>
+              <div class="text-center w-1/3">MAIS</div>
+          </div>
+      </div>
 
 
     <form  style="height:auto;" id="containerList" class="containerList">
@@ -179,132 +183,133 @@ if (isset($_GET['id'])) {
 
     
     <div class="containerList">
-       
-    
-    <?php
+<?php
+if ($result && $result->num_rows != 0) {
+    $somaQuantidadeTotal = 0;
+    $somaValorTotal = 0;
 
+    while ($row = mysqli_fetch_assoc($result)) {
+        $fornecedor = $row['fornecedor'];
+        $quantidade = $row['quantidade'];
+        $valor_unit = $row['valor_unit'];
+        $valor_total = $row['valor_total'];
+        $dataRetirada = $row['data_retirada'];
+        $produto = $row['produto'];
+        $idItem = $row['id'];
+        $chaveAcesso = $row['chaveAcesso'];
+        $somaQuantidadeTotal += $quantidade;
 
+        $valorUnitString = "R$ " . number_format($valor_unit / 100, 2, ",", ".");
+        $valorTotalString = "R$ " . number_format($valor_total / 100, 2, ",", ".");
+        $somaValorTotal += $valor_total;
+        ?>
 
+        <input id="chaveAcesso" type="hidden" value="<?= $chaveAcesso ?>">
 
-            if ($result && $result->num_rows != 0) {
-
-                $somaQuantidadeTotal = 0;
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $fornecedor = $row['fornecedor'];
-                    $quantidade = $row['quantidade'];
-                    $valor_unit = $row['valor_unit'];
-                    $valor_total = $row['valor_total'];
-                    $produto = $row['produto'];
-                    $idItem = $row['id'];
-                    $chaveAcesso = $row['chaveAcesso'];
-
-
-                    $somaQuantidadeTotal += $quantidade;
-                    ?>
-
-                    <input id="chaveAcesso" type="hidden" value="<?=$chaveAcesso?>">
-                    <div id="<?=$idItem?>" class="containerProdutoPedido">
-                    <div class="dadosPedido">
-                        <div id="fornecedorNome" class="fornecedor"><?=$fornecedor?></div>
-                        <div class="quantidades2">
-                            <input style="width:50px;height:20px;background-color:transparent;" type="number" onchange="editarQuantidade('<?=$chaveAcesso?>','<?=$idItem?>',this,'<?=$valor_unit?>','<?=$valor_total?>','<?=$valorTotalSalvoPedido?>')" value="<?=$quantidade?>" class="quantidadeEditar" id="qnt">
-                            <div id="vlr"> R$ <?=number_format($valor_total / 100, 2, ",", ".")?></div>
-                            <div onclick="trocarDisplay('info<?=$idItem?>', 'img<?=$idItem?>')" id="verMais">
-                                <img id="img<?=$idItem?>" src="../../assets/eye.svg" alt="Olho vetor">
-                            </div>
-                        </div>
+        <div id="<?= $idItem ?>" class="w-full px-4 py-2 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 text-sm flex flex-col gap-2">
+            <!-- Linha principal alinhada com cabeçalho -->
+            <div class="flex justify-between items-center">
+                <div class="w-1/3 font-medium text-gray-800 dark:text-white">
+                    <?= $fornecedor ?>
+                </div>
+                <div class="w-1/6 text-center">
+                    <input onchange="alterarDataRetirada('<?= $idItem ?>',this)" type="date" value="<?= $dataRetirada ?>" class="w-full text-center bg-transparent border border-gray-300 dark:border-gray-600 rounded px-1 py-1 text-sm">
+                </div>
+                <div class="w-2/5 flex justify-between items-center text-gray-700 dark:text-gray-200">
+                    <div class="w-1/3 text-center">
+                        <input type="number"
+                            onchange="editarQuantidade('<?= $chaveAcesso ?>','<?= $idItem ?>', this, '<?= $valor_unit ?>')"
+                            value="<?= $quantidade ?>"
+                            class="w-14 text-center bg-transparent border border-gray-300 dark:border-gray-600 rounded px-1 py-1 text-sm">
                     </div>
-                    <div style="display: none;" id="info<?=$idItem?>" class="dadosPedidoSecundario">
-                        <div id="produtoLista" class="produtoLista"><?=$produto?></div>
-                        <div class="quantidades3">
-                            <div id="vlr">Unit R$ <?=number_format($valor_unit / 100, 2, ",", ".")?></div>
-                            <a href="apagar.php?id=<?=$idItem?>&valorPedidoSalvo=<?=$valorTotalSalvoPedido?>&valorTotal=<?=$valor_total?>&chaveAcesso=<?=$chaveAcesso?>">
-                                <div id="verMais<?=$idItem?>">
-                                    <img src="../../assets/erase.svg" alt="Olho vetor">
-                                </div>
-                            </a>
-                        </div>
+                    <div class="w-1/3 text-center font-semibold text-green-600"><?= $valorTotalString ?></div>
+                    <div class="w-1/3 text-center">
+                        <button onclick="trocarDisplay('info<?= $idItem ?>', 'img<?= $idItem ?>')">
+                            <img id="img<?= $idItem ?>" src="../../assets/eye.svg" alt="Ver mais" class="w-5 h-5 mx-auto opacity-60">
+                        </button>
                     </div>
                 </div>
-                <?php
-                }
-            } else {
-                echo 'Registro n�o encontrado!';
-            }
-            } else {
-            echo 'ID n�o fornecido na URL!';
-            }
-    ?>
+            </div>
+
+            <!-- Linha secundária: Produto / Unit / Apagar -->
+            <div id="info<?= $idItem ?>" style="display:none;" class="flex justify-between items-center bg-gray-50 dark:bg-gray-800 px-2 py-2 rounded">
+                <div class="w-1/3 text-gray-700 dark:text-gray-300"><?= $produto ?></div>
+                <div class="w-1/6"></div>
+                <div class="w-2/5 flex justify-between items-center">
+                    <div class="w-1/3 text-center text-gray-500 dark:text-gray-400">Unit <?= $valorUnitString ?></div>
+                    <div class="w-1/3 text-center"></div>
+                    <div class="w-1/3 text-center">
+                        <a onclick="apagarPedido('<?=$idItem?>')">
+                            <img src="../../assets/erase.svg" alt="Apagar" class="w-5 h-5 mx-auto hover:opacity-80">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    }
+} else {
+    echo '<p class="text-red-600 p-4">Registro não encontrado!</p>';
+}
+?>
+
      
     </div>
 
+  <!-- Botão Salvar
+  <button onclick="enviarDados()" id="salvarPedido"
+    class="fixed bottom-4 right-4 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg z-50">
+    <img src="../../assets/save.svg" alt="Salvar" class="w-6 h-6">
+  </button> -->
 
-<button onclick="enviarDados()" id="salvarPedido" class="salvarPedido" > <img src="../../assets/save.svg" alt=""></button>
-
-<div id="containerValoresFinais"   class="containerValoresFinais">
-    <div id="containerInternoValoresFinais"  class="containerInternoValoresFinais">
-        <div id="" class="headValores">
-            <p>N&deg; CAIXAS</p>
-            <p id="Ncaixas"><?php echo $somaQuantidadeTotal?></p>
+  <!-- Container de Valores Finais -->
+  <div id="containerValoresFinais"
+    class="w-full mt-6 px-4 py-4 bg-white dark:bg-gray-800 rounded shadow-md text-gray-800 dark:text-white">
+    <div id="containerInternoValoresFinais"
+      class="flex flex-col sm:flex-row  justify-center items-center flex-row gap-6 text-center">
+      <div class="space-y-1">
+        <p class="font-semibold text-sm">Nº CAIXAS</p>
+        <p id="Ncaixas" class="text-lg font-bold"><?php echo $somaQuantidadeTotal ?></p>
+      </div>
+      <!-- <div class="space-y-1">
+        <p class="font-semibold text-sm">CX. REST.</p>
+        <div class="flex justify-center items-center gap-2">
+          <p id="CxRest" class="text-lg font-bold">0</p>
+          <span class="text-sm">de</span>
+          <input id="inputCxRest" type="number"
+            class="w-20 px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600">
         </div>
-        <div id="" class="headValores">
-            <p>CX. REST.</p>
-            <div class="CxDiv">
-                <p id="CxRest">0</p> de
-                <input id="inputCxRest" type="number">
-            </div>
-        </div>
-        <div id="" class="headValores">
-            <p>VALOR TOTAL</p>
-            <p id="valorTotalPedido">R$ <?php echo number_format($valorTotalSalvoPedido / 100, 2, ",", "."); ?></p>
-
-        </div>
+      </div> -->
+      <div class="space-y-1">
+        <p class="font-semibold text-sm">VALOR TOTAL</p>
+        <p id="valorTotalPedido" class="text-lg font-bold">R$ <?php echo number_format($somaValorTotal / 100, 2, ",", ".") ?></p>
+      </div>
     </div>
-</div>
+  </div>
+
+  <!-- Scripts -->
+       <script src="../../generalScripts/toastify.js"></script>
+
+    <script src="../../generalScripts/darkmode.js"></script>
+ 
+  <script src="../../generalScripts/backPage.js"></script>
+
+  <script src="../pedidos/buscaCliente.js"></script>
+  <script src="../pedidos/pedidos.js"></script>
+
+  <script src="../pedidos/buscaFornecedor.js"></script>
+  <script src="../pedidos/buscaProduto.js"></script>
 
 
+  <script src="../pedidos/aumentarQuantidade.js"></script>
 
-<footer>
-    <p id="data-footer"> </p>
-</footer>
+  <script src="../pedidos/mostrarInfo.js"></script>
+  <script src="listarProdutos.js"></script>
+  <script src="salvarEdicao.js"></script>
+  <script src="../../generalScripts/deleteDiv.js"></script>
+  <script src="validarBotaoSalvar.js"></script>
+  
+  <script src="avisoSalvar.js"></script>
 </body>
-
-
-
-<script src="../../generalScripts/version.js"></script>
-
-<script src="../../generalScripts/backPage.js"></script>
-
-
-
-<script src="../pedidos/buscaCliente.js"></script>
-
-<script src="../pedidos/pedidos.js"></script>
-
-<script src="../pedidos/buscaFornecedor.js"></script>
-
-<script src="../pedidos/buscaProduto.js"></script>
-
-<script src="../../generalScripts/atualDate.js"></script>
-
-<script src="../pedidos/aumentarQuantidade.js"></script>
-
-<script src="../pedidos/mostrarInfo.js"></script>
-<!-- 
-lista o produto adicionado na lista do pedido -->
-<script src="listarProdutos.js"></script>
-<script src="cadastro.js"></script>
-<script src="../../generalScripts/deleteDiv.js"></script>
-
-<script src="validarBotaoSalvar.js"></script>
-<script src="../../mobileMenu/js/mobileMenu.js"></script>
-
-<script src="avisoSalvar.js"></script>
-
-
-
 </html>
-
-
-

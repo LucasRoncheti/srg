@@ -26,11 +26,22 @@ $resultado_sql = mysqli_query($conn, $result_sql);
 
 //Verificar se encontrou resultado na tabela "sqls"
 if(($resultado_sql) AND ($resultado_sql->num_rows != 0)){
-   
+    
+
 
 
 while($row_sql = mysqli_fetch_assoc($resultado_sql)){
     $dataFormatada = date('d/m/y', strtotime($row_sql['dataAtual']));
+    $chaveAcesso = $row_sql['chaveAcesso'];
+
+    $stmt = $conn->prepare('SELECT  SUM(valor_total) AS total FROM pedidos_dados WHERE chaveAcesso = ? ');
+    $stmt->bind_param('s',$chaveAcesso);
+    if($stmt->execute()){
+        $result = $stmt->get_result();
+        $row1 = $result->fetch_assoc();
+        $somaTotalValor = $row1['total'] ?? 0;
+    }
+
     echo '<div class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-md p-4 mb-4 shadow hover:shadow-lg transition">';
     echo '    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">';
     echo '        <div class="font-semibold text-black dark:text-white">Pedido Nº ' . $row_sql['id'] . '</div>';
@@ -38,7 +49,7 @@ while($row_sql = mysqli_fetch_assoc($resultado_sql)){
     echo '    </div>';
     echo '    <div class="flex items-center justify-between mb-2">';
     echo '        <div class="text-lg font-medium text-black dark:text-white">' . $row_sql['cliente'] . '</div>';
-    echo '        <div class="text-green-600 dark:text-green-400 font-semibold">R$ ' . number_format($row_sql['valor_total'] / 100, 2, ",", ".") . '</div>';
+    echo '        <div class="text-green-600 dark:text-green-400 font-semibold">R$ ' . number_format($somaTotalValor / 100, 2, ",", ".") . '</div>';
     echo '    </div>';
     echo '    <div class="flex gap-4 justify-end mt-2">';
     echo '        <a href="print.php?id=' . $row_sql['chaveAcesso'] . '" title="Imprimir">';
