@@ -2,7 +2,7 @@
 
 //dados do servidor para conexão
 
-$validacao = false;
+$validacao = true;
 
 if ($validacao) {
 

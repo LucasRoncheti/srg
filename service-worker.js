@@ -3,7 +3,7 @@ self.addEventListener('install', event => {
         caches.open('pwa-cache').then(cache => {
             return cache.addAll([
                 '/',
-                '/main.php',
+                '/index.php',
                 '/main.js',
                 '/manifest.json'
             ]);

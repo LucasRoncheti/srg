@@ -123,18 +123,9 @@
   <!-- Scripts -->
   <script src="generalScripts/version.js"></script>
   <script src="generalScripts/timeFormat.js"></script>
-  <script src="/main.js"></script>
+  <script src="../main.js"></script>
 
 </body>
 </html>
 
-<script>
-  if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('Service Worker registrado', reg))
-      .catch(err => console.error('Erro ao registrar Service Worker', err));
-  });
-}
 
-</script>
