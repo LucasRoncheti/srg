@@ -1,4 +1,7 @@
 function enviarImagem(inputElement) {
+
+    const divSalvando = document.getElementById('loadingScreen');
+    divSalvando.classList.remove('hidden')
     const id_item = inputElement.getAttribute('id');
     const file = inputElement.files[0];
 
@@ -52,13 +55,16 @@ function enviarImagem(inputElement) {
                     .then(data => {
                     
                         console.log(data);
-                        reload();
-                    
-                       
+                        alert(data);
+                        setTimeout(() => {
+                            reload();
+                        }, 500);
+             
+                
                     })
                     .catch(error => {
-                        alert('Erro de rede: ' + error);
-                        reload();
+                        alert('Errro ao enviar imagem, entre em contato com o administrador  ' + error);
+                        
                     });
                 }, 'image/jpeg', quality2);
             }, 'image/jpeg', quality1);

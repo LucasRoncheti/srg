@@ -50,6 +50,9 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
     <link rel="stylesheet" href="../../mobileMenu/css/mobileMenu.css">
     <link rel="stylesheet" href="salvarInspessao.css">
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="shortcut icon" href="../../assets/favicon.svg" type="image/x-icon">
     <title>Inspeção</title>
 
@@ -75,7 +78,9 @@ if (isset($_GET['id']) && isset($_GET['numero']) && isset($_GET['cliente'])) {
 
 <body id="body" onload="onLoad()">
 
-
+    <div id="loadingScreen" class="fixed inset-0 z-[9999999999] flex items-center justify-center bg-white bg-opacity-80 hidden">
+        <div class="text-gray-800 text-lg font-semibold">Salvando...</div>
+    </div>
 
 
     <!--Menu mobile   -->

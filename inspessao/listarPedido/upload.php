@@ -30,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nome_do_arquivo = $uploadPath;
 
             if ($stmt->execute()) {
-                echo 'Imagem Thumb salva com sucesso.'.$Idimagem;
+                echo 'Imagem Thumb salva com sucesso.';
                 
             } else {
-                echo 'Erro ao inserir imagem Thumb no banco de dados.';
+                echo 'ERRO ao inserir imagem Thumb no banco de dados.';
                
             }
         } else {
-            echo 'Erro ao salvar a  imagem Thumb no banco de dados.';
+            echo 'ERRO ao salvar a  imagem Thumb no banco de dados.';
            
         }
 
@@ -53,14 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nome_do_arquivo1 = $uploadPath1;
 
                 if ($stmt->execute()) {
-                    echo 'Imagem HD salva com sucesso.'.$Idimagem;
+                    echo 'Imagem HD salva com sucesso.';
                     
                 } else {
-                    echo 'Erro ao inserir imagem HD no banco de dados.';
+                    echo 'ERRO ao inserir imagem HD no banco de dados.';
                    
                 }
             } else {
-                echo 'Erro ao salvar a  imagem HD no banco de dados.';
+                echo 'ERRO ao salvar a  imagem HD no banco de dados.';
                
             }
         }
