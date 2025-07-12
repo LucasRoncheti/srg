@@ -130,14 +130,15 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
             <!-- Campos gerados dinamicamente -->
 
 
-            <div class="flex justify-center w-full mt-4">
+          
                 <button
+                id="buttonSave"
                     type="submit"
-                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 w-full rounded">
-                    Salvar Dados <i class="fas fa-save"></i>
+                    class="bg-green-600 hover:bg-green-700 z-[2000] text-white w-[60px] h-[60px] rounded-full fixed bottom-[30px] right-[30px]">
+                    <i class="fas fa-save w-[30px]"></i>
 
                 </button>
-            </div>
+
 
         </form>
 
@@ -156,6 +157,7 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
 
     <script src="../../generalScripts/version.js"></script>
     <script src="../../generalScripts/backPage.js"></script>
+    <script src="../js/preEmbarque.js"></script>
 
 
 
@@ -218,6 +220,8 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
             },
         ];
 
+        const  buttonSave = document.getElementById('buttonSave')
+
         const form = document.getElementById("formPreEmbarque");
 
         camposPreEmbarque.forEach((campo, index) => {
@@ -259,7 +263,14 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
                         cardWrapper.classList.remove("border-gray-400");
                         cardWrapper.classList.add("border-orange-500");
                     }
+
+                    buttonSave.classList.add('animate-bounce')
+                
+                    buttonSave.classList.remove('bg-green-600')
+                    buttonSave.classList.add('bg-red-600')
                 });
+
+       
 
             } else {
                 const inputGaleria = document.createElement("input");
@@ -303,6 +314,10 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
                         // Atualiza borda para laranja (não salvo)
                         cardWrapper.classList.remove("border-gray-400");
                         cardWrapper.classList.add("border-orange-500");
+
+                            buttonSave.classList.add('animate-bounce')
+                            buttonSave.classList.remove('bg-green-600')
+                            buttonSave.classList.add('bg-red-600')
 
                         const url = URL.createObjectURL(file);
 
@@ -373,7 +388,7 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
 
             }
 
-            salvarImagens(formData);
+            salvarDadosPreEmbarque(formData);
         });
 
 
@@ -404,9 +419,15 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
     </script>
 
     <script>
-        async function salvarImagens(formData) {
+        async function salvarDadosPreEmbarque(formData) {//salva os dados do pre embarque no banco de dados 
             mostrarLoader(); // mostra o loader
 
+           
+                    buttonSave.classList.remove('bg-red-600')
+                    buttonSave.classList.add('bg-green-600')
+                    buttonSave.classList.remove('animate-bounce')
+                    buttonSave.classList.add('animate-pulse')
+            
             for (let [key, value] of formData.entries()) {
                 console.log(key, value);
             }
@@ -429,7 +450,10 @@ if (isset($_GET['id']) && isset($_GET['nome'])) {
                     card.classList.add("border-gray-400");
                 });
 
+                setTimeout(()=>{
 
+                    window.location.reload()
+                },500)
 
                 // Atualize ou recarregue dados conforme necessário
             } catch (error) {

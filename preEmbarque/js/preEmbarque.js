@@ -8,7 +8,7 @@ $(document).ready(function () {
 });
 
 function listar(pagina, qnt_result_pg) {
-  //varia´veis que serão enviadas pelo metodo post para o php
+  //variaveis que serão enviadas pelo metodo post para o php
   var dados = {
     pagina: pagina,
     qnt_result_pg: qnt_result_pg,
@@ -19,7 +19,7 @@ function listar(pagina, qnt_result_pg) {
   });
 }
 
-async function salvarPreEmbarque() {
+async function salvarPreEmbarque() {//salva o pre embarque na página inicial dos pre embarques 
   const form = document.getElementById("cadastroForm");
 
   const inputs = form.querySelectorAll("input");
@@ -55,7 +55,7 @@ async function salvarPreEmbarque() {
 }
 
 function deletar(id) {
-  if (confirm("Tem certeza que deseja deletar esta inspeção?")) {
+  if (confirm("Tem certeza que deseja deletar pre embarque?")) {
     $.ajax({
       url: "./php/deletarPreEmbarque.php", // O arquivo PHP que processará a exclusão
       type: "POST",
